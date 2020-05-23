@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz/surveys")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SurveyRESTController {
 
     @Autowired
