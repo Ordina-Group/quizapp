@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Survey } from '../surveys/survey';
+import {AnswerOptions, Survey} from '../surveys/survey';
 import { SurveyService } from '../surveys/survey.service';
+import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
 
 
 @Component({
@@ -10,14 +11,23 @@ import { SurveyService } from '../surveys/survey.service';
 })
 export class QuestionComponent implements OnInit {
 
+
   public _currentSurvey: Survey;
+  private correct: boolean;
+
+ _answeroptions = new AnswerOptions();
+
   public get currentSurvey(): Survey {
     return this._currentSurvey;
   }
+
   public set currentSurvey(value: Survey) {
     this._currentSurvey = value;
   }
+
   errorMessage = '';
+
+
 
   constructor(
     private surveyService: SurveyService) {
@@ -31,4 +41,46 @@ export class QuestionComponent implements OnInit {
     });
   }
 
+  // hier zetten we de string van de eventlistener van setradio naar de string variabele correct (dus bijv: option 3 naar variabele string option 3
+
+
+
+
+  buttonClicked = false;
+
+
+
+
+  clicked() {
+
+      this.buttonClicked = !this.buttonClicked;
+
+    }
+
+  questionForm = new FormGroup({
+    gender: new FormControl()
+  });
+
+
+
+  onFormSubmit(questionForm: any) {
+    console.log(this.questionForm.valid);
+    this._answeroptions.id= this.questionForm.get('gridradios').value;
+    console.log(this._answeroptions.id)
+
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

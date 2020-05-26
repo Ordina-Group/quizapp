@@ -17,6 +17,12 @@ h2 {
   width:95%;
 }
 
+p {
+  color:black;
+  font-family:'Roboto', sans-serif;
+  font-size: 15px;
+}
+
 .form-check-label{
   color:white;
   margin-top:1rem;

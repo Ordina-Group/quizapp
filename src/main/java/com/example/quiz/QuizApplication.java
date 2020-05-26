@@ -29,7 +29,7 @@ public class QuizApplication {
             survey.setSurveyDescription("Een nieuwe survey");
             surveyRepository.save(survey);
 
-            Question question = new Question("Question one", 1, survey);
+            Question question = new Question("Denk jij dat er programmeerwerk kijken bij de werking van een stoplicht op de weg?", 1, survey);
             questionRepository.save(question);
 
             Question question2 = new Question("Question two", 2, survey);
@@ -40,8 +40,8 @@ public class QuizApplication {
 
             //save answeroptions
             answerOptionRepository.save(new AnswerOption(1, "answer A", true, question));
-            answerOptionRepository.save(new AnswerOption(2, "answer B", false, question));
-            answerOptionRepository.save(new AnswerOption(3, "answer C", false, question));
+            answerOptionRepository.save(new AnswerOption(2, "Answer B", false, question));
+            answerOptionRepository.save(new AnswerOption(3, "Answer C", false, question));
 
             answerOptionRepository.save(new AnswerOption(1, "answer A", false, question2));
             answerOptionRepository.save(new AnswerOption(2, "answer B", false, question2));

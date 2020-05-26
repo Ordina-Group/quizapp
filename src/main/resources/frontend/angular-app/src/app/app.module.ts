@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { QuestionComponent } from './question/question.component';
 import {SurveyService} from "./surveys/survey.service";
 import { HttpClientModule } from '@angular/common/http';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [SurveyService],
   bootstrap: [AppComponent]

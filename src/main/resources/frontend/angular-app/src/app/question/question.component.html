@@ -8,42 +8,55 @@
 <div>
 {{ _currentSurvey?.surveyDescription }}
 </div>
-<div>test</div>
 <div class="jumbotron-fluid" Style="background-color:black;">
   <div class="container">
     <div class="row">
       <h2 style="margin-top: 2rem;"> {{ _currentSurvey?.questions[1].questionDescription }}</h2>
     </div>
-    <div class="row" style="margin-top: 2rem;">
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-          <label class="form-check-label" for="gridRadios1">
-            A. {{ _currentSurvey?.questions[1].answerOptions[1].value }}
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios2" id="gridRadios2" value="option2">
-          <label class="form-check-label" for="gridRadios2">
-            B. {{ _currentSurvey?.questions[1].answerOptions[2].value }}
-          </label>
-        </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3">
-          <label class="form-check-label" for="gridRadios3">
-            C. {{ _currentSurvey?.questions[1].answerOptions[2].value }}
-          </label>
-        </div>
+    <form #questionForm="ngForm"(ngSubmit)="onFormSubmit(questionForm)">
+<table>
+  <tr>
+    <td>
+ <input type="radio" name="gridRadios"  value="option1"  [ngModel]="_answeroptions.id" required #gridradios="ngModel" >
+            A. {{ _currentSurvey?.questions[0].answerOptions[0].value }}
+  </td>
+    </tr>
 
+      <tr>
+        <td>
+          <input  type="radio" name="gridRadios" id="gridRadios2" value="option2" [ngModel]="_answeroptions.id" required #gridradios="ngModel">
 
-      </div>
+            B. {{ _currentSurvey?.questions[0].answerOptions[1].value }}
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+
+          <input type="radio" name="gridRadios" id="gridRadios3" value="option3" [ngModel]="_answeroptions.id" required #gridradios="ngModel">
+          < C. {{ _currentSurvey?.questions[0].answerOptions[2].value }}>
+        </td>
+      </tr>
+  <tr>
+    <td colspan="2">
+      <button>Submit</button>
+    </td>
+  </tr>
+</table>
+      </form>
+
+    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"><p>Goed! blablablabla</p>
     </div>
   </div>
-</div>
+
 
 <div class="container-fluid" Style="background-color:black;">
   <div class="text-right" Style="background-color:black;">
-    <p><a [routerLink]="['/question']"><button class="btn btn-dark btn-lg">Volgende</button></a></p>
+    <p><a [routerLink]="['/question']"><button (click)="clicked()" class="btn btn-dark btn-lg">Bevestigen</button></a></p>
   </div>
+</div>
+
+
 </div>
