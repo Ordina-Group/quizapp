@@ -5,58 +5,55 @@
     </div>
   </div>
 </div>
+
 <div>
 {{ _currentSurvey?.surveyDescription }}
 </div>
+
 <div class="jumbotron-fluid" Style="background-color:black;">
   <div class="container">
     <div class="row">
-      <h2 style="margin-top: 2rem;"> {{ _currentSurvey?.questions[1].questionDescription }}</h2>
+      <h2 style="margin-top: 2rem;"> {{ _currentSurvey?.questions[currentQuestion].questionDescription}}</h2>
     </div>
 
-    <form #questionForm="ngForm"(ngSubmit)="onFormSubmit(questionForm)">
-<table>
-  <tr>
-    <td>
- <input type="radio" name="gridRadios"  value="option1"  [ngModel]="_answeroptions.id" required #gridradios="ngModel" >
-            A. {{ _currentSurvey?.questions[0].answerOptions[0].value }}
-  </td>
-    </tr>
+    <div class="row">
+      <div class="col-sm-6">
+        <form #questionForm="ngForm" (ngSubmit)="onFormSubmit(questionForm)">
 
-      <tr>
-        <td>
-          <input  type="radio" name="gridRadios" id="gridRadios2" value="option2" [ngModel]="_answeroptions.id" required #gridradios="ngModel">
+          <div class="radioBlok" *ngFor="let answer of answers">
+            <input type="radio" name="answerButtons" value="answer">
+            <label class="antwoordLabel">{{answer}}</label>
+          </div>
 
-            B. {{ _currentSurvey?.questions[0].answerOptions[1].value }}
+          <button type="submit" *ngIf="show">
+            Submit
+          </button>
 
-        </td>
-      </tr>
+        </form>
 
-      <tr>
-        <td>
 
-          <input type="radio" name="gridRadios" id="gridRadios3" value="option3" [ngModel]="_answeroptions.id" required #gridradios="ngModel">
-          < C. {{ _currentSurvey?.questions[0].answerOptions[2].value }}>
-        </td>
-      </tr>
-  <tr>
-    <td colspan="2">
-      <button>Submit</button>
-    </td>
-  </tr>
-</table>
-      </form>
 
-    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"><p>Goed! blablablabla</p>
+      </div>
+
+    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"><p class="p-zwart">Goed! blablablabla</p>
     </div>
+
   </div>
 
+    <div class="row">
+      <div class="col-11" Style="background-color:black;" *ngIf="buttonClicked">
+      </div>
+      <div class="col-1" Style="background-color:black;" *ngIf="showVolgende">
+        <p style="margin: 1rem;"><a [routerLink]="['/question']"><button class="btn btn-dark btn-lg">Volgende</button></a></p>
+      </div>
+    </div>
 
-<div class="container-fluid" Style="background-color:black;">
-  <div class="text-right" Style="background-color:black;">
-    <p><a [routerLink]="['/question']"><button (click)="clicked()" class="btn btn-dark btn-lg">Bevestigen</button></a></p>
   </div>
 </div>
 
 
-</div>
+
+
+
+
+

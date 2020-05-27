@@ -18,6 +18,12 @@ h2 {
 }
 
 p {
+  color:white;
+  font-family:'Roboto', sans-serif;
+  font-size: 15px;
+}
+
+.p-zwart{
   color:black;
   font-family:'Roboto', sans-serif;
   font-size: 15px;
@@ -40,3 +46,26 @@ p {
 .button{
   margin: 2rem;
 }
+
+.input{
+  color:white;
+}
+
+.td{
+  color:white;
+}
+
+input[type=radio]{
+  display: inline-block;
+}
+
+label.antwoordLabel{
+  color: white;
+  margin-left: .5rem;
+}
+
+.radioBlok{
+  display: block;
+  align-items: center;
+}
+

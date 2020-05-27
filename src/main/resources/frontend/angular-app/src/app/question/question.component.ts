@@ -4,6 +4,7 @@ import { SurveyService } from '../surveys/survey.service';
 import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
 
 
+
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -11,23 +12,17 @@ import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
 })
 export class QuestionComponent implements OnInit {
 
+  answers: string[] = ['antwoord A', 'antwoord B', 'antwoord C'];
+  chosenAnswerString: string;
+  answerOptionsArray: AnswerOptions[];
+  chosenAnswer: AnswerOptions;
+  currentQuestion = 2;
+  buttonClicked = false;
+  show = true;
+  showVolgende = false;
 
   public _currentSurvey: Survey;
   private correct: boolean;
-
- _answeroptions = new AnswerOptions();
-
-  public get currentSurvey(): Survey {
-    return this._currentSurvey;
-  }
-
-  public set currentSurvey(value: Survey) {
-    this._currentSurvey = value;
-  }
-
-  errorMessage = '';
-
-
 
   constructor(
     private surveyService: SurveyService) {
@@ -41,46 +36,53 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  // hier zetten we de string van de eventlistener van setradio naar de string variabele correct (dus bijv: option 3 naar variabele string option 3
+//hier worden de array geleegd in de functie,
+// vervolgens wordt de array gelijk gesteld aan de answeroption van deze vraag.
+// In de loop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
+  setAnswersToRadiobuttons() {
+    this.answers = [];
+    this.answerOptionsArray = this.currentSurvey.questions[this.currentQuestion].answerOptions;
+    this.answerOptionsArray.forEach(answerOption => {
+      this.answers.push(answerOption.value);
+    });
+  }
 
 
+  public get currentSurvey(): Survey {
+    return this._currentSurvey;
+  }
 
-
-  buttonClicked = false;
-
-
+  public set currentSurvey(value: Survey) {
+    this._currentSurvey = value;
+    this.setAnswersToRadiobuttons();
+  }
+  errorMessage = '';
 
 
   clicked() {
-
-      this.buttonClicked = !this.buttonClicked;
-
-    }
+    this.buttonClicked = !this.buttonClicked;
+    this.showVolgende = !this.showVolgende;
+  }
 
   questionForm = new FormGroup({
-    gender: new FormControl()
+    gridradios: new FormControl()
   });
 
 
 
   onFormSubmit(questionForm: any) {
-    console.log(this.questionForm.valid);
-    this._answeroptions.id= this.questionForm.get('gridradios').value;
-    console.log(this._answeroptions.id)
+    console.log(questionForm.value)
+    this.clicked();
+    this.show = !this.show;
 
   }
 }
-
-
-
-
-
-
-
-
-
-
-
+//   if(questionForm.value === true){
+//       this.buttonClicked = !this.buttonClicked;
+//       this.show = !this.show;
+//     } else{
+//       this.buttonClicked = !this.buttonClicked;
+//     }
 
 
 
