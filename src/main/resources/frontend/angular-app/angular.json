@@ -15,7 +15,7 @@
           "options": {
             "index": "src/index.html",
             "main": "src/main.ts",
-            "outputPath": "dist",
+            "outputPath": "../../public",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,

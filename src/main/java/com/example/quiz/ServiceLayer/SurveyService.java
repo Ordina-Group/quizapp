@@ -18,7 +18,8 @@ public class SurveyService {
 
   public List<Survey> findAllSurveys() {
 
-        return surveyRepository.findAll(Sort.by(Sort.Direction.ASC,"id" ));
+      //  return surveyRepository.findAll(Sort.by(Sort.Direction.ASC,"id" ));
+      return surveyRepository.findAll();
 
     }
 

@@ -67,6 +67,7 @@ export class AnswerOptions {
   number: number;
   value: string;
   correct: boolean;
+  answerExplanation: string;
 }
 
 

@@ -12,14 +12,15 @@ import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
 })
 export class QuestionComponent implements OnInit {
 
-  answers: string[] = ['antwoord A', 'antwoord B', 'antwoord C'];
+  answers: string[];
   chosenAnswerString: string;
   answerOptionsArray: AnswerOptions[];
   chosenAnswer: AnswerOptions;
-  currentQuestion = 2;
+  currentQuestion = 1;
   buttonClicked = false;
   show = true;
   showVolgende = false;
+
 
   public _currentSurvey: Survey;
   private correct: boolean;
@@ -36,9 +37,9 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-//hier worden de array geleegd in de functie,
-// vervolgens wordt de array gelijk gesteld aan de answeroption van deze vraag.
-// In de loop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
+//hier wordt de String array"answers" geleegd in de functie,
+// vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
+// In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
     this.answers = [];
     this.answerOptionsArray = this.currentSurvey.questions[this.currentQuestion].answerOptions;
@@ -65,15 +66,24 @@ export class QuestionComponent implements OnInit {
   }
 
   questionForm = new FormGroup({
-    gridradios: new FormControl()
-  });
+ //gridradios: new FormControl()
+ });
 
 
-
+//Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop
   onFormSubmit(questionForm: any) {
     console.log(questionForm.value)
     this.clicked();
     this.show = !this.show;
+
+  }
+
+  //als je op knop "volgende" drukt wil je de volgende vraag laten zien
+  nextQuestion(){
+    this.currentQuestion++;
+    this.setAnswersToRadiobuttons();
+    this.show = true;
+    this.showVolgende = false;
 
   }
 }

@@ -17,7 +17,8 @@ public class QuestionService {
 
     public List<Question> findAllQuestions() {
 
-        return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "number"));
+       // return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "number"));
+        return questionRepository.findAll();
 
     }
 
