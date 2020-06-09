@@ -677,7 +677,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function clicked() {
           this.buttonClicked = !this.buttonClicked;
           this.showVolgende = !this.showVolgende;
-        } //Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop
+        } //Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
 
       }, {
         key: "onFormSubmit",
@@ -690,10 +690,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "nextQuestion",
         value: function nextQuestion() {
-          this.currentQuestion++;
-          this.setAnswersToRadiobuttons();
-          this.show = true;
-          this.showVolgende = false;
+          if (this.currentSurvey.questions[this.currentQuestion].number === 3) {
+            this.currentQuestion = 1;
+            console.log(this.currentQuestion);
+          } else {
+            this.currentQuestion = this.currentSurvey.questions[this.currentQuestion].number + 1;
+            console.log(this.currentQuestion);
+          }
+
+          this.setAnswersToRadiobuttons(); // this.show = true;
+          //  this.showVolgende = false;
+          // console.log(this.currentQuestion);
         }
       }, {
         key: "currentSurvey",

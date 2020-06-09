@@ -349,7 +349,7 @@ class QuestionComponent {
         this.buttonClicked = !this.buttonClicked;
         this.showVolgende = !this.showVolgende;
     }
-    //Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop
+    //Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
     onFormSubmit(questionForm) {
         console.log(questionForm.value);
         this.clicked();
@@ -357,10 +357,18 @@ class QuestionComponent {
     }
     //als je op knop "volgende" drukt wil je de volgende vraag laten zien
     nextQuestion() {
-        this.currentQuestion++;
+        if (this.currentSurvey.questions[this.currentQuestion].number === 3) {
+            this.currentQuestion = 1;
+            console.log(this.currentQuestion);
+        }
+        else {
+            this.currentQuestion = this.currentSurvey.questions[this.currentQuestion].number + 1;
+            console.log(this.currentQuestion);
+        }
         this.setAnswersToRadiobuttons();
-        this.show = true;
-        this.showVolgende = false;
+        // this.show = true;
+        //  this.showVolgende = false;
+        // console.log(this.currentQuestion);
     }
 }
 QuestionComponent.ɵfac = function QuestionComponent_Factory(t) { return new (t || QuestionComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_surveys_survey_service__WEBPACK_IMPORTED_MODULE_2__["SurveyService"])); };

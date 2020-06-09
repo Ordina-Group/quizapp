@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AnswerOptions, Survey} from '../surveys/survey';
+import {AnswerOptions, Question, Survey} from '../surveys/survey';
 import { SurveyService } from '../surveys/survey.service';
 import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
 
@@ -24,6 +24,7 @@ export class QuestionComponent implements OnInit {
 
   public _currentSurvey: Survey;
   private correct: boolean;
+
 
   constructor(
     private surveyService: SurveyService) {
@@ -70,7 +71,7 @@ export class QuestionComponent implements OnInit {
  });
 
 
-//Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop
+//Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
   onFormSubmit(questionForm: any) {
     console.log(questionForm.value)
     this.clicked();
@@ -80,11 +81,19 @@ export class QuestionComponent implements OnInit {
 
   //als je op knop "volgende" drukt wil je de volgende vraag laten zien
   nextQuestion(){
-    this.currentQuestion++;
-    this.setAnswersToRadiobuttons();
-    this.show = true;
-    this.showVolgende = false;
+if(this.currentSurvey.questions[this.currentQuestion].number === 3){
+  this.currentQuestion = 1;
+  console.log(this.currentQuestion);
+}else {
+  this.currentQuestion = this.currentSurvey.questions[this.currentQuestion].number + 1;
+  console.log(this.currentQuestion);
+}
+   this.setAnswersToRadiobuttons();
 
+  // this.show = true;
+  //  this.showVolgende = false;
+
+   // console.log(this.currentQuestion);
   }
 }
 //   if(questionForm.value === true){
