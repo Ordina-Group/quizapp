@@ -13,14 +13,15 @@ import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
 export class QuestionComponent implements OnInit {
 
   answers: string[];
-  chosenAnswerString: string;
+
   answerOptionsArray: AnswerOptions[];
   chosenAnswer: AnswerOptions;
-  isCorrect: Boolean;
+  selectedValue: String = '';
   currentQuestion = 0;
   buttonClicked = false;
   show = true;
   showVolgende = false;
+
 
 
   public _currentSurvey: Survey;
@@ -77,11 +78,13 @@ export class QuestionComponent implements OnInit {
 //Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
 // (dit gebeurd met show) en clicked() functie wordt aangeroepen
   onFormSubmit(questionForm: any) {
-    console.log(questionForm.value)
     this.clicked();
     this.show = !this.show;
-    this.answerIsCorrect();
+    console.log(this.selectedValue);
+  }
 
+  onItemChange(value){
+    console.log(" Value is : ", value );
   }
 
   //als je op knop "volgende" drukt wil je de volgende vraag laten zien
@@ -95,16 +98,19 @@ export class QuestionComponent implements OnInit {
     console.log("witte vlak is nu weg");
   }
 
-  public answerIsCorrect(): boolean {
-    this.isCorrect = this.chosenAnswer.correct;
-    if (this.isCorrect === false) {
+//  public answerIsCorrect(): boolean {
+ //   this.isCorrect = this.chosenAnswer.correct;
+  //  console.log(this.isCorrect);
+   // console.log(this.chosenAnswer.correct + "dit is de .correct");
+   // if (this.isCorrect === true) {
+    //  return true;
+   // } else {
+    //  return true;
+   // }
 
-      return false;
-    } else {
-      return true;
-    }
+  //}
 
-  }
+
 }
 
 

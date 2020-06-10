@@ -21,7 +21,7 @@
         <form #questionForm="ngForm" (ngSubmit)="onFormSubmit(questionForm)">
 
           <div class="radioBlok" *ngFor="let answer of answers">
-            <input type="radio" name="answerButtons" value="answer">
+            <input type="radio" name="answerButtons" [(ngModel)]="selectedValue" value="{{answer}}">
             <label class="antwoordLabel">{{answer}}</label>
           </div>
 
@@ -32,7 +32,7 @@
         </form>
       </div>
 
-    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"><p class="p-green">{{_currentSurvey?.questions[currentQuestion].answerOptions[0].answerExplanation}}</p>
+    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"><p ng-class="answerIsCorrect()? class='p-red': class='p-green'">{{_currentSurvey?.questions[currentQuestion].answerOptions[0].answerExplanation}} blablablabla</p>
     </div>
 
   </div>
