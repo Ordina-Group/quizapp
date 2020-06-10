@@ -32,7 +32,7 @@
         </form>
       </div>
 
-    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"><p class="p-zwart">{{_currentSurvey?.questions[currentQuestion].answerOptions[0].answerExplanation}}</p>
+    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"><p class="p-green">{{_currentSurvey?.questions[currentQuestion].answerOptions[0].answerExplanation}}</p>
     </div>
 
   </div>
@@ -41,7 +41,7 @@
       <div class="col-11" Style="background-color:black;" *ngIf="buttonClicked">
       </div>
       <div class="col-1" Style="background-color:black;" *ngIf="showVolgende">
-        <p style="margin: 1rem;"><a [routerLink]="['/question']"><button class="btn btn-dark btn-lg" (click)="nextQuestion()">Volgende</button></a></p>
+        <p style="margin: 1rem;"><button class="btn btn-dark btn-lg" (click)="nextQuestion()">Volgende</button></p>
       </div>
     </div>
 

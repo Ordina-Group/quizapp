@@ -16,7 +16,8 @@ export class QuestionComponent implements OnInit {
   chosenAnswerString: string;
   answerOptionsArray: AnswerOptions[];
   chosenAnswer: AnswerOptions;
-  currentQuestion = 1;
+  isCorrect: Boolean;
+  currentQuestion = 0;
   buttonClicked = false;
   show = true;
   showVolgende = false;
@@ -58,50 +59,54 @@ export class QuestionComponent implements OnInit {
     this._currentSurvey = value;
     this.setAnswersToRadiobuttons();
   }
+
   errorMessage = '';
 
-
+//deze functie laat het witte vlak met uitleg zien en reset de buttonclicked gelijk
+  // showvolgende knop wordt getoond
   clicked() {
     this.buttonClicked = !this.buttonClicked;
     this.showVolgende = !this.showVolgende;
   }
 
   questionForm = new FormGroup({
- //gridradios: new FormControl()
- });
+    //gridradios: new FormControl()
+  });
 
 
 //Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
+// (dit gebeurd met show) en clicked() functie wordt aangeroepen
   onFormSubmit(questionForm: any) {
     console.log(questionForm.value)
     this.clicked();
     this.show = !this.show;
+    this.answerIsCorrect();
 
   }
 
   //als je op knop "volgende" drukt wil je de volgende vraag laten zien
-  nextQuestion(){
-if(this.currentSurvey.questions[this.currentQuestion].number === 3){
-  this.currentQuestion = 1;
-  console.log(this.currentQuestion);
-}else {
-  this.currentQuestion = this.currentSurvey.questions[this.currentQuestion].number + 1;
-  console.log(this.currentQuestion);
-}
-   this.setAnswersToRadiobuttons();
+  nextQuestion() {
+    this.currentQuestion++;
+    this.setAnswersToRadiobuttons();
+    this.show = true;
+    this.showVolgende = false;
+    this.buttonClicked = false;
+    this.chosenAnswer = null;
+    console.log("witte vlak is nu weg");
+  }
 
-  // this.show = true;
-  //  this.showVolgende = false;
+  public answerIsCorrect(): boolean {
+    this.isCorrect = this.chosenAnswer.correct;
+    if (this.isCorrect === false) {
 
-   // console.log(this.currentQuestion);
+      return false;
+    } else {
+      return true;
+    }
+
   }
 }
-//   if(questionForm.value === true){
-//       this.buttonClicked = !this.buttonClicked;
-//       this.show = !this.show;
-//     } else{
-//       this.buttonClicked = !this.buttonClicked;
-//     }
+
 
 
 

@@ -23,11 +23,18 @@ p {
   font-size: 15px;
 }
 
-.p-zwart{
-  color:black;
+.p-green{
+  color:green;
   font-family:'Roboto', sans-serif;
   font-size: 15px;
 }
+
+.p-red{
+  color:red;
+  font-family:'Roboto', sans-serif;
+  font-size: 15px;
+}
+
 
 .form-check-label{
   color:white;
@@ -46,6 +53,8 @@ p {
 .button{
   margin: 2rem;
 }
+
+
 
 .input{
   color:white;

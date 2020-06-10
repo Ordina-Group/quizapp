@@ -43,11 +43,11 @@ public class QuizApplication {
             answerOptionRepository.save(new AnswerOption(2, "Answer B", false, question, "answerexplanation"));
             answerOptionRepository.save(new AnswerOption(3, "Answer C", false, question, "answerexplanation"));
 
-            answerOptionRepository.save(new AnswerOption(1, "answer A", false, question2, "answerexplanation"));
+            answerOptionRepository.save(new AnswerOption(1, "answer A van tweede vraag", false, question2, "answerexplanation"));
             answerOptionRepository.save(new AnswerOption(2, "answer B", false, question2, "answerexplanation"));
             answerOptionRepository.save(new AnswerOption(3, "answer C", true, question2, "answerexplanation"));
 
-            answerOptionRepository.save(new AnswerOption(1, "answer A", false, question3, "answerexplanation" ));
+            answerOptionRepository.save(new AnswerOption(1, "answer A van derde vraag", false, question3, "answerexplanation" ));
             answerOptionRepository.save(new AnswerOption(2, "answer B", true, question3, "answerexplanation"));
             answerOptionRepository.save(new AnswerOption(3, "answer C", false, question3, "answerexplanation"));
 
