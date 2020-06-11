@@ -23,7 +23,6 @@ export class QuestionComponent implements OnInit {
   showVolgende = false;
 
 
-
   public _currentSurvey: Survey;
   private correct: boolean;
 
@@ -76,15 +75,29 @@ export class QuestionComponent implements OnInit {
 
 
 //Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
-// (dit gebeurd met show) en clicked() functie wordt aangeroepen
+// (dit gebeurd met show) en clicked() functie wordt aangeroepen.
+// Tevens wordt het antwoord gekoppeld met het juiste antwoord dmv aanroepen setchosenanswer functie
   onFormSubmit(questionForm: any) {
     this.clicked();
     this.show = !this.show;
     console.log(this.selectedValue);
+    this.setChosenAnswer();
   }
 
-  onItemChange(value){
-    console.log(" Value is : ", value );
+  //hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptions
+  setChosenAnswer() {
+    const chosenAnswerAsArray = this.answerOptionsArray.filter(answerOption => {
+      return answerOption.value === this.selectedValue;
+    });
+    this.chosenAnswer = chosenAnswerAsArray[0];
+    console.log(this.chosenAnswer);
+    console.log(this.chosenAnswer.correct);
+  }
+
+
+
+  onItemChange(value) {
+    console.log(" Value is : ", value);
   }
 
   //als je op knop "volgende" drukt wil je de volgende vraag laten zien
@@ -98,21 +111,7 @@ export class QuestionComponent implements OnInit {
     console.log("witte vlak is nu weg");
   }
 
-//  public answerIsCorrect(): boolean {
- //   this.isCorrect = this.chosenAnswer.correct;
-  //  console.log(this.isCorrect);
-   // console.log(this.chosenAnswer.correct + "dit is de .correct");
-   // if (this.isCorrect === true) {
-    //  return true;
-   // } else {
-    //  return true;
-   // }
 
-  //}
 
 
 }
-
-
-
-

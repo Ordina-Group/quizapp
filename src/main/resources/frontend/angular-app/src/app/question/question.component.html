@@ -32,8 +32,7 @@
         </form>
       </div>
 
-    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"><p ng-class="answerIsCorrect()? class='p-red': class='p-green'">{{_currentSurvey?.questions[currentQuestion].answerOptions[0].answerExplanation}} blablablabla</p>
-    </div>
+    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': this.chosenAnswer.correct === true ? 'green' : 'red' }"> test test</div></div>
 
   </div>
 
@@ -46,7 +45,7 @@
     </div>
 
   </div>
-</div>
+
 
 
 
