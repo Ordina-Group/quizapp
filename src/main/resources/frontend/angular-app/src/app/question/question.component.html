@@ -7,13 +7,13 @@
 </div>
 
 <div>
-{{ _currentSurvey?.surveyDescription }}
+  {{ _currentSurvey?.surveyDescription }}
 </div>
 
 <div class="jumbotron-fluid" Style="background-color:black;">
   <div class="container">
     <div class="row">
-      <h2 style="margin-top: 2rem;"> {{ _currentSurvey?.questions[currentQuestion].questionDescription}}</h2>
+      <h2 style="margin-top: 2rem;"> {{ currentQuestionObject?.questionDescription}}</h2>
     </div>
 
     <div class="row">
@@ -32,24 +32,18 @@
         </form>
       </div>
 
-    <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': this.chosenAnswer.correct === true ? 'green' : 'red' }"> test test</div></div>
-
-  </div>
-
-    <div class="row">
-      <div class="col-11" Style="background-color:black;" *ngIf="buttonClicked">
-      </div>
-      <div class="col-1" Style="background-color:black;" *ngIf="showVolgende">
-        <p style="margin: 1rem;"><button class="btn btn-dark btn-lg" (click)="nextQuestion()">Volgende</button></p>
-      </div>
+      <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"
+        [ngStyle]="{ 'color': this.chosenAnswer.correct === true ? 'green' : 'red' }"> test test</div>
     </div>
 
   </div>
 
+  <div class="row">
+    <div class="col-11" Style="background-color:black;" *ngIf="buttonClicked">
+    </div>
+    <div class="col-1" Style="background-color:black;" *ngIf="showVolgende">
+      <p style="margin: 1rem;"><button class="btn btn-dark btn-lg" (click)="nextQuestion()">Volgende</button></p>
+    </div>
+  </div>
 
-
-
-
-
-
-
+</div>
