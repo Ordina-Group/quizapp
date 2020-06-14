@@ -523,9 +523,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       if (rf & 1) {
         var _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 16);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input", 15);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input", 17);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function QuestionComponent_div_14_Template_input_ngModelChange_1_listener($event) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
@@ -537,7 +537,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "label", 16);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "label", 18);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
 
@@ -565,7 +565,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function QuestionComponent_button_15_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 17);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 19);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Submit ");
 
@@ -581,9 +581,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function QuestionComponent_div_16_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 18);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 20);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " test test");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       }
@@ -591,27 +591,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       if (rf & 2) {
         var ctx_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](1, _c0, ctx_r3.chosenAnswer.correct === true ? "green" : "red"));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngStyle", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](2, _c0, ctx_r3.chosenAnswer.correct === true ? "green" : "red"));
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r3.chosenAnswer.answerExplanation, "");
       }
     }
 
-    function QuestionComponent_div_18_Template(rf, ctx) {
+    function QuestionComponent_div_20_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "div", 19);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "div", 21);
       }
     }
 
-    function QuestionComponent_div_19_Template(rf, ctx) {
+    function QuestionComponent_div_21_Template(rf, ctx) {
       if (rf & 1) {
         var _r10 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 20);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 22);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p", 21);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p", 23);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 22);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 24);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function QuestionComponent_div_19_Template_button_click_2_listener() {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function QuestionComponent_div_21_Template_button_click_2_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r10);
 
           var ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
@@ -640,7 +644,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.show = true;
         this.showVolgende = false;
         this.errorMessage = '';
-        this.questionForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({//gridradios: new FormControl()
+        this.questionForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({// gridradios: new FormControl()
         });
         console.log('constructor van Question');
       }
@@ -658,29 +662,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               return _this3.errorMessage = err;
             }
           });
-        } //hier wordt de String array"answers" geleegd in de functie,
-        // vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
-        // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
-
+        }
       }, {
         key: "setAnswersToRadiobuttons",
+        // hier wordt de String array"answers" geleegd in de functie,
+        // vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
+        // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
         value: function setAnswersToRadiobuttons() {
           var _this4 = this;
 
           this.answers = [];
-          this.answerOptionsArray = this.currentSurvey.questions[this.currentQuestion].answerOptions;
+          this.currentQuestionObject = this.currentSurvey.questions.filter(function (question) {
+            return question.number === _this4.currentQuestion + 1;
+          })[0];
+
+          if (this.currentQuestionObject === undefined) {
+            console.log('geen volgende vraag!'); // hier wil je iets doen om naar een eindpagina te gaan.
+
+            return;
+          }
+
+          this.answerOptionsArray = this.currentQuestionObject.answerOptions;
           this.answerOptionsArray.forEach(function (answerOption) {
             _this4.answers.push(answerOption.value);
           });
-        }
+        } // deze functie laat het witte vlak met uitleg zien en reset de buttonclicked gelijk
+        // showvolgende knop wordt getoond
+
       }, {
         key: "clicked",
-        //deze functie laat het witte vlak met uitleg zien en reset de buttonclicked gelijk
-        // showvolgende knop wordt getoond
         value: function clicked() {
           this.buttonClicked = !this.buttonClicked;
           this.showVolgende = !this.showVolgende;
-        } //Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
+        } // Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
         // (dit gebeurd met show) en clicked() functie wordt aangeroepen.
         // Tevens wordt het antwoord gekoppeld met het juiste antwoord dmv aanroepen setchosenanswer functie
 
@@ -691,7 +705,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.show = !this.show;
           console.log(this.selectedValue);
           this.setChosenAnswer();
-        } //hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptions
+        } // hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptions
 
       }, {
         key: "setChosenAnswer",
@@ -708,8 +722,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "onItemChange",
         value: function onItemChange(value) {
-          console.log(" Value is : ", value);
-        } //als je op knop "volgende" drukt wil je de volgende vraag laten zien
+          console.log(' Value is : ', value);
+        } // als je op knop "volgende" drukt wil je de volgende vraag laten zien
 
       }, {
         key: "nextQuestion",
@@ -719,8 +733,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.show = true;
           this.showVolgende = false;
           this.buttonClicked = false;
-          this.chosenAnswer = null;
-          console.log("witte vlak is nu weg");
+          this.selectedValue = null;
+          console.log('witte vlak is nu weg');
         }
       }, {
         key: "currentSurvey",
@@ -743,9 +757,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     QuestionComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
       type: QuestionComponent,
       selectors: [["app-question"]],
-      decls: 20,
+      decls: 22,
       vars: 7,
-      consts: [["Style", "background-image: url('./assets/images/traffic.jpg');", 1, "jumbotron-fluid"], [1, "container", "mx-auto"], [1, "row"], ["Style", "background-color:black;", 1, "jumbotron-fluid"], [1, "container"], [2, "margin-top", "2rem"], [1, "col-sm-6"], [3, "ngSubmit"], ["questionForm", "ngForm"], ["class", "radioBlok", 4, "ngFor", "ngForOf"], ["type", "submit", 4, "ngIf"], ["class", "col-sm-6", "style", "background-color: white", 3, "ngStyle", 4, "ngIf"], ["class", "col-11", "Style", "background-color:black;", 4, "ngIf"], ["class", "col-1", "Style", "background-color:black;", 4, "ngIf"], [1, "radioBlok"], ["type", "radio", "name", "answerButtons", 3, "ngModel", "value", "ngModelChange"], [1, "antwoordLabel"], ["type", "submit"], [1, "col-sm-6", 2, "background-color", "white", 3, "ngStyle"], ["Style", "background-color:black;", 1, "col-11"], ["Style", "background-color:black;", 1, "col-1"], [2, "margin", "1rem"], [1, "btn", "btn-dark", "btn-lg", 3, "click"]],
+      consts: [["Style", "background-image: url('./assets/images/traffic.jpg');", 1, "jumbotron-fluid"], [1, "container", "mx-auto"], [1, "row"], ["Style", "background-color:black;", 1, "jumbotron-fluid"], [1, "container"], [2, "margin-top", "2rem"], [1, "col-sm-6"], [3, "ngSubmit"], ["questionForm", "ngForm"], ["class", "radioBlok", 4, "ngFor", "ngForOf"], ["type", "submit", 4, "ngIf"], ["class", "col-sm-6", "style", "background-color: white", 3, "ngStyle", 4, "ngIf"], [1, "row", 2, "margin-top", "5px"], [1, "col-sm-12"], ["class", "col-11", "Style", "background-color:black;", 4, "ngIf"], ["class", "col-1", "Style", "background-color:black;", 4, "ngIf"], [1, "radioBlok"], ["type", "radio", "name", "answerButtons", 3, "ngModel", "value", "ngModelChange"], [1, "antwoordLabel"], ["type", "submit"], [1, "col-sm-6", 2, "background-color", "white", 3, "ngStyle"], ["Style", "background-color:black;", 1, "col-11"], ["Style", "background-color:black;", 1, "col-1"], [2, "margin", "1rem"], [1, "btn", "btn-dark", "btn-lg", 3, "click"]],
       template: function QuestionComponent_Template(rf, ctx) {
         if (rf & 1) {
           var _r11 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
@@ -802,17 +816,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, QuestionComponent_div_16_Template, 2, 3, "div", 11);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, QuestionComponent_div_16_Template, 2, 4, "div", 11);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 12);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](18, QuestionComponent_div_18_Template, 1, 0, "div", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](18, "div", 13);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](19, QuestionComponent_div_19_Template, 4, 0, "div", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 2);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, QuestionComponent_div_20_Template, 1, 0, "div", 14);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](21, QuestionComponent_div_21_Template, 4, 0, "div", 15);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -822,11 +842,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         if (rf & 2) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("\n", ctx._currentSurvey == null ? null : ctx._currentSurvey.surveyDescription, "\n");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx._currentSurvey == null ? null : ctx._currentSurvey.surveyDescription, "\n");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx._currentSurvey == null ? null : ctx._currentSurvey.questions[ctx.currentQuestion].questionDescription, "");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.currentQuestionObject == null ? null : ctx.currentQuestionObject.questionDescription, "");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
 
@@ -840,7 +860,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.buttonClicked);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.buttonClicked);
 
@@ -1093,7 +1113,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\Users\epo23656\Desktop\quiz_2404_Eric\quiz-master\src\main\resources\frontend\angular-app\src\main.ts */
+    /*! C:\Users\epo23656\Desktop\quizapp\src\main\resources\frontend\angular-app\src\main.ts */
     "./main.ts");
     /***/
   }
