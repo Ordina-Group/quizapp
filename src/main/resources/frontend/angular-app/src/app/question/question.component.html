@@ -33,9 +33,13 @@
       </div>
 
       <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"
-        [ngStyle]="{ 'color': this.chosenAnswer.correct === true ? 'green' : 'red' }"> test test</div>
+        [ngStyle]="{ 'color': this.chosenAnswer.correct === true ? 'green' : 'red' }"> {{this.chosenAnswer.answerExplanation}}</div>
     </div>
 
+  </div>
+
+  <div class="row" style="margin-top: 5px" >
+    <div class="col-sm-12"></div>
   </div>
 
   <div class="row">
