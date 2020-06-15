@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AnswerOptions, Question, Survey } from '../surveys/survey';
 import { SurveyService } from '../surveys/survey.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-
+import {ActivatedRoute, Router, RouterModule} from "@angular/router";
 
 
 @Component({
@@ -36,7 +36,7 @@ export class QuestionComponent implements OnInit {
   }
 
   constructor(
-    private surveyService: SurveyService) {
+    private surveyService: SurveyService, private route: ActivatedRoute, private router: Router) {
     console.log('constructor van Question');
   }
 
@@ -61,6 +61,7 @@ export class QuestionComponent implements OnInit {
     if (this.currentQuestionObject === undefined) {
       console.log('geen volgende vraag!');
       // hier wil je iets doen om naar een eindpagina te gaan.
+      this.router.navigate(['/endpage']);
       return;
     }
     this.answerOptionsArray = this.currentQuestionObject.answerOptions;
