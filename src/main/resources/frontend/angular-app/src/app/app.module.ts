@@ -7,6 +7,7 @@ import { QuestionComponent } from './question/question.component';
 import {SurveyService} from "./surveys/survey.service";
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from "@angular/forms";
+import { EndpageComponent } from './endpage/endpage.component';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import {FormsModule} from "@angular/forms";
     AppComponent,
     HomeComponent,
     QuestionComponent,
+    EndpageComponent,
   ],
   imports: [
     BrowserModule,
