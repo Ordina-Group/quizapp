@@ -16,13 +16,13 @@
 
     exports = ___CSS_LOADER_API_IMPORT___(true); // Module
 
-    exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n", "", {
+    exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\r\n", "", {
       "version": 3,
       "sources": ["styles.css"],
       "names": [],
       "mappings": "AAAA,8EAA8E",
       "file": "styles.css",
-      "sourcesContent": ["/* You can add global styles to this file, and also import other style files */\n"]
+      "sourcesContent": ["/* You can add global styles to this file, and also import other style files */\r\n"]
     }]); // Exports
 
     module.exports = exports;
@@ -464,7 +464,7 @@
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\Users\epo23656\Desktop\quiz_2404_Eric\quiz-master\src\main\resources\frontend\angular-app\src\styles.css */
+    /*! C:\Users\epo23656\Desktop\quizapp\src\main\resources\frontend\angular-app\src\styles.css */
     "./styles.css");
     /***/
   }
