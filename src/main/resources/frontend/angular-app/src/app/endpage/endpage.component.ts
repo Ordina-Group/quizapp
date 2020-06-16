@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-endpage',
@@ -6,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./endpage.component.css']
 })
 export class EndpageComponent implements OnInit {
+  correctAnswer: string;
+  incorrectAnswer: string;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      this.correctAnswer = params["correctAnswer"];
+      this.incorrectAnswer = params["incorrectAnswer"];
+    });
+  }
 
   ngOnInit(): void {
   }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AnswerOptions, Question, Survey } from '../surveys/survey';
 import { SurveyService } from '../surveys/survey.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import {ActivatedRoute, Router, RouterModule} from "@angular/router";
+import {ActivatedRoute, NavigationExtras, Router, RouterModule} from "@angular/router";
 
 
 @Component({
@@ -17,6 +17,8 @@ export class QuestionComponent implements OnInit {
   chosenAnswer: AnswerOptions;
   selectedValue: String = '';
   currentQuestion = 0;
+  correctAnswer = 0;
+  inCorrectAnswer =0;
   currentQuestionObject: Question;
   buttonClicked = false;
   show = true;
@@ -27,6 +29,8 @@ export class QuestionComponent implements OnInit {
   questionForm = new FormGroup({
     // gridradios: new FormControl()
   });
+
+
 
   ngOnInit(): void {
     this.surveyService.getSurvey(1).subscribe({
@@ -61,7 +65,13 @@ export class QuestionComponent implements OnInit {
     if (this.currentQuestionObject === undefined) {
       console.log('geen volgende vraag!');
       // hier wil je iets doen om naar een eindpagina te gaan.
-      this.router.navigate(['/endpage']);
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+          "correctAnswer": this.correctAnswer,
+          "incorrectAnswer": this.inCorrectAnswer
+        }
+      };
+      this.router.navigate(['/endpage'], navigationExtras);
       return;
     }
     this.answerOptionsArray = this.currentQuestionObject.answerOptions;
@@ -88,7 +98,7 @@ export class QuestionComponent implements OnInit {
     this.setChosenAnswer();
   }
 
-  // hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptions
+  // hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptions (die van de database komt)
   setChosenAnswer() {
     const chosenAnswerAsArray = this.answerOptionsArray.filter(answerOption => {
       return answerOption.value === this.selectedValue;
@@ -96,6 +106,7 @@ export class QuestionComponent implements OnInit {
     this.chosenAnswer = chosenAnswerAsArray[0];
     console.log(this.chosenAnswer);
     console.log(this.chosenAnswer.correct);
+    this.saveAnswers();
   }
 
 
@@ -113,6 +124,21 @@ export class QuestionComponent implements OnInit {
     this.buttonClicked = false;
     this.selectedValue = null;
     console.log('witte vlak is nu weg');
+  }
+
+  //hier worden alle goede en foute antwoorden bijgehouden
+  saveAnswers(){
+    if (this.chosenAnswer.correct === true){
+      this.correctAnswer++;
+      console.log(this.correctAnswer);
+      return this.correctAnswer;
+    }else{
+      this.inCorrectAnswer++;
+      console.log(this.inCorrectAnswer);
+      return this.inCorrectAnswer;
+    }
+
+
   }
 
 }
