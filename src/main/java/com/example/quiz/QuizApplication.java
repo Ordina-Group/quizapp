@@ -21,9 +21,9 @@ public class QuizApplication {
         SpringApplication.run(QuizApplication.class);
     }
 
-    @Bean
-    public CommandLineRunner demo(SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository) {
-        return (args) -> {
+ /*   @Bean
+   public CommandLineRunner demo(SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository) {
+       return (args) -> {
 
             Survey survey = new Survey();
             survey.setSurveyDescription("Survey DevoxxxKids dag");
@@ -57,7 +57,7 @@ public class QuizApplication {
 
     }
 
-
+*/
 }
 
 
