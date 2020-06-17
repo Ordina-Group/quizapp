@@ -1,8 +1,8 @@
 .jumbotron-fluid{
   background-size: cover;
-  height:400px;
   display: flex;
   align-items: center;
+  background-color: black;
 }
 
 h2 {
@@ -10,29 +10,35 @@ h2 {
   font-family:'Roboto', sans-serif;
   font-size: 30px;
   align-self: center;
+  margin-top: 2rem;
 }
 
 .container{
   align-self:start;
   width:95%;
+  background-color: black;
 }
 
 p {
   color:white;
   font-family:'Roboto', sans-serif;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .p-green{
   color:green;
   font-family:'Roboto', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .p-red{
   color:red;
   font-family:'Roboto', sans-serif;
-  font-size: 15px;
+  font-size: 14px;
+}
+
+.antwoordLabel{
+  font-size: 14px
 }
 
 
@@ -75,6 +81,10 @@ label.antwoordLabel{
 
 .radioBlok{
   display: block;
-  align-items: center;
+  align-items: start
+}
+
+.row{
+  margin-top: 2rem;
 }
 

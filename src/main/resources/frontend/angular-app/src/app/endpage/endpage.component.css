@@ -4,5 +4,11 @@ h2{
 }
 
 .jumbotron-fluid{
-  background-color:white;
+  background-color:black;
+  height:200px;
+}
+
+
+h3{
+  color:white;
 }

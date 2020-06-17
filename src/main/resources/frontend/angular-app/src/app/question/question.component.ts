@@ -98,7 +98,7 @@ export class QuestionComponent implements OnInit {
     this.setChosenAnswer();
   }
 
-  // hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptions (die van de database komt)
+  // hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptionsmvn package (die van de database komt)
   setChosenAnswer() {
     const chosenAnswerAsArray = this.answerOptionsArray.filter(answerOption => {
       return answerOption.value === this.selectedValue;
