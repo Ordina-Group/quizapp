@@ -16,8 +16,13 @@ public class AnswerOption {
 
     private Long id;
     private int number;
+
+    @Column(columnDefinition="text")
     private String value;
+
     private Boolean isCorrect;
+
+    @Column(columnDefinition="text")
     private String answerExplanation;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
