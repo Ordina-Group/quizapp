@@ -21,21 +21,21 @@ public class QuizApplication {
         SpringApplication.run(QuizApplication.class);
     }
 
- /*   @Bean
-   public CommandLineRunner demo(SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository) {
-       return (args) -> {
+    @Bean
+    public CommandLineRunner demo(SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository) {
+        return (args) -> {
 
             Survey survey = new Survey();
             survey.setSurveyDescription("Survey DevoxxxKids dag");
             surveyRepository.save(survey);
 
-            Question question = new Question("Denk jij dat er programmeerwerk kijken bij de werking van een verkeerslicht?", 1, survey);
+            Question question = new Question("Denk jij dat er programmeerwerk komt kijken bij de werking van een verkeerslicht?", 1, survey);
             questionRepository.save(question);
 
             Question question2 = new Question("Hoe werkt een streepjescode op een verpakking uit de supermarkt?", 2, survey);
             questionRepository.save(question2);
 
-            Question question3 = new Question("Question three", 3, survey);
+            Question question3 = new Question("Stelling: (Zelfrijdende) auto's leren bevatten soms software die bijv. vrachtwagens kunnen herkennen op de weg.", 3, survey);
             questionRepository.save(question3);
 
             //save answeroptions
@@ -47,9 +47,9 @@ public class QuizApplication {
             answerOptionRepository.save(new AnswerOption(2, "De scanner kijkt naar de dikte van de streepjes en geeft dit door aan de computer. De dikte van het streepje komt overeen met de cijfers zie onder een barcode staan.", false, question2, "Dit is helaas niet goed. Computers werken alleen met nullen en enen. De lichte streepjes op de barcode worden gelezen door de scanner. Deze stuurt licht naar buiten en het licht weerkaatst op de witte delen. De witte delen worden dan verwerkt als nummer 1."));
 
 
-            answerOptionRepository.save(new AnswerOption(1, "answer A van derde vraag", false, question3, "answerexplanation" ));
-            answerOptionRepository.save(new AnswerOption(2, "answer B", true, question3, "answerexplanation"));
-            answerOptionRepository.save(new AnswerOption(3, "answer C", false, question3, "answerexplanation"));
+            answerOptionRepository.save(new AnswerOption(1, "Ja, dat is waar. Camera's en bijbehorende software van de auto vergelijken de beelden van een vrachtwagen met hoe een vrachtwagen eruit hoort te zien. Indien deze beelden matchen, wordt het object als vrachtwagen gezien.", true, question3, "Ja, dit is correct, als is het niet zo kort door de bocht als het hier staat. Een auto kan tevens zo geprogrammeerd worden dat het zelfs kan leren een vrachtwagen te herkennen." ));
+            answerOptionRepository.save(new AnswerOption(2, "Ja, dat is waar. De camera's  en software van de auto 'leest' het kentekenbord van de vrachtwagen en vergelijkt deze met kenteken data van een nationale database of deze als een vrachtwagen geregistreerd staat.", false, question3, "Nee, had wellicht ook een mogelijkheid geweest, maar is niet zoals het werkt. Het bovenstaande antwoord is correct. Een auto kan tevens zo geprogrammeerd worden dat het zelfs kan leren een vrachtwagen te herkennen."));
+            answerOptionRepository.save(new AnswerOption(3, "Nee, dat is niet waar. Dit kan onmogelijk in de software verwerkt worden. ", false, question3, "Helaas niet goed. Het eerste antwoord is correct; Het bovenstaande antwoord is correct. Een auto kan tevens zo geprogrammeerd worden dat het zelfs kan leren een vrachtwagen te herkennen."));
 
 
         };
@@ -57,7 +57,7 @@ public class QuizApplication {
 
     }
 
-*/
+
 }
 
 

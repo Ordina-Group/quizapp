@@ -3,6 +3,7 @@ import { AnswerOptions, Question, Survey } from '../surveys/survey';
 import { SurveyService } from '../surveys/survey.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import {ActivatedRoute, NavigationExtras, Router, RouterModule} from "@angular/router";
+import {any} from "codelyzer/util/function";
 
 
 @Component({
@@ -23,6 +24,7 @@ export class QuestionComponent implements OnInit {
   buttonClicked = false;
   show = true;
   showVolgende = false;
+  hasAnswer = false;
   public _currentSurvey: Survey;
   private correct: boolean;
   errorMessage = '';
@@ -83,8 +85,15 @@ export class QuestionComponent implements OnInit {
   // deze functie laat het witte vlak met uitleg zien en reset de buttonclicked gelijk
   // showvolgende knop wordt getoond
   clicked() {
-    this.buttonClicked = !this.buttonClicked;
-    this.showVolgende = !this.showVolgende;
+    if (!this.selectedValue) {
+      this.hasAnswer = !this.hasAnswer;
+      console.log("geen antwoord ingegeven")
+      this.onFormSubmit(this.questionForm);
+    } else {
+      this.buttonClicked = !this.buttonClicked;
+      this.showVolgende = !this.showVolgende;
+      this.hasAnswer = false;
+    }
   }
 
 
