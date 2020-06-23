@@ -29,27 +29,27 @@ public class QuizApplication {
             survey.setSurveyDescription("Een nieuwe survey");
             surveyRepository.save(survey);
 
-            Question question = new Question("Denk jij dat er programmeerwerk kijken bij de werking van een stoplicht op de weg?", 1, survey);
+            Question question = new Question("Slag bij Nieuwpoort?", 1, survey);
             questionRepository.save(question);
 
-            Question question2 = new Question("Question two", 2, survey);
+            Question question2 = new Question("Slag bij Hastings?", 2, survey);
             questionRepository.save(question2);
 
-            Question question3 = new Question("Question three", 3, survey);
+            Question question3 = new Question("Slag bij Waterloo?", 3, survey);
             questionRepository.save(question3);
 
             //save answeroptions
-            answerOptionRepository.save(new AnswerOption(1, "answer eerste", true, question,"answerexplanation"));
-            answerOptionRepository.save(new AnswerOption(2, "Answer B", false, question, "answerexplanation"));
-            answerOptionRepository.save(new AnswerOption(3, "Answer C", false, question, "answerexplanation"));
+            answerOptionRepository.save(new AnswerOption(1, "1600", true, question,"Juist, het was in 1600"));
+            answerOptionRepository.save(new AnswerOption(2, "1601", false, question, "Onjuist, het was 1 jaar eerder, in 1600"));
+            answerOptionRepository.save(new AnswerOption(3, "1602", false, question, "Onjuist, het was 2 jaar eerder, in 1600"));
 
-            answerOptionRepository.save(new AnswerOption(1, "answer A van tweede vraag", false, question2, "answerexplanation"));
-            answerOptionRepository.save(new AnswerOption(2, "answer B", false, question2, "answerexplanation"));
-            answerOptionRepository.save(new AnswerOption(3, "answer C", true, question2, "answerexplanation"));
+            answerOptionRepository.save(new AnswerOption(1, "1065", false, question2, "Onjuist, het was 1 jaar later, in 1066"));
+            answerOptionRepository.save(new AnswerOption(2, "1066", true, question2, "Juist, het was in 1066"));
+            answerOptionRepository.save(new AnswerOption(3, "1067", false, question2, "Onjuist, het was 1 jaar eerder, in 1066"));
 
-            answerOptionRepository.save(new AnswerOption(1, "answer A van derde vraag", false, question3, "answerexplanation" ));
-            answerOptionRepository.save(new AnswerOption(2, "answer B", true, question3, "answerexplanation"));
-            answerOptionRepository.save(new AnswerOption(3, "answer C", false, question3, "answerexplanation"));
+            answerOptionRepository.save(new AnswerOption(1, "1813", false, question3, "Onjuist, het was 2 jaar later, in 1815" ));
+            answerOptionRepository.save(new AnswerOption(2, "1814", false, question3, "Onjuist, het was 1 jaar later, in 1815"));
+            answerOptionRepository.save(new AnswerOption(3, "1815", true, question3, "Juist, het was in 1815"));
 
 
         };

@@ -18,7 +18,6 @@ public class AnswerOption {
     private int number;
     private String value;
     private Boolean isCorrect;
-    private String answerExplanation;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "questionid", nullable = false)
@@ -31,12 +30,10 @@ public class AnswerOption {
 
     }
 
-    public AnswerOption(int number, String value, Boolean isCorrect, Question question, String answerExplanation) {
+    public AnswerOption(int number, String value, Question question) {
         this.number= number;
         this.value = value;
-        this.isCorrect = isCorrect;
         this.question = question;
-        this.answerExplanation = answerExplanation;
     }
 
     public int getNumber() {
@@ -53,14 +50,6 @@ public class AnswerOption {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public Boolean getCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(Boolean correct) {
-        isCorrect = correct;
     }
 
     public Question getQuestion() {
@@ -92,20 +81,12 @@ public class AnswerOption {
     }*/
 
 
-    public String AnsweroptionsToString() {
-        return String.format(
-                "AnswerOptions[number=%d, answerOptions='%s', isCorrect='%s' ]",
-                number, value, isCorrect);
-    }
+//    public String AnsweroptionsToString() {
+//        return String.format(
+//                "AnswerOptions[number=%d, answerOptions='%s', isCorrect='%s' ]",
+//                number, value, isCorrect);
+//    }
 
-
-    public String getAnswerExplanation() {
-        return answerExplanation;
-    }
-
-    public void setAnswerExplanation(String answerExplanation) {
-        this.answerExplanation = answerExplanation;
-    }
 }
 
 
