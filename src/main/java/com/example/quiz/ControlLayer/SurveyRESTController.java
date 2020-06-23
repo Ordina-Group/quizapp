@@ -10,17 +10,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz/surveys")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8080")
 public class SurveyRESTController {
 
     @Autowired
     private SurveyService surveyService;
 
+    //questions
     @GetMapping
     public List<Survey> list(){
         return surveyService.findAllSurveys();
     }
 
+    //questions/1
     @GetMapping
     @RequestMapping("{id}")
     public Survey get(@PathVariable Long id){
