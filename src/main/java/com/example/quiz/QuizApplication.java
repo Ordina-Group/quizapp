@@ -39,7 +39,7 @@ public class QuizApplication {
             questionRepository.save(question3);
 
             //save answeroptions
-            answerOptionRepository.save(new AnswerOption(1, "Ja, deels. Door een detectielus op de weg die een auto opmerkt, maar bij meerdere auto's kan dit niet en regelen mensen vanuit een speciale 'bestuurskamer' dit.", false, question,"Dit is helaas niet goed. Meerdere detectielussen kunnen informatie doorgeven over meerder auto's"));
+            answerOptionRepository.save(new AnswerOption(1, "Ja, deels. Door een detectielus op de weg die een auto opmerkt, maar bij meerdere auto's kan dit niet en regelen mensen vanuit een speciale 'bestuurskamer' dit.", false, question,"Dit is helaas niet goed. Meerdere detectielussen kunnen informatie doorgeven over meerdere auto's"));
             answerOptionRepository.save(new AnswerOption(2, "Ja, volledig. Alles is computergestuurd; meerdere detectielussen geven een seintje naar de computer die dit regelt.", true, question, "Dit is goed! Zelfs een ambulance kan inbellen naar deze computer om te vertellen dat het verkeerslicht op groen moet in de richting waar deze heen moet."));
             answerOptionRepository.save(new AnswerOption(3, "Nee, dit is te ingewikkeld voor een computer; als er een ambulance aankomt werkt dit systeem immers niet. Vanuit de bestuurskamer regelen mensen dit.", false, question, "Dit is helaas niet goed. De computers kunnen zo geprogrammeerd worden, zodat een ambulance kan inbellen naar de computer om te vertellen dat het verkeerslicht op groen moet in de richting waar deze vandaan komt en heen gaat."));
 
