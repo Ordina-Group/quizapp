@@ -1,8 +1,10 @@
 package com.example.quiz;
 
+import com.example.quiz.Repository.AnswerIsCorrectRepository;
 import com.example.quiz.Repository.AnswerOptionRepository;
 import com.example.quiz.Repository.QuestionRepository;
 import com.example.quiz.Repository.SurveyRepository;
+import com.example.quiz.model.AnswerIsCorrect;
 import com.example.quiz.model.AnswerOption;
 import com.example.quiz.model.Question;
 import com.example.quiz.model.Survey;
@@ -22,7 +24,7 @@ public class QuizApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository) {
+    public CommandLineRunner demo(SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository, AnswerIsCorrectRepository answerIsCorrectRepository) {
         return (args) -> {
 
             Survey survey = new Survey();
@@ -39,17 +41,42 @@ public class QuizApplication {
             questionRepository.save(question3);
 
             //save answeroptions
-            answerOptionRepository.save(new AnswerOption(1, "1600", true, question,"Juist, het was in 1600"));
-            answerOptionRepository.save(new AnswerOption(2, "1601", false, question, "Onjuist, het was 1 jaar eerder, in 1600"));
-            answerOptionRepository.save(new AnswerOption(3, "1602", false, question, "Onjuist, het was 2 jaar eerder, in 1600"));
+            answerOptionRepository.save(new AnswerOption( "1600", question));
+            answerOptionRepository.save(new AnswerOption( "1601", question));
+            answerOptionRepository.save(new AnswerOption( "1602", question));
 
-            answerOptionRepository.save(new AnswerOption(1, "1065", false, question2, "Onjuist, het was 1 jaar later, in 1066"));
-            answerOptionRepository.save(new AnswerOption(2, "1066", true, question2, "Juist, het was in 1066"));
-            answerOptionRepository.save(new AnswerOption(3, "1067", false, question2, "Onjuist, het was 1 jaar eerder, in 1066"));
+            answerOptionRepository.save(new AnswerOption( "1065", question2));
+            answerOptionRepository.save(new AnswerOption( "1066", question2));
+            answerOptionRepository.save(new AnswerOption("1067", question2));
 
-            answerOptionRepository.save(new AnswerOption(1, "1813", false, question3, "Onjuist, het was 2 jaar later, in 1815" ));
-            answerOptionRepository.save(new AnswerOption(2, "1814", false, question3, "Onjuist, het was 1 jaar later, in 1815"));
-            answerOptionRepository.save(new AnswerOption(3, "1815", true, question3, "Juist, het was in 1815"));
+            answerOptionRepository.save(new AnswerOption("1813", question3));
+            answerOptionRepository.save(new AnswerOption("1814", question3));
+            answerOptionRepository.save(new AnswerOption("1815", question3));
+
+            AnswerIsCorrect answerIsCorrect1 = new AnswerIsCorrect(true,"Juist, het was in 1600");
+            answerIsCorrectRepository.save(answerIsCorrect1);
+            AnswerIsCorrect answerIsCorrect2 = new AnswerIsCorrect(false, "Onjuist, het was 1 jaar eerder, in 1600");
+            answerIsCorrectRepository.save(answerIsCorrect2);
+            AnswerIsCorrect answerIsCorrect3 = new AnswerIsCorrect(false, "Onjuist, het was 2 jaar eerder, in 1600");
+            answerIsCorrectRepository.save(answerIsCorrect3);
+
+            AnswerIsCorrect answerIsCorrect4 = new AnswerIsCorrect(false, "Onjuist, het was 1 jaar later, in 1066");
+            answerIsCorrectRepository.save(answerIsCorrect4);
+            AnswerIsCorrect answerIsCorrect5 = new AnswerIsCorrect(true,  "Juist, het was in 1066");
+            answerIsCorrectRepository.save(answerIsCorrect5);
+            AnswerIsCorrect answerIsCorrect6 = new AnswerIsCorrect(false, "Onjuist, het was 1 jaar eerder, in 1066");
+            answerIsCorrectRepository.save(answerIsCorrect6);
+
+            AnswerIsCorrect answerIsCorrect7 = new AnswerIsCorrect(false, "Onjuist, het was 2 jaar later, in 1815" );
+            answerIsCorrectRepository.save(answerIsCorrect7);
+            AnswerIsCorrect answerIsCorrect8 = new AnswerIsCorrect(false, "Onjuist, het was 1 jaar later, in 1815");
+            answerIsCorrectRepository.save(answerIsCorrect8);
+            AnswerIsCorrect answerIsCorrect9 = new AnswerIsCorrect(true, "Juist, het was in 1815");
+            answerIsCorrectRepository.save(answerIsCorrect9);
+
+//            answerIsCorrectRepository.save(new AnswerIsCorrect(false, "Onjuist, het was 2 jaar later, in 1815" ));
+//            answerIsCorrectRepository.save(new AnswerIsCorrect(false, "Onjuist, het was 1 jaar later, in 1815"));
+//            answerIsCorrectRepository.save(new AnswerIsCorrect(true, "Juist, het was in 1815"));
 
 
         };

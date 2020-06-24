@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="answerOptions")
@@ -13,35 +14,22 @@ public class AnswerOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
-    private int number;
     private String value;
-    private Boolean isCorrect;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "questionid", nullable = false)
     @JsonIgnore
     private Question question;
 
-
-
     protected AnswerOption() {
 
     }
 
-    public AnswerOption(int number, String value, Question question) {
-        this.number= number;
+    public AnswerOption(String value, Question question) {
         this.value = value;
         this.question = question;
-    }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public String getValue() {
@@ -67,7 +55,6 @@ public class AnswerOption {
     public void setId(Long id) {
         this.id = id;
     }
-
 
 
     /*public String getanswerOptions() {
