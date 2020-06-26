@@ -18,18 +18,24 @@ public class SubmittedAnswerService {
 
     @Autowired
     private AnswerIsCorrectRepository answerIsCorrectRepository;
+    @Autowired
     private SubmittedAnswerRepository submittedAnswerRepository;
 
-    public Optional<AnswerIsCorrect> ResponseToSubmission(SubmittedAnswer submittedAnswer) {
+    public AnswerIsCorrect ResponseToSubmission(SubmittedAnswer submittedAnswer) {
+        System.out.println("komen we hier?");
 
         Optional<AnswerIsCorrect> optAnswerIsCorrect = answerIsCorrectRepository.findById(submittedAnswer.getChosenAnswerId());
-
+        System.out.println("hier dan?");
         if (optAnswerIsCorrect.isPresent()) {
             AnswerIsCorrect answerIsCorrect = optAnswerIsCorrect.get();
             submittedAnswer.setAnsweredCorrect(answerIsCorrect.getCorrect());
+            submittedAnswerRepository.save(submittedAnswer);
+            return answerIsCorrect;
+        } else {
+            System.out.println("En hier komen we dus zowiezo?");
+            return new AnswerIsCorrect(1L,false, "hallo");
         }
-        submittedAnswerRepository.save(submittedAnswer);
-        return optAnswerIsCorrect;
+
         // check of antwoord goed is
         //haal AnswerIsCorrect object op dmv repository met answerID
         //

@@ -14,12 +14,26 @@ public class AnswerIsCorrect {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private Long answerOptionId;
     private Boolean isCorrect;
     private String answerExplanation;
 
-    public AnswerIsCorrect(Boolean isCorrect, String answerExplanation) {
+    public AnswerIsCorrect(Long answerOptionId, Boolean isCorrect, String answerExplanation) {
+        this.answerOptionId = answerOptionId;
         this.isCorrect = isCorrect;
         this.answerExplanation = answerExplanation;
+    }
+
+    public AnswerIsCorrect() {
+    }
+
+    public Long getAnswerOptionId() {
+        return answerOptionId;
+    }
+
+    public void setAnswerOptionId(Long answerOptionId) {
+        this.answerOptionId = answerOptionId;
     }
 
     public Boolean getCorrect() {
