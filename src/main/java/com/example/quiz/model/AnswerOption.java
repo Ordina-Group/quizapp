@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="answerOptions")
@@ -13,43 +14,22 @@ public class AnswerOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
-    private int number;
-
-    @Column(columnDefinition="text")
     private String value;
-
-    private Boolean isCorrect;
-
-    @Column(columnDefinition="text")
-    private String answerExplanation;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "questionid", nullable = false)
     @JsonIgnore
     private Question question;
 
-
-
     protected AnswerOption() {
 
     }
 
-    public AnswerOption(int number, String value, Boolean isCorrect, Question question, String answerExplanation) {
-        this.number= number;
+    public AnswerOption(String value, Question question) {
         this.value = value;
-        this.isCorrect = isCorrect;
         this.question = question;
-        this.answerExplanation = answerExplanation;
-    }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
     }
 
     public String getValue() {
@@ -58,14 +38,6 @@ public class AnswerOption {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public Boolean getCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(Boolean correct) {
-        isCorrect = correct;
     }
 
     public Question getQuestion() {
@@ -85,7 +57,6 @@ public class AnswerOption {
     }
 
 
-
     /*public String getanswerOptions() {
 
         return answerOptions;
@@ -97,20 +68,12 @@ public class AnswerOption {
     }*/
 
 
-    public String AnsweroptionsToString() {
-        return String.format(
-                "AnswerOptions[number=%d, answerOptions='%s', isCorrect='%s' ]",
-                number, value, isCorrect);
-    }
+//    public String AnsweroptionsToString() {
+//        return String.format(
+//                "AnswerOptions[number=%d, answerOptions='%s', isCorrect='%s' ]",
+//                number, value, isCorrect);
+//    }
 
-
-    public String getAnswerExplanation() {
-        return answerExplanation;
-    }
-
-    public void setAnswerExplanation(String answerExplanation) {
-        this.answerExplanation = answerExplanation;
-    }
 }
 
 

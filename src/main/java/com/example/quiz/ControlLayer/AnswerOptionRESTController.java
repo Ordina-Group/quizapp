@@ -1,3 +1,4 @@
+
 package com.example.quiz.ControlLayer;
 
 import com.example.quiz.Repository.AnswerOptionRepository;
@@ -11,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz/answeroptions")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AnswerOptionRESTController {
 
     @Autowired
@@ -36,4 +37,5 @@ public class AnswerOptionRESTController {
 
 
 }
+
 

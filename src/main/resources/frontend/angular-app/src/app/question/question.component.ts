@@ -2,9 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AnswerOptions, Question, Survey } from '../surveys/survey';
 import { SurveyService } from '../surveys/survey.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+<<<<<<< HEAD
+import { SubmittedAnswerService } from '../submittedanswers/submittedanswer.service';
+import { SubmittedAnswer } from '../submittedanswers/submittedanswer';
+import { AnswerIsCorrect } from '../answeriscorrect/answeriscorrect';
+=======
 import {ActivatedRoute, NavigationExtras, Router, RouterModule} from "@angular/router";
 import {any} from "codelyzer/util/function";
 
+>>>>>>> 525db19cae7e6498b6c454e2cc1bdc55519240ee
 
 @Component({
   selector: 'app-question',
@@ -13,10 +19,9 @@ import {any} from "codelyzer/util/function";
 })
 export class QuestionComponent implements OnInit {
 
-  answers: string[];
   answerOptionsArray: AnswerOptions[];
   chosenAnswer: AnswerOptions;
-  selectedValue: String = '';
+  selectedValue: number = 0;
   currentQuestion = 0;
   correctAnswer = 0;
   inCorrectAnswer =0;
@@ -28,6 +33,8 @@ export class QuestionComponent implements OnInit {
   public _currentSurvey: Survey;
   private correct: boolean;
   errorMessage = '';
+  submittedAnswer: SubmittedAnswer;
+  answerIsCorrect: AnswerIsCorrect;
   questionForm = new FormGroup({
     // gridradios: new FormControl()
   });
@@ -42,11 +49,13 @@ export class QuestionComponent implements OnInit {
   }
 
   constructor(
-    private surveyService: SurveyService, private route: ActivatedRoute, private router: Router) {
+    private surveyService: SurveyService,
+    private submittedAnswerService: SubmittedAnswerService) {
     console.log('constructor van Question');
+    console.log('constructor van Submittedanswer');
   }
 
-
+ 
   public get currentSurvey(): Survey {
     return this._currentSurvey;
   }
@@ -60,7 +69,7 @@ export class QuestionComponent implements OnInit {
   // vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
   // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
-    this.answers = [];
+    console.log(this.currentSurvey)
     this.currentQuestionObject = this.currentSurvey.questions.filter(question => {
       return question.number === this.currentQuestion + 1;
     })[0];
@@ -77,9 +86,7 @@ export class QuestionComponent implements OnInit {
       return;
     }
     this.answerOptionsArray = this.currentQuestionObject.answerOptions;
-    this.answerOptionsArray.forEach(answerOption => {
-      this.answers.push(answerOption.value);
-    });
+
   }
 
   // deze functie laat het witte vlak met uitleg zien en reset de buttonclicked gelijk
@@ -104,19 +111,25 @@ export class QuestionComponent implements OnInit {
     this.clicked();
     this.show = !this.show;
     console.log(this.selectedValue);
-    this.setChosenAnswer();
+    this.submittedAnswer = new SubmittedAnswer();
+    this.submittedAnswer.chosenAnswerId = this.selectedValue 
+    this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
+      console.log("answerIsCorrect: " + answerIsCorrect)
+      this.answerIsCorrect = answerIsCorrect;
+    });
   }
 
-  // hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptionsmvn package (die van de database komt)
-  setChosenAnswer() {
-    const chosenAnswerAsArray = this.answerOptionsArray.filter(answerOption => {
-      return answerOption.value === this.selectedValue;
-    });
-    this.chosenAnswer = chosenAnswerAsArray[0];
-    console.log(this.chosenAnswer);
-    console.log(this.chosenAnswer.correct);
-    this.saveAnswers();
-  }
+
+
+  // // hier vergelijk je het gekozen antwoord met het antwoord van het object answeroptions
+  // setChosenAnswer() {
+  //   const chosenAnswerAsArray = this.answerOptionsArray.filter(answerOption => {
+  //     return answerOption.value === this.selectedValue;
+  //   });
+  //   this.chosenAnswer = chosenAnswerAsArray[0];
+  //   console.log(this.chosenAnswer);
+  //   console.log(this.chosenAnswer.correct);
+  // }
 
 
 

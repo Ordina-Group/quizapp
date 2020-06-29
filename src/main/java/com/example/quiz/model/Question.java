@@ -25,17 +25,17 @@ public class Question {
     @JsonIgnore
     private Survey survey;
 
-    private int number;
+    private int questionNumber;
 
 
     public Question() {
     }
 
 
-    public Question(String questionDescription, int number, Survey survey) {
+    public Question(String questionDescription, int questionNumber, Survey survey) {
         this.survey = survey;
         this.questionDescription = questionDescription;
-        this.number = number;
+        this.questionNumber = questionNumber;
     }
 
     public Long getId() {
@@ -76,11 +76,11 @@ public class Question {
     }
 
     public int getNumber() {
-        return number;
+        return questionNumber;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setNumber(int questionNumber) {
+        this.questionNumber = questionNumber;
     }
 
     public String questionToString() {
