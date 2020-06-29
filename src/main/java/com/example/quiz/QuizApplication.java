@@ -43,7 +43,7 @@ public class QuizApplication {
         return (args) -> {
 
             Survey survey = new Survey();
-            survey.setSurveyDescription("Een nieuwe survey");
+            survey.setSurveyDescription("Survey DevoxxxKids dag");
             surveyRepository.save(survey);
 
             Question question = new Question("Slag bij Nieuwpoort?", 1, survey);
@@ -92,6 +92,7 @@ public class QuizApplication {
 //            answerIsCorrectRepository.save(new AnswerIsCorrect(false, "Onjuist, het was 2 jaar later, in 1815" ));
 //            answerIsCorrectRepository.save(new AnswerIsCorrect(false, "Onjuist, het was 1 jaar later, in 1815"));
 //            answerIsCorrectRepository.save(new AnswerIsCorrect(true, "Juist, het was in 1815"));
+
 
 
         };

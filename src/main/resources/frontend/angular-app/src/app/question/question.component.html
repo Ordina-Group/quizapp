@@ -1,4 +1,4 @@
-<div class="jumbotron-fluid" Style="background-image: url('./assets/images/traffic.jpg');">
+<div class="jumbotron-fluid" Style="background-image: url('./assets/images/traffic.jpg'); height: 250px">
   <div class="container mx-auto">
     <div class="row">
 
@@ -7,38 +7,51 @@
 </div>
 
 <div>
-  {{ _currentSurvey?.surveyDescription }}
+
 </div>
 
-<div class="jumbotron-fluid" Style="background-color:black;">
+<div class="jumbotron-fluid d-flex flex-column">
   <div class="container">
     <div class="row">
-      <h2 style="margin-top: 2rem;"> {{ currentQuestionObject?.questionDescription}}</h2>
+      <h2> {{ currentQuestionObject?.questionDescription}}</h2>
     </div>
+  </div>
+
+  <div class="container">
+<div class="row">
+  <div class="col-sm-12">
+    <div *ngIf="buttonClicked" class="col-sm-12" style="background-color: white; font-size: 14px; padding: 2rem" [ngStyle]="{ 'color': this.chosenAnswer.correct === true ? 'green' : 'red' }"> {{this.chosenAnswer.answerExplanation}}</div>
+  </div>
+  </div>
 
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-12">
         <form #questionForm="ngForm" (ngSubmit)="onFormSubmit(questionForm)">
 
           <div class="radioBlok" *ngFor="let answer of answerOptionsArray">
             <input type="radio" name="answerButtons" [(ngModel)]="selectedValue" value="{{answer.id}}">
             <label class="antwoordLabel">{{answer.value}}</label>
           </div>
-
-          <button type="submit" *ngIf="show">
+          <div class="col-6" *ngIf="hasAnswer">
+            <p Style="color:red; padding:1rem"> Selecteer een antwoord om verder te gaan</p>
+          </div>
+          <button class="btn btn-light btn-sm" type="submit" *ngIf="show">
             Submit
           </button>
 
         </form>
       </div>
-
+      <!-- werkt niet aangezien de knop eerder word verwerkt dan de incoming data van de post-->
       <div *ngIf="buttonClicked" class="col-sm-6" style="background-color: white"
         [ngStyle]="{ 'color': this.answerIsCorrect.isCorrect === true ? 'green' : 'red' }"> {{this.answerIsCorrect.answerExplanation}}</div>
     </div>
 
+
+       </div>
   </div>
 
-  <div class="row" style="margin-top: 5px" >
+  <div class="container mx-auto">
+  <div class="row" style="margin: 5px; background-color: white" >
     <div class="col-sm-12"></div>
   </div>
 
@@ -50,4 +63,5 @@
     </div>
   </div>
 
+</div>
 </div>

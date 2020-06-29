@@ -2,9 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AnswerOptions, Question, Survey } from '../surveys/survey';
 import { SurveyService } from '../surveys/survey.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+<<<<<<< HEAD
 import { SubmittedAnswerService } from '../submittedanswers/submittedanswer.service';
 import { SubmittedAnswer } from '../submittedanswers/submittedanswer';
 import { AnswerIsCorrect } from '../answeriscorrect/answeriscorrect';
+=======
+import {ActivatedRoute, NavigationExtras, Router, RouterModule} from "@angular/router";
+import {any} from "codelyzer/util/function";
+
+>>>>>>> 525db19cae7e6498b6c454e2cc1bdc55519240ee
 
 @Component({
   selector: 'app-question',
@@ -17,10 +23,13 @@ export class QuestionComponent implements OnInit {
   chosenAnswer: AnswerOptions;
   selectedValue: number = 0;
   currentQuestion = 0;
+  correctAnswer = 0;
+  inCorrectAnswer =0;
   currentQuestionObject: Question;
   buttonClicked = false;
   show = true;
   showVolgende = false;
+  hasAnswer = false;
   public _currentSurvey: Survey;
   private correct: boolean;
   errorMessage = '';
@@ -29,6 +38,8 @@ export class QuestionComponent implements OnInit {
   questionForm = new FormGroup({
     // gridradios: new FormControl()
   });
+
+
 
   ngOnInit(): void {
     this.surveyService.getSurvey(1).subscribe({
@@ -65,6 +76,13 @@ export class QuestionComponent implements OnInit {
     if (this.currentQuestionObject === undefined) {
       console.log('geen volgende vraag!');
       // hier wil je iets doen om naar een eindpagina te gaan.
+      let navigationExtras: NavigationExtras = {
+        queryParams: {
+          "correctAnswer": this.correctAnswer,
+          "incorrectAnswer": this.inCorrectAnswer
+        }
+      };
+      this.router.navigate(['/endpage'], navigationExtras);
       return;
     }
     this.answerOptionsArray = this.currentQuestionObject.answerOptions;
@@ -74,8 +92,15 @@ export class QuestionComponent implements OnInit {
   // deze functie laat het witte vlak met uitleg zien en reset de buttonclicked gelijk
   // showvolgende knop wordt getoond
   clicked() {
-    this.buttonClicked = !this.buttonClicked;
-    this.showVolgende = !this.showVolgende;
+    if (!this.selectedValue) {
+      this.hasAnswer = !this.hasAnswer;
+      console.log("geen antwoord ingegeven")
+      this.onFormSubmit(this.questionForm);
+    } else {
+      this.buttonClicked = !this.buttonClicked;
+      this.showVolgende = !this.showVolgende;
+      this.hasAnswer = false;
+    }
   }
 
 
@@ -121,6 +146,21 @@ export class QuestionComponent implements OnInit {
     this.buttonClicked = false;
     this.selectedValue = null;
     console.log('witte vlak is nu weg');
+  }
+
+  //hier worden alle goede en foute antwoorden bijgehouden
+  saveAnswers(){
+    if (this.chosenAnswer.correct === true){
+      this.correctAnswer++;
+      console.log(this.correctAnswer);
+      return this.correctAnswer;
+    }else{
+      this.inCorrectAnswer++;
+      console.log(this.inCorrectAnswer);
+      return this.inCorrectAnswer;
+    }
+
+
   }
 
 }

@@ -17,7 +17,7 @@ public class Question {
 
     private String questionDescription;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<AnswerOption> answerOptions;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

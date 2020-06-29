@@ -10,17 +10,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz/surveys")        //Alle requests die worden behandeld in deze folder gaan hiernaartoe
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*")
+
 public class SurveyRESTController {
 
     @Autowired
     private SurveyService surveyService;
 
+    //questions
     @GetMapping
     public List<Survey> list(){
         return surveyService.findAllSurveys();
     }
 
+    //questions/1
     @GetMapping
     @RequestMapping("{id}")
     public Survey get(@PathVariable Long id){

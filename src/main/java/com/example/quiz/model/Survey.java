@@ -17,9 +17,10 @@ public class Survey {
     @Column(name="surveyid")
     private Long id;
 
+
     private String surveyDescription;
 
-    @OneToMany(mappedBy = "survey", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    @OneToMany(mappedBy = "survey",cascade = CascadeType.ALL )
     private Set<Question> questions;
 
     public Survey() {
