@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz/answeriscorrect")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AnswerIsCorrectRESTController {
 
     @Autowired

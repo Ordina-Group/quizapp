@@ -25,12 +25,6 @@ public class SubmittedAnswer {
         this.answeredCorrect = answeredCorrect;
     }
 
-//    public String surveyAnswersToString() {
-//        return String.format(
-//                "SurveyAnswers[id=%d,userId=%d, choosenAnswer='%s']",
-//                id, userId, chosenAnswer);
-//    }
-
     public Long getId() { return id; }
 
     public void setId(Long id) { this.id = id; }

@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/quiz/submittedanswers")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SubmittedAnswerRESTController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class SubmittedAnswerRESTController {
     }
 
     //Requestbody laat het antwoord vd gebruiker hier binnenkomen
-    @PostMapping("/submittedAnswer")
+    @PostMapping()
     public ResponseEntity<AnswerIsCorrect> createSubmittedAnswer(@RequestBody SubmittedAnswer submittedAnswer) {
         AnswerIsCorrect answer = submittedAnswerService.ResponseToSubmission(submittedAnswer);
         return  new ResponseEntity<>(answer, new HttpHeaders(), HttpStatus.OK);

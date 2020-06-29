@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz/questions")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class QuestionRESTController {
 
     @Autowired

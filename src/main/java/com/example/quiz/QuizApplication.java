@@ -12,6 +12,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @SpringBootApplication
@@ -22,6 +24,19 @@ public class QuizApplication {
 
         SpringApplication.run(QuizApplication.class);
     }
+
+
+    @Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+			}
+		};
+	}
+
+
 
     @Bean
     public CommandLineRunner demo(SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository, AnswerIsCorrectRepository answerIsCorrectRepository) {
@@ -80,8 +95,6 @@ public class QuizApplication {
 
 
         };
-
-
     }
 
 

@@ -13,10 +13,9 @@ import { AnswerIsCorrect } from '../answeriscorrect/answeriscorrect';
 })
 export class QuestionComponent implements OnInit {
 
-  answers: string[];
   answerOptionsArray: AnswerOptions[];
   chosenAnswer: AnswerOptions;
-  selectedValue: String = '';
+  selectedValue: number = 0;
   currentQuestion = 0;
   currentQuestionObject: Question;
   buttonClicked = false;
@@ -45,6 +44,7 @@ export class QuestionComponent implements OnInit {
     console.log('constructor van Submittedanswer');
   }
 
+ 
   public get currentSurvey(): Survey {
     return this._currentSurvey;
   }
@@ -58,7 +58,7 @@ export class QuestionComponent implements OnInit {
   // vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
   // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
-    this.answers = [];
+    console.log(this.currentSurvey)
     this.currentQuestionObject = this.currentSurvey.questions.filter(question => {
       return question.number === this.currentQuestion + 1;
     })[0];
@@ -68,9 +68,7 @@ export class QuestionComponent implements OnInit {
       return;
     }
     this.answerOptionsArray = this.currentQuestionObject.answerOptions;
-    this.answerOptionsArray.forEach(answerOption => {
-      this.answers.push(answerOption.value);
-    });
+
   }
 
   // deze functie laat het witte vlak met uitleg zien en reset de buttonclicked gelijk
@@ -88,9 +86,11 @@ export class QuestionComponent implements OnInit {
     this.clicked();
     this.show = !this.show;
     console.log(this.selectedValue);
-  //  this.setChosenAnswer();
+    this.submittedAnswer = new SubmittedAnswer();
+    this.submittedAnswer.chosenAnswerId = this.selectedValue 
     this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
-      this.answerIsCorrect = answerIsCorrect as AnswerIsCorrect;
+      console.log("answerIsCorrect: " + answerIsCorrect)
+      this.answerIsCorrect = answerIsCorrect;
     });
   }
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.io.Console;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,10 +23,11 @@ public class SubmittedAnswerService {
     private SubmittedAnswerRepository submittedAnswerRepository;
 
     public AnswerIsCorrect ResponseToSubmission(SubmittedAnswer submittedAnswer) {
-        System.out.println("komen we hier?");
+        System.out.println("submittedAnswer : " + submittedAnswer.getChosenAnswerId());
 
         Optional<AnswerIsCorrect> optAnswerIsCorrect = answerIsCorrectRepository.findById(submittedAnswer.getChosenAnswerId());
-        System.out.println("hier dan?");
+        System.out.println("optAnswerIsCorrect is present : " + optAnswerIsCorrect.isPresent());
+        System.out.println("optAnswerIsCorrect get : " + optAnswerIsCorrect.get().getCorrect());
         if (optAnswerIsCorrect.isPresent()) {
             AnswerIsCorrect answerIsCorrect = optAnswerIsCorrect.get();
             submittedAnswer.setAnsweredCorrect(answerIsCorrect.getCorrect());

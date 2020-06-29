@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz/surveys")        //Alle requests die worden behandeld in deze folder gaan hiernaartoe
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class SurveyRESTController {
 
     @Autowired

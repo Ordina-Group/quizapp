@@ -20,9 +20,9 @@
       <div class="col-sm-6">
         <form #questionForm="ngForm" (ngSubmit)="onFormSubmit(questionForm)">
 
-          <div class="radioBlok" *ngFor="let answer of answers">
-            <input type="radio" name="answerButtons" [(ngModel)]="selectedValue" value="{{answer}}">
-            <label class="antwoordLabel">{{answer}}</label>
+          <div class="radioBlok" *ngFor="let answer of answerOptionsArray">
+            <input type="radio" name="answerButtons" [(ngModel)]="selectedValue" value="{{answer.id}}">
+            <label class="antwoordLabel">{{answer.value}}</label>
           </div>
 
           <button type="submit" *ngIf="show">

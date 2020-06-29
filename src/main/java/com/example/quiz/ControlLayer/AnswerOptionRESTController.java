@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quiz/answeroptions")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AnswerOptionRESTController {
 
     @Autowired
