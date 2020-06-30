@@ -90,12 +90,6 @@ public class QuizApplication {
             AnswerIsCorrect answerIsCorrect9 = new AnswerIsCorrect(9L,true, "Juist, het was in 1815");
             answerIsCorrectRepository.save(answerIsCorrect9);
 
-//            answerIsCorrectRepository.save(new AnswerIsCorrect(false, "Onjuist, het was 2 jaar later, in 1815" ));
-//            answerIsCorrectRepository.save(new AnswerIsCorrect(false, "Onjuist, het was 1 jaar later, in 1815"));
-//            answerIsCorrectRepository.save(new AnswerIsCorrect(true, "Juist, het was in 1815"));
-
-
-
         };
     }
 
