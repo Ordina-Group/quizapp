@@ -2,15 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AnswerOptions, Question, Survey } from '../surveys/survey';
 import { SurveyService } from '../surveys/survey.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-<<<<<<< HEAD
 import { SubmittedAnswerService } from '../submittedanswers/submittedanswer.service';
 import { SubmittedAnswer } from '../submittedanswers/submittedanswer';
 import { AnswerIsCorrect } from '../answeriscorrect/answeriscorrect';
-=======
 import {ActivatedRoute, NavigationExtras, Router, RouterModule} from "@angular/router";
 import {any} from "codelyzer/util/function";
 
->>>>>>> 525db19cae7e6498b6c454e2cc1bdc55519240ee
 
 @Component({
   selector: 'app-question',
@@ -48,9 +45,9 @@ export class QuestionComponent implements OnInit {
     });
   }
 
-  constructor(
-    private surveyService: SurveyService,
-    private submittedAnswerService: SubmittedAnswerService) {
+  constructor(private surveyService: SurveyService,
+              private submittedAnswerService: SubmittedAnswerService,
+              private router: Router) {
     console.log('constructor van Question');
     console.log('constructor van Submittedanswer');
   }
@@ -150,7 +147,7 @@ export class QuestionComponent implements OnInit {
 
   //hier worden alle goede en foute antwoorden bijgehouden
   saveAnswers(){
-    if (this.chosenAnswer.correct === true){
+    if (true === true){
       this.correctAnswer++;
       console.log(this.correctAnswer);
       return this.correctAnswer;

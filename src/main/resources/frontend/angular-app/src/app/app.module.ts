@@ -8,6 +8,7 @@ import {SurveyService} from './surveys/survey.service';
 import { SubmittedAnswerService } from './submittedanswers/submittedanswer.service';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { EndpageComponent } from './endpage/endpage.component';
 
 
 @NgModule({
