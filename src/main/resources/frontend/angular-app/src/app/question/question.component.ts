@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveyService } from '../services/survey.service';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { SubmittedAnswerService } from '../services/submittedanswer.service';
+import {FormGroup } from '@angular/forms';
 import { SubmittedAnswer } from '../model/submittedanswer';
 import { AnswerIsCorrect } from '../model/answeriscorrect';
-import {ActivatedRoute, NavigationExtras, Router, RouterModule} from "@angular/router";
-import {any} from "codelyzer/util/function";
+import { NavigationExtras, Router} from "@angular/router";
 import { AnswerOptions } from '../model/answerOptions';
 import { Question } from '../model/question';
-import { Survey } from '../surveys/survey';
+import { SubmittedAnswerService } from '../services/submitAnswer.service';
+import { Survey } from '../model/survey';
 
 
 @Component({
@@ -18,19 +17,19 @@ import { Survey } from '../surveys/survey';
 })
 export class QuestionComponent implements OnInit {
 
+  public _currentSurvey: Survey;
+  currentQuestionObject: Question;
   answerOptionsArray: AnswerOptions[];
   chosenAnswer: AnswerOptions;
+
   selectedValue: number = 0;
   currentQuestion = 0;
   correctAnswer = 0;
   inCorrectAnswer =0;
-  currentQuestionObject: Question;
   buttonClicked = false;
   show = true;
   showVolgende = false;
   hasAnswer = false;
-  public _currentSurvey: Survey;
-  private correct: boolean;
   errorMessage = '';
   submittedAnswer: SubmittedAnswer;
   answerIsCorrect: AnswerIsCorrect;
@@ -41,39 +40,37 @@ export class QuestionComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.surveyService.getSurvey(1).subscribe({
-      next: survey => this.currentSurvey = survey,
-      error: err => this.errorMessage = err
-    });
+    this.surveyService.surveys.subscribe(surveys => {
+      //picks the first survey that is not null
+      this.currentSurvey = surveys.find(survey => survey.id != null);
+    })
   }
 
   constructor(private surveyService: SurveyService,
               private submittedAnswerService: SubmittedAnswerService,
               private router: Router) {
-    console.log('constructor van Question');
-    console.log('constructor van Submittedanswer');
   }
 
- 
   public get currentSurvey(): Survey {
     return this._currentSurvey;
   }
 
   public set currentSurvey(value: Survey) {
     this._currentSurvey = value;
-    this.setAnswersToRadiobuttons();
+    if(this._currentSurvey != undefined){
+      this.setAnswersToRadiobuttons();
+    }
   }
 
   // hier wordt de String array"answers" geleegd in de functie,
   // vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
   // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
-    console.log(this.currentSurvey)
     this.currentQuestionObject = this.currentSurvey.questions.filter(question => {
       return question.number === this.currentQuestion + 1;
     })[0];
+    // this.currentQuestionObject = this._currentSurvey.questions.sort((question1, question2) => question1.number - question2.number)[0]
     if (this.currentQuestionObject === undefined) {
-      console.log('geen volgende vraag!');
       // hier wil je iets doen om naar een eindpagina te gaan.
       let navigationExtras: NavigationExtras = {
         queryParams: {

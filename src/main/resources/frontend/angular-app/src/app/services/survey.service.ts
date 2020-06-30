@@ -1,37 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { Survey } from '../surveys/survey';
+import { UrlService } from './url.service';
+import { Survey } from '../model/survey';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SurveyService {
 
-  private surveyUrl = 'http://localhost:8080/quiz/surveys';
+  private surveyUrl = this.urlService.url + '/surveys/';
+  surveys: BehaviorSubject<Survey[]>;
 
-  
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private urlService: UrlService) {
+    this.surveys = new BehaviorSubject([]);
+    this.getInitSurveys();
   }
 
-  getSurveys(): Observable<Survey[]> {
-    console.log('getSurveys');
-    return this.http.get<Survey[]>(this.surveyUrl)
-      .pipe(
-        tap(data => console.log('All: ' + JSON.stringify(data))),
-        catchError(this.handleError)
-      );
+  private getInitSurveys() {
+    this.http.get<Survey[]>(this.surveyUrl).subscribe(surveys => {
+      this.surveys.next(surveys)
+      // console.log('All: ' + JSON.stringify(surveys))
+    });
   }
 
-  getSurvey(id: number): Observable<Survey | undefined> {
+
+
+  getSurvey(id: number) {
     console.log('getSurvey by id');
-    return this.getSurveys()
-      .pipe(
-        map((surveys: Survey[]) => surveys.find(s => s.id === id))
-      );
+    return this.surveys.value.find(survey => survey.id === id)
   }
 
   private handleError(err: HttpErrorResponse) {
