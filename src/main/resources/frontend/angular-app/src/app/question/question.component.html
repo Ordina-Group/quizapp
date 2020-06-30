@@ -20,7 +20,7 @@
   <div class="container">
 <div class="row">
   <div class="col-sm-12">
-    <div *ngIf="buttonClicked" class="col-sm-12" style="background-color: white; font-size: 14px; padding: 2rem" [ngStyle]="{ 'color': this.chosenAnswer.correct === true ? 'green' : 'red' }"> {{this.chosenAnswer.answerExplanation}}</div>
+    <div *ngIf="buttonClicked" class="col-sm-12" style="background-color: white; font-size: 14px; padding: 2rem" [ngStyle]="{ 'color': true === true ? 'green' : 'red' }"> {{this.chosenAnswer}}</div>
   </div>
   </div>
 
@@ -63,5 +63,4 @@
     </div>
   </div>
 
-</div>
 </div>

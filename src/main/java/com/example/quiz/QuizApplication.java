@@ -31,7 +31,8 @@ public class QuizApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+                registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
 			}
 		};
 	}
@@ -88,12 +89,6 @@ public class QuizApplication {
             answerIsCorrectRepository.save(answerIsCorrect8);
             AnswerIsCorrect answerIsCorrect9 = new AnswerIsCorrect(9L,true, "Juist, het was in 1815");
             answerIsCorrectRepository.save(answerIsCorrect9);
-
-//            answerIsCorrectRepository.save(new AnswerIsCorrect(false, "Onjuist, het was 2 jaar later, in 1815" ));
-//            answerIsCorrectRepository.save(new AnswerIsCorrect(false, "Onjuist, het was 1 jaar later, in 1815"));
-//            answerIsCorrectRepository.save(new AnswerIsCorrect(true, "Juist, het was in 1815"));
-
-
 
         };
     }

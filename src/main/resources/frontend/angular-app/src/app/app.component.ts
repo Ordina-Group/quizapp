@@ -10,34 +10,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
 
-
   title = 'Welkom bij de survey';
 
-
   errorMessage = '';
-  currentSurvey: Survey;
-  surveys: Survey[];
 
+  constructor() {}
+  ngOnInit() {}
 
-  constructor(
-    private surveyService: SurveyService) {
-    console.log("constructor van AppComponent");
-  }
-
-
-  ngOnInit() {
-    console.log('ngInit van AppComponent');
-    this.surveyService.getSurveys().subscribe(data => {
-      this.surveys = data;
-    });
-  }
-
-  getSurvey(id: number) {
-    this.surveyService.getSurvey(id).subscribe({
-      next: survey => this.currentSurvey = survey,
-      error: err => this.errorMessage = err
-    });
-  }
 }
 
 
