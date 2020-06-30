@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AnswerOptions, Question, Survey } from '../surveys/survey';
-import { SurveyService } from '../surveys/survey.service';
+import { SurveyService } from '../services/survey.service';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { SubmittedAnswerService } from '../submittedanswers/submittedanswer.service';
-import { SubmittedAnswer } from '../submittedanswers/submittedanswer';
-import { AnswerIsCorrect } from '../answeriscorrect/answeriscorrect';
+import { SubmittedAnswerService } from '../services/submittedanswer.service';
+import { SubmittedAnswer } from '../model/submittedanswer';
+import { AnswerIsCorrect } from '../model/answeriscorrect';
 import {ActivatedRoute, NavigationExtras, Router, RouterModule} from "@angular/router";
 import {any} from "codelyzer/util/function";
+import { AnswerOptions } from '../model/answerOptions';
+import { Question } from '../model/question';
+import { Survey } from '../surveys/survey';
 
 
 @Component({

@@ -1,6 +1,7 @@
 import {OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {SurveyService} from "./survey.service";
+import {SurveyService} from "../services/survey.service";
+import { Question } from '../model/question';
 
 export class Survey implements OnInit {
 
@@ -36,19 +37,8 @@ export class Survey implements OnInit {
 }
 
 
-export class Question {
-  answerOptions: Array<AnswerOptions>;
-  number: number;
-  questionDescription: string;
-}
 
 
-export class AnswerOptions {
-  id: number;
-  number: number;
-  value: string;
-//  correct: boolean;
-//  answerExplanation: string;
-}
+
 
 

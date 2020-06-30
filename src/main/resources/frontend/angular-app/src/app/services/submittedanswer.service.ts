@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SubmittedAnswer } from './submittedanswer';
-import { AnswerIsCorrect } from '../answeriscorrect/answeriscorrect';
+import { SubmittedAnswer } from '../model/submittedanswer';
+import { AnswerIsCorrect } from '../model/answeriscorrect';
 
 @Injectable({
   providedIn: 'root'
