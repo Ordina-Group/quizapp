@@ -1,11 +1,8 @@
 package com.example.quiz.ServiceLayer;
 
-import com.example.quiz.Repository.QuestionRepository;
 import com.example.quiz.Repository.SurveyRepository;
-import com.example.quiz.model.Question;
 import com.example.quiz.model.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

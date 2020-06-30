@@ -1,7 +1,6 @@
 package com.example.quiz.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -36,11 +35,11 @@ public class AnswerIsCorrect {
         this.answerOptionId = answerOptionId;
     }
 
-    public Boolean getCorrect() {
+    public Boolean getIsCorrect() {
         return isCorrect;
     }
 
-    public void setCorrect(Boolean isCorrect) {
+    public void setIsCorrect(Boolean isCorrect) {
         this.isCorrect = isCorrect;
     }
 

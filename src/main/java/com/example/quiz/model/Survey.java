@@ -1,8 +1,6 @@
 package com.example.quiz.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.domain.Sort;
 
 import javax.persistence.*;
 import java.util.Set;

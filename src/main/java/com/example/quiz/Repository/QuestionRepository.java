@@ -1,6 +1,4 @@
 package com.example.quiz.Repository;
-import java.util.List;
-import java.util.Optional;
 import com.example.quiz.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
