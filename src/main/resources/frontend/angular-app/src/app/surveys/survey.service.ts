@@ -10,13 +10,11 @@ import { Survey } from './survey';
 })
 export class SurveyService {
 
- // private surveyUrl = '/server/quiz/surveys';
   private surveyUrl = 'http://localhost:8080/quiz/surveys';
 
+  
 
   constructor(private http: HttpClient) {
-    console.log('constructor van SurveyService');
-
   }
 
   getSurveys(): Observable<Survey[]> {

@@ -1,22 +1,3 @@
-/*export interface ISurvey {
-
-    id: number;
-    questionDescription : string;
-    questions: Array<IQuestion>;
-  }
-
-export interface IQuestion {
-    answeroptions: Array<IAnswerOptions>;
-    number : number;
-}
-
-
-  export interface IAnswerOptions {
-        id: number;
-        number: number;
-        value: string;
-        correct: boolean
-  }*/
 import {OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SurveyService} from "./survey.service";
