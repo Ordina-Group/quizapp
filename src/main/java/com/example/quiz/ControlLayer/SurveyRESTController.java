@@ -14,13 +14,13 @@ public class SurveyRESTController {
     @Autowired
     private SurveyService surveyService;
 
-    //questions
+    //surveys
     @GetMapping
     public List<Survey> list(){
         return surveyService.findAllSurveys();
     }
 
-    //questions/1
+    //surveys/1
     @GetMapping
     @RequestMapping("{id}")
     public Survey get(@PathVariable Long id){

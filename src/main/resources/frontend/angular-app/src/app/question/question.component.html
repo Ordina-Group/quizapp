@@ -8,15 +8,12 @@
 <div class="jumbotron-fluid d-flex flex-column">
   <div class="container">
     <div class="row">
-      <h2> {{ currentQuestionObject?.questionDescription}}</h2>
+      <h2> {{ currentQuestion?.questionDescription}}</h2>
     </div>
   </div>
 
   <div class="container">
     <div class="row col-sm-12">
-      <!-- <div *ngIf="buttonClicked" class="col-sm-12" style="background-color: pink; font-size: 14px; padding: 2rem" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }">
-        {{this.chosenAnswer.value}}
-      </div> -->
     </div>
 
     <div class="row col-sm-12">
@@ -32,12 +29,7 @@
           Submit
         </button>
 
-        <!-- form debug-->
-        <p>
-          Form chosen: {{ chosenAnswer?.value }}
-        </p>
       </form>
-      <!-- werkt niet aangezien de knop eerder word verwerkt dan de incoming data van de post-->
       <div *ngIf="answerIsCorrect" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }">
         {{answerIsCorrect.answerExplanation}}
       </div>

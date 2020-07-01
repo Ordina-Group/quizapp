@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import { SurveyScoreService } from '../services/survey-score.service';
 
 @Component({
   selector: 'app-endpage',
@@ -7,17 +8,16 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./endpage.component.css']
 })
 export class EndpageComponent implements OnInit {
-  correctAnswer: string;
-  incorrectAnswer: string;
+  correctAnswer: number;
+  incorrectAnswer: number;
 
-  constructor(private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.correctAnswer = params["correctAnswer"];
-      this.incorrectAnswer = params["incorrectAnswer"];
-    });
+  constructor(private surveyScoreService : SurveyScoreService) {
   }
 
   ngOnInit(): void {
+    this.correctAnswer = this.surveyScoreService.getCorrectAnswers();
+    this.incorrectAnswer = this.surveyScoreService.getIncorrectAnswers();
+    this.surveyScoreService.resetScores();
   }
 
 }
