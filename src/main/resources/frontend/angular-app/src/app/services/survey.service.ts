@@ -12,25 +12,17 @@ import { Survey } from '../model/survey';
 export class SurveyService {
 
   private surveyUrl = this.urlService.url + '/surveys/';
-  surveys: BehaviorSubject<Survey[]>;
+  survey: BehaviorSubject<Survey>;
 
   constructor(private http: HttpClient, private urlService: UrlService) {
-    this.surveys = new BehaviorSubject([]);
+    this.survey = new BehaviorSubject(null);
     this.getInitSurveys();
   }
 
   private getInitSurveys() {
-    this.http.get<Survey[]>(this.surveyUrl).subscribe(surveys => {
-      this.surveys.next(surveys)
-      // console.log('All: ' + JSON.stringify(surveys))
+    this.http.get<Survey>(this.surveyUrl + "1").subscribe(survey => {
+      this.survey.next(survey)
     });
-  }
-
-
-
-  getSurvey(id: number) {
-    console.log('getSurvey by id');
-    return this.surveys.value.find(survey => survey.id === id)
   }
 
   private handleError(err: HttpErrorResponse) {

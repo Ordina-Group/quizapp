@@ -7,6 +7,7 @@ import { AnswerOptions } from '../model/answerOptions';
 import { Question } from '../model/question';
 import { SubmittedAnswerService } from '../services/submitAnswer.service';
 import { Survey } from '../model/survey';
+import { SurveyScoreService } from '../services/survey-score.service';
 
 
 @Component({
@@ -17,31 +18,28 @@ import { Survey } from '../model/survey';
 export class QuestionComponent implements OnInit {
 
   public _currentSurvey: Survey;
-  currentQuestionObject: Question;
+  currentQuestion: Question;
   answerOptionsArray: AnswerOptions[];
   chosenAnswer: AnswerOptions;
 
   submittedAnswer: SubmittedAnswer;
   answerIsCorrect: AnswerIsCorrect;
 
-  currentQuestion = 0;
-  correctAnswer = 0;
-  inCorrectAnswer = 0;
+  currentQuestionNumber = 0;
   errorMessage = '';
   
 
   ngOnInit(): void {
-    this.surveyService.surveys.subscribe(surveys => {
-      //picks the first survey that is not null
-      this.currentSurvey = surveys.find(survey => survey.id != null);
+    this.surveyService.survey.subscribe(survey => {
+      this.currentSurvey = survey;
     })
   }
 
   constructor(private surveyService: SurveyService,
               private submittedAnswerService: SubmittedAnswerService,
+              private surveyScoreService: SurveyScoreService,
               private router: Router) {
   }
-
 
   public get currentSurvey(): Survey {
     return this._currentSurvey;
@@ -49,7 +47,12 @@ export class QuestionComponent implements OnInit {
 
   public set currentSurvey(value: Survey) {
     this._currentSurvey = value;
-    if(this._currentSurvey != undefined){
+    console.log("survey is: " + JSON.stringify(this._currentSurvey))
+    if(this._currentSurvey !== undefined && this._currentSurvey !== null){
+      console.log("setting buttons")
+      console.log(this._currentSurvey.questions)
+      console.log(this._currentSurvey === undefined || this._currentSurvey === null)
+      console.log(this._currentSurvey)
       this.setAnswersToRadiobuttons();
     }
   }
@@ -58,22 +61,15 @@ export class QuestionComponent implements OnInit {
   // vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
   // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
-    this.currentQuestionObject = this.currentSurvey.questions.filter(question => {
-      return question.number === this.currentQuestion + 1;
+    this.currentQuestion = this.currentSurvey.questions.filter(question => {
+      return question.number === this.currentQuestionNumber + 1;
     })[0];
     
-    if (this.currentQuestionObject === undefined) {
-      // hier wil je iets doen om naar een eindpagina te gaan.
-      let navigationExtras: NavigationExtras = {
-        queryParams: {
-          "correctAnswer": this.correctAnswer,
-          "incorrectAnswer": this.inCorrectAnswer
-        }
-      };
-      this.router.navigate(['/endpage'], navigationExtras);
+    if (this.currentQuestion === undefined) {
+      this.router.navigate(['/endpage']);
       return;
     }
-    this.answerOptionsArray = this.currentQuestionObject.answerOptions;
+    this.answerOptionsArray = this.currentQuestion.answerOptions;
 
   }
 
@@ -81,7 +77,7 @@ export class QuestionComponent implements OnInit {
   // (dit gebeurd met show) en clicked() functie wordt aangeroepen.
   // Tevens wordt het antwoord gekoppeld met het juiste antwoord dmv aanroepen setchosenanswer functie
   onFormSubmit() {
-    this.submittedAnswer = {surveyid: this.currentSurvey.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestionObject.number, answeredCorrect: false};
+    this.submittedAnswer = {surveyid: this.currentSurvey.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
     this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
       this.answerIsCorrect = answerIsCorrect;
       this.saveAnswers();
@@ -90,7 +86,7 @@ export class QuestionComponent implements OnInit {
 
   // als je op knop "volgende" drukt wil je de volgende vraag laten zien
   nextQuestion() {
-    this.currentQuestion++;
+    this.currentQuestionNumber++;
     this.setAnswersToRadiobuttons();
     this.answerIsCorrect = null;
     this.chosenAnswer = null;
@@ -98,7 +94,7 @@ export class QuestionComponent implements OnInit {
 
   //hier worden alle goede en foute antwoorden bijgehouden
   saveAnswers(){
-    this.answerIsCorrect?.isCorrect === true ? this.correctAnswer++ : this.inCorrectAnswer++;
+    this.surveyScoreService.processAnswer(this.answerIsCorrect);
   }
 
 }
