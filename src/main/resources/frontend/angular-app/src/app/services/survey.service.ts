@@ -14,13 +14,13 @@ export class SurveyService {
   private surveyUrl = this.urlService.url + '/surveys/';
   survey: BehaviorSubject<Survey>;
 
+
   constructor(private http: HttpClient, private urlService: UrlService) {
     this.survey = new BehaviorSubject(null);
-    this.getInitSurveys();
   }
 
-  private getInitSurveys() {
-    this.http.get<Survey>(this.surveyUrl + "1").subscribe(survey => {
+  getInitSurveys(id: number) {
+    this.http.get<Survey>(this.surveyUrl + id).subscribe(survey => {
       this.survey.next(survey)
     });
   }

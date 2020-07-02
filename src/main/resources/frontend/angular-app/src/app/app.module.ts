@@ -11,6 +11,8 @@ import { EndpageComponent } from './endpage/endpage.component';
 import { SubmittedAnswerService } from './services/submitAnswer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreatesurveyComponent } from './createsurvey/createsurvey.component';
+import { HomescreenComponent } from './homescreen/homescreen.component';
+
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { CreatesurveyComponent } from './createsurvey/createsurvey.component';
     QuestionComponent,
     EndpageComponent,
     CreatesurveyComponent,
+    HomescreenComponent,
+
   ],
   imports: [
     BrowserModule,
