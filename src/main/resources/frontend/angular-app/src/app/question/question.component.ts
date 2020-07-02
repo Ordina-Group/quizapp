@@ -27,7 +27,7 @@ export class QuestionComponent implements OnInit {
 
   currentQuestionNumber = 0;
   errorMessage = '';
-  
+
 
   ngOnInit(): void {
     this.surveyService.survey.subscribe(survey => {
@@ -64,7 +64,7 @@ export class QuestionComponent implements OnInit {
     this.currentQuestion = this.currentSurvey.questions.filter(question => {
       return question.number === this.currentQuestionNumber + 1;
     })[0];
-    
+
     if (this.currentQuestion === undefined) {
       this.router.navigate(['/endpage']);
       return;
@@ -73,9 +73,7 @@ export class QuestionComponent implements OnInit {
 
   }
 
-  // Als je op submit drukt, laat het programma het witte vlak zien en verdwijnt de knop submit
-  // (dit gebeurd met show) en clicked() functie wordt aangeroepen.
-  // Tevens wordt het antwoord gekoppeld met het juiste antwoord dmv aanroepen setchosenanswer functie
+
   onFormSubmit() {
     this.submittedAnswer = {surveyid: this.currentSurvey.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
     this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
