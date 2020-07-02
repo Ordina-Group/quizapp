@@ -1,0 +1,51 @@
+<div class="jumbotron-fluid" Style="background-image: url('./assets/images/traffic.jpg'); height: 250px">
+  <div class="container mx-auto">
+    <div class="row">
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron-fluid d-flex flex-column">
+  <div class="container">
+    <div class="row">
+      <h2> {{ currentQuestion?.questionDescription}}</h2>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row col-sm-12">
+    </div>
+
+    <div class="row col-sm-12">
+      <!-- form-->
+      <form #questionForm="ngForm" (ngSubmit)="onFormSubmit()">
+
+        <div class="radioBlok" *ngFor="let answerOption of answerOptionsArray">
+          <input type="radio" name="answerButtons" [(ngModel)]="chosenAnswer" [value]="answerOption">
+          <label class="antwoordLabel">{{answerOption.value}}</label>
+        </div>
+
+        <button class="btn btn-light btn-sm" type="submit" *ngIf="chosenAnswer?.value != null && answerIsCorrect == null">
+          Submit
+        </button>
+
+      </form>
+      <div *ngIf="answerIsCorrect" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }">
+        {{answerIsCorrect.answerExplanation}}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto">
+  <div class="row col-sm-12" style="margin: 5px; background-color: white">
+  </div>
+
+  <div class="row">
+    <div class="col-1" Style="background-color:black;" *ngIf="answerIsCorrect">
+      <p style="margin: 1rem;"><button class="btn btn-dark btn-lg" (click)="nextQuestion()">Volgende</button></p>
+    </div>
+  </div>
+
+</div>
