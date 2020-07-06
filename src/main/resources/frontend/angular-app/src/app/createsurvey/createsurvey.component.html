@@ -37,6 +37,8 @@
                 <label>
                    <input [formControlName]="i">
                 </label>
+                  <label>{{answeropt.value}} </label>
+
 
                 </div>
             </div>
@@ -46,13 +48,12 @@
 
 
           <div class="col-sm-4 mr-2" >
-            <button class="btn btn-dark mr-1" (click)="addAnsweropts()" >-</button>
+            <button class="btn btn-dark mr-1" (click)="deleteAnsweropts()" >-</button>
             <button class="btn btn-dark" (click)="addAnsweropts()" >+</button>
           </div>
 
           <div class="col-sm-1">
           </div>
-
 
         </div>
 
@@ -61,7 +62,7 @@
         <div class="row" style="margin-top:5rem ">
 
           <div Style="background-color:black;">
-            <button class="btn btn-dark mr-2">Maak nog een vraag</button>
+            <button class="btn btn-dark mr-2" (click)="nextQuestion()">Maak nog een vraag</button>
           </div>
 
           <div Style="background-color:black;">
