@@ -9,52 +9,71 @@
 </div>
 
   <div class="jumbotron-fluid d-flex flex-column">
-
     <div class="container">
-
+      <div class="form-group" [formGroup] = "userForm">
+        <label>Voer een nieuwe Vraag in:</label>
 
     <div class="row">
-      <!-- form-->
-      <form [formGroup]="userForm">
-        <div class="form-group">
-          <label for="newquestion">Creeer een nieuwe Vraag:</label>
-          <div class="row">
             <div class="col-sm-10">
-          <input class="form-control"  name="newquestion" id="newquestion" type="text" formControlName="newquestion">
-        </div>
-            <div class="col-sm-2">
+             <input formControlName="newquestion">
             </div>
+
+            <div class="col-sm-2">
+            <label></label>
+            </div>
+    </div>
+
+
+        <div class="spaced-row">
+          <div class="col-sm-12">
           </div>
+        </div>
+
+
+        <label>Voer een nieuw Antwoord in:</label>
+        <div class="row" formArrayName="answeropts">
+          <div class="col-sm-6 mr-2">
+                <div  *ngFor="let answeropt of answeropts.controls; let i=index">
+                <label>
+                   <input [formControlName]="i">
+                </label>
+
+                </div>
+            </div>
+
+          <div class="col-sm-1">
+          </div>
+
+
+          <div class="col-sm-4 mr-2" >
+            <button class="btn btn-dark mr-1" (click)="addAnsweropts()" >-</button>
+            <button class="btn btn-dark" (click)="addAnsweropts()" >+</button>
+          </div>
+
+          <div class="col-sm-1">
+          </div>
+
 
         </div>
 
-        <div class="form-group">
-          <label for="newanswer">Creeer een nieuw Antwoord:</label>
-          <div class="row">
-            <div class="col-sm-10">
-          <input class="form-control" name="newanswer" id="newanswer" type="text" formControlName="newanswer">
-          </div>
-            <div class="col-sm-2">
-          <button class="btn btn-dark" (click)="addAnswer()">Voeg toe</button>
-            </div>
-        </div>
-          <div *ngIf="show == true"><p>{{userForm.controls.newquestion.value}}</p><p>{{userForm.controls.newanswer.value}}</p></div>
-        </div>
+
 
         <div class="row" style="margin-top:5rem ">
 
-          <div class="form-group mr-3" Style="background-color:black;">
-            <button class="btn btn-dark">Maak nog een vraag</button>
+          <div Style="background-color:black;">
+            <button class="btn btn-dark mr-2">Maak nog een vraag</button>
           </div>
 
-        <div class="form-group" Style="background-color:black;">
-            <button type="submit" class="btn btn-dark" [disabled]="!userForm.valid">Klaar</button>
-        </div>
+          <div Style="background-color:black;">
+            <button type="submit" class="btn btn-dark" >Klaar</button>
+          </div>
+
         </div>
 
-      </form>
-
+        </div>
+        </div>
     </div>
- </div>
 
-</div>
+
+
+
