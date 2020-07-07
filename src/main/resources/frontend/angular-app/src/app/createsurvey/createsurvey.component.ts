@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {Survey} from "../model/survey";
 import {Question} from "../model/question";
+import {NewSurvey} from "../model/newSurvey"
 import { FormArray } from '@angular/forms';
 import { CreateSurveyService} from '../services/createSurvey.service';
 
@@ -15,10 +16,13 @@ export class CreatesurveyComponent implements OnInit {
 
   userForm = this.formBuilder.group({
     newquestion: [''],
+    newsurvey: [''],
     answeropts: this.formBuilder.array([this.formBuilder.control('')])
   });
 
-  newQuestion: Question;
+  newQuestion: object;
+  questionsArray: object[] = [];
+  newSurvey: NewSurvey;
 currentQuestion = 0;
 
 
@@ -39,9 +43,15 @@ currentQuestion = 0;
   }
 
   get newquestion(){
-    return this.userForm.get('newquestion') as FormArray;
+    return this.userForm.get('newquestion');
 
   }
+
+  get newsurvey(){
+    return this.userForm.get('newsurvey');
+
+  }
+
 
   addAnsweropts() {
     this.answeropts.push(this.formBuilder.control(''));
@@ -55,13 +65,22 @@ currentQuestion = 0;
 
   nextQuestion(){
    this.saveQuestion();
-   this.currentQuestion++;
   this.userForm.reset();
   }
 
   saveQuestion(){
-this.newQuestion = {questionDescription: this.newquestion.value, answerOptions: this.answeropts.value, number: null};
-console.log(this.newQuestion);
+this.newQuestion = {questionDescription: this.newquestion.value, answerOptions: this.answeropts.value};
+this.questionsArray.push(this.newQuestion);
+    console.log(this.questionsArray);
 
   }
-}
+
+  onSubmit(){
+   this.saveQuestion();
+    this.newSurvey = {surveydescription: this.newsurvey.value, question: this.questionsArray};
+    console.log(this.newSurvey);
+
+ }
+
+  }
+

@@ -11,6 +11,23 @@
   <div class="jumbotron-fluid d-flex flex-column">
     <div class="container">
       <div class="form-group" [formGroup] = "userForm">
+        <label> Survey naam:</label>
+        <div class="row">
+          <div class="col-sm-10">
+            <input formControlName="newsurvey">
+          </div>
+
+          <div class="col-sm-2">
+            <label></label>
+          </div>
+        </div>
+
+        <div class="spaced-row">
+          <div class="col-sm-12">
+          </div>
+        </div>
+
+
         <label>Voer een nieuwe Vraag in:</label>
 
     <div class="row">
@@ -66,7 +83,7 @@
           </div>
 
           <div Style="background-color:black;">
-            <button type="submit" class="btn btn-dark" >Klaar</button>
+            <button type="submit" (click)="onSubmit()" class="btn btn-dark" >Klaar</button>
           </div>
 
         </div>
