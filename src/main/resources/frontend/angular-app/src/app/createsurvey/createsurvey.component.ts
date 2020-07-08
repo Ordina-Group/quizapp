@@ -4,7 +4,7 @@ import {Survey} from "../model/survey";
 import {Question} from "../model/question";
 import {NewSurvey} from "../model/newSurvey"
 import { FormArray } from '@angular/forms';
-import { CreateSurveyService} from '../services/createSurvey.service';
+
 
 
 @Component({
@@ -15,13 +15,16 @@ import { CreateSurveyService} from '../services/createSurvey.service';
 export class CreatesurveyComponent implements OnInit {
 
   userForm = this.formBuilder.group({
-    newquestion: [''],
     newsurvey: [''],
-    answeropts: this.formBuilder.array([this.formBuilder.control('')])
+    question: this.formBuilder.group({
+      newquestion: [''],
+      answeropts: this.formBuilder.array([this.formBuilder.control('')]),
+      iscorrect: ['']
+  }),
   });
-
-  newQuestion: object;
-  questionsArray: object[] = [];
+  count: number = 0;
+  newQuestion: Question;
+  questionsArray: Question[] = [];
   newSurvey: NewSurvey;
 currentQuestion = 0;
 
@@ -33,14 +36,11 @@ currentQuestion = 0;
 
   ngOnInit(){
 
-  }
-
-
-
-  get answeropts(){
-    return this.userForm.get('answeropts') as FormArray;
 
   }
+
+
+
 
   get newquestion(){
     return this.userForm.get('newquestion');
@@ -53,12 +53,25 @@ currentQuestion = 0;
   }
 
 
-  addAnsweropts() {
-    this.answeropts.push(this.formBuilder.control(''));
+
+
+  get iscorrect(){
+    return this.userForm.get('iscorrect');
+
   }
 
   deleteAnsweropts() {
    this.answeropts.removeAt(this.answeropts.length - 1);
+
+  }
+
+  addAnsweropts() {
+    this.answeropts.push(this.formBuilder.control(''));
+  }
+
+  get answeropts(){
+    return this.userForm.get('answeropts') as FormArray;
+
   }
 
 
@@ -69,15 +82,15 @@ currentQuestion = 0;
   }
 
   saveQuestion(){
-this.newQuestion = {questionDescription: this.newquestion.value, answerOptions: this.answeropts.value};
+this.newQuestion = {questionDescription: this.newquestion.value, answerOptions: this.answeropts.value, iscorrect: this.iscorrect.value, number: this.count};
 this.questionsArray.push(this.newQuestion);
+this.newSurvey = {surveydescription: this.newsurvey.value, question: this.questionsArray}
     console.log(this.questionsArray);
 
   }
 
   onSubmit(){
    this.saveQuestion();
-    this.newSurvey = {surveydescription: this.newsurvey.value, question: this.questionsArray};
     console.log(this.newSurvey);
 
  }
