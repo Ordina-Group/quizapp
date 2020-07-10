@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div formGroupName="question">
+        <div>
         <label>Voer een nieuwe Vraag in:</label>
 
     <div class="row">
@@ -50,17 +50,29 @@
         <label>Voer een nieuw Antwoord in:</label>
         <div class="row">
           <div class="col-sm-6 mr-2">
-                <div formArrayName="answeropts" *ngFor="let answeropt of answeropts.controls; index as i">
-                   <input [formControlName]="i">
-                  <label>{{answeropt.value}} </label>
+            <div formArrayName="answeropts">
+                <div  [formGroupName]="i" *ngFor="let answer of answeropts.controls; let i = index;">
+                   <input type="text" formControlName="answer">
+                  <div class="radioBlok">
+                    <label class="form-check-label">
+                    <input class="form-check-input" type="radio" value="goed" formControlName="iscorrect"> goed
+                    </label>
+                  </div>
+                  <div class="radioBlok">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" value="fout" formControlName="iscorrect"> fout
+                    </label>
+                  </div>
+
                 </div>
+            </div>
             </div>
 
           <div class="col-sm-1">
           </div>
 
           <div class="col-sm-4 mr-2" >
-            <button class="btn btn-dark mr-1" (click)="deleteAnsweropts()" >-</button>
+            <button class="btn btn-dark mr-1">-</button>
             <button class="btn btn-dark" (click)="addAnsweropts()" >+</button>
           </div>
 
@@ -69,11 +81,6 @@
 
         </div>
 
-        <div class="radioBlok">
-        <label>
-          <input type="radio" formControlName="iscorrect"> goed
-        </label>
-        </div>
 
         <div class="col-sm-1">
         </div>

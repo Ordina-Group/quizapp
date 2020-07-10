@@ -4,6 +4,8 @@ import { Survey } from "../model/survey";
 import { Question } from "../model/question";
 import { NewSurvey } from "../model/newSurvey"
 import { FormArray } from '@angular/forms';
+import {AnswerIsCorrect} from "../model/answerIsCorrect";
+import {AnswerOptions} from "../model/answerOptions";
 
 
 
@@ -16,39 +18,66 @@ export class CreatesurveyComponent implements OnInit {
 
   userForm: FormGroup;
   count: number;
+  newquestionarray: Question;
+
   questionsArray: Question[];
+  answerarray: AnswerIsCorrect[];
+
   newSurvey: NewSurvey;
   currentQuestion: number;
+  answeriscorrect: AnswerIsCorrect;
+
 
 
   constructor(private formBuilder: FormBuilder) {
     this.questionsArray = [];
+    this.answerarray = [];
     this.count = 0;
     this.currentQuestion = 0;
     this.userForm = this.formBuilder.group({
       newsurvey: [''],
-      question: this.formBuilder.group({
         newquestion: [''],
-        answeropts: this.formBuilder.array([this.formBuilder.control('')]),
-        iscorrect: ['']
-      }),
-    });
+        answeropts: this.formBuilder.array( [])
+        });
+    }
 
-  }
+
 
 
   ngOnInit() {
 
+  }
+
+
+  get answeropts() {
+  return this.userForm.get('answeropts') as FormArray;
+     }
+
+ addAnsweropts(): void {
+   this.answeropts.push(this.buildAnsweropts());
 
   }
 
 
+    buildAnsweropts(): FormGroup{
+      return this.formBuilder.group({
+        answer: '',
+        iscorrect: 'goed'
+      })
+    }
+
+
+
+
+//  deleteAnsweropts() {
+ //   (this.userForm.get('question').get('answeropts') as FormArray).removeAt(this.answeropts.length - 1);
+ // }
 
 
   get newquestion() {
-    return this.userForm.get('question').get('newquestion');
-
+    return this.userForm.get('newquestion');
   }
+
 
   get newsurvey() {
     return this.userForm.get('newsurvey');
@@ -58,37 +87,29 @@ export class CreatesurveyComponent implements OnInit {
 
 
 
-  get iscorrect() {
-    return this.userForm.get('iscorrect');
-
-  }
-
-  deleteAnsweropts() {
-    this.answeropts.removeAt(this.answeropts.length - 1);
-
-  }
-
-  addAnsweropts() {
-    this.answeropts.push(this.formBuilder.control(''));
-  }
-
-  get answeropts() {
-    return this.userForm.get('question').get('answeropts') as FormArray;
-
-  }
-
-
-
   nextQuestion() {
+
+    console.log(this.answeropts.value);
+    console.log(this.buildAnsweropts().get('list.0'));
     this.saveQuestion();
     this.userForm.reset();
   }
 
   saveQuestion() {
-    this.newquestion = { questionDescription: this.newquestion.value, answerOptions: this.answeropts.value, iscorrect: this.iscorrect.value, number: this.count };
-    this.questionsArray.push(this.newquestion);
-    this.newSurvey = { surveydescription: this.newsurvey.value, question: this.questionsArray }
-    console.log(this.questionsArray);
+    console.log();
+  //  let item1 = this.answeropts.at(0).value;
+   // console.log(item1);
+
+ // this.answeriscorrect ={id:null, answerExplanation:this.answeropts.value, isCorrect:this.iscorrect.value, answerOptionId: this.count}
+  //this.answerarray.push(this.answeriscorrect);
+
+  //  this.answeroptionsarray = {id: null, answerOptionId: this.count, answerExplanation, isCorrect: this.iscorrect.value}
+   // this.answerarray.push(this.answeroptionsarray);
+    //this.newquestionarray= {questionDescription: this.newquestion.value, answerOptions: this.answerarray, iscorrect: this.iscorrect.value, number: this.count };
+   // this.questionsArray.push(this.newquestionarray);
+ //   this.newSurvey = { surveydescription: this.newsurvey.value, question: this.questionsArray }
+
+    console.log(this.answeriscorrect);
 
   }
 
