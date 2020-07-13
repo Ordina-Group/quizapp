@@ -7,4 +7,3 @@ export interface Survey {
     pageTitle: string;
     errorMessage: string;
   }
-  
