@@ -16,17 +16,11 @@ export class CreatesurveyComponent implements OnInit {
 
   quizForm: FormGroup;
   count: number;
-  questionsArray: Question[];
-  answerarray: AnswerIsCorrect[];
 
   newQuiz: Quiz;
   currentQuestion: number;
-  answeriscorrect: AnswerIsCorrect;
-
 
   constructor(private formBuilder: FormBuilder) {
-    this.questionsArray = [];
-    this.answerarray = [];
     this.count = 0;
     this.currentQuestion = 0;
 
@@ -68,12 +62,14 @@ export class CreatesurveyComponent implements OnInit {
   saveQuestion() {
     let quizname = this.quizForm.get('quizName').value;
     let questionDescription = this.quizForm.get('question').value;
+
     let question = {answerOptions:[]} as Question;
     this.answerOptions.controls.forEach(control => {
       let answerOption = this.toAnswerOption(control)
       question.answerOptions.push(answerOption)
     })
     question.questionDescription = questionDescription;
+
     this.newQuiz.pageTitle = quizname;
     this.newQuiz.questions.push(question);
   }
