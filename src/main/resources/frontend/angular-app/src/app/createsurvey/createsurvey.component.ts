@@ -6,6 +6,7 @@ import { NewSurvey } from "../model/newSurvey"
 import { FormArray } from '@angular/forms';
 import {AnswerIsCorrect} from "../model/answerIsCorrect";
 import {AnswerOptions} from "../model/answerOptions";
+import get = Reflect.get;
 
 
 
@@ -19,59 +20,64 @@ export class CreatesurveyComponent implements OnInit {
   userForm: FormGroup;
   count: number;
   newquestionarray: Question;
-
+  answer: string;
   questionsArray: Question[];
-  answerarray: AnswerIsCorrect[];
-
+  answerarray: AnswerOptions[];
   newSurvey: NewSurvey;
   currentQuestion: number;
-  answeriscorrect: AnswerIsCorrect;
+  answersoptionsarray: AnswerOptions;
+  private buildanswer: FormGroup;
 
 
 
   constructor(private formBuilder: FormBuilder) {
     this.questionsArray = [];
+    this.answer= '';
     this.answerarray = [];
     this.count = 0;
     this.currentQuestion = 0;
-    this.userForm = this.formBuilder.group({
-      newsurvey: [''],
-        newquestion: [''],
-        answeropts: this.formBuilder.array( [])
-        });
-    }
+  }
 
 
 
 
   ngOnInit() {
-
+    this.userForm = this.formBuilder.group({
+      newsurvey: [''],
+      newquestion: [''],
+      answeropts: this.formBuilder.array( [])
+    });
+this.addAnsweropts();
   }
 
 
   get answeropts() {
-  return this.userForm.get('answeropts') as FormArray;
-     }
+    return this.userForm.get('answeropts') as FormArray;
+  }
 
- addAnsweropts(): void {
-   this.answeropts.push(this.buildAnsweropts());
+  addAnsweropts(): void {
+    this.answeropts.push(this.buildAnsweropts());
 
   }
 
 
-    buildAnsweropts(): FormGroup{
-      return this.formBuilder.group({
-        answer: '',
-        iscorrect: 'goed'
-      })
+  buildAnsweropts(): FormGroup{
+    return this.buildanswer = this.formBuilder.group({
+      answer: '',
+      iscorrect: [true]
+    })
+
+
+
     }
 
 
 
 
+
 //  deleteAnsweropts() {
- //   (this.userForm.get('question').get('answeropts') as FormArray).removeAt(this.answeropts.length - 1);
- // }
+  //   (this.userForm.get('question').get('answeropts') as FormArray).removeAt(this.answeropts.length - 1);
+  // }
 
 
   get newquestion() {
@@ -90,26 +96,28 @@ export class CreatesurveyComponent implements OnInit {
   nextQuestion() {
 
     console.log(this.answeropts.value);
-    console.log(this.buildAnsweropts().get('list.0'));
+    console.log(this.answeropts.value[0].answer);
+    console.log(this.buildanswer.controls['answer'].value);
     this.saveQuestion();
     this.userForm.reset();
   }
 
   saveQuestion() {
-    console.log();
-  //  let item1 = this.answeropts.at(0).value;
-   // console.log(item1);
+    this.answersoptionsarray = {id: null, number: null, value: this.answeropts.value[0].answer, correctanswer: this.answeropts.value[0].iscorrect}
+    this.answerarray.push(this.answersoptionsarray);
+    //  let item1 = this.answeropts.at(0).value;
+    // console.log(item1);
 
- // this.answeriscorrect ={id:null, answerExplanation:this.answeropts.value, isCorrect:this.iscorrect.value, answerOptionId: this.count}
-  //this.answerarray.push(this.answeriscorrect);
+    // this.answeriscorrect ={id:null, answerExplanation:this.answeropts.value, isCorrect:this.iscorrect.value, answerOptionId: this.count}
+    //this.answerarray.push(this.answeriscorrect);
 
-  //  this.answeroptionsarray = {id: null, answerOptionId: this.count, answerExplanation, isCorrect: this.iscorrect.value}
-   // this.answerarray.push(this.answeroptionsarray);
+    //  this.answeroptionsarray = {id: null, answerOptionId: this.count, answerExplanation, isCorrect: this.iscorrect.value}
+    // this.answerarray.push(this.answeroptionsarray);
     //this.newquestionarray= {questionDescription: this.newquestion.value, answerOptions: this.answerarray, iscorrect: this.iscorrect.value, number: this.count };
-   // this.questionsArray.push(this.newquestionarray);
- //   this.newSurvey = { surveydescription: this.newsurvey.value, question: this.questionsArray }
+    // this.questionsArray.push(this.newquestionarray);
+    //   this.newSurvey = { surveydescription: this.newsurvey.value, question: this.questionsArray }
 
-    console.log(this.answeriscorrect);
+    console.log(this.answerarray);
 
   }
 
@@ -120,4 +128,3 @@ export class CreatesurveyComponent implements OnInit {
   }
 
 }
-
