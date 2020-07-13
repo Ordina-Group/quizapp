@@ -3,10 +3,10 @@ import { SurveyService } from '../services/survey.service';
 import { SubmittedAnswer } from '../model/submittedanswer';
 import { AnswerIsCorrect } from '../model/answeriscorrect';
 import { NavigationExtras, Router} from "@angular/router";
-import { AnswerOptions } from '../model/answerOptions';
+import { AnswerOption } from '../model/answerOption';
 import { Question } from '../model/question';
 import { SubmittedAnswerService } from '../services/submitAnswer.service';
-import { Survey } from '../model/survey';
+import { Quiz } from '../model/quiz';
 import { SurveyScoreService } from '../services/survey-score.service';
 
 
@@ -17,10 +17,10 @@ import { SurveyScoreService } from '../services/survey-score.service';
 })
 export class QuestionComponent implements OnInit {
 
-  public _currentSurvey: Survey;
+  public _currentSurvey: Quiz;
   currentQuestion: Question;
-  answerOptionsArray: AnswerOptions[];
-  chosenAnswer: AnswerOptions;
+  answerOptionsArray: AnswerOption[];
+  chosenAnswer: AnswerOption;
 
   submittedAnswer: SubmittedAnswer;
   answerIsCorrect: AnswerIsCorrect;
@@ -41,11 +41,11 @@ export class QuestionComponent implements OnInit {
               private router: Router) {
   }
 
-  public get currentSurvey(): Survey {
+  public get currentSurvey(): Quiz {
     return this._currentSurvey;
   }
 
-  public set currentSurvey(value: Survey) {
+  public set currentSurvey(value: Quiz) {
     this._currentSurvey = value;
     console.log("survey is: " + JSON.stringify(this._currentSurvey))
     if(this._currentSurvey !== undefined && this._currentSurvey !== null){

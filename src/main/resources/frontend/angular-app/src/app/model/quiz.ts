@@ -1,10 +1,9 @@
 import { Question } from './question';
 
-export interface Survey {
+export interface Quiz {
     id: number;
-    surveyDescription: string;
+    quizDescription: string;
     questions: Question[];
     pageTitle: string;
     errorMessage: string;
   }
-  
