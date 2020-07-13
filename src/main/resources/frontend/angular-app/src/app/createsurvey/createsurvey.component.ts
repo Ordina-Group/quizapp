@@ -19,11 +19,12 @@ export class CreatesurveyComponent implements OnInit {
 
   newQuiz: Quiz;
   currentQuestion: number;
+  lockQuizName : boolean;
 
   constructor(private formBuilder: FormBuilder) {
     this.count = 0;
     this.currentQuestion = 0;
-
+    this.lockQuizName = false;
     this.newQuiz = {questions: []} as Quiz;
 
     this.quizForm = this.formBuilder.group({
@@ -34,7 +35,6 @@ export class CreatesurveyComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   get answerOptions(): FormArray {
@@ -45,6 +45,9 @@ export class CreatesurveyComponent implements OnInit {
     this.answerOptions.push(this.newAnswerOption());
   }
 
+  get quizName(): string{
+    return this.quizForm.get('quizName').value
+  }
   private newAnswerOption(): FormGroup {
     return this.formBuilder.group({
       answer: '',
@@ -56,11 +59,13 @@ export class CreatesurveyComponent implements OnInit {
   nextQuestion() {
     console.log(this.answerOptions.value);
     this.saveQuestion();
-    this.quizForm.reset();
+    this.lockQuizName = true;
+    this.quizForm.get('question').reset();
+    this.quizForm.get('answerOptions').reset();
   }
 
   saveQuestion() {
-    let quizname = this.quizForm.get('quizName').value;
+    let quizname = this.quizName;
     let questionDescription = this.quizForm.get('question').value;
 
     let question = {answerOptions:[]} as Question;
