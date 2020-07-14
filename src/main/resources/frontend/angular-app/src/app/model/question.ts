@@ -1,8 +1,8 @@
-import { AnswerOptions } from './answerOptions';
+import { AnswerOption } from './answerOption';
 
 
 export interface Question {
-    answerOptions: Array<AnswerOptions>;
+    answerOptions: Array<AnswerOption>;
     number: number;
     questionDescription: string;
     iscorrect: boolean;

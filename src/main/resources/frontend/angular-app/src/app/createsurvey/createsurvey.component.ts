@@ -82,7 +82,7 @@ export class CreatesurveyComponent implements OnInit {
   private toAnswerOption(ac: AbstractControl): AnswerOption {
     let answerOption = {} as AnswerOption;
     answerOption.value = ac.get('answer').value;
-    answerOption.isCorrect = ac.get('iscorrect').value;
+    answerOption.correctanswer = ac.get('iscorrect').value;
     return answerOption;
   }
 
