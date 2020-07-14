@@ -35,6 +35,8 @@ export class CreatesurveyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.addAnswerOption();
+
   }
 
   get answerOptions(): FormArray {
@@ -44,6 +46,10 @@ export class CreatesurveyComponent implements OnInit {
   addAnswerOption(): void {
     this.answerOptions.push(this.newAnswerOption());
   }
+
+  deleteAnswerOption() {
+    (this.quizForm.get('answerOptions') as FormArray).removeAt(this.answerOptions.length - 1);
+    }
 
   get quizName(): string{
     return this.quizForm.get('quizName').value
