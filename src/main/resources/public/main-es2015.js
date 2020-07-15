@@ -96,7 +96,7 @@ class AppComponent {
     }
     getSurvey(id) {
         this.surveyService.getSurvey(id).subscribe({
-            next: survey => this.currentSurvey = survey,
+            next: survey => this.currentQuiz = survey,
             error: err => this.errorMessage = err
         });
     }
@@ -450,15 +450,15 @@ class QuestionComponent {
     }
     ngOnInit() {
         this.surveyService.getSurvey(1).subscribe({
-            next: survey => this.currentSurvey = survey,
+            next: survey => this.currentQuiz = survey,
             error: err => this.errorMessage = err
         });
     }
     get currentSurvey() {
-        return this._currentSurvey;
+        return this._quizSurvey;
     }
     set currentSurvey(value) {
-        this._currentSurvey = value;
+        this._quizSurvey = value;
         this.setAnswersToRadiobuttons();
     }
     // hier wordt de String array"answers" geleegd in de functie,
@@ -466,7 +466,7 @@ class QuestionComponent {
     // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
     setAnswersToRadiobuttons() {
         this.answers = [];
-        this.currentQuestionObject = this.currentSurvey.questions.filter(question => {
+        this.currentQuestionObject = this.currentQuiz.question.filter(question => {
             return question.number === this.currentQuestion + 1;
         })[0];
         if (this.currentQuestionObject === undefined) {

@@ -23,7 +23,7 @@ public class SubmittedAnswerRESTController {
 
     @GetMapping
     @RequestMapping("{id}")
-    public SubmittedAnswer get(@PathVariable Long id){
+    public SubmittedAnswer get(@PathVariable Long id) {
         return submittedAnswerRepository.getOne(id);
     }
 
@@ -31,7 +31,7 @@ public class SubmittedAnswerRESTController {
     @PostMapping()
     public ResponseEntity<AnswerIsCorrect> createSubmittedAnswer(@RequestBody SubmittedAnswer submittedAnswer) {
         AnswerIsCorrect answer = submittedAnswerService.ResponseToSubmission(submittedAnswer);
-        return  new ResponseEntity<>(answer, new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(answer, new HttpHeaders(), HttpStatus.OK);
     }
 }
 

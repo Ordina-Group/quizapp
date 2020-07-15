@@ -16,13 +16,13 @@ public class AnswerIsCorrectRESTController {
     private AnswerIsCorrectRepository answerIsCorrectRepository;
 
     @GetMapping
-    public List<AnswerIsCorrect> list(){
+    public List<AnswerIsCorrect> list() {
         return answerIsCorrectRepository.findAll();
     }
 
     @GetMapping
     @RequestMapping("{id}")
-    public AnswerIsCorrect get(@PathVariable Long id){
+    public AnswerIsCorrect get(@PathVariable Long id) {
 
         return answerIsCorrectRepository.getOne(id);
     }

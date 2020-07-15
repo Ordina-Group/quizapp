@@ -6,22 +6,22 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="surveys")
+@Table(name = "quizs")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Survey {
+public class Quiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="surveyid")
+    @Column(name = "quizid")
     private Long id;
 
 
-    private String surveyDescription;
+    private String quizDescription;
 
-    @OneToMany(mappedBy = "survey",cascade = CascadeType.ALL )
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private Set<Question> questions;
 
-    public Survey() {
+    public Quiz() {
 
     }
 
@@ -33,12 +33,12 @@ public class Survey {
         this.id = id;
     }
 
-    public String getSurveyDescription() {
-        return surveyDescription;
+    public String getQuizDescription() {
+        return quizDescription;
     }
 
-    public void setSurveyDescription(String surveyDescription) {
-        this.surveyDescription = surveyDescription;
+    public void setQuizDescription(String quizDescription) {
+        this.quizDescription = quizDescription;
     }
 
     public Set<Question> getQuestions() {

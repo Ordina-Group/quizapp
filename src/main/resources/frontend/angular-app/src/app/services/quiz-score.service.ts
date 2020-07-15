@@ -4,7 +4,7 @@ import { AnswerIsCorrect } from '../model/answeriscorrect';
 @Injectable({
   providedIn: 'root'
 })
-export class SurveyScoreService {
+export class QuizScoreService {
 
   private correctAnswer = 0;
   private inCorrectAnswer = 0;

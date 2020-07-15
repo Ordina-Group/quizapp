@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name ="questions")
+@Table(name = "questions")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Question {
     @Id
@@ -23,7 +23,7 @@ public class Question {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "surveyid", nullable = false)
     @JsonIgnore
-    private Survey survey;
+    private Quiz quiz;
 
     private int questionNumber;
 
@@ -32,8 +32,8 @@ public class Question {
     }
 
 
-    public Question(String questionDescription, int questionNumber, Survey survey) {
-        this.survey = survey;
+    public Question(String questionDescription, int questionNumber, Quiz quiz) {
+        this.quiz = quiz;
         this.questionDescription = questionDescription;
         this.questionNumber = questionNumber;
     }
@@ -67,12 +67,12 @@ public class Question {
         this.answerOptions = answerOptions;
     }
 
-    public Survey getSurvey() {
-        return survey;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setSurvey(Survey survey) {
-        this.survey = survey;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     public int getNumber() {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Survey} from "../model/survey";
-import {SurveyService} from "../services/survey.service";
+import {Quiz} from "../model/quiz";
+import {QuizService} from "../services/quiz.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,7 +12,7 @@ export class HomescreenComponent implements OnInit {
 
   chosenSurvey: number;
 
-  constructor(private surveyService: SurveyService, private router: Router) {
+  constructor(private surveyService: QuizService, private router: Router) {
   }
 
   ngOnInit(): void {

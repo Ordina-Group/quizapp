@@ -4,15 +4,15 @@ import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 import { UrlService } from './url.service';
-import { Survey } from '../model/survey';
+import { Quiz } from '../model/quiz';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SurveyService {
+export class QuizService {
 
   private surveyUrl = this.urlService.url + '/surveys/';
-  survey: BehaviorSubject<Survey>;
+  survey: BehaviorSubject<Quiz>;
 
 
   constructor(private http: HttpClient, private urlService: UrlService) {
@@ -20,7 +20,7 @@ export class SurveyService {
   }
 
   getInitSurveys(id: number) {
-    this.http.get<Survey>(this.surveyUrl + id).subscribe(survey => {
+    this.http.get<Quiz>(this.surveyUrl + id).subscribe(survey => {
       this.survey.next(survey)
     });
   }

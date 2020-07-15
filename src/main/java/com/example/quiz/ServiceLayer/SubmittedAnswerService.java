@@ -30,7 +30,7 @@ public class SubmittedAnswerService {
             return answerIsCorrect;
         } else {
             System.out.println("En hier komen we dus zowiezo?");
-            return new AnswerIsCorrect(1L,false, "hallo");
+            return new AnswerIsCorrect(1L, false, "hallo");
         }
 
         // check of antwoord goed is
@@ -43,7 +43,6 @@ public class SubmittedAnswerService {
 
         //return response naar controller
     }
-
 
 
 //    public List<SubmittedAnswer> findAllSubmittedAnswers() {

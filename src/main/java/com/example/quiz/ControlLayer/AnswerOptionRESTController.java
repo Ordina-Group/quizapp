@@ -16,13 +16,13 @@ public class AnswerOptionRESTController {
     private AnswerOptionRepository answerOptionRepository;
 
     @GetMapping
-    public List<AnswerOption> list(){
+    public List<AnswerOption> list() {
         return answerOptionRepository.findAll();
     }
 
     @GetMapping
     @RequestMapping("{id}")
-    public AnswerOption get(@PathVariable Long id){
+    public AnswerOption get(@PathVariable Long id) {
 
         return answerOptionRepository.getOne(id);
     }

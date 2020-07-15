@@ -1,12 +1,10 @@
 package com.example.quiz.Repository;
 
-import com.example.quiz.model.Survey;
+import com.example.quiz.model.Quiz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface SurveyRepository extends JpaRepository<Survey, Long> {
-
-
+public interface QuizRepository extends JpaRepository<Quiz, Long> {
 }
