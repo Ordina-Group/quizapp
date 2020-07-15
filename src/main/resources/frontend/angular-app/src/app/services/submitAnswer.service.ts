@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SubmittedAnswer } from '../model/submittedanswer';
+import { SubmitAnswer } from '../model/submitAnswer';
 import { AnswerIsCorrect } from '../model/answeriscorrect';
 import { UrlService } from './url.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SubmittedAnswerService {
+export class SubmitAnswerService {
 
-  private surveyUrl = this.urlService.url + '/submittedanswers/';
+  private submitAnswerUrl = this.urlService.url + '/submittedanswers/';
 
-  constructor(private http: HttpClient, 
+  constructor(private http: HttpClient,
               private urlService: UrlService) {
 
   }
-  
-  postSubmittedAnswer(submittedAnswer: SubmittedAnswer) {
-    return this.http.post<AnswerIsCorrect>(this.surveyUrl, submittedAnswer);
+
+  postSubmittedAnswer(submitAnswer: SubmitAnswer) {
+    return this.http.post<AnswerIsCorrect>(this.submitAnswerUrl, submitAnswer);
   }
 
-  
+
 }

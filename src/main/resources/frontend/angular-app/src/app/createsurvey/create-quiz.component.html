@@ -1,5 +1,3 @@
-
-
 <div class="jumbotron-fluid d-flex flex-column">
   <div class="container">
     <div class="row">
@@ -8,37 +6,35 @@
   </div>
 </div>
 
-  <div class="jumbotron-fluid d-flex flex-column">
-    <div class="container">
-      <div class="form-group" [formGroup] = "quizForm">
-        <label> Survey naam:</label>
+<div class="jumbotron-fluid d-flex flex-column">
+  <div class="container">
+    <div class="form-group" [formGroup]="quizForm">
+      <label> Survey naam:</label>
+      <div class="row">
+        <div class="col-sm-10">
+          <input formControlName="quizName">
+        </div>
+        <div class="col-sm-2">
+          <label></label>
+        </div>
+      </div>
+
+      <div class="spaced-row">
+        <div class="col-sm-12">
+        </div>
+      </div>
+
+      <div>
+        <label>Voer een nieuwe Vraag in:</label>
+
         <div class="row">
           <div class="col-sm-10">
-            <input formControlName="quizName">
+            <input formControlName="question">
           </div>
-
-
           <div class="col-sm-2">
             <label></label>
           </div>
         </div>
-
-        <div class="spaced-row">
-          <div class="col-sm-12">
-          </div>
-        </div>
-
-        <div>
-        <label>Voer een nieuwe Vraag in:</label>
-
-    <div class="row">
-            <div class="col-sm-10">
-             <input formControlName="question">
-            </div>
-            <div class="col-sm-2">
-            <label></label>
-            </div>
-    </div>
 
 
         <div class="spaced-row">
@@ -51,29 +47,23 @@
         <div class="row">
           <div class="col-sm-6 mr-2">
             <div formArrayName="answerOptions">
-                <div  [formGroupName]="i" *ngFor="let answer of answerOptions.controls; let i = index;">
-                   <input type="text" formControlName="answer">
-                  <div class="radioBlok">
-                    <label class="form-check-label">
-                    <input class="form-check-input" type="radio" value="true" formControlName="iscorrect"> goed
-                    </label>
-                  </div>
-                  <div class="radioBlok">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="radio" value="false" formControlName="iscorrect"> fout
-                    </label>
-                  </div>
-
+              <div [formGroupName]="i" *ngFor="let answerOption of answerOptions.controls; let i = index;">
+                <input type="text" formControlName="answer">
+                <div class="radioBlok">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="true" formControlName="iscorrect"> correct
+                  </label>
                 </div>
+              </div>
             </div>
-            </div>
+          </div>
 
           <div class="col-sm-1">
           </div>
 
-          <div class="col-sm-4 mr-2" >
-            <button class="btn btn-dark mr-1" (click)="deleteAnswerOption()" >-</button>
-            <button class="btn btn-dark" (click)="addAnswerOption()" >+</button>
+          <div class="col-sm-4 mr-2">
+            <button class="btn btn-dark mr-1" (click)="deleteAnswerOption()">-</button>
+            <button class="btn btn-dark" (click)="addAnswerOption()">+</button>
           </div>
 
           <div class="col-sm-1">
@@ -86,23 +76,23 @@
         </div>
 
 
+      </div>
+
+      <div class="row" style="margin-top:5rem ">
+
+        <div Style="background-color:black;">
+          <button class="btn btn-dark mr-2" (click)="nextQuestion()">Maak nog een vraag</button>
         </div>
 
-        <div class="row" style="margin-top:5rem ">
-
-          <div Style="background-color:black;">
-            <button class="btn btn-dark mr-2" (click)="nextQuestion()">Maak nog een vraag</button>
-          </div>
-
-          <div Style="background-color:black;">
-            <button type="submit" (click)="onSubmit()" class="btn btn-dark" >Klaar</button>
-          </div>
-
+        <div Style="background-color:black;">
+          <button type="submit" (click)="onSubmit()" class="btn btn-dark">Klaar</button>
         </div>
 
-        </div>
-        </div>
+      </div>
+
     </div>
+  </div>
+</div>
 
 
 

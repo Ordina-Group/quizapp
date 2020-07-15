@@ -1,4 +1,4 @@
-export interface SubmittedAnswer {
+export interface SubmitAnswer {
   surveyid: number;
   chosenAnswerId: number;
   questionid: number;

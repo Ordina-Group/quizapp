@@ -96,7 +96,7 @@ class AppComponent {
     }
     getSurvey(id) {
         this.surveyService.getSurvey(id).subscribe({
-            next: survey => this.quizSurvey = survey,
+            next: survey => this.currentQuiz = survey,
             error: err => this.errorMessage = err
         });
     }
@@ -450,7 +450,7 @@ class QuestionComponent {
     }
     ngOnInit() {
         this.surveyService.getSurvey(1).subscribe({
-            next: survey => this.quizSurvey = survey,
+            next: survey => this.currentQuiz = survey,
             error: err => this.errorMessage = err
         });
     }
@@ -466,7 +466,7 @@ class QuestionComponent {
     // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
     setAnswersToRadiobuttons() {
         this.answers = [];
-        this.currentQuestionObject = this.quizSurvey.question.filter(question => {
+        this.currentQuestionObject = this.currentQuiz.question.filter(question => {
             return question.number === this.currentQuestion + 1;
         })[0];
         if (this.currentQuestionObject === undefined) {

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../services/quiz.service';
-import { SubmittedAnswer } from '../model/submittedanswer';
+import { SubmitAnswer } from '../model/submitAnswer';
 import { AnswerIsCorrect } from '../model/answeriscorrect';
 import { NavigationExtras, Router} from "@angular/router";
 import { AnswerOption } from '../model/answerOption';
 import { Question } from '../model/question';
-import { SubmittedAnswerService } from '../services/submitAnswer.service';
+import { SubmitAnswerService } from '../services/submitAnswer.service';
 import { Quiz } from '../model/quiz';
 import { QuizScoreService } from '../services/quiz-score.service';
 
@@ -17,35 +17,35 @@ import { QuizScoreService } from '../services/quiz-score.service';
 })
 export class QuestionComponent implements OnInit {
 
-  private _quizSurvey: Quiz;
+  private _currentQuiz: Quiz;
   currentQuestion: Question;
   answerOptionsArray: AnswerOption[];
   chosenAnswer: AnswerOption;
 
-  submittedAnswer: SubmittedAnswer;
+  submittedAnswer: SubmitAnswer;
   answerIsCorrect: AnswerIsCorrect;
 
   currentQuestionNumber = 0;
   errorMessage = '';
 
   constructor(private quizService: QuizService,
-              private submittedAnswerService: SubmittedAnswerService,
+              private submittedAnswerService: SubmitAnswerService,
               private quizScoreService: QuizScoreService,
               private router: Router) {
   }
 
   ngOnInit(): void {
     this.quizService.survey.subscribe(quiz => {
-      this.quizSurvey = quiz;
+      this.currentQuiz = quiz;
     })
   }
-  public get quizSurvey(): Quiz {
-    return this._quizSurvey;
+  public get currentQuiz(): Quiz {
+    return this._currentQuiz;
   }
 
-  public set quizSurvey(value: Quiz) {
-    this._quizSurvey = value;
-    if(this._quizSurvey !== undefined && this._quizSurvey !== null){
+  public set currentQuiz(value: Quiz) {
+    this._currentQuiz = value;
+    if(this._currentQuiz !== undefined && this._currentQuiz !== null){
       this.setAnswersToRadiobuttons();
     }
   }
@@ -54,7 +54,7 @@ export class QuestionComponent implements OnInit {
   // vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
   // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
-    this.currentQuestion = this.quizSurvey.questions.filter(question => {
+    this.currentQuestion = this.currentQuiz.questions.filter(question => {
       return question.number === this.currentQuestionNumber + 1;
     })[0];
 
@@ -68,7 +68,7 @@ export class QuestionComponent implements OnInit {
 
 
   onFormSubmit() {
-    this.submittedAnswer = {surveyid: this.quizSurvey.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
+    this.submittedAnswer = {surveyid: this.currentQuiz.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
     this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
       this.answerIsCorrect = answerIsCorrect;
       this.saveAnswers();

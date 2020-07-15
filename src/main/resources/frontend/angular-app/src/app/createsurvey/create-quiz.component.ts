@@ -36,7 +36,6 @@ export class CreateQuizComponent implements OnInit {
 
   ngOnInit() {
     this.addAnswerOption();
-
   }
 
   get answerOptions(): FormArray {
@@ -57,13 +56,12 @@ export class CreateQuizComponent implements OnInit {
   private newAnswerOption(): FormGroup {
     return this.formBuilder.group({
       answer: '',
-      iscorrect: 'goed'
+      iscorrect: 'true'
     })
   }
 
 
   nextQuestion() {
-    console.log(this.answerOptions.value);
     this.saveQuestion();
     this.lockQuizName = true;
     this.quizForm.get('question').reset();
@@ -88,13 +86,12 @@ export class CreateQuizComponent implements OnInit {
   private toAnswerOption(ac: AbstractControl): AnswerOption {
     let answerOption = {} as AnswerOption;
     answerOption.value = ac.get('answer').value;
-    answerOption.correctanswer = ac.get('iscorrect').value;
+    answerOption.correctAnswer = ac.get('iscorrect').value;
     return answerOption;
   }
 
   onSubmit() {
     this.saveQuestion();
-    console.log(this.newQuiz)
   }
 
 }

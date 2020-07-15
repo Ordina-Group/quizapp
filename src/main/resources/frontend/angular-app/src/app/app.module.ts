@@ -8,7 +8,7 @@ import { QuizService} from './services/quiz.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule} from '@angular/forms';
 import { EndpageComponent } from './endpage/endpage.component';
-import { SubmittedAnswerService } from './services/submitAnswer.service';
+import { SubmitAnswerService } from './services/submitAnswer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateQuizComponent } from './createsurvey/create-quiz.component';
 import { HomescreenComponent } from './homescreen/homescreen.component';
@@ -35,7 +35,7 @@ import { HomescreenComponent } from './homescreen/homescreen.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [QuizService, SubmittedAnswerService],
+  providers: [QuizService, SubmitAnswerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
