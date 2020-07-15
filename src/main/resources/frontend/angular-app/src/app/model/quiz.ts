@@ -2,7 +2,7 @@ import { Question } from './question';
 
 export interface Quiz {
     id: number;
-    quizDescription: string;
+    surveyDescription: string;
     questions: Question[];
     pageTitle: string;
     errorMessage: string;

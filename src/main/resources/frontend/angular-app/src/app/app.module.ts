@@ -16,6 +16,7 @@ import { HomescreenComponent } from './homescreen/homescreen.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,8 +25,9 @@ import { HomescreenComponent } from './homescreen/homescreen.component';
     EndpageComponent,
     CreateQuizComponent,
     HomescreenComponent,
-
   ],
+
+
   imports: [
     BrowserModule,
     AppRoutingModule,
