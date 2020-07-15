@@ -21,7 +21,7 @@ public class Question {
     private Set<AnswerOption> answerOptions;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "surveyid", nullable = false)
+    @JoinColumn(name = "quizid", nullable = false)
     @JsonIgnore
     private Quiz quiz;
 

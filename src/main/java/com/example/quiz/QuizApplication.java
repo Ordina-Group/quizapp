@@ -39,7 +39,7 @@ public class QuizApplication {
 
 
 
-    @Bean
+ /*   @Bean
     public CommandLineRunner demo(QuizRepository quizRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository, AnswerIsCorrectRepository answerIsCorrectRepository) {
         return (args) -> {
 
@@ -92,7 +92,7 @@ public class QuizApplication {
 
         };
     }
-
+*/
 
 }
 

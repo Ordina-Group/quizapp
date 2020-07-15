@@ -5,6 +5,7 @@ import {Question} from "../model/question";
 import {FormArray} from '@angular/forms';
 import {AnswerIsCorrect} from "../model/answerIsCorrect";
 import {AnswerOption} from "../model/answerOption";
+import { QuizService } from '../services/quiz.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class CreateQuizComponent implements OnInit {
   currentQuestion: number;
   lockQuizName : boolean;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,  private quizService: QuizService) {
     this.count = 0;
     this.currentQuestion = 0;
     this.lockQuizName = false;
@@ -68,6 +69,7 @@ export class CreateQuizComponent implements OnInit {
     this.quizForm.get('answerOptions').reset();
   }
 
+  // hier wordt answerOptions to question gesaved en alle questions worden in object newQuiz bewaard
   saveQuestion() {
     let quizname = this.quizName;
     let questionDescription = this.quizForm.get('question').value;
@@ -79,7 +81,7 @@ export class CreateQuizComponent implements OnInit {
     })
     question.questionDescription = questionDescription;
 
-    this.newQuiz.pageTitle = quizname;
+    this.newQuiz.surveyDescription = quizname;
     this.newQuiz.questions.push(question);
   }
 
@@ -92,6 +94,8 @@ export class CreateQuizComponent implements OnInit {
 
   onSubmit() {
     this.saveQuestion();
+   this.quizService.postnewQuiz(this.newQuiz);
+    console.log(this.newQuiz);
   }
 
 }

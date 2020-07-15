@@ -12,6 +12,7 @@ import { Quiz } from '../model/quiz';
 export class QuizService {
 
   private surveyUrl = this.urlService.url + '/surveys/';
+  private surveyUrlTwo = this.urlService.url + '/surveys/';
   survey: BehaviorSubject<Quiz>;
 
 
@@ -24,6 +25,7 @@ export class QuizService {
       this.survey.next(survey)
     });
   }
+
 
   private handleError(err: HttpErrorResponse) {
     // in a real world app, we may send the server to some remote logging infrastructure
@@ -40,6 +42,12 @@ export class QuizService {
     console.error(errorMessage);
     return throwError(errorMessage);
   }
+
+
+
+  postnewQuiz(newQuiz: Quiz) {
+   return this.http.post<Quiz>(this.surveyUrlTwo, newQuiz);
+}
 
 }
 
