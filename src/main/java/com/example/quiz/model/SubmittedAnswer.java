@@ -6,14 +6,13 @@ import javax.persistence.*;
 @Table(name = "submittedAnswers")
 public class SubmittedAnswer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     Long surveyid;
     Long questionid;
     Long chosenAnswerId;
     Boolean answeredCorrect;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     protected SubmittedAnswer() {
     }

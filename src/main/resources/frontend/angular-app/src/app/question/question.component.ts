@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { QuizService } from '../services/quiz.service';
-import { SubmitAnswer } from '../model/submitAnswer';
-import { AnswerIsCorrect } from '../model/answeriscorrect';
-import { NavigationExtras, Router} from "@angular/router";
-import { AnswerOption } from '../model/answerOption';
-import { Question } from '../model/question';
-import { SubmitAnswerService } from '../services/submitAnswer.service';
-import { Quiz } from '../model/quiz';
-import { QuizScoreService } from '../services/quiz-score.service';
+import {Component, OnInit} from '@angular/core';
+import {QuizService} from '../services/quiz.service';
+import {SubmitAnswer} from '../model/submitAnswer';
+import {AnswerIsCorrect} from '../model/answeriscorrect';
+import {Router} from "@angular/router";
+import {AnswerOption} from '../model/answerOption';
+import {Question} from '../model/question';
+import {SubmitAnswerService} from '../services/submitAnswer.service';
+import {Quiz} from '../model/quiz';
+import {QuizScoreService} from '../services/quiz-score.service';
 
 
 @Component({
@@ -17,14 +17,11 @@ import { QuizScoreService } from '../services/quiz-score.service';
 })
 export class QuestionComponent implements OnInit {
 
-  private _currentQuiz: Quiz;
   currentQuestion: Question;
   answerOptionsArray: AnswerOption[];
   chosenAnswer: AnswerOption;
-
   submittedAnswer: SubmitAnswer;
   answerIsCorrect: AnswerIsCorrect;
-
   currentQuestionNumber = 0;
   errorMessage = '';
 
@@ -34,24 +31,28 @@ export class QuestionComponent implements OnInit {
               private router: Router) {
   }
 
-  ngOnInit(): void {
-    this.quizService.survey.subscribe(quiz => {
-      this.currentQuiz = quiz;
-    })
-  }
+  private _currentQuiz: Quiz;
+
   public get currentQuiz(): Quiz {
     return this._currentQuiz;
   }
 
   public set currentQuiz(value: Quiz) {
     this._currentQuiz = value;
-    if(this._currentQuiz !== undefined && this._currentQuiz !== null){
+    if (this._currentQuiz !== undefined && this._currentQuiz !== null) {
       this.setAnswersToRadiobuttons();
     }
   }
 
+  ngOnInit(): void {
+    this.quizService.survey.subscribe(quiz => {
+      this.currentQuiz = quiz;
+    })
+  }
+
   // hier wordt de String array"answers" geleegd in de functie,
   // vervolgens wordt de array gelijk /gematched aan de answeroption van deze vraag die uit de database zijn gehaald
+
   // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
     this.currentQuestion = this.currentQuiz.questions.filter(question => {
@@ -68,7 +69,12 @@ export class QuestionComponent implements OnInit {
 
 
   onFormSubmit() {
-    this.submittedAnswer = {surveyid: this.currentQuiz.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
+    this.submittedAnswer = {
+      surveyid: this.currentQuiz.id,
+      chosenAnswerId: this.chosenAnswer.id,
+      questionid: this.currentQuestion.number,
+      answeredCorrect: false
+    };
     this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
       this.answerIsCorrect = answerIsCorrect;
       this.saveAnswers();
@@ -84,7 +90,7 @@ export class QuestionComponent implements OnInit {
   }
 
   //hier worden alle goede en foute antwoorden bijgehouden
-  saveAnswers(){
+  saveAnswers() {
     this.quizScoreService.processAnswer(this.answerIsCorrect);
   }
 

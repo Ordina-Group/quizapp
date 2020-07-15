@@ -1,20 +1,20 @@
-<div class="jumbotron jumbotron-fluid" Style="background-color:black">
+<div Style="background-color:black" class="jumbotron jumbotron-fluid">
 
   <div class="container mx-auto">
     <div class="row align-items-start">
-      <h1 class='mx-auto' style="margin-top: 4rem;" >Welkom bij de Ordina Quizapp!</h1>
+      <h1 class='mx-auto' style="margin-top: 4rem;">Welkom bij de Ordina Quizapp!</h1>
     </div>
   </div>
 
-    <div class="container mx-auto" style="margin-top: 4rem">
-      <h2>Voer een Surveynummer in:</h2>
-      <form #homescreenForm="ngForm" (ngSubmit)="onOpenSurveySubmit()">
-        <div class="form-inline justify-content-center">
-          <input class="form-control mr-1" [(ngModel)]="chosenSurvey" [ngModelOptions]="{standalone: true}">
-          <button type="submit"  class="btn btn-dark">Open Survey</button>
-        </div>
-      </form>
-    </div>
+  <div class="container mx-auto" style="margin-top: 4rem">
+    <h2>Voer een Surveynummer in:</h2>
+    <form #homescreenForm="ngForm" (ngSubmit)="onOpenSurveySubmit()">
+      <div class="form-inline justify-content-center">
+        <input [(ngModel)]="chosenSurvey" [ngModelOptions]="{standalone: true}" class="form-control mr-1">
+        <button class="btn btn-dark" type="submit">Open Survey</button>
+      </div>
+    </form>
+  </div>
 
 
   <div class="container mx-auto" style="margin-top: 4rem">

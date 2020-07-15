@@ -1,9 +1,9 @@
-import { Question } from './question';
+import {Question} from './question';
 
 export interface Quiz {
-    id: number;
-    surveyDescription: string;
-    questions: Question[];
-    pageTitle: string;
-    errorMessage: string;
-  }
+  id: number;
+  surveyDescription: string;
+  questions: Question[];
+  pageTitle: string;
+  errorMessage: string;
+}

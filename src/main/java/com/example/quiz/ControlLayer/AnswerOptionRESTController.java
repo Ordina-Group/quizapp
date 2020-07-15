@@ -1,19 +1,20 @@
-
 package com.example.quiz.ControlLayer;
 
 import com.example.quiz.Repository.AnswerOptionRepository;
 import com.example.quiz.model.AnswerOption;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/quiz/answeroptions")
+//@RestController
+//@RequestMapping("/quiz/answeroptions")
 public class AnswerOptionRESTController {
 
-    @Autowired
-    private AnswerOptionRepository answerOptionRepository;
+    private final AnswerOptionRepository answerOptionRepository;
+
+    public AnswerOptionRESTController(AnswerOptionRepository answerOptionRepository) {
+        this.answerOptionRepository = answerOptionRepository;
+    }
 
     @GetMapping
     public List<AnswerOption> list() {
@@ -23,7 +24,6 @@ public class AnswerOptionRESTController {
     @GetMapping
     @RequestMapping("{id}")
     public AnswerOption get(@PathVariable Long id) {
-
         return answerOptionRepository.getOne(id);
     }
 

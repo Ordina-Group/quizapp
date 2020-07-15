@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {Quiz} from "../model/quiz";
 import {Question} from "../model/question";
-import {FormArray} from '@angular/forms';
-import {AnswerIsCorrect} from "../model/answerIsCorrect";
 import {AnswerOption} from "../model/answerOption";
 
 
@@ -19,7 +17,7 @@ export class CreateQuizComponent implements OnInit {
 
   newQuiz: Quiz;
   currentQuestion: number;
-  lockQuizName : boolean;
+  lockQuizName: boolean;
 
   constructor(private formBuilder: FormBuilder) {
     this.count = 0;
@@ -34,12 +32,16 @@ export class CreateQuizComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.addAnswerOption();
-  }
-
   get answerOptions(): FormArray {
     return this.quizForm.get('answerOptions') as FormArray;
+  }
+
+  get quizName(): string {
+    return this.quizForm.get('quizName').value
+  }
+
+  ngOnInit() {
+    this.addAnswerOption();
   }
 
   addAnswerOption(): void {
@@ -48,18 +50,7 @@ export class CreateQuizComponent implements OnInit {
 
   deleteAnswerOption() {
     (this.quizForm.get('answerOptions') as FormArray).removeAt(this.answerOptions.length - 1);
-    }
-
-  get quizName(): string{
-    return this.quizForm.get('quizName').value
   }
-  private newAnswerOption(): FormGroup {
-    return this.formBuilder.group({
-      answer: '',
-      iscorrect: 'true'
-    })
-  }
-
 
   nextQuestion() {
     this.saveQuestion();
@@ -72,7 +63,7 @@ export class CreateQuizComponent implements OnInit {
     let quizname = this.quizName;
     let questionDescription = this.quizForm.get('question').value;
 
-    let question = {answerOptions:[]} as Question;
+    let question = {answerOptions: []} as Question;
     this.answerOptions.controls.forEach(control => {
       let answerOption = this.toAnswerOption(control)
       question.answerOptions.push(answerOption)
@@ -83,15 +74,22 @@ export class CreateQuizComponent implements OnInit {
     this.newQuiz.questions.push(question);
   }
 
+  onSubmit() {
+    this.saveQuestion();
+  }
+
+  private newAnswerOption(): FormGroup {
+    return this.formBuilder.group({
+      answer: '',
+      iscorrect: 'true'
+    })
+  }
+
   private toAnswerOption(ac: AbstractControl): AnswerOption {
     let answerOption = {} as AnswerOption;
     answerOption.value = ac.get('answer').value;
     answerOption.correctAnswer = ac.get('iscorrect').value;
     return answerOption;
-  }
-
-  onSubmit() {
-    this.saveQuestion();
   }
 
 }

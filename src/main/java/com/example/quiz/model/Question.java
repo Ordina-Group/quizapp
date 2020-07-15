@@ -39,17 +39,14 @@ public class Question {
     }
 
     public Long getId() {
-
         return id;
     }
 
     public void setId(Long id) {
-
         this.id = id;
     }
 
     public String getQuestionDescription() {
-
         return questionDescription;
     }
 
@@ -58,12 +55,10 @@ public class Question {
     }
 
     public Set<AnswerOption> getAnswerOptions() {
-
         return answerOptions;
     }
 
     public void setAnswerOptions(Set<AnswerOption> answerOptions) {
-
         this.answerOptions = answerOptions;
     }
 

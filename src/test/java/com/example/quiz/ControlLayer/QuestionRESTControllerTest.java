@@ -3,9 +3,7 @@ package com.example.quiz.ControlLayer;
 import com.example.quiz.QuizApplication;
 import com.example.quiz.Repository.QuestionRepository;
 import com.example.quiz.ServiceLayer.QuestionService;
-
 import org.junit.Before;
-
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -17,12 +15,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @RunWith(MockitoJUnitRunner.class)
 public class QuestionRESTControllerTest {
 
-    @InjectMocks
-    private QuestionRESTController questionRESTController;
-
     @Mock
     QuizApplication quizapplication;
-
+    @InjectMocks
+    private QuestionRESTController questionRESTController;
     private MockMvc mockMvc;
 
     private QuestionRepository questionRepository;
@@ -33,17 +29,17 @@ public class QuestionRESTControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(this.questionRESTController).build();
     }
 
- //   @Test
-  //  public void testFindQuestionByid() throws Exception {
-        // build your expected results here
+    //   @Test
+    //  public void testFindQuestionByid() throws Exception {
+    // build your expected results here
 
-   //     MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080//questionbyid/1")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+    //     MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080//questionbyid/1")).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
 
 
-     //   assertEquals((Object) "response does not match", mvcResult.getResponse().getContentAsString(), );
+    //   assertEquals((Object) "response does not match", mvcResult.getResponse().getContentAsString(), );
 
-        // verify the calls
+    // verify the calls
     //}
-    }
+}
 
 

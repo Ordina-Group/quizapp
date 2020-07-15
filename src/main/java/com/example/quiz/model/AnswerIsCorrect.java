@@ -43,23 +43,6 @@ public class AnswerIsCorrect {
         this.isCorrect = isCorrect;
     }
 
-    /*public String getanswerOptions() {
-
-        return answerOptions;
-    }
-
-    public Boolean getIsCorrect() {
-
-        return isCorrect;
-    }*/
-
-
-/*    public String AnsweroptionsToString() {
-        return String.format(
-                "AnswerOptions[number=%d, answerOptions='%s', isCorrect='%s' ]",
-                number, value, isCorrect);
-    }*/
-
     public String getAnswerExplanation() {
         return answerExplanation;
     }

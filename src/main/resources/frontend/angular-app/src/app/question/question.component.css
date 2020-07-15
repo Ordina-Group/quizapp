@@ -1,4 +1,4 @@
-.jumbotron-fluid{
+.jumbotron-fluid {
   background-size: cover;
   display: flex;
   align-items: center;
@@ -6,85 +6,84 @@
 }
 
 h2 {
-  color:white;
-  font-family:'Roboto', sans-serif;
+  color: white;
+  font-family: 'Roboto', sans-serif;
   font-size: 30px;
   align-self: center;
   margin-top: 2rem;
 }
 
-.container{
-  align-self:start;
-  width:95%;
+.container {
+  align-self: start;
+  width: 95%;
   background-color: black;
 }
 
 p {
-  color:white;
-  font-family:'Roboto', sans-serif;
+  color: white;
+  font-family: 'Roboto', sans-serif;
   font-size: 13px;
 }
 
-.p-green{
-  color:green;
-  font-family:'Roboto', sans-serif;
+.p-green {
+  color: green;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
 }
 
-.p-red{
-  color:red;
-  font-family:'Roboto', sans-serif;
+.p-red {
+  color: red;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
 }
 
-.antwoordLabel{
+.antwoordLabel {
   font-size: 14px
 }
 
 
-.form-check-label{
-  color:white;
-  margin-top:1rem;
+.form-check-label {
+  color: white;
+  margin-top: 1rem;
 }
 
 
-.form-check-input{
-  margin-top:1rem;
+.form-check-input {
+  margin-top: 1rem;
 }
 
-.form-check{
-  margin-top:1rem;
+.form-check {
+  margin-top: 1rem;
 }
 
-.button{
+.button {
   margin: 2rem;
 }
 
 
-
-.input{
-  color:white;
+.input {
+  color: white;
 }
 
-.td{
-  color:white;
+.td {
+  color: white;
 }
 
-input[type=radio]{
+input[type=radio] {
   display: inline-block;
 }
 
-label.antwoordLabel{
+label.antwoordLabel {
   color: white;
   margin-left: .5rem;
 }
 
-.radioBlok{
+.radioBlok {
   display: block;
   align-items: start
 }
 
-.row{
+.row {
   margin-top: 2rem;
 }
 

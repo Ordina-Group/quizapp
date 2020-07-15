@@ -1,4 +1,4 @@
-<div class="jumbotron-fluid" Style="background-image: url('./assets/images/traffic.jpg'); height: 250px">
+<div Style="background-image: url('./assets/images/traffic.jpg'); height: 250px" class="jumbotron-fluid">
   <div class="container mx-auto">
     <div class="row">
     </div>
@@ -20,20 +20,23 @@
       <!-- form-->
       <form #questionForm="ngForm" (ngSubmit)="onFormSubmit()">
 
-        <div class="radioBlok" *ngFor="let answerOption of answerOptionsArray">
-          <input type="radio" name="answerButtons" [(ngModel)]="chosenAnswer" [value]="answerOption">
+        <div *ngFor="let answerOption of answerOptionsArray" class="radioBlok">
+          <input [(ngModel)]="chosenAnswer" [value]="answerOption" name="answerButtons" type="radio">
           <label class="antwoordLabel">{{answerOption.value}}</label>
         </div>
 
-        <button class="btn btn-light btn-sm" type="submit" *ngIf="chosenAnswer?.value != null && answerIsCorrect == null">
+        <button *ngIf="chosenAnswer?.value != null && answerIsCorrect == null" class="btn btn-light btn-sm"
+                type="submit">
           Submit
         </button>
 
       </form>
-      <div *ngIf="answerIsCorrect" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }">
+      <div *ngIf="answerIsCorrect" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }"
+           class="col-sm-6"
+           style="background-color: white">
         {{answerIsCorrect.answerExplanation}}
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -43,8 +46,10 @@
   </div>
 
   <div class="row">
-    <div class="col-1" Style="background-color:black;" *ngIf="answerIsCorrect">
-      <p style="margin: 1rem;"><button class="btn btn-dark btn-lg" (click)="nextQuestion()">Volgende</button></p>
+    <div *ngIf="answerIsCorrect" Style="background-color:black;" class="col-1">
+      <p style="margin: 1rem;">
+        <button (click)="nextQuestion()" class="btn btn-dark btn-lg">Volgende</button>
+      </p>
     </div>
   </div>
 

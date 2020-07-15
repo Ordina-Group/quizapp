@@ -1,19 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {BehaviorSubject, throwError} from 'rxjs';
 
-import { UrlService } from './url.service';
-import { Quiz } from '../model/quiz';
+import {UrlService} from './url.service';
+import {Quiz} from '../model/quiz';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
 
-  private surveyUrl = this.urlService.url + '/surveys/';
   survey: BehaviorSubject<Quiz>;
-
+  private surveyUrl = this.urlService.url + '/surveys/';
 
   constructor(private http: HttpClient, private urlService: UrlService) {
     this.survey = new BehaviorSubject(null);

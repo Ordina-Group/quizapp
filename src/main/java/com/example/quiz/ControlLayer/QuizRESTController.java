@@ -2,7 +2,6 @@ package com.example.quiz.ControlLayer;
 
 import com.example.quiz.ServiceLayer.QuizService;
 import com.example.quiz.model.Quiz;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping("/quiz/surveys")
 public class QuizRESTController {
 
-    @Autowired
-    private QuizService quizService;
+    private final QuizService quizService;
+
+    public QuizRESTController(QuizService quizService) {
+        this.quizService = quizService;
+    }
 
     //surveys
     @GetMapping
@@ -25,13 +27,11 @@ public class QuizRESTController {
     @GetMapping
     @RequestMapping("{id}")
     public Quiz get(@PathVariable Long id) {
-
         return quizService.findSurveyById(id);
     }
 
     @PostMapping
     public Quiz create(@RequestBody final Quiz quiz) {
-
         return quizService.saveSurvey(quiz);
     }
 

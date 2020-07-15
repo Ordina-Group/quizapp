@@ -22,13 +22,11 @@ public class AnswerOption {
     private Question question;
 
     protected AnswerOption() {
-
     }
 
     public AnswerOption(String value, Question question) {
         this.value = value;
         this.question = question;
-
     }
 
     public String getValue() {
@@ -55,23 +53,6 @@ public class AnswerOption {
         this.id = id;
     }
 
-
-    /*public String getanswerOptions() {
-
-        return answerOptions;
-    }
-
-    public Boolean getIsCorrect() {
-
-        return isCorrect;
-    }*/
-
-
-//    public String AnsweroptionsToString() {
-//        return String.format(
-//                "AnswerOptions[number=%d, answerOptions='%s', isCorrect='%s' ]",
-//                number, value, isCorrect);
-//    }
 
 }
 

@@ -8,7 +8,7 @@
 
 <div class="jumbotron-fluid d-flex flex-column">
   <div class="container">
-    <div class="form-group" [formGroup]="quizForm">
+    <div [formGroup]="quizForm" class="form-group">
       <label> Survey naam:</label>
       <div class="row">
         <div class="col-sm-10">
@@ -47,11 +47,11 @@
         <div class="row">
           <div class="col-sm-6 mr-2">
             <div formArrayName="answerOptions">
-              <div [formGroupName]="i" *ngFor="let answerOption of answerOptions.controls; let i = index;">
-                <input type="text" formControlName="answer">
+              <div *ngFor="let answerOption of answerOptions.controls; let i = index;" [formGroupName]="i">
+                <input formControlName="answer" type="text">
                 <div class="radioBlok">
                   <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="true" formControlName="iscorrect"> correct
+                    <input class="form-check-input" formControlName="iscorrect" type="checkbox" value="true"> correct
                   </label>
                 </div>
               </div>
@@ -62,8 +62,8 @@
           </div>
 
           <div class="col-sm-4 mr-2">
-            <button class="btn btn-dark mr-1" (click)="deleteAnswerOption()">-</button>
-            <button class="btn btn-dark" (click)="addAnswerOption()">+</button>
+            <button (click)="deleteAnswerOption()" class="btn btn-dark mr-1">-</button>
+            <button (click)="addAnswerOption()" class="btn btn-dark">+</button>
           </div>
 
           <div class="col-sm-1">
@@ -81,11 +81,11 @@
       <div class="row" style="margin-top:5rem ">
 
         <div Style="background-color:black;">
-          <button class="btn btn-dark mr-2" (click)="nextQuestion()">Maak nog een vraag</button>
+          <button (click)="nextQuestion()" class="btn btn-dark mr-2">Maak nog een vraag</button>
         </div>
 
         <div Style="background-color:black;">
-          <button type="submit" (click)="onSubmit()" class="btn btn-dark">Klaar</button>
+          <button (click)="onSubmit()" class="btn btn-dark" type="submit">Klaar</button>
         </div>
 
       </div>

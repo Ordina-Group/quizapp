@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { SubmitAnswer } from '../model/submitAnswer';
-import { AnswerIsCorrect } from '../model/answeriscorrect';
-import { UrlService } from './url.service';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {SubmitAnswer} from '../model/submitAnswer';
+import {AnswerIsCorrect} from '../model/answeriscorrect';
+import {UrlService} from './url.service';
 
 @Injectable({
   providedIn: 'root'

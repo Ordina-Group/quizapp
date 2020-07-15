@@ -2,18 +2,20 @@ package com.example.quiz.ControlLayer;
 
 import com.example.quiz.ServiceLayer.QuestionService;
 import com.example.quiz.model.Question;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@RestController
-@RequestMapping("/quiz/questions")
+//@RestController
+//@RequestMapping("/quiz/questions")
 public class QuestionRESTController {
 
-    @Autowired
-    private QuestionService questionService;
+    private final QuestionService questionService;
+
+    public QuestionRESTController(QuestionService questionService) {
+        this.questionService = questionService;
+    }
 
     @GetMapping
     public List<Question> list() {

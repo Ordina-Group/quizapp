@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +11,11 @@ export class AppComponent implements OnInit {
 
   errorMessage = '';
 
-  constructor() {}
-  ngOnInit() {}
+  constructor() {
+  }
+
+  ngOnInit() {
+  }
 
 }
 

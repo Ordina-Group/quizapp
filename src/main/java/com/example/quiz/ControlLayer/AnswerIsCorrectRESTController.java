@@ -1,19 +1,20 @@
-
 package com.example.quiz.ControlLayer;
 
 import com.example.quiz.Repository.AnswerIsCorrectRepository;
 import com.example.quiz.model.AnswerIsCorrect;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/quiz/answeriscorrect")
+//@RestController
+//@RequestMapping("/quiz/answeriscorrect")
 public class AnswerIsCorrectRESTController {
 
-    @Autowired
-    private AnswerIsCorrectRepository answerIsCorrectRepository;
+    private final AnswerIsCorrectRepository answerIsCorrectRepository;
+
+    public AnswerIsCorrectRESTController(AnswerIsCorrectRepository answerIsCorrectRepository) {
+        this.answerIsCorrectRepository = answerIsCorrectRepository;
+    }
 
     @GetMapping
     public List<AnswerIsCorrect> list() {
@@ -23,7 +24,6 @@ public class AnswerIsCorrectRESTController {
     @GetMapping
     @RequestMapping("{id}")
     public AnswerIsCorrect get(@PathVariable Long id) {
-
         return answerIsCorrectRepository.getOne(id);
     }
 
