@@ -9,7 +9,7 @@ import { Quiz } from '../model/quiz';
 @Injectable({
   providedIn: 'root'
 })
-export class SurveyService {
+export class QuizService {
 
   private surveyUrl = this.urlService.url + '/surveys/';
   survey: BehaviorSubject<Quiz>;

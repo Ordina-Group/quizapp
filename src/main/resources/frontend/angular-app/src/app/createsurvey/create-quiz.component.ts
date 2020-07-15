@@ -9,10 +9,10 @@ import {AnswerOption} from "../model/answerOption";
 
 @Component({
   selector: 'app-createsurvey',
-  templateUrl: './createsurvey.component.html',
-  styleUrls: ['./createsurvey.component.css']
+  templateUrl: './create-quiz.component.html',
+  styleUrls: ['./create-quiz.component.css']
 })
-export class CreatesurveyComponent implements OnInit {
+export class CreateQuizComponent implements OnInit {
 
   quizForm: FormGroup;
   count: number;

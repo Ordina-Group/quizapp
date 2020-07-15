@@ -3,11 +3,11 @@ package com.example.quiz;
 import com.example.quiz.Repository.AnswerIsCorrectRepository;
 import com.example.quiz.Repository.AnswerOptionRepository;
 import com.example.quiz.Repository.QuestionRepository;
-import com.example.quiz.Repository.SurveyRepository;
+import com.example.quiz.Repository.QuizRepository;
 import com.example.quiz.model.AnswerIsCorrect;
 import com.example.quiz.model.AnswerOption;
 import com.example.quiz.model.Question;
-import com.example.quiz.model.Survey;
+import com.example.quiz.model.Quiz;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -40,20 +40,20 @@ public class QuizApplication {
 
 
     @Bean
-    public CommandLineRunner demo(SurveyRepository surveyRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository, AnswerIsCorrectRepository answerIsCorrectRepository) {
+    public CommandLineRunner demo(QuizRepository quizRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository, AnswerIsCorrectRepository answerIsCorrectRepository) {
         return (args) -> {
 
-            Survey survey = new Survey();
-            survey.setSurveyDescription("Survey DevoxxxKids dag");
-            surveyRepository.save(survey);
+            Quiz quiz = new Quiz();
+            quiz.setQuizDescription("Survey DevoxxxKids dag");
+            quizRepository.save(quiz);
 
-            Question question = new Question("Slag bij Nieuwpoort?", 1, survey);
+            Question question = new Question("Slag bij Nieuwpoort?", 1, quiz);
             questionRepository.save(question);
 
-            Question question2 = new Question("Slag bij Hastings?", 2, survey);
+            Question question2 = new Question("Slag bij Hastings?", 2, quiz);
             questionRepository.save(question2);
 
-            Question question3 = new Question("Slag bij Waterloo?", 3, survey);
+            Question question3 = new Question("Slag bij Waterloo?", 3, quiz);
             questionRepository.save(question3);
 
             //save answeroptions

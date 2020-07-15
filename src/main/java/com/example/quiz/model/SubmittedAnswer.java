@@ -3,7 +3,7 @@ package com.example.quiz.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name="submittedAnswers")
+@Table(name = "submittedAnswers")
 public class SubmittedAnswer {
 
     @Id
@@ -25,9 +25,13 @@ public class SubmittedAnswer {
         this.answeredCorrect = answeredCorrect;
     }
 
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getSurveyid() {
         return surveyid;

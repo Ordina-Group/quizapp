@@ -903,7 +903,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this5 = this;
 
           this.answers = [];
-          this.currentQuestionObject = this.currentSurvey.questions.filter(function (question) {
+          this.currentQuestionObject = this.currentSurvey.question.filter(function (question) {
             return question.number === _this5.currentQuestion + 1;
           })[0];
 
@@ -1002,7 +1002,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return this._currentSurvey;
         },
         set: function set(value) {
-          this._currentSurvey = value;
+          this._quizSurvey = value;
           this.setAnswersToRadiobuttons();
         }
       }]);

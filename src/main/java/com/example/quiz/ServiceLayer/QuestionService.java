@@ -21,7 +21,7 @@ public class QuestionService {
     }
 
 
-    public Question findQuestionById(Long id){
+    public Question findQuestionById(Long id) {
         return questionRepository.getOne(id);
 
     }

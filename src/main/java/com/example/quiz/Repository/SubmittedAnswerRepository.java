@@ -6,15 +6,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-    public interface SubmittedAnswerRepository extends JpaRepository<SubmittedAnswer, Long> {
-        //List<AnswerExplanations> findAnswerOptionsByAnswerexid(Long answerexid);
+public interface SubmittedAnswerRepository extends JpaRepository<SubmittedAnswer, Long> {
 
-    //  List<Answeroptions> findByQuestions(Questions questions, Sort sort);
-    //Vindt de antwoordmogelijkheden door het id in te geven van de bijbehorende tabel (dus answeroptions id).
-    //Optional<AnswerOption> findById(Long id);
-
-    //Vindt de antwoordmogelijkheden door de vraag id mee op te geven die erbij hoort.
-    //List<AnswerOption> findByQuestionId(Long questionid);
-
-    }
+}
 
