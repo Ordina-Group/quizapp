@@ -10,7 +10,7 @@ public class SubmittedAnswer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    Long surveyid;
+    Long quizid;
     Long questionid;
     Long chosenAnswerId;
     Boolean answeredCorrect;
@@ -18,8 +18,8 @@ public class SubmittedAnswer {
     protected SubmittedAnswer() {
     }
 
-    public SubmittedAnswer(Long surveyid, Long questionid, Long chosenAnswerId, boolean answeredCorrect) {
-        this.surveyid = surveyid;
+    public SubmittedAnswer(Long quizid, Long questionid, Long chosenAnswerId, boolean answeredCorrect) {
+        this.quizid = quizid;
         this.questionid = questionid;
         this.chosenAnswerId = chosenAnswerId;
         this.answeredCorrect = answeredCorrect;
@@ -33,12 +33,12 @@ public class SubmittedAnswer {
         this.id = id;
     }
 
-    public Long getSurveyid() {
-        return surveyid;
+    public Long getQuizid() {
+        return quizid;
     }
 
-    public void setSurveyid(Long surveyid) {
-        this.surveyid = surveyid;
+    public void setQuizid(Long quizid) {
+        this.quizid = quizid;
     }
 
     public Long getQuestionid() {

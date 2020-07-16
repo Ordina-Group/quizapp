@@ -1,31 +1,32 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {BehaviorSubject, throwError} from 'rxjs';
 
-import { UrlService } from './url.service';
-import { Quiz } from '../model/quiz';
+import {UrlService} from './url.service';
+import {Quiz} from '../model/quiz';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
 
-  private surveyUrl = this.urlService.url + '/surveys/';
-  private surveyUrlTwo = this.urlService.url + '/surveys/';
-  survey: BehaviorSubject<Quiz>;
+  private surveyUrl = this.urlService.url + "/";
+  quizSubject: BehaviorSubject<Quiz>;
 
 
   constructor(private http: HttpClient, private urlService: UrlService) {
-    this.survey = new BehaviorSubject(null);
+    this.quizSubject = new BehaviorSubject(null);
   }
 
-  getInitSurveys(id: number) {
-    this.http.get<Quiz>(this.surveyUrl + id).subscribe(survey => {
-      this.survey.next(survey)
+  getInitQuiz(id: number) {
+    this.http.get<Quiz>(this.surveyUrl + id).subscribe(quiz => {
+      this.quizSubject.next(quiz)
     });
   }
 
+  postnewQuiz(newQuiz: Quiz) {
+    return this.http.post<String>(this.surveyUrl, newQuiz);
+  }
 
   private handleError(err: HttpErrorResponse) {
     // in a real world app, we may send the server to some remote logging infrastructure
@@ -43,11 +44,6 @@ export class QuizService {
     return throwError(errorMessage);
   }
 
-
-
-  postnewQuiz(newQuiz: Quiz) {
-   return this.http.post<String>(this.surveyUrlTwo, newQuiz);
-}
 
 }
 

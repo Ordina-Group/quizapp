@@ -4,7 +4,7 @@ import {HomeComponent} from "./home/home.component";
 import {QuestionComponent} from "./question/question.component";
 import {EndpageComponent} from "./endpage/endpage.component";
 import { HomescreenComponent } from './homescreen/homescreen.component';
-import {CreateQuizComponent} from "./createsurvey/create-quiz.component";
+import {CreateQuizComponent} from "./createquiz/create-quiz.component";
 
 
 const routes: Routes = [
@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'homescreen', component: HomescreenComponent},
   {path: 'question', component: QuestionComponent},
   {path: 'endpage', component:EndpageComponent},
-  {path: 'createsurvey', component:CreateQuizComponent},
+  {path: 'createquiz', component:CreateQuizComponent},
 
 ];
 

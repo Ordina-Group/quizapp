@@ -10,7 +10,7 @@ import { FormsModule} from '@angular/forms';
 import { EndpageComponent } from './endpage/endpage.component';
 import { SubmitAnswerService } from './services/submitAnswer.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateQuizComponent } from './createsurvey/create-quiz.component';
+import { CreateQuizComponent } from './createquiz/create-quiz.component';
 import { HomescreenComponent } from './homescreen/homescreen.component';
 
 

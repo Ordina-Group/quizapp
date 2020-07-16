@@ -2,43 +2,41 @@ package com.example.quiz.ControlLayer;
 
 import com.example.quiz.ServiceLayer.QuizService;
 import com.example.quiz.model.Quiz;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/quiz/surveys")
+@RequestMapping("/quiz")
 public class QuizRESTController {
 
-    @Autowired
     private QuizService quizService;
 
-    //surveys
+    public QuizRESTController(QuizService quizService) {
+        this.quizService = quizService;
+    }
+
+
     @GetMapping
     public List<Quiz> list() {
-        return quizService.findAllSurveys();
+        return quizService.findAllQuizs();
     }
 
-    //surveys/1
+    //quiz/1
     @GetMapping
-    @RequestMapping("{id}")
+    @RequestMapping("/{id}")
     public Quiz get(@PathVariable Long id) {
-
-        return quizService.findSurveyById(id);
+        return quizService.findQuizById(id);
     }
 
-   @PostMapping()
-   @ResponseStatus(HttpStatus.CREATED)
- public String create(@RequestBody final Quiz newquiz) {
-     String s = quizService.ResponseToSubmission(newquiz);
-       return "test";
-   }
-
+    @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED)
+    public String create(@RequestBody final Quiz newquiz) {
+        String s = quizService.ResponseToSubmission(newquiz);
+        return "test";
+    }
 
 
 }

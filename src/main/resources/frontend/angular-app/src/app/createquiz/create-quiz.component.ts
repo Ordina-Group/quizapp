@@ -9,7 +9,7 @@ import { QuizService } from '../services/quiz.service';
 
 
 @Component({
-  selector: 'app-createsurvey',
+  selector: 'app-createquiz',
   templateUrl: './create-quiz.component.html',
   styleUrls: ['./create-quiz.component.css']
 })
@@ -83,7 +83,7 @@ export class CreateQuizComponent implements OnInit {
     })
     question.questionDescription = questionDescription;
 
-    this.newQuiz.surveyDescription = quizname;
+    this.newQuiz.quizDescription = quizname;
     this.newQuiz.questions.push(question);
   }
 
@@ -98,7 +98,8 @@ export class CreateQuizComponent implements OnInit {
     this.saveQuestion();
     this.quizService.postnewQuiz(this.newQuiz).subscribe(quiz => {
       this.quiz = quiz
-      console.log(this.quiz);
+      console.log("quiz is");
+      console.log(quiz);
     })
     console.log(this.newQuiz);
   }

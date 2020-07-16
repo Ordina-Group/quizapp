@@ -1,5 +1,5 @@
 export interface SubmitAnswer {
-  surveyid: number;
+  quizid: number;
   chosenAnswerId: number;
   questionid: number;
   answeredCorrect: boolean;
