@@ -12,7 +12,7 @@ public class Quiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "quizid")
+    //@Column(name = "quizid")
     private Long id;
 
 
@@ -20,6 +20,11 @@ public class Quiz {
 
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private Set<Question> questions;
+
+    public Quiz(long id, String quizDescription){
+this.id = id;
+this.quizDescription = quizDescription;
+    }
 
     public Quiz() {
 

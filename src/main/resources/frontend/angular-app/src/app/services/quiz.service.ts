@@ -46,7 +46,7 @@ export class QuizService {
 
 
   postnewQuiz(newQuiz: Quiz) {
-   return this.http.post<Quiz>(this.surveyUrlTwo, newQuiz);
+   return this.http.post<String>(this.surveyUrlTwo, newQuiz);
 }
 
 }

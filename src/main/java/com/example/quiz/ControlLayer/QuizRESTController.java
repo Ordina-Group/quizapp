@@ -33,9 +33,10 @@ public class QuizRESTController {
     }
 
    @PostMapping()
- public ResponseEntity<Quiz> create(@RequestBody final Quiz newquiz) {
-     Quiz quiz = quizService.ResponseToSubmission(newquiz);
-       return new ResponseEntity<>(quiz, new HttpHeaders(), HttpStatus.OK);
+   @ResponseStatus(HttpStatus.CREATED)
+ public String create(@RequestBody final Quiz newquiz) {
+     String s = quizService.ResponseToSubmission(newquiz);
+       return "test";
    }
 
 

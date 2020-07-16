@@ -3,6 +3,7 @@ package com.example.quiz.ServiceLayer;
 import com.example.quiz.Repository.AnswerIsCorrectRepository;
 import com.example.quiz.Repository.SubmittedAnswerRepository;
 import com.example.quiz.model.AnswerIsCorrect;
+import com.example.quiz.model.Quiz;
 import com.example.quiz.model.SubmittedAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,7 @@ public class SubmittedAnswerService {
         } else {
             System.out.println("En hier komen we dus zowiezo?");
             return new AnswerIsCorrect(1L, false, "hallo");
+
         }
 
         // check of antwoord goed is
