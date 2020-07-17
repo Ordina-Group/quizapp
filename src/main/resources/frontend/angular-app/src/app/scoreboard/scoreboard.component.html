@@ -1,0 +1,49 @@
+<div class="jumbotron-fluid">
+  <div class="container mx-auto" style="margin-top: 2rem">
+    <div class="row">
+      <h2>High scores:</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto" style="margin-top: 4rem">
+
+<table class='table'>
+  <thead>
+  <tr>
+    <th>Naam:</th>
+    <th>Score:</th>
+    <th>Tijdstip van afronding:</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor='let scoreEntry of scoreEntries'>
+    <td>{{scoreEntry.userName}}</td>
+    <td>{{scoreEntry.answersCorrect}}</td>
+    <td>{{scoreEntry.finishTimestampString}}</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="row">
+  <h2 class='mx-auto'><button [routerLink]="['/namescreen']" class="btn btn-dark btn-lg btn-block">Probeer het nog een keer</button></h2>
+</div>
+
+
+<!--<div class="jumbotron-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6"><h3>Je hebt {{correctAnswer}} vra(a)g(en) goed beantwoord.</h3></div>
+      <div class="col-md-3"></div>
+    </div>
+
+    <div class="row" style="background-color: black">
+      <div class="col-md-3"></div>
+      <div class="col-md-6"><h3>Je hebt {{incorrectAnswer}} vra(a)g(en) fout beantwoord.</h3></div>
+      <div class="col-md-3"></div>
+    </div>
+
+  </div>
+</div>-->

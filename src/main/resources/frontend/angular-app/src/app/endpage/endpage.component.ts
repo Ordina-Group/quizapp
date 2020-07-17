@@ -17,7 +17,6 @@ export class EndpageComponent implements OnInit {
   ngOnInit(): void {
     this.correctAnswer = this.surveyScoreService.getCorrectAnswers();
     this.incorrectAnswer = this.surveyScoreService.getIncorrectAnswers();
-    this.surveyScoreService.resetScores();
   }
 
 }
