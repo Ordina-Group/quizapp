@@ -8,7 +8,7 @@ import { Question } from '../model/question';
 import { SubmittedAnswerService } from '../services/submitAnswer.service';
 import { Survey } from '../model/survey';
 import { SurveyScoreService } from '../services/survey-score.service';
-
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-question',
@@ -27,7 +27,8 @@ export class QuestionComponent implements OnInit {
 
   currentQuestionNumber = 0;
   errorMessage = '';
-
+  private date: Date;
+  private dateString: string;
 
   ngOnInit(): void {
     this.surveyService.survey.subscribe(survey => {
@@ -66,6 +67,10 @@ export class QuestionComponent implements OnInit {
     })[0];
 
     if (this.currentQuestion === undefined) {
+      this.date = new Date();
+      this.dateString = formatDate(this.date, 'dd/MM/yyyy HH:mm:ss', 'en');
+      this.surveyScoreService.setFinishTimestamp(this.date);
+      this.surveyScoreService.setFinishTimestampString(this.dateString);
       this.router.navigate(['/endpage']);
       return;
     }

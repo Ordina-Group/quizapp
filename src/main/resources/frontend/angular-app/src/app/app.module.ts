@@ -11,7 +11,9 @@ import { EndpageComponent } from './endpage/endpage.component';
 import { SubmittedAnswerService } from './services/submitAnswer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomescreenComponent } from './homescreen/homescreen.component';
-
+import {NamescreenComponent} from './namescreen/namescreen.component';
+import {ScoreboardComponent} from './scoreboard/scoreboard.component';
+// import { formatDate } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { HomescreenComponent } from './homescreen/homescreen.component';
     QuestionComponent,
     EndpageComponent,
     HomescreenComponent,
+    NamescreenComponent,
+    ScoreboardComponent,
   ],
   imports: [
     BrowserModule,

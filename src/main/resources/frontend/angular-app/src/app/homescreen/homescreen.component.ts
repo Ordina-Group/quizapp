@@ -19,9 +19,9 @@ export class HomescreenComponent implements OnInit {
   }
 
   onOpenSurveySubmit() {
-    console.log("chosen survey: " + this.chosenSurvey)
+    console.log("chosen survey: " + this.chosenSurvey);
     this.surveyService.getInitSurveys(this.chosenSurvey);
-    this.router.navigate(['/question']);
+    this.router.navigate(['/namescreen']);
   }
 
 

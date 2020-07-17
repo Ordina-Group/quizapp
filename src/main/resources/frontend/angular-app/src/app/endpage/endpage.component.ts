@@ -11,13 +11,12 @@ export class EndpageComponent implements OnInit {
   correctAnswer: number;
   incorrectAnswer: number;
 
-  constructor(private surveyScoreService : SurveyScoreService) {
+  constructor(private surveyScoreService: SurveyScoreService) {
   }
 
   ngOnInit(): void {
     this.correctAnswer = this.surveyScoreService.getCorrectAnswers();
     this.incorrectAnswer = this.surveyScoreService.getIncorrectAnswers();
-    this.surveyScoreService.resetScores();
   }
 
 }

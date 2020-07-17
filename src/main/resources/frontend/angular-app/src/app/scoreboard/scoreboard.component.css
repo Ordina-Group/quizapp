@@ -1,0 +1,24 @@
+h2{
+  margin-top: 2rem;
+  color:white;
+  text-align:center;
+}
+
+.jumbotron-fluid{
+  background-color:black;
+  height:200px;
+}
+
+thead{
+  color:white;
+}
+
+
+h3{
+  color:white;
+  text-underline:white;
+}
+
+tbody{
+  color:white;
+}
