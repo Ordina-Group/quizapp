@@ -27,9 +27,9 @@ public class QuizService {
         return quizRepository.saveAndFlush(quiz);
     }
 
-    public String ResponseToSubmission(Quiz newQuiz) {
+    public Long ResponseToSubmission(Quiz newQuiz) {
         this.saveQuiz(newQuiz);
-        return "test";
+        return newQuiz.getId();
     }
 
 }

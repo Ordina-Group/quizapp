@@ -33,9 +33,9 @@ public class QuizRESTController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public String create(@RequestBody final Quiz newquiz) {
-        String s = quizService.ResponseToSubmission(newquiz);
-        return "test";
+    public Long create(@RequestBody final Quiz newquiz) {
+        Long s = quizService.ResponseToSubmission(newquiz);
+        return s;
     }
 
 

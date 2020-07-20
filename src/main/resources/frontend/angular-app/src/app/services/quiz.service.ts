@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {BehaviorSubject, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 
 import {UrlService} from './url.service';
 import {Quiz} from '../model/quiz';
@@ -9,6 +9,7 @@ import {Quiz} from '../model/quiz';
   providedIn: 'root'
 })
 export class QuizService {
+
 
   private surveyUrl = this.urlService.url + "/";
   quizSubject: BehaviorSubject<Quiz>;
@@ -25,7 +26,7 @@ export class QuizService {
   }
 
   postnewQuiz(newQuiz: Quiz) {
-    return this.http.post<String>(this.surveyUrl, newQuiz);
+    return this.http.post<number>(this.surveyUrl, { newQuiz, responseType: 'number'});
   }
 
   private handleError(err: HttpErrorResponse) {

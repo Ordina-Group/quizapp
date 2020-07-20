@@ -15,7 +15,7 @@ import { QuizService } from '../services/quiz.service';
 })
 export class CreateQuizComponent implements OnInit {
 
-  quiz: String;
+  quiz: number;
   quizForm: FormGroup;
   count: number;
 
