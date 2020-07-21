@@ -26,7 +26,7 @@ export class QuizService {
   }
 
   postnewQuiz(newQuiz: Quiz) {
-    return this.http.post<number>(this.surveyUrl, { newQuiz, responseType: 'number'});
+    return this.http.post<number>(this.surveyUrl, newQuiz,);
   }
 
   private handleError(err: HttpErrorResponse) {
