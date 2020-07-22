@@ -27,10 +27,10 @@ public class QuizService {
         return quizRepository.saveAndFlush(quiz);
     }
 
-    public Long ResponseToSubmission(Quiz newquiz) {
+    public Quiz ResponseToSubmission(Quiz newquiz) {
         System.out.println(newquiz);
         this.saveQuiz(newquiz);
-        return newquiz.getId();
+        return newquiz;
     }
 
 }

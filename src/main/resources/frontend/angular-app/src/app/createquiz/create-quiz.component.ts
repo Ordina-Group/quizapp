@@ -15,19 +15,21 @@ import { QuizService } from '../services/quiz.service';
 })
 export class CreateQuizComponent implements OnInit {
 
-  quiz: number;
+  quiz: Quiz;
   quizForm: FormGroup;
   count: number;
-
-  newQuiz: Quiz;
   currentQuestion: number;
+  newQuiz: Quiz;
+  currentQuestionsArray: Array<number>;
   lockQuizName: boolean;
 
   constructor(private formBuilder: FormBuilder, private quizService: QuizService) {
-    this.count = 0;
     this.currentQuestion = 0;
+
+    this.currentQuestionsArray = [];
     this.lockQuizName = false;
     this.newQuiz = {questions: []} as Quiz;
+
 
     this.quizForm = this.formBuilder.group({
       quizName: [''],
@@ -56,6 +58,8 @@ export class CreateQuizComponent implements OnInit {
     return this.quizForm.get('quizName').value
   }
 
+
+
   private newAnswerOption(): FormGroup {
     return this.formBuilder.group({
       answer: '',
@@ -69,12 +73,14 @@ export class CreateQuizComponent implements OnInit {
     this.lockQuizName = true;
     this.quizForm.get('question').reset();
     this.quizForm.get('answerOptions').reset();
+
   }
 
   // hier wordt answerOptions to question gesaved en alle questions worden in object newQuiz bewaard
   saveQuestion() {
     let quizname = this.quizName;
     let questionDescription = this.quizForm.get('question').value;
+    let currentQuestion = this.currentQuestion;
 
     let question = {answerOptions: []} as Question;
     this.answerOptions.controls.forEach(control => {
@@ -82,10 +88,24 @@ export class CreateQuizComponent implements OnInit {
       question.answerOptions.push(answerOption)
     })
     question.questionDescription = questionDescription;
+    question.number= currentQuestion;
 
     this.newQuiz.quizDescription = quizname;
     this.newQuiz.questions.push(question);
+    this.checkQuestion();
   }
+
+  checkQuestion(){
+    this.currentQuestion++;
+    this.currentQuestionsArray.push(this.currentQuestion);
+
+  }
+
+  onClick(){
+
+  }
+
+
 
   private toAnswerOption(ac: AbstractControl): AnswerOption {
     let answerOption = {} as AnswerOption;

@@ -2,7 +2,9 @@ package com.example.quiz.ControlLayer;
 
 import com.example.quiz.ServiceLayer.QuizService;
 import com.example.quiz.model.Quiz;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 public class QuizRESTController {
 
     private QuizService quizService;
+
 
     public QuizRESTController(QuizService quizService) {
         this.quizService = quizService;
@@ -33,10 +36,10 @@ public class QuizRESTController {
 
     @PostMapping()
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Long createQuiz(@RequestBody Quiz newQuiz) {
+    public ResponseEntity<Quiz> createQuiz(@RequestBody Quiz newQuiz) {
         System.out.println(newQuiz);
-        Long s = quizService.ResponseToSubmission(newQuiz);
-        return s;
+        Quiz q = quizService.ResponseToSubmission(newQuiz);
+        return new ResponseEntity<>(q, new HttpHeaders(), HttpStatus.OK);
 
     }
 

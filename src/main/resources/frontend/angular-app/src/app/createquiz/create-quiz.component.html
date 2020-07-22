@@ -24,6 +24,14 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-sm-1" *ngFor="let questionNumber of currentQuestionsArray; let i = index">
+          <button class="btn btn-dark">{{ questionNumber }}</button>
+        </div>
+        <div class="col-sm-11">
+        </div>
+      </div>
+
       <div>
         <label>Voer een nieuwe Vraag in:</label>
 
