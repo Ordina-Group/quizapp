@@ -20,8 +20,13 @@ export class HomescreenComponent implements OnInit {
 
   onOpenQuizSubmit() {
     console.log("chosen quiz: " + this.chosenQuiz)
+    this.quizService.quizSubject.subscribe(newquiz => {
+      if (newquiz!=null){
+      this.router.navigate(['/question'])
+      }
+      console.log(newquiz)
+    })
     this.quizService.getInitQuiz(this.chosenQuiz);
-    this.router.navigate(['/question']);
   }
 
 

@@ -55,10 +55,11 @@ export class QuestionComponent implements OnInit {
   // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
     this.currentQuestion = this.currentQuiz.questions.filter(question => {
-      return question.number === this.currentQuestionNumber + 1;
+      return question.id === this.currentQuestionNumber + 1;
     })[0];
 
     if (this.currentQuestion === undefined) {
+      console.log('currentquestion is: ' + this.currentQuestion)
       this.router.navigate(['/endpage']);
       return;
     }

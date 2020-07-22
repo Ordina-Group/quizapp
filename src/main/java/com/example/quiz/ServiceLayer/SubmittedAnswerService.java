@@ -19,11 +19,9 @@ public class SubmittedAnswerService {
     private SubmittedAnswerRepository submittedAnswerRepository;
 
     public AnswerIsCorrect ResponseToSubmission(SubmittedAnswer submittedAnswer) {
-        System.out.println("submittedAnswer : " + submittedAnswer.getChosenAnswerId());
 
         Optional<AnswerIsCorrect> optAnswerIsCorrect = answerIsCorrectRepository.findById(submittedAnswer.getChosenAnswerId());
-        System.out.println("optAnswerIsCorrect is present : " + optAnswerIsCorrect.isPresent());
-        System.out.println("optAnswerIsCorrect get : " + optAnswerIsCorrect.get().getIsCorrect());
+
         if (optAnswerIsCorrect.isPresent()) {
             AnswerIsCorrect answerIsCorrect = optAnswerIsCorrect.get();
             submittedAnswer.setAnsweredCorrect(answerIsCorrect.getIsCorrect());
