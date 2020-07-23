@@ -23,7 +23,8 @@ public class Quiz implements Serializable {
     @JoinColumn(name = "quiz_id")
     private Set<Question> questions;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "quiz_id")
     private Set<Score> scores;
 
     public Quiz() {

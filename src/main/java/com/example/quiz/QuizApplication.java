@@ -18,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class QuizApplication {
@@ -43,38 +45,33 @@ public class QuizApplication {
 
             Quiz quiz = new Quiz();
             quiz.setQuizDescription("Survey DevoxxxKids dag");
-            quizRepository.save(quiz);
 
-            Score score1 = new Score("Player 1", 1, new Date(120,6,17,12,34,56),"17/07/2020 12:34:56",quiz);
-            scoreRepository.save(score1);
-
-            Score score2 = new Score("Player 2", 2, new Date(120,6,18,12,34,56),"18/07/2020 12:34:56",quiz);
-            scoreRepository.save(score2);
-
-            Score score3 = new Score("Player 3", 3, new Date(120,6,19,12,34,56),"19/07/2020 12:34:56",quiz);
-            scoreRepository.save(score3);
-
-            Question question = new Question("Slag bij Nieuwpoort?", 1, quiz);
-            questionRepository.save(question);
-
-            Question question2 = new Question("Slag bij Hastings?", 2, quiz);
-            questionRepository.save(question2);
-
-            Question question3 = new Question("Slag bij Waterloo?", 3, quiz);
-            questionRepository.save(question3);
+            Question question = new Question("Slag bij Nieuwpoort?", 1);
+            Question question2 = new Question("Slag bij Hastings?", 2);
+            Question question3 = new Question("Slag bij Waterloo?", 3);
 
             //save answeroptions
-            answerOptionRepository.save(new AnswerOption( "1600", question));
-            answerOptionRepository.save(new AnswerOption( "1601", question));
-            answerOptionRepository.save(new AnswerOption( "1602", question));
+            Set<AnswerOption> setAnswerOptions = new HashSet<AnswerOption>();
+            setAnswerOptions.add(new AnswerOption( "1600", true));
+            setAnswerOptions.add(new AnswerOption( "1601", false));
+            setAnswerOptions.add(new AnswerOption( "1602", false));
+            Set<AnswerOption> setAnswerOptions2 = new HashSet<AnswerOption>();
+            setAnswerOptions2.add(new AnswerOption( "1065", false));
+            setAnswerOptions2.add(new AnswerOption( "1066", true));
+            setAnswerOptions2.add(new AnswerOption( "1067", false));
+            Set<AnswerOption> setAnswerOptions3 = new HashSet<AnswerOption>();
+            setAnswerOptions3.add(new AnswerOption( "1813", false));
+            setAnswerOptions3.add(new AnswerOption( "1814", false));
+            setAnswerOptions3.add(new AnswerOption( "1815", true));
+            question.setAnswerOptions(setAnswerOptions);
+            question2.setAnswerOptions(setAnswerOptions2);
+            question3.setAnswerOptions(setAnswerOptions3);
 
-            answerOptionRepository.save(new AnswerOption( "1065", question2));
-            answerOptionRepository.save(new AnswerOption( "1066", question2));
-            answerOptionRepository.save(new AnswerOption("1067", question2));
-
-            answerOptionRepository.save(new AnswerOption("1813", question3));
-            answerOptionRepository.save(new AnswerOption("1814", question3));
-            answerOptionRepository.save(new AnswerOption("1815", question3));
+            Set<Question> setQuestions = new HashSet<Question>();
+            setQuestions.add(question);
+            setQuestions.add(question2);
+            setQuestions.add(question3);
+            quiz.setQuestions(setQuestions);
 
             AnswerIsCorrect answerIsCorrect1 = new AnswerIsCorrect(1L,true,"Juist, het was in 1600");
             answerIsCorrectRepository.save(answerIsCorrect1);
@@ -97,6 +94,15 @@ public class QuizApplication {
             AnswerIsCorrect answerIsCorrect9 = new AnswerIsCorrect(9L,true, "Juist, het was in 1815");
             answerIsCorrectRepository.save(answerIsCorrect9);
 
+            Quiz returnedQuiz = quizRepository.save(quiz);
+            Set<Score> setScores = new HashSet<Score>();
+            Score score1 = new Score("Player 1", 1, new Date(120,6,17,12,34,56),"17/07/2020 12:34:56",returnedQuiz.getId());
+            setScores.add(score1);
+            Score score2 = new Score("Player 2", 2, new Date(120,6,18,12,34,56),"18/07/2020 12:34:56",returnedQuiz.getId());
+            setScores.add(score2);
+            Score score3 = new Score("Player 3", 3, new Date(120,6,19,12,34,56),"19/07/2020 12:34:56",returnedQuiz.getId());
+            setScores.add(score3);
+            quiz.setScores(setScores);
         };
     }
 

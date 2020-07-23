@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,7 +23,7 @@ public class ScoreService {
         List<Score> listScores2 = new ArrayList<>();
         listScores = scoreRepository.findAll();
         for (Score currentScore : listScores){
-            if(currentScore.getQuizId() == id){
+            if(currentScore.getQuizid() == id){
                 listScores2.add(currentScore);
             }
         }
@@ -34,9 +35,7 @@ public class ScoreService {
     }*/
 
     public Score saveScore(Score score, long quizid) {
-        return scoreRepository.saveAndFlush(score);
+        score.setQuizid(quizid);
+        return scoreRepository.save(score);
     }
-
 }
-
-

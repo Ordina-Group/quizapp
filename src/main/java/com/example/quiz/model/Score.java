@@ -23,11 +23,12 @@ public class Score {
     private String finishTimestampString;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "quizid", nullable = false)
-    @JsonIgnore
-    private Quiz quiz;
-//    private Long quizid;
+
+    /*    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "quizid", nullable = false)
+        @JsonIgnore
+        private Quiz quiz;*/
+    private Long quizid;
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
@@ -44,22 +45,22 @@ public class Score {
     public String getFinishTimestampString() {return finishTimestampString;}
     public void setFinishTimestampString(String finishTimestampString) {this.finishTimestampString = finishTimestampString;}
 
+/*
     public Long getQuizId() {return quiz.getId();}
     public void setQuizId(Long quizid) {quiz.setId(quizid);}
-
-/*
-    public Long getQuizId() {return quizid;}
-    public void setQuizId(Long quizid) {this.quizid = quizid;}
 */
+
+    public Long getQuizid() {return quizid;}
+    public void setQuizid(Long quizid) {this.quizid = quizid;}
 
     public Score() {}
 
-    public Score(String userName, int answersCorrect, Date finishTimestamp, String finishTimestampString, Quiz quiz) {
+    public Score(String userName, int answersCorrect, Date finishTimestamp, String finishTimestampString, Long quizid) {
         this.userName = userName;
         this.answersCorrect = answersCorrect;
         this.finishTimestamp = finishTimestamp;
         this.finishTimestampString = finishTimestampString;
-        this.quiz = quiz;
-//        this.quizid = quiz.getId();
+//        this.quiz = quiz;
+        this.quizid = quizid;
     }
 }
