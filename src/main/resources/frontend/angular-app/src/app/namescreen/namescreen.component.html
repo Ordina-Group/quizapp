@@ -1,0 +1,31 @@
+<!--<div class="jumbotron-fluid" Style="background-image: url('./assets/images/code.jpg');">
+  <div class="container mx-auto">
+    <div class="row">
+      <h2 class='mx-auto' style="margin-top: 4rem;" >Voer hier je naam in:</h2>
+    </div>
+    <div class="row">
+      <form #namescreenForm="ngForm" (ngSubmit)="onNaamSubmit()">
+        <div class="form-name justify-content-center">
+          <input class="form-control mr-1" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}">
+          <button type="submit"  class="btn btn-dark">Naar de eerste vraag</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>-->
+
+<div class="jumbotron jumbotron-fluid" Style="background-color:black">
+  <div class="container mx-auto" style="margin-top: 4rem">
+    <h2 class='mx-auto' style="margin-top: 4rem;" >Voer hier je naam in:</h2>
+<!--    <div class="row">
+    </div>-->
+    <form #homescreenForm="ngForm" (ngSubmit)="onNaamSubmit()">
+      <div class="form-inline justify-content-center">
+        <input class="form-control mr-1" size="15" [(ngModel)]="userName" [ngModelOptions]="{standalone: true}">
+        <button type="submit"  class="btn btn-dark">Naar de eerste vraag</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+

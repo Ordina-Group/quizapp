@@ -12,7 +12,9 @@ import { SubmitAnswerService } from './services/submitAnswer.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateQuizComponent } from './createquiz/create-quiz.component';
 import { HomescreenComponent } from './homescreen/homescreen.component';
-
+import {NamescreenComponent} from './namescreen/namescreen.component';
+import {ScoreboardComponent} from './scoreboard/scoreboard.component';
+// import { formatDate } from '@angular/common';
 
 
 
@@ -25,6 +27,8 @@ import { HomescreenComponent } from './homescreen/homescreen.component';
     EndpageComponent,
     CreateQuizComponent,
     HomescreenComponent,
+    NamescreenComponent,
+    ScoreboardComponent,
   ],
 
 

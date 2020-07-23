@@ -8,7 +8,7 @@ import { Question } from '../model/question';
 import { SubmitAnswerService } from '../services/submitAnswer.service';
 import { Quiz } from '../model/quiz';
 import { QuizScoreService } from '../services/quiz-score.service';
-
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-question',
@@ -27,6 +27,8 @@ export class QuestionComponent implements OnInit {
 
   currentQuestionNumber = 0;
   errorMessage = '';
+  private date: Date;
+  private dateString: string;
 
   constructor(private quizService: QuizService,
               private submittedAnswerService: SubmitAnswerService,
@@ -60,6 +62,10 @@ export class QuestionComponent implements OnInit {
 
     if (this.currentQuestion === undefined) {
       console.log('currentquestion is: ' + this.currentQuestion)
+      this.date = new Date();
+      this.dateString = formatDate(this.date, 'dd/MM/yyyy HH:mm:ss', 'en');
+      this.quizScoreService.setFinishTimestamp(this.date);
+      this.quizScoreService.setFinishTimestampString(this.dateString);
       this.router.navigate(['/endpage']);
       return;
     }

@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 
-import {UrlService} from './url.service';
-import {Quiz} from '../model/quiz';
+import { UrlService } from './url.service';
+import { Quiz } from '../model/quiz';
+import { ScoreEntry } from '../model/scoreEntry';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class QuizService {
 
   private surveyUrl = this.urlService.url + "/";
   quizSubject: BehaviorSubject<Quiz>;
+  scoreEntries: ScoreEntry[] = [];
 
 
   constructor(private http: HttpClient, private urlService: UrlService) {
@@ -27,6 +29,22 @@ export class QuizService {
 
   postnewQuiz(newQuiz: Quiz) {
     return this.http.post<number>(this.surveyUrl, newQuiz);
+  }
+
+  public getHighscores() {
+    return this.scoreEntries;
+  }
+
+  public addHighScore(scoreEntry: ScoreEntry) {
+    this.scoreEntries.push(scoreEntry);
+    // after adding a new high score, the table is immediately again sorted.
+    this.scoreEntries.sort((a, b) => {
+      if (a.answersCorrect < b.answersCorrect) {return 1; }
+      if (a.answersCorrect > b.answersCorrect) {return -1; }
+      if (a.finishTimestamp < b.finishTimestamp) {return 1; }
+      if (a.finishTimestamp > b.finishTimestamp) {return -1; }
+      return 0;
+    });
   }
 
   private handleError(err: HttpErrorResponse) {
@@ -44,7 +62,6 @@ export class QuizService {
     console.error(errorMessage);
     return throwError(errorMessage);
   }
-
 
 }
 

@@ -22,7 +22,7 @@ export class HomescreenComponent implements OnInit {
     console.log("chosen quiz: " + this.chosenQuiz)
     this.quizService.quizSubject.subscribe(newquiz => {
       if (newquiz!=null){
-      this.router.navigate(['/question'])
+      this.router.navigate(['/namescreen'])
       }
       console.log(newquiz)
     })
