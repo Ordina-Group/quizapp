@@ -2,7 +2,6 @@ package com.example.quiz.ServiceLayer;
 
 import com.example.quiz.Repository.QuizRepository;
 import com.example.quiz.model.Quiz;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,18 +9,30 @@ import java.util.List;
 @Service
 public class QuizService {
 
-    @Autowired
-    private QuizRepository quizRepository;
+    private final QuizRepository quizRepository;
 
-    public List<Quiz> findAllSurveys() {
+    public QuizService(QuizRepository quizRepository) {
+        this.quizRepository = quizRepository;
+    }
+
+    public List<Quiz> findAllQuizs() {
         return quizRepository.findAll();
     }
 
-    public Quiz findSurveyById(Long id) {
+    public Quiz findQuizById(Long id) {
         return quizRepository.getOne(id);
     }
 
-    public Quiz saveSurvey(Quiz quiz) {
+    public Quiz saveQuiz(Quiz quiz) {
         return quizRepository.saveAndFlush(quiz);
     }
+
+    public Long ResponseToSubmission(Quiz newquiz) {
+        System.out.println(newquiz);
+        this.saveQuiz(newquiz);
+        return newquiz.getId();
+    }
+
 }
+
+

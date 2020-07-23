@@ -17,6 +17,7 @@
     </div>
 
     <div class="row col-sm-12">
+      <div class="col-sm-6">
       <!-- form-->
       <form #questionForm="ngForm" (ngSubmit)="onFormSubmit()">
 
@@ -30,10 +31,11 @@
         </button>
 
       </form>
+      </div>
       <div *ngIf="answerIsCorrect" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }">
         {{answerIsCorrect.answerExplanation}}
       </div>
-      
+
     </div>
   </div>
 </div>

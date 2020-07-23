@@ -33,7 +33,7 @@ public class ScoreService {
         return questionRepository.getOne(id);
     }*/
 
-    public Score saveScore(Score score) {
+    public Score saveScore(Score score, long quizid) {
         return scoreRepository.saveAndFlush(score);
     }
 

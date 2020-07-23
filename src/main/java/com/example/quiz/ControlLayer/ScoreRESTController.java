@@ -27,7 +27,7 @@ public class ScoreRESTController {
 
     @PostMapping("/{quizid}")
     public Score submitScore(@RequestBody final Score score, @PathVariable Long quizid) {
-        return scoreService.saveScore(score);
+        return scoreService.saveScore(score,quizid);
     }
 
 }

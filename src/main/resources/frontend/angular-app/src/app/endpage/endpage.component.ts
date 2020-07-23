@@ -15,16 +15,6 @@ export class EndpageComponent implements OnInit {
   scoreEntry: ScoreEntry;
 
   constructor(private quizService: QuizService, private quizScoreService: QuizScoreService) {
-/*    this.scoreEntry = {
-      'userName': quizScoreService.getUserName(),
-      'answersCorrect': quizScoreService.getCorrectAnswers(),
-      'finishTimestamp': quizScoreService.getFinishTimestamp(),
-      'finishTimestampString': quizScoreService.getFinishTimestampString(),
-    };
-    console.log('about to post: ' + this.scoreEntry);*/
-//    quizService.postScore(this.scoreEntry);
-
-
   }
 
   ngOnInit(): void {
