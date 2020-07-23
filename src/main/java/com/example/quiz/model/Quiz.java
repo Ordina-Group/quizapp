@@ -23,9 +23,7 @@ public class Quiz implements Serializable {
     @JoinColumn(name = "quiz_id")
     private Set<Question> questions;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "quiz_id")
-    private Set<Score> scores;
+
 
     public Quiz() {
     }
@@ -89,11 +87,5 @@ public class Quiz implements Serializable {
                 '}';
     }
 
-    public Set<Score> getScores() {
-        return scores;
-    }
 
-    public void setScores(Set<Score> scores) {
-        this.scores = scores;
-    }
 }

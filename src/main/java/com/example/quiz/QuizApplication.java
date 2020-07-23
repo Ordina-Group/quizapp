@@ -95,14 +95,12 @@ public class QuizApplication {
             answerIsCorrectRepository.save(answerIsCorrect9);
 
             Quiz returnedQuiz = quizRepository.save(quiz);
-            Set<Score> setScores = new HashSet<Score>();
             Score score1 = new Score("Player 1", 1, new Date(120,6,17,12,34,56),"17/07/2020 12:34:56",returnedQuiz.getId());
-            setScores.add(score1);
             Score score2 = new Score("Player 2", 2, new Date(120,6,18,12,34,56),"18/07/2020 12:34:56",returnedQuiz.getId());
-            setScores.add(score2);
             Score score3 = new Score("Player 3", 3, new Date(120,6,19,12,34,56),"19/07/2020 12:34:56",returnedQuiz.getId());
-            setScores.add(score3);
-            quiz.setScores(setScores);
+            scoreRepository.save(score1);
+            scoreRepository.save(score2);
+            scoreRepository.save(score3);
         };
     }
 
