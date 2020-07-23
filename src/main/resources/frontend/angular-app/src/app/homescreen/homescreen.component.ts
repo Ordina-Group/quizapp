@@ -10,18 +10,23 @@ import {Router} from "@angular/router";
 })
 export class HomescreenComponent implements OnInit {
 
-  chosenSurvey: number;
+  chosenQuiz: number;
 
-  constructor(private surveyService: QuizService, private router: Router) {
+  constructor(private quizService: QuizService, private router: Router) {
   }
 
   ngOnInit(): void {
   }
 
-  onOpenSurveySubmit() {
-    console.log("chosen survey: " + this.chosenSurvey);
-    this.surveyService.getInitSurveys(this.chosenSurvey);
-    this.router.navigate(['/namescreen']);
+  onOpenQuizSubmit() {
+    console.log("chosen quiz: " + this.chosenQuiz)
+    this.quizService.quizSubject.subscribe(newquiz => {
+      if (newquiz!=null){
+      this.router.navigate(['/namescreen'])
+      }
+      console.log(newquiz)
+    })
+    this.quizService.getInitQuiz(this.chosenQuiz);
   }
 
 

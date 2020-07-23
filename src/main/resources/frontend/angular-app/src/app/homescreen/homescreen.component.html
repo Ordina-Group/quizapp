@@ -5,11 +5,11 @@
     </div>
   </div>
     <div class="container mx-auto" style="margin-top: 4rem">
-      <h2>Voer een Surveynummer in:</h2>
-      <form #homescreenForm="ngForm" (ngSubmit)="onOpenSurveySubmit()">
+      <h2>Voer een Quiznummer in:</h2>
+      <form #homescreenForm="ngForm" (ngSubmit)="onOpenQuizSubmit()">
         <div class="form-inline justify-content-center">
-          <input class="form-control mr-1" [(ngModel)]="chosenSurvey" [ngModelOptions]="{standalone: true}">
-          <button type="submit"  class="btn btn-dark">Open Survey</button>
+          <input class="form-control mr-1" [(ngModel)]="chosenQuiz" [ngModelOptions]="{standalone: true}">
+          <button type="submit"  class="btn btn-dark">Open Quiz</button>
         </div>
       </form>
     </div>
@@ -18,7 +18,7 @@
   <div class="container mx-auto" style="margin-top: 4rem">
     <h2>Of:</h2>
     <div class="form-inline justify-content-center">
-      <button [routerLink]="['/createsurvey']" class="btn btn-dark">Maak een nieuwe Survey</button>
+      <button [routerLink]="['/createquiz']" class="btn btn-dark">Maak een nieuwe Quiz</button>
     </div>
   </div>
 

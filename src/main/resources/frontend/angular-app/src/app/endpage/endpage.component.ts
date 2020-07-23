@@ -11,12 +11,12 @@ export class EndpageComponent implements OnInit {
   correctAnswer: number;
   incorrectAnswer: number;
 
-  constructor(private surveyScoreService : QuizScoreService) {
+  constructor(private quizScoreService : QuizScoreService) {
   }
 
   ngOnInit(): void {
-    this.correctAnswer = this.surveyScoreService.getCorrectAnswers();
-    this.incorrectAnswer = this.surveyScoreService.getIncorrectAnswers();
+    this.correctAnswer = this.quizScoreService.getCorrectAnswers();
+    this.incorrectAnswer = this.quizScoreService.getIncorrectAnswers();
   }
 
 }

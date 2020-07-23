@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 
 import { UrlService } from './url.service';
 import { Quiz } from '../model/quiz';
@@ -12,19 +11,24 @@ import { ScoreEntry } from '../model/scoreEntry';
 })
 export class QuizService {
 
-  private surveyUrl = this.urlService.url + '/surveys/';
-  survey: BehaviorSubject<Quiz>;
+
+  private surveyUrl = this.urlService.url + "/";
+  quizSubject: BehaviorSubject<Quiz>;
   scoreEntries: ScoreEntry[] = [];
 
-  constructor(  private http: HttpClient,
-                private urlService: UrlService) {
-    this.survey = new BehaviorSubject(null);
+
+  constructor(private http: HttpClient, private urlService: UrlService) {
+    this.quizSubject = new BehaviorSubject(null);
   }
 
-  getInitSurveys(id: number) {
-    this.http.get<Quiz>(this.surveyUrl + id).subscribe(survey => {
-      this.survey.next(survey)
+  getInitQuiz(id: number) {
+    this.http.get<Quiz>(this.surveyUrl + id).subscribe(quiz => {
+      this.quizSubject.next(quiz)
     });
+  }
+
+  postnewQuiz(newQuiz: Quiz) {
+    return this.http.post<number>(this.surveyUrl, newQuiz);
   }
 
   public getHighscores() {

@@ -37,7 +37,7 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.quizService.survey.subscribe(quiz => {
+    this.quizService.quizSubject.subscribe(quiz => {
       this.currentQuiz = quiz;
     })
   }
@@ -57,10 +57,11 @@ export class QuestionComponent implements OnInit {
   // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
   setAnswersToRadiobuttons() {
     this.currentQuestion = this.currentQuiz.questions.filter(question => {
-      return question.number === this.currentQuestionNumber + 1;
+      return question.id === this.currentQuestionNumber + 1;
     })[0];
 
     if (this.currentQuestion === undefined) {
+      console.log('currentquestion is: ' + this.currentQuestion)
       this.date = new Date();
       this.dateString = formatDate(this.date, 'dd/MM/yyyy HH:mm:ss', 'en');
       this.quizScoreService.setFinishTimestamp(this.date);
@@ -74,7 +75,7 @@ export class QuestionComponent implements OnInit {
 
 
   onFormSubmit() {
-    this.submittedAnswer = {surveyid: this.currentQuiz.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
+    this.submittedAnswer = {quizid: this.currentQuiz.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
     this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
       this.answerIsCorrect = answerIsCorrect;
       this.saveAnswers();

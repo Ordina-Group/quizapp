@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "answerOptions")
@@ -16,19 +17,19 @@ public class AnswerOption {
     private Long id;
     private String value;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "questionid", nullable = false)
     @JsonIgnore
-    private Question question;
+    private boolean isCorrect;
 
     protected AnswerOption() {
-
     }
 
-    public AnswerOption(String value, Question question) {
+    public AnswerOption(String value, boolean isCorrect) {
         this.value = value;
-        this.question = question;
+        this.isCorrect = isCorrect;
+    }
 
+    public AnswerOption(AnswerOption answerOption){
+        this(answerOption.getValue(), answerOption.isCorrect());
     }
 
     public String getValue() {
@@ -39,13 +40,6 @@ public class AnswerOption {
         this.value = value;
     }
 
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
 
     public Long getId() {
         return id;
@@ -55,24 +49,38 @@ public class AnswerOption {
         this.id = id;
     }
 
-
-    /*public String getanswerOptions() {
-
-        return answerOptions;
+    public boolean isCorrect() {
+        return isCorrect;
     }
 
-    public Boolean getIsCorrect() {
+    public void setCorrect(boolean correct) {
+        isCorrect = correct;
+    }
 
-        return isCorrect;
-    }*/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AnswerOption that = (AnswerOption) o;
+        return isCorrect == that.isCorrect &&
+                id.equals(that.id) &&
+                value.equals(that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, value, isCorrect);
+    }
 
 
-//    public String AnsweroptionsToString() {
-//        return String.format(
-//                "AnswerOptions[number=%d, answerOptions='%s', isCorrect='%s' ]",
-//                number, value, isCorrect);
-//    }
-
+    @Override
+    public String toString() {
+        return "AnswerOption{" +
+                "id=" + id +
+                ", value='" + value + '\'' +
+                ", isCorrect=" + isCorrect +
+                '}';
+    }
 }
 
 
