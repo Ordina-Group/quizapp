@@ -21,6 +21,9 @@ public class Quiz {
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     private Set<Question> questions;
 
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+    private Set<Score> scores;
+
     public Quiz() {
 
     }
@@ -47,5 +50,13 @@ public class Quiz {
 
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
+    }
+
+    public Set<Score> getScores() {
+        return scores;
+    }
+
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
     }
 }

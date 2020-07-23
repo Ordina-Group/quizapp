@@ -828,13 +828,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _services_quiz_score_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _services_quiz_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! ../services/quiz.service */
+    "./app/services/quiz.service.ts");
+    /* harmony import */
+
+
+    var _services_quiz_score_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ../services/quiz-score.service */
     "./app/services/quiz-score.service.ts");
     /* harmony import */
 
 
-    var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/router */
     "../node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
 
@@ -843,17 +849,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     var EndpageComponent = /*#__PURE__*/function () {
-      function EndpageComponent(surveyScoreService) {
+      function EndpageComponent(quizService, quizScoreService) {
         _classCallCheck(this, EndpageComponent);
 
-        this.surveyScoreService = surveyScoreService;
+        this.quizService = quizService;
+        this.quizScoreService = quizScoreService;
+        this.scoreEntry = {
+          'userName': quizScoreService.getUserName(),
+          'answersCorrect': quizScoreService.getCorrectAnswers(),
+          'finishTimestamp': quizScoreService.getFinishTimestamp(),
+          'finishTimestampString': quizScoreService.getFinishTimestampString()
+        };
+        console.log('about to post: ' + this.scoreEntry); //    quizService.postScore(this.scoreEntry);
       }
 
       _createClass(EndpageComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.correctAnswer = this.surveyScoreService.getCorrectAnswers();
-          this.incorrectAnswer = this.surveyScoreService.getIncorrectAnswers();
+          this.correctAnswer = this.quizScoreService.getCorrectAnswers();
+          this.incorrectAnswer = this.quizScoreService.getIncorrectAnswers();
         }
       }]);
 
@@ -861,7 +875,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     EndpageComponent.ɵfac = function EndpageComponent_Factory(t) {
-      return new (t || EndpageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_score_service__WEBPACK_IMPORTED_MODULE_1__["QuizScoreService"]));
+      return new (t || EndpageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_score_service__WEBPACK_IMPORTED_MODULE_2__["QuizScoreService"]));
     };
 
     EndpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -963,7 +977,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0));
         }
       },
-      directives: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLink"]],
+      directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"]],
       styles: ["h2[_ngcontent-%COMP%]{\r\n  margin-top: 2rem;\r\n  color:white;\r\n}\r\n\r\n.jumbotron-fluid[_ngcontent-%COMP%]{\r\n  background-color:black;\r\n  height:200px;\r\n}\r\n\r\nh3[_ngcontent-%COMP%]{\r\n  color:white;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW5kcGFnZS9lbmRwYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQkFBZ0I7RUFDaEIsV0FBVztBQUNiOztBQUVBO0VBQ0Usc0JBQXNCO0VBQ3RCLFlBQVk7QUFDZDs7QUFHQTtFQUNFLFdBQVc7QUFDYiIsImZpbGUiOiJzcmMvYXBwL2VuZHBhZ2UvZW5kcGFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaDJ7XHJcbiAgbWFyZ2luLXRvcDogMnJlbTtcclxuICBjb2xvcjp3aGl0ZTtcclxufVxyXG5cclxuLmp1bWJvdHJvbi1mbHVpZHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOmJsYWNrO1xyXG4gIGhlaWdodDoyMDBweDtcclxufVxyXG5cclxuXHJcbmgze1xyXG4gIGNvbG9yOndoaXRlO1xyXG59XHJcbiJdfQ== */"]
     });
     /*@__PURE__*/
@@ -978,7 +992,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       }], function () {
         return [{
-          type: _services_quiz_score_service__WEBPACK_IMPORTED_MODULE_1__["QuizScoreService"]
+          type: _services_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"]
+        }, {
+          type: _services_quiz_score_service__WEBPACK_IMPORTED_MODULE_2__["QuizScoreService"]
         }];
       }, null);
     })();
@@ -1951,18 +1967,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var ScoreboardComponent = /*#__PURE__*/function () {
       function ScoreboardComponent(quizService, quizScoreService) {
+        var _this5 = this;
+
         _classCallCheck(this, ScoreboardComponent);
 
         this.quizService = quizService;
         this.quizScoreService = quizScoreService;
-        this.scoreEntry = {
-          'userName': quizScoreService.getUserName(),
-          'answersCorrect': quizScoreService.getCorrectAnswers(),
-          'finishTimestamp': quizScoreService.getFinishTimestamp(),
-          'finishTimestampString': quizScoreService.getFinishTimestampString()
-        };
-        quizService.addHighScore(this.scoreEntry);
-        this.scoreEntries = quizService.getHighscores(); //    this.surveyScoreService.resetScores();
+        /*    this.scoreEntry =     {
+              'userName': quizScoreService.getUserName(),
+              'answersCorrect': quizScoreService.getCorrectAnswers(),
+              'finishTimestamp': quizScoreService.getFinishTimestamp(),
+              'finishTimestampString': quizScoreService.getFinishTimestampString(),
+            };*/
+        //    quizService.addHighScore(this.scoreEntry);
+        //    this.scoreEntries = getHighScores();
+
+        this.quizService.getScores().subscribe(function (data) {
+          return _this5.scoreEntry = {
+            userName: data.userName,
+            answersCorrect: data.answersCorrect,
+            finishTimestamp: data.finishTimestamp,
+            finishTimestampString: data.finishTimestampString
+          };
+        });
+        console.log(this.scoreEntry);
+        console.log(this.scoreEntry.userName);
+        console.log(this.scoreEntry.answersCorrect);
+        console.log(this.scoreEntry.finishTimestamp);
+        console.log(this.scoreEntry.finishTimestampString); //    this.surveyScoreService.resetScores();
       }
 
       _createClass(ScoreboardComponent, [{
@@ -2238,21 +2270,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! rxjs */
-    "../node_modules/rxjs/_esm2015/index.js");
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/common/http */
+    "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
     /* harmony import */
 
 
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/common/http */
-    "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! rxjs */
+    "../node_modules/rxjs/_esm2015/index.js");
     /* harmony import */
 
 
     var _url_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./url.service */
     "./app/services/url.service.ts");
+
+    var httpOptions = {
+      headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+        'Content-Type': 'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
 
     var QuizService = /*#__PURE__*/function () {
       function QuizService(http, urlService) {
@@ -2261,67 +2300,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.http = http;
         this.urlService = urlService;
         this.surveyUrl = this.urlService.url + '/surveys/';
-        this.scoreEntries = [];
-        this.survey = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.scoresUrl = this.urlService.url + '/scores/';
+        this.survey = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](null);
+        this.scoreEntries = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](null);
       }
 
       _createClass(QuizService, [{
         key: "getInitSurveys",
         value: function getInitSurveys(id) {
-          var _this5 = this;
+          var _this6 = this;
 
           this.http.get(this.surveyUrl + id).subscribe(function (survey) {
-            _this5.survey.next(survey);
+            _this6.survey.next(survey);
           });
         }
+        /*  public getHighscores() {
+            return this.scoreEntries;
+          }*/
+
       }, {
-        key: "getHighscores",
-        value: function getHighscores() {
-          return this.scoreEntries;
-        }
-      }, {
-        key: "addHighScore",
-        value: function addHighScore(scoreEntry) {
-          this.scoreEntries.push(scoreEntry); // after adding a new high score, the table is immediately again sorted.
-
-          this.scoreEntries.sort(function (a, b) {
-            if (a.answersCorrect < b.answersCorrect) {
-              return 1;
-            }
-
-            if (a.answersCorrect > b.answersCorrect) {
-              return -1;
-            }
-
-            if (a.finishTimestamp < b.finishTimestamp) {
-              return 1;
-            }
-
-            if (a.finishTimestamp > b.finishTimestamp) {
-              return -1;
-            }
-
-            return 0;
-          });
-        }
-      }, {
-        key: "handleError",
-        value: function handleError(err) {
-          // in a real world app, we may send the server to some remote logging infrastructure
-          // instead of just logging it to the console
-          var errorMessage = '';
-
-          if (err.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
-            errorMessage = "An error occurred: ".concat(err.error.message);
-          } else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong,
-            errorMessage = "Server returned code: ".concat(err.status, ", error message is: ").concat(err.message);
-          }
-
-          console.error(errorMessage);
-          return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(errorMessage);
+        key: "getScores",
+        value: function getScores() {
+          return this.http.get(this.scoresUrl);
         }
       }]);
 
@@ -2329,7 +2329,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     QuizService.ɵfac = function QuizService_Factory(t) {
-      return new (t || QuizService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"]));
+      return new (t || QuizService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"]));
     };
 
     QuizService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
@@ -2347,7 +2347,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }]
       }], function () {
         return [{
-          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]
         }, {
           type: _url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"]
         }];

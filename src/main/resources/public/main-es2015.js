@@ -424,23 +424,34 @@ CreateQuizComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EndpageComponent", function() { return EndpageComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _services_quiz_score_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/quiz-score.service */ "./app/services/quiz-score.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "../node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _services_quiz_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/quiz.service */ "./app/services/quiz.service.ts");
+/* harmony import */ var _services_quiz_score_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/quiz-score.service */ "./app/services/quiz-score.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "../node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+
 
 
 
 
 const _c0 = function () { return ["/scoreboard"]; };
 class EndpageComponent {
-    constructor(surveyScoreService) {
-        this.surveyScoreService = surveyScoreService;
+    constructor(quizService, quizScoreService) {
+        this.quizService = quizService;
+        this.quizScoreService = quizScoreService;
+        this.scoreEntry = {
+            'userName': quizScoreService.getUserName(),
+            'answersCorrect': quizScoreService.getCorrectAnswers(),
+            'finishTimestamp': quizScoreService.getFinishTimestamp(),
+            'finishTimestampString': quizScoreService.getFinishTimestampString(),
+        };
+        console.log('about to post: ' + this.scoreEntry);
+        //    quizService.postScore(this.scoreEntry);
     }
     ngOnInit() {
-        this.correctAnswer = this.surveyScoreService.getCorrectAnswers();
-        this.incorrectAnswer = this.surveyScoreService.getIncorrectAnswers();
+        this.correctAnswer = this.quizScoreService.getCorrectAnswers();
+        this.incorrectAnswer = this.quizScoreService.getIncorrectAnswers();
     }
 }
-EndpageComponent.ɵfac = function EndpageComponent_Factory(t) { return new (t || EndpageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_score_service__WEBPACK_IMPORTED_MODULE_1__["QuizScoreService"])); };
+EndpageComponent.ɵfac = function EndpageComponent_Factory(t) { return new (t || EndpageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_score_service__WEBPACK_IMPORTED_MODULE_2__["QuizScoreService"])); };
 EndpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: EndpageComponent, selectors: [["app-endpage"]], decls: 23, vars: 4, consts: [[1, "jumbotron-fluid"], [1, "container", "mx-auto", 2, "margin-top", "2rem"], [1, "row"], [1, "container"], [1, "col-md-3"], [1, "col-md-6"], [1, "row", 2, "background-color", "black"], [1, "mx-auto"], [1, "btn", "btn-dark", "btn-lg", "btn-block", 3, "routerLink"]], template: function EndpageComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
@@ -487,7 +498,7 @@ EndpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("Je hebt ", ctx.incorrectAnswer, " vra(a)g(en) fout beantwoord.");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0));
-    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLink"]], styles: ["h2[_ngcontent-%COMP%]{\r\n  margin-top: 2rem;\r\n  color:white;\r\n}\r\n\r\n.jumbotron-fluid[_ngcontent-%COMP%]{\r\n  background-color:black;\r\n  height:200px;\r\n}\r\n\r\nh3[_ngcontent-%COMP%]{\r\n  color:white;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW5kcGFnZS9lbmRwYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQkFBZ0I7RUFDaEIsV0FBVztBQUNiOztBQUVBO0VBQ0Usc0JBQXNCO0VBQ3RCLFlBQVk7QUFDZDs7QUFHQTtFQUNFLFdBQVc7QUFDYiIsImZpbGUiOiJzcmMvYXBwL2VuZHBhZ2UvZW5kcGFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaDJ7XHJcbiAgbWFyZ2luLXRvcDogMnJlbTtcclxuICBjb2xvcjp3aGl0ZTtcclxufVxyXG5cclxuLmp1bWJvdHJvbi1mbHVpZHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOmJsYWNrO1xyXG4gIGhlaWdodDoyMDBweDtcclxufVxyXG5cclxuXHJcbmgze1xyXG4gIGNvbG9yOndoaXRlO1xyXG59XHJcbiJdfQ== */"] });
+    } }, directives: [_angular_router__WEBPACK_IMPORTED_MODULE_3__["RouterLink"]], styles: ["h2[_ngcontent-%COMP%]{\r\n  margin-top: 2rem;\r\n  color:white;\r\n}\r\n\r\n.jumbotron-fluid[_ngcontent-%COMP%]{\r\n  background-color:black;\r\n  height:200px;\r\n}\r\n\r\nh3[_ngcontent-%COMP%]{\r\n  color:white;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZW5kcGFnZS9lbmRwYWdlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxnQkFBZ0I7RUFDaEIsV0FBVztBQUNiOztBQUVBO0VBQ0Usc0JBQXNCO0VBQ3RCLFlBQVk7QUFDZDs7QUFHQTtFQUNFLFdBQVc7QUFDYiIsImZpbGUiOiJzcmMvYXBwL2VuZHBhZ2UvZW5kcGFnZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaDJ7XHJcbiAgbWFyZ2luLXRvcDogMnJlbTtcclxuICBjb2xvcjp3aGl0ZTtcclxufVxyXG5cclxuLmp1bWJvdHJvbi1mbHVpZHtcclxuICBiYWNrZ3JvdW5kLWNvbG9yOmJsYWNrO1xyXG4gIGhlaWdodDoyMDBweDtcclxufVxyXG5cclxuXHJcbmgze1xyXG4gIGNvbG9yOndoaXRlO1xyXG59XHJcbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](EndpageComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -495,7 +506,7 @@ EndpageComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineC
                 templateUrl: './endpage.component.html',
                 styleUrls: ['./endpage.component.css']
             }]
-    }], function () { return [{ type: _services_quiz_score_service__WEBPACK_IMPORTED_MODULE_1__["QuizScoreService"] }]; }, null); })();
+    }], function () { return [{ type: _services_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"] }, { type: _services_quiz_score_service__WEBPACK_IMPORTED_MODULE_2__["QuizScoreService"] }]; }, null); })();
 
 
 /***/ }),
@@ -948,14 +959,25 @@ class ScoreboardComponent {
     constructor(quizService, quizScoreService) {
         this.quizService = quizService;
         this.quizScoreService = quizScoreService;
-        this.scoreEntry = {
-            'userName': quizScoreService.getUserName(),
-            'answersCorrect': quizScoreService.getCorrectAnswers(),
-            'finishTimestamp': quizScoreService.getFinishTimestamp(),
-            'finishTimestampString': quizScoreService.getFinishTimestampString(),
-        };
-        quizService.addHighScore(this.scoreEntry);
-        this.scoreEntries = quizService.getHighscores();
+        /*    this.scoreEntry =     {
+              'userName': quizScoreService.getUserName(),
+              'answersCorrect': quizScoreService.getCorrectAnswers(),
+              'finishTimestamp': quizScoreService.getFinishTimestamp(),
+              'finishTimestampString': quizScoreService.getFinishTimestampString(),
+            };*/
+        //    quizService.addHighScore(this.scoreEntry);
+        //    this.scoreEntries = getHighScores();
+        this.quizService.getScores().subscribe((data) => this.scoreEntry = {
+            userName: data.userName,
+            answersCorrect: data.answersCorrect,
+            finishTimestamp: data.finishTimestamp,
+            finishTimestampString: data.finishTimestampString
+        });
+        console.log(this.scoreEntry);
+        console.log(this.scoreEntry.userName);
+        console.log(this.scoreEntry.answersCorrect);
+        console.log(this.scoreEntry.finishTimestamp);
+        console.log(this.scoreEntry.finishTimestampString);
         //    this.surveyScoreService.resetScores();
     }
     ngOnInit() {
@@ -1092,74 +1114,50 @@ QuizScoreService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuizService", function() { return QuizService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "../node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../node_modules/rxjs/_esm2015/index.js");
 /* harmony import */ var _url_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./url.service */ "./app/services/url.service.ts");
 
 
 
 
 
+
+const httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
+        'Content-Type': 'application/json',
+        'Authorization': 'my-auth-token'
+    })
+};
 class QuizService {
     constructor(http, urlService) {
         this.http = http;
         this.urlService = urlService;
         this.surveyUrl = this.urlService.url + '/surveys/';
-        this.scoreEntries = [];
-        this.survey = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.scoresUrl = this.urlService.url + '/scores/';
+        this.survey = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](null);
+        this.scoreEntries = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](null);
     }
     getInitSurveys(id) {
         this.http.get(this.surveyUrl + id).subscribe(survey => {
             this.survey.next(survey);
         });
     }
-    getHighscores() {
+    /*  public getHighscores() {
         return this.scoreEntries;
-    }
-    addHighScore(scoreEntry) {
-        this.scoreEntries.push(scoreEntry);
-        // after adding a new high score, the table is immediately again sorted.
-        this.scoreEntries.sort((a, b) => {
-            if (a.answersCorrect < b.answersCorrect) {
-                return 1;
-            }
-            if (a.answersCorrect > b.answersCorrect) {
-                return -1;
-            }
-            if (a.finishTimestamp < b.finishTimestamp) {
-                return 1;
-            }
-            if (a.finishTimestamp > b.finishTimestamp) {
-                return -1;
-            }
-            return 0;
-        });
-    }
-    handleError(err) {
-        // in a real world app, we may send the server to some remote logging infrastructure
-        // instead of just logging it to the console
-        let errorMessage = '';
-        if (err.error instanceof ErrorEvent) {
-            // A client-side or network error occurred. Handle it accordingly.
-            errorMessage = `An error occurred: ${err.error.message}`;
-        }
-        else {
-            // The backend returned an unsuccessful response code.
-            // The response body may contain clues as to what went wrong,
-            errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
-        }
-        console.error(errorMessage);
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(errorMessage);
+      }*/
+    getScores() {
+        return this.http.get(this.scoresUrl);
     }
 }
-QuizService.ɵfac = function QuizService_Factory(t) { return new (t || QuizService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"])); };
+QuizService.ɵfac = function QuizService_Factory(t) { return new (t || QuizService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"])); };
 QuizService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: QuizService, factory: QuizService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](QuizService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }, { type: _url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"] }]; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }, { type: _url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"] }]; }, null); })();
 
 
 /***/ }),

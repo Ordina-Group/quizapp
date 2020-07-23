@@ -1,0 +1,42 @@
+package com.example.quiz.ServiceLayer;
+
+import com.example.quiz.Repository.ScoreRepository;
+import com.example.quiz.model.Score;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+public class ScoreService {
+
+    @Autowired
+    private ScoreRepository scoreRepository;
+
+    public List<Score> findAllScores() {return scoreRepository.findAll(); }
+
+    public List<Score> findScoresByQuizId(Long id) {
+        List<Score> listScores;
+        List<Score> listScores2 = new ArrayList<>();
+        listScores = scoreRepository.findAll();
+        for (Score currentScore : listScores){
+            if(currentScore.getQuizId() == id){
+                listScores2.add(currentScore);
+            }
+        }
+        return listScores2;
+    }
+
+/*    public Question findQuestionById(Long id) {
+        return questionRepository.getOne(id);
+    }*/
+
+    public Score saveScore(Score score) {
+        return scoreRepository.saveAndFlush(score);
+    }
+
+}
+
+

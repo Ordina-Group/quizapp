@@ -14,17 +14,36 @@ export class ScoreboardComponent implements OnInit {
   scoreEntries: ScoreEntry[];
 
   constructor(private quizService: QuizService, private quizScoreService: QuizScoreService) {
-    this.scoreEntry =     {
+/*    this.scoreEntry =     {
       'userName': quizScoreService.getUserName(),
       'answersCorrect': quizScoreService.getCorrectAnswers(),
       'finishTimestamp': quizScoreService.getFinishTimestamp(),
       'finishTimestampString': quizScoreService.getFinishTimestampString(),
-    };
-    quizService.addHighScore(this.scoreEntry);
-    this.scoreEntries = quizService.getHighscores();
+    };*/
+//    quizService.addHighScore(this.scoreEntry);
+//    this.scoreEntries = getHighScores();
+
+
+
+/*      this.quizScoreService.getScores().subscribe((data: ScoreEntry) =>
+      this.scoreEntry = {
+        userName: data.userName,
+        answersCorrect: data.answersCorrect,
+        finishTimestamp: data.finishTimestamp,
+        finishTimestampString: data.finishTimestampString
+      });*/
+/*      console.log(this.scoreEntry);
+      console.log(this.scoreEntry.userName);
+      console.log(this.scoreEntry.answersCorrect);
+      console.log(this.scoreEntry.finishTimestamp);
+      console.log(this.scoreEntry.finishTimestampString);*/
 //    this.surveyScoreService.resetScores();
   }
 
   ngOnInit(): void {
+    this.quizScoreService.getScores(this.quizService.quizId).subscribe(scoreEntries => {
+      console.log(scoreEntries);
+      this.scoreEntries = scoreEntries;
+    });
   }
 }

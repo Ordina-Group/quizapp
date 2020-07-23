@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AnswerIsCorrect } from '../model/answeriscorrect';
+import {HttpClient} from "@angular/common/http";
+import {UrlService} from "./url.service";
+import {BehaviorSubject} from "rxjs";
+import {ScoreEntry} from "../model/scoreEntry";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +15,12 @@ export class QuizScoreService {
   private inCorrectAnswer = 0;
   private finishTimestamp: Date;
   private finishTimestampString = '';
+  private scoresUrl = this.urlService.url + '/scores/';
 
-  constructor() { }
+
+  constructor(  private http: HttpClient,
+                private urlService: UrlService) {
+  }
 
   public getUserName() {
     return this.userName;
@@ -25,6 +33,9 @@ export class QuizScoreService {
   public processAnswer(answerIsCorrect: AnswerIsCorrect){
     answerIsCorrect?.isCorrect === true ? this.correctAnswer++ : this.inCorrectAnswer++;
   }
+
+  getScores(id: number) {
+    return this.http.get<ScoreEntry[]>(this.scoresUrl + id); }
 
   public getCorrectAnswers(){
     return this.correctAnswer;

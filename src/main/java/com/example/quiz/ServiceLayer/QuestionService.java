@@ -15,15 +15,11 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     public List<Question> findAllQuestions() {
-        return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "number"));
-
-
+        return questionRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
-
 
     public Question findQuestionById(Long id) {
         return questionRepository.getOne(id);
-
     }
 
     public Question saveQuestion(Question question) {

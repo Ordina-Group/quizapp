@@ -3,10 +3,12 @@ package com.example.quiz;
 import com.example.quiz.Repository.AnswerIsCorrectRepository;
 import com.example.quiz.Repository.AnswerOptionRepository;
 import com.example.quiz.Repository.QuestionRepository;
+import com.example.quiz.Repository.ScoreRepository;
 import com.example.quiz.Repository.QuizRepository;
 import com.example.quiz.model.AnswerIsCorrect;
 import com.example.quiz.model.AnswerOption;
 import com.example.quiz.model.Question;
+import com.example.quiz.model.Score;
 import com.example.quiz.model.Quiz;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,16 +17,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Date;
 
 @SpringBootApplication
 public class QuizApplication {
 
-
     public static void main(String[] args) {
-
         SpringApplication.run(QuizApplication.class);
     }
-
 
     @Bean
 	public WebMvcConfigurer corsConfigurer() {
@@ -37,15 +37,22 @@ public class QuizApplication {
 		};
 	}
 
-
-
     @Bean
-    public CommandLineRunner demo(QuizRepository quizRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository, AnswerIsCorrectRepository answerIsCorrectRepository) {
+    public CommandLineRunner demo(QuizRepository quizRepository, ScoreRepository scoreRepository, QuestionRepository questionRepository, AnswerOptionRepository answerOptionRepository, AnswerIsCorrectRepository answerIsCorrectRepository) {
         return (args) -> {
 
             Quiz quiz = new Quiz();
             quiz.setQuizDescription("Survey DevoxxxKids dag");
             quizRepository.save(quiz);
+
+            Score score1 = new Score("Player 1", 1, new Date(120,6,17,12,34,56),"17/07/2020 12:34:56",quiz);
+            scoreRepository.save(score1);
+
+            Score score2 = new Score("Player 2", 2, new Date(120,6,18,12,34,56),"18/07/2020 12:34:56",quiz);
+            scoreRepository.save(score2);
+
+            Score score3 = new Score("Player 3", 3, new Date(120,6,19,12,34,56),"19/07/2020 12:34:56",quiz);
+            scoreRepository.save(score3);
 
             Question question = new Question("Slag bij Nieuwpoort?", 1, quiz);
             questionRepository.save(question);
