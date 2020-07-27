@@ -6,6 +6,7 @@ import {FormArray} from '@angular/forms';
 import {AnswerIsCorrect} from "../model/answerIsCorrect";
 import {AnswerOption} from "../model/answerOption";
 import { QuizService } from '../services/quiz.service';
+import {checkBudgets} from "@angular-devkit/build-angular/src/angular-cli-files/utilities/bundle-calculator";
 
 
 @Component({
@@ -18,23 +19,24 @@ export class CreateQuizComponent implements OnInit {
   quiz: Quiz;
   quizForm: FormGroup;
   count: number;
-  currentQuestion: number;
+
   newQuiz: Quiz;
-  currentQuestionsArray: Array<number>;
+  currentQuestion: number;
   lockQuizName: boolean;
+  currentQuestionsArray: Array<number>;
 
   constructor(private formBuilder: FormBuilder, private quizService: QuizService) {
+    this.count = 0;
     this.currentQuestion = 0;
-
     this.currentQuestionsArray = [];
     this.lockQuizName = false;
     this.newQuiz = {questions: []} as Quiz;
 
-
     this.quizForm = this.formBuilder.group({
       quizName: [''],
       question: [''],
-      answerOptions: this.formBuilder.array([])
+      answerOptions: this.formBuilder.array([]),
+      currentQuestionsArray:  this.formBuilder.array([])
     });
   }
 
@@ -58,8 +60,6 @@ export class CreateQuizComponent implements OnInit {
     return this.quizForm.get('quizName').value
   }
 
-
-
   private newAnswerOption(): FormGroup {
     return this.formBuilder.group({
       answer: '',
@@ -73,14 +73,11 @@ export class CreateQuizComponent implements OnInit {
     this.lockQuizName = true;
     this.quizForm.get('question').reset();
     this.quizForm.get('answerOptions').reset();
-
   }
 
-  // hier wordt answerOptions to question gesaved en alle questions worden in object newQuiz bewaard
   saveQuestion() {
     let quizname = this.quizName;
     let questionDescription = this.quizForm.get('question').value;
-    let currentQuestion = this.currentQuestion;
 
     let question = {answerOptions: []} as Question;
     this.answerOptions.controls.forEach(control => {
@@ -88,24 +85,42 @@ export class CreateQuizComponent implements OnInit {
       question.answerOptions.push(answerOption)
     })
     question.questionDescription = questionDescription;
-    question.number= currentQuestion;
 
     this.newQuiz.quizDescription = quizname;
     this.newQuiz.questions.push(question);
-    this.checkQuestion();
+
+    let newQuizQuestion = questionDescription;
+    localStorage.setItem(newQuizQuestion, questionDescription);
+
+    let myItem = localStorage.getItem(newQuizQuestion);
+    console.log(myItem);
+
+   // let answerObj ={answerOptions: "answerOption"};
+    //localStorage.setItem('answerObj', JSON.stringify(answerObj));
+this.checkQuestion();
+
   }
+
 
   checkQuestion(){
     this.currentQuestion++;
-    this.currentQuestionsArray.push(this.currentQuestion);
-
+    this.count = this.currentQuestion;
+    this.currentQuestionsArray.push(this.count);
   }
 
   onClick(){
+    const number = this.count;
+    console.log(this.count)
+    console.log(this.quiz.id)
+    this.quizService.getInitQuiz(this.quiz.id)
+
+    // this.quizService.quizSubject.subscribe(oldquiz => { this.quiz = oldquiz
+    //console.log("quiz is")
+    //console.log(oldquiz)})
+    // this.quiz.questions= this.oldQuestionArray;
+    //   console.log(this.oldQuestionArray)
 
   }
-
-
 
   private toAnswerOption(ac: AbstractControl): AnswerOption {
     let answerOption = {} as AnswerOption;
@@ -125,3 +140,4 @@ export class CreateQuizComponent implements OnInit {
   }
 
 }
+

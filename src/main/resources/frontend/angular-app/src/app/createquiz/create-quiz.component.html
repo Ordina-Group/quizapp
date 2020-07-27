@@ -24,13 +24,15 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-1" *ngFor="let questionNumber of currentQuestionsArray; let i = index">
-          <button class="btn btn-dark">{{ questionNumber }}</button>
+<div class="row" formArrayName="currentQuestionsArray">
+        <div class="col-sm-1 mb-2 mr-2" *ngFor="let questionNumber of currentQuestionsArray; let i = index">
+          <button class="btn btn-dark" [value]="questionNumber" (click)="onClick()">{{ questionNumber }}</button>
         </div>
+
         <div class="col-sm-11">
         </div>
       </div>
+
 
       <div>
         <label>Voer een nieuwe Vraag in:</label>
@@ -40,12 +42,11 @@
             <input formControlName="question">
           </div>
           <div class="col-sm-2">
-            <label></label>
           </div>
         </div>
 
 
-        <div class="spaced-row">
+        <div class="spaced-row" >
           <div class="col-sm-12">
           </div>
         </div>
