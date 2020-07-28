@@ -35,6 +35,7 @@ public class ScoreService {
     }*/
 
     public Score saveScore(Score score, long quizid) {
+        System.out.println(score.getId() + "" + quizid);
         score.setQuizid(quizid);
         return scoreRepository.save(score);
     }

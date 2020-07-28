@@ -1,8 +1,11 @@
 package com.example.quiz.ControlLayer;
 
 import com.example.quiz.ServiceLayer.ScoreService;
+import com.example.quiz.model.Quiz;
 import com.example.quiz.model.Score;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -15,9 +18,14 @@ public class ScoreRESTController {
         this.scoreService = scoreService;
     }
 
-    @PostMapping("/{quizid}")
-    public Score submitScore(@RequestBody final Score score, @PathVariable Long quizid) {
-        return scoreService.saveScore(score,quizid);
+    @GetMapping("/{id}")
+    public List<Score> get(@PathVariable Long id) {
+        return scoreService.findScoresByQuizId(id);
+    }
+
+    @PostMapping("/{id}")
+    public Score submitScore(@RequestBody final Score score, @PathVariable Long id) {
+        return scoreService.saveScore(score,id);
     }
 
 }

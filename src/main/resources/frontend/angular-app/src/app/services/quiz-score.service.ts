@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AnswerIsCorrect } from '../model/answeriscorrect';
-import {HttpClient} from "@angular/common/http";
-import {UrlService} from "./url.service";
-import {BehaviorSubject} from "rxjs";
-import {ScoreEntry} from "../model/scoreEntry";
+import {HttpClient} from '@angular/common/http';
+import {UrlService} from './url.service';
+import {BehaviorSubject} from 'rxjs';
+import {ScoreEntry} from '../model/scoreEntry';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,9 @@ export class QuizScoreService {
 
   getScores(id: number) {
     return this.http.get<ScoreEntry[]>(this.scoresUrl + id); }
+
+  postScore(scoreEntry: ScoreEntry, id: number) {
+    this.http.post(this.scoresUrl + id, scoreEntry).subscribe(data => {console.log(data); }); }
 
   public getCorrectAnswers(){
     return this.correctAnswer;

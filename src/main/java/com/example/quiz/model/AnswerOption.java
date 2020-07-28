@@ -32,19 +32,22 @@ public class AnswerOption {
         this(answerOption.getValue(), answerOption.isCorrect());
     }
 
+    public AnswerOption(Long id, String s, boolean b) {
+        this.id = id;
+        this.value = s;
+        this.isCorrect = b;
+    }
+
     public String getValue() {
         return value;
     }
-
     public void setValue(String value) {
         this.value = value;
     }
 
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -52,7 +55,6 @@ public class AnswerOption {
     public boolean isCorrect() {
         return isCorrect;
     }
-
     public void setCorrect(boolean correct) {
         isCorrect = correct;
     }

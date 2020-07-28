@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../services/quiz.service';
 import {QuizScoreService} from '../services/quiz-score.service';
 import {ScoreEntry} from '../model/scoreEntry';
+import {Quiz} from '../model/quiz';
 
 @Component({
   selector: 'app-scoreboard',
@@ -9,9 +10,9 @@ import {ScoreEntry} from '../model/scoreEntry';
   styleUrls: ['./scoreboard.component.css']
 })
 export class ScoreboardComponent implements OnInit {
-
   scoreEntry: ScoreEntry;
   scoreEntries: ScoreEntry[];
+  private _currentQuiz: Quiz;
 
   constructor(private quizService: QuizService, private quizScoreService: QuizScoreService) {
 /*    this.scoreEntry =     {
@@ -41,7 +42,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.quizScoreService.getScores(this.quizService.quizId).subscribe(scoreEntries => {
+    this.quizScoreService.getScores(this.quizService.quizSubject.getValue().id).subscribe(scoreEntries => {
       console.log(scoreEntries);
       this.scoreEntries = scoreEntries;
     });

@@ -39,7 +39,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _question_question_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./question/question.component */ "./app/question/question.component.ts");
 /* harmony import */ var _endpage_endpage_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./endpage/endpage.component */ "./app/endpage/endpage.component.ts");
 /* harmony import */ var _homescreen_homescreen_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./homescreen/homescreen.component */ "./app/homescreen/homescreen.component.ts");
-/* harmony import */ var _createsurvey_create_quiz_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./createsurvey/create-quiz.component */ "./app/createsurvey/create-quiz.component.ts");
+/* harmony import */ var _createquiz_create_quiz_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./createquiz/create-quiz.component */ "./app/createquiz/create-quiz.component.ts");
 /* harmony import */ var _namescreen_namescreen_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./namescreen/namescreen.component */ "./app/namescreen/namescreen.component.ts");
 /* harmony import */ var _scoreboard_scoreboard_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./scoreboard/scoreboard.component */ "./app/scoreboard/scoreboard.component.ts");
 
@@ -60,7 +60,7 @@ const routes = [
     { path: 'namescreen', component: _namescreen_namescreen_component__WEBPACK_IMPORTED_MODULE_7__["NamescreenComponent"] },
     { path: 'question', component: _question_question_component__WEBPACK_IMPORTED_MODULE_3__["QuestionComponent"] },
     { path: 'endpage', component: _endpage_endpage_component__WEBPACK_IMPORTED_MODULE_4__["EndpageComponent"] },
-    { path: 'createsurvey', component: _createsurvey_create_quiz_component__WEBPACK_IMPORTED_MODULE_6__["CreateQuizComponent"] },
+    { path: 'createquiz', component: _createquiz_create_quiz_component__WEBPACK_IMPORTED_MODULE_6__["CreateQuizComponent"] },
     { path: 'scoreboard', component: _scoreboard_scoreboard_component__WEBPACK_IMPORTED_MODULE_8__["ScoreboardComponent"] },
 ];
 class AppRoutingModule {
@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class AppComponent {
     constructor() {
-        this.title = 'Welkom bij de survey';
+        this.title = 'Welkom bij de quiz';
         this.errorMessage = '';
     }
     ngOnInit() { }
@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "../node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
 /* harmony import */ var _endpage_endpage_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./endpage/endpage.component */ "./app/endpage/endpage.component.ts");
 /* harmony import */ var _services_submitAnswer_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./services/submitAnswer.service */ "./app/services/submitAnswer.service.ts");
-/* harmony import */ var _createsurvey_create_quiz_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./createsurvey/create-quiz.component */ "./app/createsurvey/create-quiz.component.ts");
+/* harmony import */ var _createquiz_create_quiz_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./createquiz/create-quiz.component */ "./app/createquiz/create-quiz.component.ts");
 /* harmony import */ var _homescreen_homescreen_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./homescreen/homescreen.component */ "./app/homescreen/homescreen.component.ts");
 /* harmony import */ var _namescreen_namescreen_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./namescreen/namescreen.component */ "./app/namescreen/namescreen.component.ts");
 /* harmony import */ var _scoreboard_scoreboard_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./scoreboard/scoreboard.component */ "./app/scoreboard/scoreboard.component.ts");
@@ -182,7 +182,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
         _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"],
         _question_question_component__WEBPACK_IMPORTED_MODULE_5__["QuestionComponent"],
         _endpage_endpage_component__WEBPACK_IMPORTED_MODULE_9__["EndpageComponent"],
-        _createsurvey_create_quiz_component__WEBPACK_IMPORTED_MODULE_11__["CreateQuizComponent"],
+        _createquiz_create_quiz_component__WEBPACK_IMPORTED_MODULE_11__["CreateQuizComponent"],
         _homescreen_homescreen_component__WEBPACK_IMPORTED_MODULE_12__["HomescreenComponent"],
         _namescreen_namescreen_component__WEBPACK_IMPORTED_MODULE_13__["NamescreenComponent"],
         _scoreboard_scoreboard_component__WEBPACK_IMPORTED_MODULE_14__["ScoreboardComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -198,7 +198,7 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"],
                     _question_question_component__WEBPACK_IMPORTED_MODULE_5__["QuestionComponent"],
                     _endpage_endpage_component__WEBPACK_IMPORTED_MODULE_9__["EndpageComponent"],
-                    _createsurvey_create_quiz_component__WEBPACK_IMPORTED_MODULE_11__["CreateQuizComponent"],
+                    _createquiz_create_quiz_component__WEBPACK_IMPORTED_MODULE_11__["CreateQuizComponent"],
                     _homescreen_homescreen_component__WEBPACK_IMPORTED_MODULE_12__["HomescreenComponent"],
                     _namescreen_namescreen_component__WEBPACK_IMPORTED_MODULE_13__["NamescreenComponent"],
                     _scoreboard_scoreboard_component__WEBPACK_IMPORTED_MODULE_14__["ScoreboardComponent"],
@@ -218,10 +218,10 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
 
 /***/ }),
 
-/***/ "./app/createsurvey/create-quiz.component.ts":
-/*!***************************************************!*\
-  !*** ./app/createsurvey/create-quiz.component.ts ***!
-  \***************************************************/
+/***/ "./app/createquiz/create-quiz.component.ts":
+/*!*************************************************!*\
+  !*** ./app/createquiz/create-quiz.component.ts ***!
+  \*************************************************/
 /*! exports provided: CreateQuizComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -230,7 +230,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CreateQuizComponent", function() { return CreateQuizComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "../node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+/* harmony import */ var _services_quiz_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/quiz.service */ "./app/services/quiz.service.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+
 
 
 
@@ -250,8 +252,9 @@ function CreateQuizComponent_div_32_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroupName", i_r2);
 } }
 class CreateQuizComponent {
-    constructor(formBuilder) {
+    constructor(formBuilder, quizService) {
         this.formBuilder = formBuilder;
+        this.quizService = quizService;
         this.count = 0;
         this.currentQuestion = 0;
         this.lockQuizName = false;
@@ -289,6 +292,7 @@ class CreateQuizComponent {
         this.quizForm.get('question').reset();
         this.quizForm.get('answerOptions').reset();
     }
+    // hier wordt answerOptions to question gesaved en alle questions worden in object newQuiz bewaard
     saveQuestion() {
         let quizname = this.quizName;
         let questionDescription = this.quizForm.get('question').value;
@@ -298,7 +302,7 @@ class CreateQuizComponent {
             question.answerOptions.push(answerOption);
         });
         question.questionDescription = questionDescription;
-        this.newQuiz.pageTitle = quizname;
+        this.newQuiz.quizDescription = quizname;
         this.newQuiz.questions.push(question);
     }
     toAnswerOption(ac) {
@@ -309,15 +313,21 @@ class CreateQuizComponent {
     }
     onSubmit() {
         this.saveQuestion();
+        this.quizService.postnewQuiz(this.newQuiz).subscribe(quiz => {
+            this.quiz = quiz;
+            console.log("quiz is");
+            console.log(quiz);
+        });
+        console.log(this.newQuiz);
     }
 }
-CreateQuizComponent.ɵfac = function CreateQuizComponent_Factory(t) { return new (t || CreateQuizComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"])); };
-CreateQuizComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CreateQuizComponent, selectors: [["app-createsurvey"]], decls: 48, vars: 2, consts: [[1, "jumbotron-fluid", "d-flex", "flex-column"], [1, "container"], [1, "row"], [1, "form-group", 3, "formGroup"], [1, "col-sm-10"], ["formControlName", "quizName"], [1, "col-sm-2"], [1, "spaced-row"], [1, "col-sm-12"], ["formControlName", "question"], [1, "col-sm-6", "mr-2"], ["formArrayName", "answerOptions"], [3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "col-sm-1"], [1, "col-sm-4", "mr-2"], [1, "btn", "btn-dark", "mr-1", 3, "click"], [1, "btn", "btn-dark", 3, "click"], [1, "row", 2, "margin-top", "5rem"], ["Style", "background-color:black;"], [1, "btn", "btn-dark", "mr-2", 3, "click"], ["type", "submit", 1, "btn", "btn-dark", 3, "click"], [3, "formGroupName"], ["type", "text", "formControlName", "answer"], [1, "radioBlok"], [1, "form-check-label"], ["type", "checkbox", "value", "true", "formControlName", "iscorrect", 1, "form-check-input"]], template: function CreateQuizComponent_Template(rf, ctx) { if (rf & 1) {
+CreateQuizComponent.ɵfac = function CreateQuizComponent_Factory(t) { return new (t || CreateQuizComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_service__WEBPACK_IMPORTED_MODULE_2__["QuizService"])); };
+CreateQuizComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: CreateQuizComponent, selectors: [["app-createquiz"]], decls: 48, vars: 2, consts: [[1, "jumbotron-fluid", "d-flex", "flex-column"], [1, "container"], [1, "row"], [1, "form-group", 3, "formGroup"], [1, "col-sm-10"], ["formControlName", "quizName"], [1, "col-sm-2"], [1, "spaced-row"], [1, "col-sm-12"], ["formControlName", "question"], [1, "col-sm-6", "mr-2"], ["formArrayName", "answerOptions"], [3, "formGroupName", 4, "ngFor", "ngForOf"], [1, "col-sm-1"], [1, "col-sm-4", "mr-2"], [1, "btn", "btn-dark", "mr-1", 3, "click"], [1, "btn", "btn-dark", 3, "click"], [1, "row", 2, "margin-top", "5rem"], ["Style", "background-color:black;"], [1, "btn", "btn-dark", "mr-2", 3, "click"], ["type", "submit", 1, "btn", "btn-dark", 3, "click"], [3, "formGroupName"], ["type", "text", "formControlName", "answer"], [1, "radioBlok"], [1, "form-check-label"], ["type", "checkbox", "value", "true", "formControlName", "iscorrect", 1, "form-check-input"]], template: function CreateQuizComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "h1");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Maak een nieuwe Survey");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Maak een nieuwe Quiz");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -326,7 +336,7 @@ CreateQuizComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "label");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " Survey naam:");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](9, " Quiz naam:");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 4);
@@ -400,15 +410,15 @@ CreateQuizComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("formGroup", ctx.quizForm);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](25);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.answerOptions.controls);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormArrayName"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupName"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["CheckboxControlValueAccessor"]], styles: ["h1[_ngcontent-%COMP%] {\r\n  color:white;\r\n  font-size: 30px;\r\n  font-family: 'Roboto', sans serif;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  margin-top: 8rem;\r\n  margin-bottom: 4rem;\r\n\r\n}\r\n\r\nlabel[_ngcontent-%COMP%]{\r\n  color:white;\r\n\r\n}\r\n\r\ninput[_ngcontent-%COMP%]{\r\nwidth: 600px;\r\n}\r\n\r\np[_ngcontent-%COMP%]{\r\n  color:white;\r\n  font-size: 15px;\r\n  font-family: 'Roboto', sans serif;\r\n  text-align: center;\r\n  margin-top: 8rem;\r\n  margin-bottom: 4rem;\r\n\r\n}\r\n\r\n.spaced-row[_ngcontent-%COMP%] {\r\n  margin-bottom: 2rem;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY3JlYXRlc3VydmV5L2NyZWF0ZS1xdWl6LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFXO0VBQ1gsZUFBZTtFQUNmLGlDQUFpQztFQUNqQyxpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLGdCQUFnQjtFQUNoQixtQkFBbUI7O0FBRXJCOztBQUVBO0VBQ0UsV0FBVzs7QUFFYjs7QUFFQTtBQUNBLFlBQVk7QUFDWjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxlQUFlO0VBQ2YsaUNBQWlDO0VBQ2pDLGtCQUFrQjtFQUNsQixnQkFBZ0I7RUFDaEIsbUJBQW1COztBQUVyQjs7QUFFQTtFQUNFLG1CQUFtQjtBQUNyQiIsImZpbGUiOiJzcmMvYXBwL2NyZWF0ZXN1cnZleS9jcmVhdGUtcXVpei5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaDEge1xyXG4gIGNvbG9yOndoaXRlO1xyXG4gIGZvbnQtc2l6ZTogMzBweDtcclxuICBmb250LWZhbWlseTogJ1JvYm90bycsIHNhbnMgc2VyaWY7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIG1hcmdpbi10b3A6IDhyZW07XHJcbiAgbWFyZ2luLWJvdHRvbTogNHJlbTtcclxuXHJcbn1cclxuXHJcbmxhYmVse1xyXG4gIGNvbG9yOndoaXRlO1xyXG5cclxufVxyXG5cclxuaW5wdXR7XHJcbndpZHRoOiA2MDBweDtcclxufVxyXG5cclxucHtcclxuICBjb2xvcjp3aGl0ZTtcclxuICBmb250LXNpemU6IDE1cHg7XHJcbiAgZm9udC1mYW1pbHk6ICdSb2JvdG8nLCBzYW5zIHNlcmlmO1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICBtYXJnaW4tdG9wOiA4cmVtO1xyXG4gIG1hcmdpbi1ib3R0b206IDRyZW07XHJcblxyXG59XHJcblxyXG4uc3BhY2VkLXJvdyB7XHJcbiAgbWFyZ2luLWJvdHRvbTogMnJlbTtcclxufVxyXG4iXX0= */"] });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormArrayName"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupName"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["CheckboxControlValueAccessor"]], styles: ["h1[_ngcontent-%COMP%] {\r\n  color:white;\r\n  font-size: 30px;\r\n  font-family: 'Roboto', sans serif;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  margin-top: 8rem;\r\n  margin-bottom: 4rem;\r\n\r\n}\r\n\r\nlabel[_ngcontent-%COMP%]{\r\n  color:white;\r\n\r\n}\r\n\r\ninput[_ngcontent-%COMP%]{\r\nwidth: 600px;\r\n}\r\n\r\np[_ngcontent-%COMP%]{\r\n  color:white;\r\n  font-size: 15px;\r\n  font-family: 'Roboto', sans serif;\r\n  text-align: center;\r\n  margin-top: 8rem;\r\n  margin-bottom: 4rem;\r\n\r\n}\r\n\r\n.spaced-row[_ngcontent-%COMP%] {\r\n  margin-bottom: 2rem;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY3JlYXRlcXVpei9jcmVhdGUtcXVpei5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsV0FBVztFQUNYLGVBQWU7RUFDZixpQ0FBaUM7RUFDakMsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixnQkFBZ0I7RUFDaEIsbUJBQW1COztBQUVyQjs7QUFFQTtFQUNFLFdBQVc7O0FBRWI7O0FBRUE7QUFDQSxZQUFZO0FBQ1o7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsZUFBZTtFQUNmLGlDQUFpQztFQUNqQyxrQkFBa0I7RUFDbEIsZ0JBQWdCO0VBQ2hCLG1CQUFtQjs7QUFFckI7O0FBRUE7RUFDRSxtQkFBbUI7QUFDckIiLCJmaWxlIjoic3JjL2FwcC9jcmVhdGVxdWl6L2NyZWF0ZS1xdWl6LmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJoMSB7XHJcbiAgY29sb3I6d2hpdGU7XHJcbiAgZm9udC1zaXplOiAzMHB4O1xyXG4gIGZvbnQtZmFtaWx5OiAnUm9ib3RvJywgc2FucyBzZXJpZjtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgbWFyZ2luLXRvcDogOHJlbTtcclxuICBtYXJnaW4tYm90dG9tOiA0cmVtO1xyXG5cclxufVxyXG5cclxubGFiZWx7XHJcbiAgY29sb3I6d2hpdGU7XHJcblxyXG59XHJcblxyXG5pbnB1dHtcclxud2lkdGg6IDYwMHB4O1xyXG59XHJcblxyXG5we1xyXG4gIGNvbG9yOndoaXRlO1xyXG4gIGZvbnQtc2l6ZTogMTVweDtcclxuICBmb250LWZhbWlseTogJ1JvYm90bycsIHNhbnMgc2VyaWY7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIG1hcmdpbi10b3A6IDhyZW07XHJcbiAgbWFyZ2luLWJvdHRvbTogNHJlbTtcclxuXHJcbn1cclxuXHJcbi5zcGFjZWQtcm93IHtcclxuICBtYXJnaW4tYm90dG9tOiAycmVtO1xyXG59XHJcbiJdfQ== */"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](CreateQuizComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
-                selector: 'app-createsurvey',
+                selector: 'app-createquiz',
                 templateUrl: './create-quiz.component.html',
                 styleUrls: ['./create-quiz.component.css']
             }]
-    }], function () { return [{ type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"] }]; }, null); })();
+    }], function () { return [{ type: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"] }, { type: _services_quiz_service__WEBPACK_IMPORTED_MODULE_2__["QuizService"] }]; }, null); })();
 
 
 /***/ }),
@@ -437,18 +447,17 @@ class EndpageComponent {
     constructor(quizService, quizScoreService) {
         this.quizService = quizService;
         this.quizScoreService = quizScoreService;
-        this.scoreEntry = {
-            'userName': quizScoreService.getUserName(),
-            'answersCorrect': quizScoreService.getCorrectAnswers(),
-            'finishTimestamp': quizScoreService.getFinishTimestamp(),
-            'finishTimestampString': quizScoreService.getFinishTimestampString(),
-        };
-        console.log('about to post: ' + this.scoreEntry);
-        //    quizService.postScore(this.scoreEntry);
     }
     ngOnInit() {
         this.correctAnswer = this.quizScoreService.getCorrectAnswers();
         this.incorrectAnswer = this.quizScoreService.getIncorrectAnswers();
+        this.scoreEntry = {
+            userName: this.quizScoreService.getUserName(),
+            answersCorrect: this.quizScoreService.getCorrectAnswers(),
+            finishTimestamp: this.quizScoreService.getFinishTimestamp(),
+            finishTimestampString: this.quizScoreService.getFinishTimestampString(),
+        };
+        this.quizScoreService.postScore(this.scoreEntry, this._currentQuiz.id);
     }
 }
 EndpageComponent.ɵfac = function EndpageComponent_Factory(t) { return new (t || EndpageComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_score_service__WEBPACK_IMPORTED_MODULE_2__["QuizScoreService"])); };
@@ -586,18 +595,24 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const _c0 = function () { return { standalone: true }; };
-const _c1 = function () { return ["/createsurvey"]; };
+const _c1 = function () { return ["/createquiz"]; };
 class HomescreenComponent {
-    constructor(surveyService, router) {
-        this.surveyService = surveyService;
+    constructor(quizService, router) {
+        this.quizService = quizService;
         this.router = router;
     }
     ngOnInit() {
     }
-    onOpenSurveySubmit() {
-        console.log("chosen survey: " + this.chosenSurvey);
-        this.surveyService.getInitSurveys(this.chosenSurvey);
-        this.router.navigate(['/namescreen']);
+    onOpenQuizSubmit() {
+        console.log("chosen quiz: " + this.chosenQuiz);
+        this.quizService.quizSubject.subscribe(newquiz => {
+            if (newquiz != null) {
+                console.log('Test');
+                this.router.navigate(['/namescreen']);
+            }
+            console.log(newquiz);
+        });
+        this.quizService.getInitQuiz(this.chosenQuiz);
     }
 }
 HomescreenComponent.ɵfac = function HomescreenComponent_Factory(t) { return new (t || HomescreenComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"])); };
@@ -612,16 +627,16 @@ HomescreenComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "h2");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Voer een Surveynummer in:");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "Voer een Quiznummer in:");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "form", 5, 6);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function HomescreenComponent_Template_form_ngSubmit_8_listener() { return ctx.onOpenSurveySubmit(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function HomescreenComponent_Template_form_ngSubmit_8_listener() { return ctx.onOpenQuizSubmit(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "input", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function HomescreenComponent_Template_input_ngModelChange_11_listener($event) { return ctx.chosenSurvey = $event; });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function HomescreenComponent_Template_input_ngModelChange_11_listener($event) { return ctx.chosenQuiz = $event; });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "button", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, "Open Survey");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](13, "Open Quiz");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -632,14 +647,14 @@ HomescreenComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "Maak een nieuwe Survey");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "Maak een nieuwe Quiz");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.chosenSurvey)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.chosenQuiz)("ngModelOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](3, _c0));
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("routerLink", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](4, _c1));
     } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵangular_packages_forms_forms_y"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgForm"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgModel"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterLink"]], styles: ["h1[_ngcontent-%COMP%] {\r\n  color:white;\r\n  font-size: 30px;\r\n  font-family: 'Roboto', sans serif;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  margin-top: 8rem;\r\n\r\n}\r\n\r\nh2[_ngcontent-%COMP%] {\r\n  color:white;\r\n  alignment: center;\r\n  font-size: 20px;\r\n  font-family: 'Roboto', sans serif;\r\n  font-weight: bold;\r\n  text-align: center;\r\n  margin-top: 8rem;\r\n\r\n}\r\n\r\nform-inline[_ngcontent-%COMP%]{\r\n  align-self: center;\r\n  align-items: center;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZXNjcmVlbi9ob21lc2NyZWVuLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxXQUFXO0VBQ1gsZUFBZTtFQUNmLGlDQUFpQztFQUNqQyxpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLGdCQUFnQjs7QUFFbEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsaUJBQWlCO0VBQ2pCLGVBQWU7RUFDZixpQ0FBaUM7RUFDakMsaUJBQWlCO0VBQ2pCLGtCQUFrQjtFQUNsQixnQkFBZ0I7O0FBRWxCOztBQUVBO0VBQ0Usa0JBQWtCO0VBQ2xCLG1CQUFtQjtBQUNyQiIsImZpbGUiOiJzcmMvYXBwL2hvbWVzY3JlZW4vaG9tZXNjcmVlbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaDEge1xyXG4gIGNvbG9yOndoaXRlO1xyXG4gIGZvbnQtc2l6ZTogMzBweDtcclxuICBmb250LWZhbWlseTogJ1JvYm90bycsIHNhbnMgc2VyaWY7XHJcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XHJcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gIG1hcmdpbi10b3A6IDhyZW07XHJcblxyXG59XHJcblxyXG5oMiB7XHJcbiAgY29sb3I6d2hpdGU7XHJcbiAgYWxpZ25tZW50OiBjZW50ZXI7XHJcbiAgZm9udC1zaXplOiAyMHB4O1xyXG4gIGZvbnQtZmFtaWx5OiAnUm9ib3RvJywgc2FucyBzZXJpZjtcclxuICBmb250LXdlaWdodDogYm9sZDtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgbWFyZ2luLXRvcDogOHJlbTtcclxuXHJcbn1cclxuXHJcbmZvcm0taW5saW5le1xyXG4gIGFsaWduLXNlbGY6IGNlbnRlcjtcclxuICBhbGlnbi1pdGVtczogY2VudGVyO1xyXG59XHJcbiJdfQ== */"] });
@@ -751,13 +766,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function QuestionComponent_div_13_Template(rf, ctx) { if (rf & 1) {
+function QuestionComponent_div_14_Template(rf, ctx) { if (rf & 1) {
     const _r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 13);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input", 14);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function QuestionComponent_div_13_Template_input_ngModelChange_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r6.chosenAnswer = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "input", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function QuestionComponent_div_14_Template_input_ngModelChange_1_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r7); const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r6.chosenAnswer = $event; });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "label", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "label", 16);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -769,14 +784,14 @@ function QuestionComponent_div_13_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](answerOption_r5.value);
 } }
-function QuestionComponent_button_14_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 16);
+function QuestionComponent_button_15_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 17);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " Submit ");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 const _c0 = function (a0) { return { "color": a0 }; };
-function QuestionComponent_div_15_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 17);
+function QuestionComponent_div_16_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 18);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
@@ -785,12 +800,12 @@ function QuestionComponent_div_15_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r3.answerIsCorrect.answerExplanation, " ");
 } }
-function QuestionComponent_div_19_Template(rf, ctx) { if (rf & 1) {
+function QuestionComponent_div_20_Template(rf, ctx) { if (rf & 1) {
     const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 18);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p", 19);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 20);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function QuestionComponent_div_19_Template_button_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9); const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r8.nextQuestion(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 19);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "p", 20);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 21);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function QuestionComponent_div_20_Template_button_click_2_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9); const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r8.nextQuestion(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "Volgende");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
@@ -806,7 +821,7 @@ class QuestionComponent {
         this.errorMessage = '';
     }
     ngOnInit() {
-        this.quizService.survey.subscribe(quiz => {
+        this.quizService.quizSubject.subscribe(quiz => {
             this.currentQuiz = quiz;
         });
     }
@@ -824,9 +839,10 @@ class QuestionComponent {
     // In de forloop (HTML) wordt dan de answers gematched met dezelfde value waarde (dus antwoord A wordt radiobutton met Antwoord A)
     setAnswersToRadiobuttons() {
         this.currentQuestion = this.currentQuiz.questions.filter(question => {
-            return question.number === this.currentQuestionNumber + 1;
+            return question.id === this.currentQuestionNumber + 1;
         })[0];
         if (this.currentQuestion === undefined) {
+            console.log('currentquestion is: ' + this.currentQuestion);
             this.date = new Date();
             this.dateString = Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["formatDate"])(this.date, 'dd/MM/yyyy HH:mm:ss', 'en');
             this.quizScoreService.setFinishTimestamp(this.date);
@@ -837,7 +853,7 @@ class QuestionComponent {
         this.answerOptionsArray = this.currentQuestion.answerOptions;
     }
     onFormSubmit() {
-        this.submittedAnswer = { surveyid: this.currentQuiz.id, chosenAnswerId: this.chosenAnswer.id, questionid: this.currentQuestion.number, answeredCorrect: false };
+        this.submittedAnswer = { quizid: this.currentQuiz.id, chosenAnswerId: this.chosenAnswer.id, questionid: this.currentQuestion.number, answeredCorrect: false };
         this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
             this.answerIsCorrect = answerIsCorrect;
             this.saveAnswers();
@@ -856,7 +872,7 @@ class QuestionComponent {
     }
 }
 QuestionComponent.ɵfac = function QuestionComponent_Factory(t) { return new (t || QuestionComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_service__WEBPACK_IMPORTED_MODULE_2__["QuizService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_submitAnswer_service__WEBPACK_IMPORTED_MODULE_3__["SubmitAnswerService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_score_service__WEBPACK_IMPORTED_MODULE_4__["QuizScoreService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"])); };
-QuestionComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: QuestionComponent, selectors: [["app-question"]], decls: 20, vars: 5, consts: [["Style", "background-image: url('./assets/images/traffic.jpg'); height: 250px", 1, "jumbotron-fluid"], [1, "container", "mx-auto"], [1, "row"], [1, "jumbotron-fluid", "d-flex", "flex-column"], [1, "container"], [1, "row", "col-sm-12"], [3, "ngSubmit"], ["questionForm", "ngForm"], ["class", "radioBlok", 4, "ngFor", "ngForOf"], ["class", "btn btn-light btn-sm", "type", "submit", 4, "ngIf"], ["class", "col-sm-6", "style", "background-color: white", 3, "ngStyle", 4, "ngIf"], [1, "row", "col-sm-12", 2, "margin", "5px", "background-color", "white"], ["class", "col-1", "Style", "background-color:black;", 4, "ngIf"], [1, "radioBlok"], ["type", "radio", "name", "answerButtons", 3, "ngModel", "value", "ngModelChange"], [1, "antwoordLabel"], ["type", "submit", 1, "btn", "btn-light", "btn-sm"], [1, "col-sm-6", 2, "background-color", "white", 3, "ngStyle"], ["Style", "background-color:black;", 1, "col-1"], [2, "margin", "1rem"], [1, "btn", "btn-dark", "btn-lg", 3, "click"]], template: function QuestionComponent_Template(rf, ctx) { if (rf & 1) {
+QuestionComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: QuestionComponent, selectors: [["app-question"]], decls: 21, vars: 5, consts: [["Style", "background-image: url('./assets/images/traffic.jpg'); height: 250px", 1, "jumbotron-fluid"], [1, "container", "mx-auto"], [1, "row"], [1, "jumbotron-fluid", "d-flex", "flex-column"], [1, "container"], [1, "row", "col-sm-12"], [1, "col-sm-6"], [3, "ngSubmit"], ["questionForm", "ngForm"], ["class", "radioBlok", 4, "ngFor", "ngForOf"], ["class", "btn btn-light btn-sm", "type", "submit", 4, "ngIf"], ["class", "col-sm-6", "style", "background-color: white", 3, "ngStyle", 4, "ngIf"], [1, "row", "col-sm-12", 2, "margin", "5px", "background-color", "white"], ["class", "col-1", "Style", "background-color:black;", 4, "ngIf"], [1, "radioBlok"], ["type", "radio", "name", "answerButtons", 3, "ngModel", "value", "ngModelChange"], [1, "antwoordLabel"], ["type", "submit", 1, "btn", "btn-light", "btn-sm"], [1, "col-sm-6", 2, "background-color", "white", 3, "ngStyle"], ["Style", "background-color:black;", 1, "col-1"], [2, "margin", "1rem"], [1, "btn", "btn-dark", "btn-lg", 3, "click"]], template: function QuestionComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "div", 2);
@@ -873,25 +889,27 @@ QuestionComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](9, "div", 5);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](10, "div", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "form", 6, 7);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function QuestionComponent_Template_form_ngSubmit_11_listener() { return ctx.onFormSubmit(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](13, QuestionComponent_div_13_Template, 4, 3, "div", 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, QuestionComponent_button_14_Template, 2, 0, "button", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, QuestionComponent_div_15_Template, 2, 4, "div", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "div", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](12, "form", 7, 8);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngSubmit", function QuestionComponent_Template_form_ngSubmit_12_listener() { return ctx.onFormSubmit(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](14, QuestionComponent_div_14_Template, 4, 3, "div", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](15, QuestionComponent_button_15_Template, 2, 0, "button", 10);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](17, "div", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](19, QuestionComponent_div_19_Template, 4, 0, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](16, QuestionComponent_div_16_Template, 2, 4, "div", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](18, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, QuestionComponent_div_20_Template, 4, 0, "div", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx.currentQuestion == null ? null : ctx.currentQuestion.questionDescription, "");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.answerOptionsArray);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", (ctx.chosenAnswer == null ? null : ctx.chosenAnswer.value) != null && ctx.answerIsCorrect == null);
@@ -957,8 +975,6 @@ function ScoreboardComponent_tr_16_Template(rf, ctx) { if (rf & 1) {
 const _c0 = function () { return ["/namescreen"]; };
 class ScoreboardComponent {
     constructor(quizService, quizScoreService) {
-        this.quizService = quizService;
-        this.quizScoreService = quizScoreService;
         /*    this.scoreEntry =     {
               'userName': quizScoreService.getUserName(),
               'answersCorrect': quizScoreService.getCorrectAnswers(),
@@ -967,20 +983,27 @@ class ScoreboardComponent {
             };*/
         //    quizService.addHighScore(this.scoreEntry);
         //    this.scoreEntries = getHighScores();
-        this.quizService.getScores().subscribe((data) => this.scoreEntry = {
-            userName: data.userName,
-            answersCorrect: data.answersCorrect,
-            finishTimestamp: data.finishTimestamp,
-            finishTimestampString: data.finishTimestampString
-        });
-        console.log(this.scoreEntry);
-        console.log(this.scoreEntry.userName);
-        console.log(this.scoreEntry.answersCorrect);
-        console.log(this.scoreEntry.finishTimestamp);
-        console.log(this.scoreEntry.finishTimestampString);
+        this.quizService = quizService;
+        this.quizScoreService = quizScoreService;
+        /*      this.quizScoreService.getScores().subscribe((data: ScoreEntry) =>
+              this.scoreEntry = {
+                userName: data.userName,
+                answersCorrect: data.answersCorrect,
+                finishTimestamp: data.finishTimestamp,
+                finishTimestampString: data.finishTimestampString
+              });*/
+        /*      console.log(this.scoreEntry);
+              console.log(this.scoreEntry.userName);
+              console.log(this.scoreEntry.answersCorrect);
+              console.log(this.scoreEntry.finishTimestamp);
+              console.log(this.scoreEntry.finishTimestampString);*/
         //    this.surveyScoreService.resetScores();
     }
     ngOnInit() {
+        this.quizScoreService.getScores(this._currentQuiz.id).subscribe(scoreEntries => {
+            console.log(scoreEntries);
+            this.scoreEntries = scoreEntries;
+        });
     }
 }
 ScoreboardComponent.ɵfac = function ScoreboardComponent_Factory(t) { return new (t || ScoreboardComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_service__WEBPACK_IMPORTED_MODULE_1__["QuizService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_quiz_score_service__WEBPACK_IMPORTED_MODULE_2__["QuizScoreService"])); };
@@ -1050,14 +1073,21 @@ ScoreboardComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefi
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuizScoreService", function() { return QuizScoreService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _url_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./url.service */ "./app/services/url.service.ts");
+
+
 
 
 class QuizScoreService {
-    constructor() {
+    constructor(http, urlService) {
+        this.http = http;
+        this.urlService = urlService;
         this.userName = '';
         this.correctAnswer = 0;
         this.inCorrectAnswer = 0;
         this.finishTimestampString = '';
+        this.scoresUrl = this.urlService.url + '/scores/';
     }
     getUserName() {
         return this.userName;
@@ -1067,6 +1097,12 @@ class QuizScoreService {
     }
     processAnswer(answerIsCorrect) {
         (answerIsCorrect === null || answerIsCorrect === void 0 ? void 0 : answerIsCorrect.isCorrect) === true ? this.correctAnswer++ : this.inCorrectAnswer++;
+    }
+    getScores(id) {
+        return this.http.get(this.scoresUrl + id);
+    }
+    postScore(scoreEntry, id) {
+        this.http.post(this.scoresUrl + id, scoreEntry);
     }
     getCorrectAnswers() {
         return this.correctAnswer;
@@ -1091,14 +1127,14 @@ class QuizScoreService {
         this.inCorrectAnswer = 0;
     }
 }
-QuizScoreService.ɵfac = function QuizScoreService_Factory(t) { return new (t || QuizScoreService)(); };
+QuizScoreService.ɵfac = function QuizScoreService_Factory(t) { return new (t || QuizScoreService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_url_service__WEBPACK_IMPORTED_MODULE_2__["UrlService"])); };
 QuizScoreService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: QuizScoreService, factory: QuizScoreService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](QuizScoreService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return []; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }, { type: _url_service__WEBPACK_IMPORTED_MODULE_2__["UrlService"] }]; }, null); })();
 
 
 /***/ }),
@@ -1114,50 +1150,39 @@ QuizScoreService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QuizService", function() { return QuizService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "../node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "../node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
 /* harmony import */ var _url_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./url.service */ "./app/services/url.service.ts");
 
 
 
 
 
-
-const httpOptions = {
-    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-        'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
-    })
-};
 class QuizService {
     constructor(http, urlService) {
         this.http = http;
         this.urlService = urlService;
-        this.surveyUrl = this.urlService.url + '/surveys/';
-        this.scoresUrl = this.urlService.url + '/scores/';
-        this.survey = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](null);
-        this.scoreEntries = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](null);
+        this.surveyUrl = this.urlService.url + "/";
+        this.scoreEntries = [];
+        this.quizSubject = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
     }
-    getInitSurveys(id) {
-        this.http.get(this.surveyUrl + id).subscribe(survey => {
-            this.survey.next(survey);
+    getInitQuiz(id) {
+        this.http.get(this.surveyUrl + id).subscribe(quiz => {
+            this.quizSubject.next(quiz);
         });
     }
-    /*  public getHighscores() {
-        return this.scoreEntries;
-      }*/
-    getScores() {
-        return this.http.get(this.scoresUrl);
+    postnewQuiz(newQuiz) {
+        return this.http.post(this.surveyUrl, newQuiz);
     }
 }
-QuizService.ɵfac = function QuizService_Factory(t) { return new (t || QuizService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"])); };
+QuizService.ɵfac = function QuizService_Factory(t) { return new (t || QuizService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"])); };
 QuizService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: QuizService, factory: QuizService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](QuizService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
                 providedIn: 'root'
             }]
-    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }, { type: _url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"] }]; }, null); })();
+    }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }, { type: _url_service__WEBPACK_IMPORTED_MODULE_3__["UrlService"] }]; }, null); })();
 
 
 /***/ }),

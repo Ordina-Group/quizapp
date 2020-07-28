@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class AnswerIsCorrect {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+/*    @GeneratedValue(strategy = GenerationType.IDENTITY)   */
     private Long id;
 
     private Long answerOptionId;
@@ -19,6 +19,13 @@ public class AnswerIsCorrect {
     private String answerExplanation;
 
     public AnswerIsCorrect(Long answerOptionId, Boolean isCorrect, String answerExplanation) {
+        this.answerOptionId = answerOptionId;
+        this.isCorrect = isCorrect;
+        this.answerExplanation = answerExplanation;
+    }
+
+    public AnswerIsCorrect(Long id, Long answerOptionId, Boolean isCorrect, String answerExplanation) {
+        this.id = id;
         this.answerOptionId = answerOptionId;
         this.isCorrect = isCorrect;
         this.answerExplanation = answerExplanation;
