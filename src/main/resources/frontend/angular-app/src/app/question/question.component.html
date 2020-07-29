@@ -34,11 +34,11 @@
       </div>
       <div *ngIf="answerIsCorrect" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }">
         {{answerIsCorrect.answerExplanation}}
-        <!--          videoId=
-                  [startSeconds]="'4'"
-          [endSeconds]="8"> -->
-        <youtube-player videoId="videoId" suggestedQuality="highres" [height]="250" [width]="500">{{currentQuestion.videoId}}
+<!--        [src]='product.imageUrl'-->
+        <youtube-player [videoId]='currentQuestion.videoId' suggestedQuality="highres" [height]="250" [width]="500">
         </youtube-player>
+<!--        <iframe width="1711" height="762" src="https://www.youtube.com/embed/5ru-UM1nYJQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+        </iframe>-->
       </div>
 
     </div>

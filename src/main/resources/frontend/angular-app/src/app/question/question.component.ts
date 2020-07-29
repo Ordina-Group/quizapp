@@ -60,9 +60,7 @@ export class QuestionComponent implements OnInit {
     this.currentQuestion = this.currentQuiz.questions.filter(question => {
       return question.id === this.currentQuestionNumber + 1;
     })[0];
-
-    console.log('current video id is: ' + this.currentQuestion.videoId);
-
+//    console.log('current video id is: ' + this.currentQuestion.videoId);
     if (this.currentQuestion === undefined) {
       console.log('currentquestion is: ' + this.currentQuestion);
       this.date = new Date();
