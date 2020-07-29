@@ -34,6 +34,11 @@
       </div>
       <div *ngIf="answerIsCorrect" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }">
         {{answerIsCorrect.answerExplanation}}
+        <!--          videoId=
+                  [startSeconds]="'4'"
+          [endSeconds]="8"> -->
+        <youtube-player videoId="videoId" suggestedQuality="highres" [height]="250" [width]="500">{{currentQuestion.videoId}}
+        </youtube-player>
       </div>
 
     </div>

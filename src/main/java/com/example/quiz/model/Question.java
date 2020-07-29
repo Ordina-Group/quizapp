@@ -22,6 +22,7 @@ public class Question implements Serializable {
 
     private String questionDescription;
     private int questionNumber;
+    private String videoId;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<AnswerOption> answerOptions;
@@ -29,21 +30,21 @@ public class Question implements Serializable {
     public Question() {
     }
 
-    public Question(String questionDescription, int questionNumber) {
+    public Question(String questionDescription, int questionNumber, String videoId) {
         this.questionDescription = questionDescription;
         this.questionNumber = questionNumber;
         this.answerOptions = new HashSet<>();
+        this.videoId = videoId;
     }
 
     public Question(Question question){
-        this(question.getQuestionDescription(), question.getQuestionNumber());
+        this(question.getQuestionDescription(), question.getQuestionNumber(), question.getVideoId());
         this.answerOptions = question.getAnswerOptions();
     }
 
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -51,7 +52,6 @@ public class Question implements Serializable {
     public int getQuestionNumber() {
         return questionNumber;
     }
-
     public void setQuestionNumber(int questionNumber) {
         this.questionNumber = questionNumber;
     }
@@ -59,7 +59,6 @@ public class Question implements Serializable {
     public String getQuestionDescription() {
         return questionDescription;
     }
-
     public void setQuestionDescription(String questionDescription) {
         this.questionDescription = questionDescription;
     }
@@ -67,20 +66,19 @@ public class Question implements Serializable {
     public Set<AnswerOption> getAnswerOptions() {
         return answerOptions;
     }
-
     public void setAnswerOptions(Set<AnswerOption> answerOptions) {
         this.answerOptions = answerOptions;
     }
 
-
     public int getNumber() {
         return questionNumber;
     }
-
     public void setNumber(int questionNumber) {
         this.questionNumber = questionNumber;
     }
 
+    public String getVideoId() {return videoId; }
+    public void setVideoId(String videoId) {this.videoId = videoId; }
 
     @Override
     public String toString() {
@@ -107,6 +105,5 @@ public class Question implements Serializable {
     public int hashCode() {
         return Objects.hash(id, questionDescription, questionNumber, answerOptions);
     }
-
 
 }

@@ -46,11 +46,11 @@ public class QuizApplication {
             Quiz quiz = new Quiz();
             quiz.setQuizDescription("Survey DevoxxxKids dag");
 
-            Question question1 = new Question("Slag bij Hastings?", 1);
+            Question question1 = new Question("Slag bij Hastings?", 1,"FW4RKp23Z4M");
             //question1.setId(1L);
-            Question question2 = new Question("Slag bij Nieuwpoort?", 2);
+            Question question2 = new Question("Slag bij Nieuwpoort?", 2, "WBk5rR_2b8Q");
             //question2.setId(2L);
-            Question question3 = new Question("Slag bij Waterloo?", 3);
+            Question question3 = new Question("Slag bij Waterloo?", 3, "nDZGL1xsqzs");
             //question3.setId(3L);
 
             //save answeroptions

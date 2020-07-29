@@ -14,6 +14,7 @@ import { CreateQuizComponent } from './createquiz/create-quiz.component';
 import { HomescreenComponent } from './homescreen/homescreen.component';
 import {NamescreenComponent} from './namescreen/namescreen.component';
 import {ScoreboardComponent} from './scoreboard/scoreboard.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 // import { formatDate } from '@angular/common';
 
 
@@ -37,7 +38,8 @@ import {ScoreboardComponent} from './scoreboard/scoreboard.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    YouTubePlayerModule
   ],
   providers: [QuizService, SubmitAnswerService],
   bootstrap: [AppComponent]

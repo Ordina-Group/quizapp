@@ -102673,6 +102673,1076 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "../node_modules/@angular/youtube-player/__ivy_ngcc__/fesm2015/youtube-player.js":
+  /*!***************************************************************************************!*\
+    !*** ../node_modules/@angular/youtube-player/__ivy_ngcc__/fesm2015/youtube-player.js ***!
+    \***************************************************************************************/
+
+  /*! exports provided: YouTubePlayer, YouTubePlayerModule */
+
+  /***/
+  function node_modulesAngularYoutubePlayer__ivy_ngcc__Fesm2015YoutubePlayerJs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "YouTubePlayer", function () {
+      return YouTubePlayer;
+    });
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "YouTubePlayerModule", function () {
+      return YouTubePlayerModule;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "../node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/common */
+    "../node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    /* harmony import */
+
+
+    var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! rxjs */
+    "../node_modules/rxjs/_esm2015/index.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! rxjs/operators */
+    "../node_modules/rxjs/_esm2015/operators/index.js");
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+
+
+    var _c0 = ["youtubeContainer"];
+    var DEFAULT_PLAYER_WIDTH = 640;
+    var DEFAULT_PLAYER_HEIGHT = 390;
+    /**
+     * Angular component that renders a YouTube player via the YouTube player
+     * iframe API.
+     * @see https://developers.google.com/youtube/iframe_api_reference
+     */
+
+    var YouTubePlayer = /*#__PURE__*/function () {
+      function YouTubePlayer(_ngZone, platformId) {
+        _classCallCheck(this, YouTubePlayer);
+
+        this._ngZone = _ngZone;
+        this._youtubeContainer = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this._destroyed = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this._playerChanges = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](undefined);
+        this._videoId = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](undefined);
+        this._height = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](DEFAULT_PLAYER_HEIGHT);
+        this._width = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](DEFAULT_PLAYER_WIDTH);
+        this._startSeconds = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](undefined);
+        this._endSeconds = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](undefined);
+        this._suggestedQuality = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](undefined);
+        this._playerVars = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](undefined);
+        /** Outputs are direct proxies from the player itself. */
+
+        this.ready = this._getLazyEmitter('onReady');
+        this.stateChange = this._getLazyEmitter('onStateChange');
+        this.error = this._getLazyEmitter('onError');
+        this.apiChange = this._getLazyEmitter('onApiChange');
+        this.playbackQualityChange = this._getLazyEmitter('onPlaybackQualityChange');
+        this.playbackRateChange = this._getLazyEmitter('onPlaybackRateChange');
+        this._isBrowser = Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(platformId);
+      }
+      /** YouTube Video ID to view */
+
+
+      _createClass2(YouTubePlayer, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          var _this158 = this;
+
+          // Don't do anything if we're not in a browser environment.
+          if (!this._isBrowser) {
+            return;
+          }
+
+          var iframeApiAvailableObs = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(true);
+
+          if (!window.YT) {
+            if (this.showBeforeIframeApiLoads) {
+              throw new Error('Namespace YT not found, cannot construct embedded youtube player. ' + 'Please install the YouTube Player API Reference for iframe Embeds: ' + 'https://developers.google.com/youtube/iframe_api_reference');
+            }
+
+            var iframeApiAvailableSubject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+            this._existingApiReadyCallback = window.onYouTubeIframeAPIReady;
+
+            window.onYouTubeIframeAPIReady = function () {
+              if (_this158._existingApiReadyCallback) {
+                _this158._existingApiReadyCallback();
+              }
+
+              _this158._ngZone.run(function () {
+                return iframeApiAvailableSubject.next(true);
+              });
+            };
+
+            iframeApiAvailableObs = iframeApiAvailableSubject.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["startWith"])(false));
+          } // An observable of the currently loaded player.
+
+
+          var playerObs = createPlayerObservable(this._youtubeContainer, this._videoId, iframeApiAvailableObs, this._width, this._height, this._playerVars, this._ngZone).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (player) {
+            // Emit this before the `waitUntilReady` call so that we can bind to
+            // events that happen as the player is being initialized (e.g. `onReady`).
+            _this158._playerChanges.next(player);
+          }), waitUntilReady(function (player) {
+            // Destroy the player if loading was aborted so that we don't end up leaking memory.
+            if (!playerIsReady(player)) {
+              player.destroy();
+            }
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(this._destroyed), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["publish"])()); // Set up side effects to bind inputs to the player.
+
+          playerObs.subscribe(function (player) {
+            _this158._player = player;
+
+            if (player && _this158._pendingPlayerState) {
+              _this158._initializePlayer(player, _this158._pendingPlayerState);
+            }
+
+            _this158._pendingPlayerState = undefined;
+          });
+          bindSizeToPlayer(playerObs, this._width, this._height);
+          bindSuggestedQualityToPlayer(playerObs, this._suggestedQuality);
+          bindCueVideoCall(playerObs, this._videoId, this._startSeconds, this._endSeconds, this._suggestedQuality, this._destroyed); // After all of the subscriptions are set up, connect the observable.
+
+          playerObs.connect();
+        }
+        /**
+         * @deprecated No longer being used. To be removed.
+         * @breaking-change 11.0.0
+         */
+
+      }, {
+        key: "createEventsBoundInZone",
+        value: function createEventsBoundInZone() {
+          return {};
+        }
+      }, {
+        key: "ngAfterViewInit",
+        value: function ngAfterViewInit() {
+          this._youtubeContainer.next(this.youtubeContainer.nativeElement);
+        }
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {
+          if (this._player) {
+            this._player.destroy();
+
+            window.onYouTubeIframeAPIReady = this._existingApiReadyCallback;
+          }
+
+          this._playerChanges.complete();
+
+          this._videoId.complete();
+
+          this._height.complete();
+
+          this._width.complete();
+
+          this._startSeconds.complete();
+
+          this._endSeconds.complete();
+
+          this._suggestedQuality.complete();
+
+          this._youtubeContainer.complete();
+
+          this._playerVars.complete();
+
+          this._destroyed.next();
+
+          this._destroyed.complete();
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#playVideo */
+
+      }, {
+        key: "playVideo",
+        value: function playVideo() {
+          if (this._player) {
+            this._player.playVideo();
+          } else {
+            this._getPendingState().playbackState = 1
+            /* PLAYING */
+            ;
+          }
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#pauseVideo */
+
+      }, {
+        key: "pauseVideo",
+        value: function pauseVideo() {
+          if (this._player) {
+            this._player.pauseVideo();
+          } else {
+            this._getPendingState().playbackState = 2
+            /* PAUSED */
+            ;
+          }
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#stopVideo */
+
+      }, {
+        key: "stopVideo",
+        value: function stopVideo() {
+          if (this._player) {
+            this._player.stopVideo();
+          } else {
+            // It seems like YouTube sets the player to CUED when it's stopped.
+            this._getPendingState().playbackState = 5
+            /* CUED */
+            ;
+          }
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#seekTo */
+
+      }, {
+        key: "seekTo",
+        value: function seekTo(seconds, allowSeekAhead) {
+          if (this._player) {
+            this._player.seekTo(seconds, allowSeekAhead);
+          } else {
+            this._getPendingState().seek = {
+              seconds: seconds,
+              allowSeekAhead: allowSeekAhead
+            };
+          }
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#mute */
+
+      }, {
+        key: "mute",
+        value: function mute() {
+          if (this._player) {
+            this._player.mute();
+          } else {
+            this._getPendingState().muted = true;
+          }
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#unMute */
+
+      }, {
+        key: "unMute",
+        value: function unMute() {
+          if (this._player) {
+            this._player.unMute();
+          } else {
+            this._getPendingState().muted = false;
+          }
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#isMuted */
+
+      }, {
+        key: "isMuted",
+        value: function isMuted() {
+          if (this._player) {
+            return this._player.isMuted();
+          }
+
+          if (this._pendingPlayerState) {
+            return !!this._pendingPlayerState.muted;
+          }
+
+          return false;
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#setVolume */
+
+      }, {
+        key: "setVolume",
+        value: function setVolume(volume) {
+          if (this._player) {
+            this._player.setVolume(volume);
+          } else {
+            this._getPendingState().volume = volume;
+          }
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getVolume */
+
+      }, {
+        key: "getVolume",
+        value: function getVolume() {
+          if (this._player) {
+            return this._player.getVolume();
+          }
+
+          if (this._pendingPlayerState && this._pendingPlayerState.volume != null) {
+            return this._pendingPlayerState.volume;
+          }
+
+          return 0;
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#setPlaybackRate */
+
+      }, {
+        key: "setPlaybackRate",
+        value: function setPlaybackRate(playbackRate) {
+          if (this._player) {
+            return this._player.setPlaybackRate(playbackRate);
+          } else {
+            this._getPendingState().playbackRate = playbackRate;
+          }
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getPlaybackRate */
+
+      }, {
+        key: "getPlaybackRate",
+        value: function getPlaybackRate() {
+          if (this._player) {
+            return this._player.getPlaybackRate();
+          }
+
+          if (this._pendingPlayerState && this._pendingPlayerState.playbackRate != null) {
+            return this._pendingPlayerState.playbackRate;
+          }
+
+          return 0;
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getAvailablePlaybackRates */
+
+      }, {
+        key: "getAvailablePlaybackRates",
+        value: function getAvailablePlaybackRates() {
+          return this._player ? this._player.getAvailablePlaybackRates() : [];
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getVideoLoadedFraction */
+
+      }, {
+        key: "getVideoLoadedFraction",
+        value: function getVideoLoadedFraction() {
+          return this._player ? this._player.getVideoLoadedFraction() : 0;
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getPlayerState */
+
+      }, {
+        key: "getPlayerState",
+        value: function getPlayerState() {
+          if (!this._isBrowser || !window.YT) {
+            return undefined;
+          }
+
+          if (this._player) {
+            return this._player.getPlayerState();
+          }
+
+          if (this._pendingPlayerState && this._pendingPlayerState.playbackState != null) {
+            return this._pendingPlayerState.playbackState;
+          }
+
+          return -1
+          /* UNSTARTED */
+          ;
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getCurrentTime */
+
+      }, {
+        key: "getCurrentTime",
+        value: function getCurrentTime() {
+          if (this._player) {
+            return this._player.getCurrentTime();
+          }
+
+          if (this._pendingPlayerState && this._pendingPlayerState.seek) {
+            return this._pendingPlayerState.seek.seconds;
+          }
+
+          return 0;
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getPlaybackQuality */
+
+      }, {
+        key: "getPlaybackQuality",
+        value: function getPlaybackQuality() {
+          return this._player ? this._player.getPlaybackQuality() : 'default';
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getAvailableQualityLevels */
+
+      }, {
+        key: "getAvailableQualityLevels",
+        value: function getAvailableQualityLevels() {
+          return this._player ? this._player.getAvailableQualityLevels() : [];
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getDuration */
+
+      }, {
+        key: "getDuration",
+        value: function getDuration() {
+          return this._player ? this._player.getDuration() : 0;
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getVideoUrl */
+
+      }, {
+        key: "getVideoUrl",
+        value: function getVideoUrl() {
+          return this._player ? this._player.getVideoUrl() : '';
+        }
+        /** See https://developers.google.com/youtube/iframe_api_reference#getVideoEmbedCode */
+
+      }, {
+        key: "getVideoEmbedCode",
+        value: function getVideoEmbedCode() {
+          return this._player ? this._player.getVideoEmbedCode() : '';
+        }
+        /** Gets an object that should be used to store the temporary API state. */
+
+      }, {
+        key: "_getPendingState",
+        value: function _getPendingState() {
+          if (!this._pendingPlayerState) {
+            this._pendingPlayerState = {};
+          }
+
+          return this._pendingPlayerState;
+        }
+        /** Initializes a player from a temporary state. */
+
+      }, {
+        key: "_initializePlayer",
+        value: function _initializePlayer(player, state) {
+          var playbackState = state.playbackState,
+              playbackRate = state.playbackRate,
+              volume = state.volume,
+              muted = state.muted,
+              seek = state.seek;
+
+          switch (playbackState) {
+            case 1
+            /* PLAYING */
+            :
+              player.playVideo();
+              break;
+
+            case 2
+            /* PAUSED */
+            :
+              player.pauseVideo();
+              break;
+
+            case 5
+            /* CUED */
+            :
+              player.stopVideo();
+              break;
+          }
+
+          if (playbackRate != null) {
+            player.setPlaybackRate(playbackRate);
+          }
+
+          if (volume != null) {
+            player.setVolume(volume);
+          }
+
+          if (muted != null) {
+            muted ? player.mute() : player.unMute();
+          }
+
+          if (seek != null) {
+            player.seekTo(seek.seconds, seek.allowSeekAhead);
+          }
+        }
+        /** Gets an observable that adds an event listener to the player when a user subscribes to it. */
+
+      }, {
+        key: "_getLazyEmitter",
+        value: function _getLazyEmitter(name) {
+          var _this159 = this;
+
+          // Start with the stream of players. This way the events will be transferred
+          // over to the new player if it gets swapped out under-the-hood.
+          return this._playerChanges.pipe( // Switch to the bound event. `switchMap` ensures that the old event is removed when the
+          // player is changed. If there's no player, return an observable that never emits.
+          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (player) {
+            return player ? Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEventPattern"])(function (listener) {
+              player.addEventListener(name, listener);
+            }, function (listener) {
+              // The API seems to throw when we try to unbind from a destroyed player and it doesn't
+              // expose whether the player has been destroyed so we have to wrap it in a try/catch to
+              // prevent the entire stream from erroring out.
+              try {
+                if (player.removeEventListener) {
+                  player.removeEventListener(name, listener);
+                }
+              } catch (_a) {}
+            }) : Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])();
+          }), // By default we run all the API interactions outside the zone
+          // so we have to bring the events back in manually when they emit.
+          function (source) {
+            return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
+              return source.subscribe({
+                next: function next(value) {
+                  return _this159._ngZone.run(function () {
+                    return observer.next(value);
+                  });
+                },
+                error: function error(_error) {
+                  return observer.error(_error);
+                },
+                complete: function complete() {
+                  return observer.complete();
+                }
+              });
+            });
+          }, // Ensures that everything is cleared out on destroy.
+          Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(this._destroyed));
+        }
+      }, {
+        key: "videoId",
+        get: function get() {
+          return this._videoId.value;
+        },
+        set: function set(videoId) {
+          this._videoId.next(videoId);
+        }
+        /** Height of video player */
+
+      }, {
+        key: "height",
+        get: function get() {
+          return this._height.value;
+        },
+        set: function set(height) {
+          this._height.next(height || DEFAULT_PLAYER_HEIGHT);
+        }
+        /** Width of video player */
+
+      }, {
+        key: "width",
+        get: function get() {
+          return this._width.value;
+        },
+        set: function set(width) {
+          this._width.next(width || DEFAULT_PLAYER_WIDTH);
+        }
+        /** The moment when the player is supposed to start playing */
+
+      }, {
+        key: "startSeconds",
+        set: function set(startSeconds) {
+          this._startSeconds.next(startSeconds);
+        }
+        /** The moment when the player is supposed to stop playing */
+
+      }, {
+        key: "endSeconds",
+        set: function set(endSeconds) {
+          this._endSeconds.next(endSeconds);
+        }
+        /** The suggested quality of the player */
+
+      }, {
+        key: "suggestedQuality",
+        set: function set(suggestedQuality) {
+          this._suggestedQuality.next(suggestedQuality);
+        }
+        /**
+         * Extra parameters used to configure the player. See:
+         * https://developers.google.com/youtube/player_parameters.html?playerVersion=HTML5#Parameters
+         */
+
+      }, {
+        key: "playerVars",
+        get: function get() {
+          return this._playerVars.value;
+        },
+        set: function set(playerVars) {
+          this._playerVars.next(playerVars);
+        }
+      }]);
+
+      return YouTubePlayer;
+    }();
+
+    YouTubePlayer.ɵfac = function YouTubePlayer_Factory(t) {
+      return new (t || YouTubePlayer)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["PLATFORM_ID"]));
+    };
+
+    YouTubePlayer.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+      type: YouTubePlayer,
+      selectors: [["youtube-player"]],
+      viewQuery: function YouTubePlayer_Query(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c0, true);
+        }
+
+        if (rf & 2) {
+          var _t;
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.youtubeContainer = _t.first);
+        }
+      },
+      inputs: {
+        videoId: "videoId",
+        height: "height",
+        width: "width",
+        startSeconds: "startSeconds",
+        endSeconds: "endSeconds",
+        suggestedQuality: "suggestedQuality",
+        playerVars: "playerVars",
+        showBeforeIframeApiLoads: "showBeforeIframeApiLoads"
+      },
+      outputs: {
+        ready: "ready",
+        stateChange: "stateChange",
+        error: "error",
+        apiChange: "apiChange",
+        playbackQualityChange: "playbackQualityChange",
+        playbackRateChange: "playbackRateChange"
+      },
+      decls: 2,
+      vars: 0,
+      consts: [["youtubeContainer", ""]],
+      template: function YouTubePlayer_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](0, "div", null, 0);
+        }
+      },
+      encapsulation: 2,
+      changeDetection: 0
+    });
+
+    YouTubePlayer.ctorParameters = function () {
+      return [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]
+      }, {
+        type: Object,
+        decorators: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"],
+          args: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["PLATFORM_ID"]]
+        }]
+      }];
+    };
+
+    YouTubePlayer.propDecorators = {
+      videoId: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      height: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      width: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      startSeconds: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      endSeconds: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      suggestedQuality: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      playerVars: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      showBeforeIframeApiLoads: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+      }],
+      ready: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+      }],
+      stateChange: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+      }],
+      error: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+      }],
+      apiChange: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+      }],
+      playbackQualityChange: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+      }],
+      playbackRateChange: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+      }],
+      youtubeContainer: [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+        args: ['youtubeContainer']
+      }]
+    };
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](YouTubePlayer, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+          selector: 'youtube-player',
+          changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+          encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None,
+          // This div is *replaced* by the YouTube player embed.
+          template: '<div #youtubeContainer></div>'
+        }]
+      }], function () {
+        return [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]
+        }, {
+          type: Object,
+          decorators: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"],
+            args: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["PLATFORM_ID"]]
+          }]
+        }];
+      }, {
+        ready: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }],
+        stateChange: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }],
+        error: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }],
+        apiChange: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }],
+        playbackQualityChange: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }],
+        playbackRateChange: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"]
+        }],
+        videoId: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }],
+        height: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }],
+        width: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }],
+        startSeconds: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }],
+        endSeconds: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }],
+        suggestedQuality: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }],
+        playerVars: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }],
+        showBeforeIframeApiLoads: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }],
+        youtubeContainer: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+          args: ['youtubeContainer']
+        }]
+      });
+    })();
+    /** Listens to changes to the given width and height and sets it on the player. */
+
+
+    function bindSizeToPlayer(playerObs, widthObs, heightObs) {
+      return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])([playerObs, widthObs, heightObs]).subscribe(function (_ref14) {
+        var _ref15 = _slicedToArray(_ref14, 3),
+            player = _ref15[0],
+            width = _ref15[1],
+            height = _ref15[2];
+
+        return player && player.setSize(width, height);
+      });
+    }
+    /** Listens to changes from the suggested quality and sets it on the given player. */
+
+
+    function bindSuggestedQualityToPlayer(playerObs, suggestedQualityObs) {
+      return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])([playerObs, suggestedQualityObs]).subscribe(function (_ref16) {
+        var _ref17 = _slicedToArray(_ref16, 2),
+            player = _ref17[0],
+            suggestedQuality = _ref17[1];
+
+        return player && suggestedQuality && player.setPlaybackQuality(suggestedQuality);
+      });
+    }
+    /**
+     * Returns an observable that emits the loaded player once it's ready. Certain properties/methods
+     * won't be available until the iframe finishes loading.
+     * @param onAbort Callback function that will be invoked if the player loading was aborted before
+     * it was able to complete. Can be used to clean up any loose references.
+     */
+
+
+    function waitUntilReady(onAbort) {
+      return Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["flatMap"])(function (player) {
+        if (!player) {
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(undefined);
+        }
+
+        if (playerIsReady(player)) {
+          return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(player);
+        } // Since removeEventListener is not on Player when it's initialized, we can't use fromEvent.
+        // The player is not initialized fully until the ready is called.
+
+
+        return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (emitter) {
+          var aborted = false;
+          var resolved = false;
+
+          var onReady = function onReady(event) {
+            resolved = true;
+
+            if (!aborted) {
+              event.target.removeEventListener('onReady', onReady);
+              emitter.next(event.target);
+            }
+          };
+
+          player.addEventListener('onReady', onReady);
+          return function () {
+            aborted = true;
+
+            if (!resolved) {
+              onAbort(player);
+            }
+          };
+        }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["startWith"])(undefined));
+      });
+    }
+    /** Create an observable for the player based on the given options. */
+
+
+    function createPlayerObservable(youtubeContainer, videoIdObs, iframeApiAvailableObs, widthObs, heightObs, playerVarsObs, ngZone) {
+      var playerOptions = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])([videoIdObs, playerVarsObs]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["withLatestFrom"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])([widthObs, heightObs])), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref18) {
+        var _ref19 = _slicedToArray(_ref18, 2),
+            constructorOptions = _ref19[0],
+            sizeOptions = _ref19[1];
+
+        var _constructorOptions = _slicedToArray(constructorOptions, 2),
+            videoId = _constructorOptions[0],
+            playerVars = _constructorOptions[1];
+
+        var _sizeOptions = _slicedToArray(sizeOptions, 2),
+            width = _sizeOptions[0],
+            height = _sizeOptions[1];
+
+        return videoId ? {
+          videoId: videoId,
+          playerVars: playerVars,
+          width: width,
+          height: height
+        } : undefined;
+      }));
+      return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])([youtubeContainer, playerOptions, Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(ngZone)]).pipe(skipUntilRememberLatest(iframeApiAvailableObs), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["scan"])(syncPlayerState, undefined), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["distinctUntilChanged"])());
+    }
+    /** Skips the given observable until the other observable emits true, then emit the latest. */
+
+
+    function skipUntilRememberLatest(notifier) {
+      return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["pipe"])(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["combineLatest"])(notifier), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["skipWhile"])(function (_ref20) {
+        var _ref21 = _slicedToArray(_ref20, 2),
+            _ = _ref21[0],
+            doneSkipping = _ref21[1];
+
+        return !doneSkipping;
+      }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref22) {
+        var _ref23 = _slicedToArray(_ref22, 1),
+            value = _ref23[0];
+
+        return value;
+      }));
+    }
+    /** Destroy the player if there are no options, or create the player if there are options. */
+
+
+    function syncPlayerState(player, _ref24) {
+      var _ref25 = _slicedToArray(_ref24, 3),
+          container = _ref25[0],
+          videoOptions = _ref25[1],
+          ngZone = _ref25[2];
+
+      if (player && videoOptions && player.playerVars !== videoOptions.playerVars) {
+        // The player needs to be recreated if the playerVars are different.
+        player.destroy();
+      } else if (!videoOptions) {
+        if (player) {
+          // Destroy the player if the videoId was removed.
+          player.destroy();
+        }
+
+        return;
+      } else if (player) {
+        return player;
+      } // Important! We need to create the Player object outside of the `NgZone`, because it kicks
+      // off a 250ms setInterval which will continually trigger change detection if we don't.
+
+
+      var newPlayer = ngZone.runOutsideAngular(function () {
+        return new YT.Player(container, videoOptions);
+      });
+      newPlayer.videoId = videoOptions.videoId;
+      newPlayer.playerVars = videoOptions.playerVars;
+      return newPlayer;
+    }
+    /**
+     * Call cueVideoById if the videoId changes, or when start or end seconds change. cueVideoById will
+     * change the loaded video id to the given videoId, and set the start and end times to the given
+     * start/end seconds.
+     */
+
+
+    function bindCueVideoCall(playerObs, videoIdObs, startSecondsObs, endSecondsObs, suggestedQualityObs, destroyed) {
+      var cueOptionsObs = Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])([startSecondsObs, endSecondsObs]).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref26) {
+        var _ref27 = _slicedToArray(_ref26, 2),
+            startSeconds = _ref27[0],
+            endSeconds = _ref27[1];
+
+        return {
+          startSeconds: startSeconds,
+          endSeconds: endSeconds
+        };
+      })); // Only respond to changes in cue options if the player is not running.
+
+      var filteredCueOptions = cueOptionsObs.pipe(filterOnOther(playerObs, function (player) {
+        return !!player && !hasPlayerStarted(player);
+      })); // If the video id changed, there's no reason to run 'cue' unless the player
+      // was initialized with a different video id.
+
+      var changedVideoId = videoIdObs.pipe(filterOnOther(playerObs, function (player, videoId) {
+        return !!player && player.videoId !== videoId;
+      })); // If the player changed, there's no reason to run 'cue' unless there are cue options.
+
+      var changedPlayer = playerObs.pipe(filterOnOther(Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])([videoIdObs, cueOptionsObs]), function (_ref28, player) {
+        var _ref29 = _slicedToArray(_ref28, 2),
+            videoId = _ref29[0],
+            cueOptions = _ref29[1];
+
+        return !!player && (videoId != player.videoId || !!cueOptions.startSeconds || !!cueOptions.endSeconds);
+      }));
+      Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["merge"])(changedPlayer, changedVideoId, filteredCueOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["withLatestFrom"])(Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])([playerObs, videoIdObs, cueOptionsObs, suggestedQualityObs])), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref30) {
+        var _ref31 = _slicedToArray(_ref30, 2),
+            _ = _ref31[0],
+            values = _ref31[1];
+
+        return values;
+      }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["takeUntil"])(destroyed)).subscribe(function (_ref32) {
+        var _ref33 = _slicedToArray(_ref32, 4),
+            player = _ref33[0],
+            videoId = _ref33[1],
+            cueOptions = _ref33[2],
+            suggestedQuality = _ref33[3];
+
+        if (!videoId || !player) {
+          return;
+        }
+
+        player.videoId = videoId;
+        player.cueVideoById(Object.assign({
+          videoId: videoId,
+          suggestedQuality: suggestedQuality
+        }, cueOptions));
+      });
+    }
+
+    function hasPlayerStarted(player) {
+      var state = player.getPlayerState();
+      return state !== -1
+      /* UNSTARTED */
+      && state !== 5
+      /* CUED */
+      ;
+    }
+
+    function playerIsReady(player) {
+      return 'getPlayerStatus' in player;
+    }
+    /** Combines the two observables temporarily for the filter function. */
+
+
+    function filterOnOther(otherObs, filterFn) {
+      return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["pipe"])(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["withLatestFrom"])(otherObs), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (_ref34) {
+        var _ref35 = _slicedToArray(_ref34, 2),
+            value = _ref35[0],
+            other = _ref35[1];
+
+        return filterFn(other, value);
+      }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref36) {
+        var _ref37 = _slicedToArray(_ref36, 1),
+            value = _ref37[0];
+
+        return value;
+      }));
+    }
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+
+
+    var COMPONENTS = [YouTubePlayer];
+
+    var YouTubePlayerModule = function YouTubePlayerModule() {
+      _classCallCheck(this, YouTubePlayerModule);
+    };
+
+    YouTubePlayerModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
+      type: YouTubePlayerModule
+    });
+    YouTubePlayerModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({
+      factory: function YouTubePlayerModule_Factory(t) {
+        return new (t || YouTubePlayerModule)();
+      }
+    });
+
+    (function () {
+      (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](YouTubePlayerModule, {
+        declarations: [YouTubePlayer],
+        exports: [YouTubePlayer]
+      });
+    })();
+    /*@__PURE__*/
+
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](YouTubePlayerModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
+        args: [{
+          declarations: COMPONENTS,
+          exports: COMPONENTS
+        }]
+      }], null, null);
+    })();
+    /**
+     * @license
+     * Copyright Google LLC All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
+
+    /**
+     * Generated bundle index. Do not edit.
+     */
+    //# sourceMappingURL=youtube-player.js.map
+
+    /***/
+
+  },
+
+  /***/
   "../node_modules/rxjs/_esm2015/index.js":
   /*!**********************************************!*\
     !*** ../node_modules/rxjs/_esm2015/index.js ***!
@@ -103388,15 +104458,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super69 = _createSuper(AsyncSubject);
 
       function AsyncSubject() {
-        var _this158;
+        var _this160;
 
         _classCallCheck(this, AsyncSubject);
 
-        _this158 = _super69.apply(this, arguments);
-        _this158.value = null;
-        _this158.hasNext = false;
-        _this158.hasCompleted = false;
-        return _this158;
+        _this160 = _super69.apply(this, arguments);
+        _this160.value = null;
+        _this160.hasNext = false;
+        _this160.hasCompleted = false;
+        return _this160;
       }
 
       _createClass2(AsyncSubject, [{
@@ -103423,9 +104493,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "error",
-        value: function error(_error) {
+        value: function error(_error2) {
           if (!this.hasCompleted) {
-            _get(_getPrototypeOf(AsyncSubject.prototype), "error", this).call(this, _error);
+            _get(_getPrototypeOf(AsyncSubject.prototype), "error", this).call(this, _error2);
           }
         }
       }, {
@@ -103486,13 +104556,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super70 = _createSuper(BehaviorSubject);
 
       function BehaviorSubject(_value) {
-        var _this159;
+        var _this161;
 
         _classCallCheck(this, BehaviorSubject);
 
-        _this159 = _super70.call(this);
-        _this159._value = _value;
-        return _this159;
+        _this161 = _super70.call(this);
+        _this161._value = _value;
+        return _this161;
       }
 
       _createClass2(BehaviorSubject, [{
@@ -103568,16 +104638,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super71 = _createSuper(InnerSubscriber);
 
       function InnerSubscriber(parent, outerValue, outerIndex) {
-        var _this160;
+        var _this162;
 
         _classCallCheck(this, InnerSubscriber);
 
-        _this160 = _super71.call(this);
-        _this160.parent = parent;
-        _this160.outerValue = outerValue;
-        _this160.outerIndex = outerIndex;
-        _this160.index = 0;
-        return _this160;
+        _this162 = _super71.call(this);
+        _this162.parent = parent;
+        _this162.outerValue = outerValue;
+        _this162.outerIndex = outerIndex;
+        _this162.index = 0;
+        return _this162;
       }
 
       _createClass2(InnerSubscriber, [{
@@ -103869,12 +104939,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "forEach",
         value: function forEach(next, promiseCtor) {
-          var _this161 = this;
+          var _this163 = this;
 
           promiseCtor = getPromiseCtor(promiseCtor);
           return new promiseCtor(function (resolve, reject) {
             var subscription;
-            subscription = _this161.subscribe(function (value) {
+            subscription = _this163.subscribe(function (value) {
               try {
                 next(value);
               } catch (err) {
@@ -103914,13 +104984,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "toPromise",
         value: function toPromise(promiseCtor) {
-          var _this162 = this;
+          var _this164 = this;
 
           promiseCtor = getPromiseCtor(promiseCtor);
           return new promiseCtor(function (resolve, reject) {
             var value;
 
-            _this162.subscribe(function (x) {
+            _this164.subscribe(function (x) {
               return value = x;
             }, function (err) {
               return reject(err);
@@ -104125,7 +105195,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super73 = _createSuper(ReplaySubject);
 
       function ReplaySubject() {
-        var _this163;
+        var _this165;
 
         var bufferSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : Number.POSITIVE_INFINITY;
         var windowTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Number.POSITIVE_INFINITY;
@@ -104133,21 +105203,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _classCallCheck(this, ReplaySubject);
 
-        _this163 = _super73.call(this);
-        _this163.scheduler = scheduler;
-        _this163._events = [];
-        _this163._infiniteTimeWindow = false;
-        _this163._bufferSize = bufferSize < 1 ? 1 : bufferSize;
-        _this163._windowTime = windowTime < 1 ? 1 : windowTime;
+        _this165 = _super73.call(this);
+        _this165.scheduler = scheduler;
+        _this165._events = [];
+        _this165._infiniteTimeWindow = false;
+        _this165._bufferSize = bufferSize < 1 ? 1 : bufferSize;
+        _this165._windowTime = windowTime < 1 ? 1 : windowTime;
 
         if (windowTime === Number.POSITIVE_INFINITY) {
-          _this163._infiniteTimeWindow = true;
-          _this163.next = _this163.nextInfiniteTimeWindow;
+          _this165._infiniteTimeWindow = true;
+          _this165.next = _this165.nextInfiniteTimeWindow;
         } else {
-          _this163.next = _this163.nextTimeWindow;
+          _this165.next = _this165.nextTimeWindow;
         }
 
-        return _this163;
+        return _this165;
       }
 
       _createClass2(ReplaySubject, [{
@@ -104388,13 +105458,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super74 = _createSuper(SubjectSubscriber);
 
       function SubjectSubscriber(destination) {
-        var _this164;
+        var _this166;
 
         _classCallCheck(this, SubjectSubscriber);
 
-        _this164 = _super74.call(this, destination);
-        _this164.destination = destination;
-        return _this164;
+        _this166 = _super74.call(this, destination);
+        _this166.destination = destination;
+        return _this166;
       }
 
       return SubjectSubscriber;
@@ -104406,17 +105476,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super75 = _createSuper(Subject);
 
       function Subject() {
-        var _this165;
+        var _this167;
 
         _classCallCheck(this, Subject);
 
-        _this165 = _super75.call(this);
-        _this165.observers = [];
-        _this165.closed = false;
-        _this165.isStopped = false;
-        _this165.hasError = false;
-        _this165.thrownError = null;
-        return _this165;
+        _this167 = _super75.call(this);
+        _this167.observers = [];
+        _this167.closed = false;
+        _this167.isStopped = false;
+        _this167.hasError = false;
+        _this167.thrownError = null;
+        return _this167;
       }
 
       _createClass2(Subject, [{
@@ -104540,14 +105610,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super76 = _createSuper(AnonymousSubject);
 
       function AnonymousSubject(destination, source) {
-        var _this166;
+        var _this168;
 
         _classCallCheck(this, AnonymousSubject);
 
-        _this166 = _super76.call(this);
-        _this166.destination = destination;
-        _this166.source = source;
-        return _this166;
+        _this168 = _super76.call(this);
+        _this168.destination = destination;
+        _this168.source = source;
+        return _this168;
       }
 
       _createClass2(AnonymousSubject, [{
@@ -104629,15 +105699,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super77 = _createSuper(SubjectSubscription);
 
       function SubjectSubscription(subject, subscriber) {
-        var _this167;
+        var _this169;
 
         _classCallCheck(this, SubjectSubscription);
 
-        _this167 = _super77.call(this);
-        _this167.subject = subject;
-        _this167.subscriber = subscriber;
-        _this167.closed = false;
-        return _this167;
+        _this169 = _super77.call(this);
+        _this169.subject = subject;
+        _this169.subscriber = subscriber;
+        _this169.closed = false;
+        return _this169;
       }
 
       _createClass2(SubjectSubscription, [{
@@ -104739,47 +105809,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super78 = _createSuper(Subscriber);
 
       function Subscriber(destinationOrNext, error, complete) {
-        var _this168;
+        var _this170;
 
         _classCallCheck(this, Subscriber);
 
-        _this168 = _super78.call(this);
-        _this168.syncErrorValue = null;
-        _this168.syncErrorThrown = false;
-        _this168.syncErrorThrowable = false;
-        _this168.isStopped = false;
+        _this170 = _super78.call(this);
+        _this170.syncErrorValue = null;
+        _this170.syncErrorThrown = false;
+        _this170.syncErrorThrowable = false;
+        _this170.isStopped = false;
 
         switch (arguments.length) {
           case 0:
-            _this168.destination = _Observer__WEBPACK_IMPORTED_MODULE_1__["empty"];
+            _this170.destination = _Observer__WEBPACK_IMPORTED_MODULE_1__["empty"];
             break;
 
           case 1:
             if (!destinationOrNext) {
-              _this168.destination = _Observer__WEBPACK_IMPORTED_MODULE_1__["empty"];
+              _this170.destination = _Observer__WEBPACK_IMPORTED_MODULE_1__["empty"];
               break;
             }
 
             if (typeof destinationOrNext === 'object') {
               if (destinationOrNext instanceof Subscriber) {
-                _this168.syncErrorThrowable = destinationOrNext.syncErrorThrowable;
-                _this168.destination = destinationOrNext;
-                destinationOrNext.add(_assertThisInitialized(_this168));
+                _this170.syncErrorThrowable = destinationOrNext.syncErrorThrowable;
+                _this170.destination = destinationOrNext;
+                destinationOrNext.add(_assertThisInitialized(_this170));
               } else {
-                _this168.syncErrorThrowable = true;
-                _this168.destination = new SafeSubscriber(_assertThisInitialized(_this168), destinationOrNext);
+                _this170.syncErrorThrowable = true;
+                _this170.destination = new SafeSubscriber(_assertThisInitialized(_this170), destinationOrNext);
               }
 
               break;
             }
 
           default:
-            _this168.syncErrorThrowable = true;
-            _this168.destination = new SafeSubscriber(_assertThisInitialized(_this168), destinationOrNext, error, complete);
+            _this170.syncErrorThrowable = true;
+            _this170.destination = new SafeSubscriber(_assertThisInitialized(_this170), destinationOrNext, error, complete);
             break;
         }
 
-        return _this168;
+        return _this170;
       }
 
       _createClass2(Subscriber, [{
@@ -104869,15 +105939,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super79 = _createSuper(SafeSubscriber);
 
       function SafeSubscriber(_parentSubscriber, observerOrNext, error, complete) {
-        var _this169;
+        var _this171;
 
         _classCallCheck(this, SafeSubscriber);
 
-        _this169 = _super79.call(this);
-        _this169._parentSubscriber = _parentSubscriber;
+        _this171 = _super79.call(this);
+        _this171._parentSubscriber = _parentSubscriber;
         var next;
 
-        var context = _assertThisInitialized(_this169);
+        var context = _assertThisInitialized(_this171);
 
         if (Object(_util_isFunction__WEBPACK_IMPORTED_MODULE_0__["isFunction"])(observerOrNext)) {
           next = observerOrNext;
@@ -104890,18 +105960,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             context = Object.create(observerOrNext);
 
             if (Object(_util_isFunction__WEBPACK_IMPORTED_MODULE_0__["isFunction"])(context.unsubscribe)) {
-              _this169.add(context.unsubscribe.bind(context));
+              _this171.add(context.unsubscribe.bind(context));
             }
 
-            context.unsubscribe = _this169.unsubscribe.bind(_assertThisInitialized(_this169));
+            context.unsubscribe = _this171.unsubscribe.bind(_assertThisInitialized(_this171));
           }
         }
 
-        _this169._context = context;
-        _this169._next = next;
-        _this169._error = error;
-        _this169._complete = complete;
-        return _this169;
+        _this171._context = context;
+        _this171._next = next;
+        _this171._error = error;
+        _this171._complete = complete;
+        return _this171;
       }
 
       _createClass2(SafeSubscriber, [{
@@ -104957,14 +106027,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "complete",
         value: function complete() {
-          var _this170 = this;
+          var _this172 = this;
 
           if (!this.isStopped) {
             var _parentSubscriber = this._parentSubscriber;
 
             if (this._complete) {
               var wrappedComplete = function wrappedComplete() {
-                return _this170._complete.call(_this170._context);
+                return _this172._complete.call(_this172._context);
               };
 
               if (!_config__WEBPACK_IMPORTED_MODULE_4__["config"].useDeprecatedSynchronousErrorHandling || !_parentSubscriber.syncErrorThrowable) {
@@ -105353,16 +106423,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super80 = _createSuper(ConnectableObservable);
 
       function ConnectableObservable(source, subjectFactory) {
-        var _this171;
+        var _this173;
 
         _classCallCheck(this, ConnectableObservable);
 
-        _this171 = _super80.call(this);
-        _this171.source = source;
-        _this171.subjectFactory = subjectFactory;
-        _this171._refCount = 0;
-        _this171._isComplete = false;
-        return _this171;
+        _this173 = _super80.call(this);
+        _this173.source = source;
+        _this173.subjectFactory = subjectFactory;
+        _this173._refCount = 0;
+        _this173._isComplete = false;
+        return _this173;
       }
 
       _createClass2(ConnectableObservable, [{
@@ -105452,13 +106522,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super81 = _createSuper(ConnectableSubscriber);
 
       function ConnectableSubscriber(destination, connectable) {
-        var _this172;
+        var _this174;
 
         _classCallCheck(this, ConnectableSubscriber);
 
-        _this172 = _super81.call(this, destination);
-        _this172.connectable = connectable;
-        return _this172;
+        _this174 = _super81.call(this, destination);
+        _this174.connectable = connectable;
+        return _this174;
       }
 
       _createClass2(ConnectableSubscriber, [{
@@ -105531,13 +106601,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super82 = _createSuper(RefCountSubscriber);
 
       function RefCountSubscriber(destination, connectable) {
-        var _this173;
+        var _this175;
 
         _classCallCheck(this, RefCountSubscriber);
 
-        _this173 = _super82.call(this, destination);
-        _this173.connectable = connectable;
-        return _this173;
+        _this175 = _super82.call(this, destination);
+        _this175.connectable = connectable;
+        return _this175;
       }
 
       _createClass2(RefCountSubscriber, [{
@@ -105626,27 +106696,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super83 = _createSuper(SubscribeOnObservable);
 
       function SubscribeOnObservable(source) {
-        var _this174;
+        var _this176;
 
         var delayTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
         var scheduler = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _scheduler_asap__WEBPACK_IMPORTED_MODULE_1__["asap"];
 
         _classCallCheck(this, SubscribeOnObservable);
 
-        _this174 = _super83.call(this);
-        _this174.source = source;
-        _this174.delayTime = delayTime;
-        _this174.scheduler = scheduler;
+        _this176 = _super83.call(this);
+        _this176.source = source;
+        _this176.delayTime = delayTime;
+        _this176.scheduler = scheduler;
 
         if (!Object(_util_isNumeric__WEBPACK_IMPORTED_MODULE_2__["isNumeric"])(delayTime) || delayTime < 0) {
-          _this174.delayTime = 0;
+          _this176.delayTime = 0;
         }
 
         if (!scheduler || typeof scheduler.schedule !== 'function') {
-          _this174.scheduler = _scheduler_asap__WEBPACK_IMPORTED_MODULE_1__["asap"];
+          _this176.scheduler = _scheduler_asap__WEBPACK_IMPORTED_MODULE_1__["asap"];
         }
 
-        return _this174;
+        return _this176;
       }
 
       _createClass2(SubscribeOnObservable, [{
@@ -105804,7 +106874,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     function dispatch(state) {
-      var _this175 = this;
+      var _this177 = this;
 
       var self = this;
       var args = state.args,
@@ -105825,7 +106895,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var value = innerArgs.length <= 1 ? innerArgs[0] : innerArgs;
 
-          _this175.add(scheduler.schedule(dispatchNext, 0, {
+          _this177.add(scheduler.schedule(dispatchNext, 0, {
             value: value,
             subject: subject
           }));
@@ -105987,7 +107057,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
 
     function dispatch(state) {
-      var _this176 = this;
+      var _this178 = this;
 
       var params = state.params,
           subscriber = state.subscriber,
@@ -106008,14 +107078,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var err = innerArgs.shift();
 
           if (err) {
-            _this176.add(scheduler.schedule(dispatchError, 0, {
+            _this178.add(scheduler.schedule(dispatchError, 0, {
               err: err,
               subject: subject
             }));
           } else {
             var value = innerArgs.length <= 1 ? innerArgs[0] : innerArgs;
 
-            _this176.add(scheduler.schedule(dispatchNext, 0, {
+            _this178.add(scheduler.schedule(dispatchNext, 0, {
               value: value,
               subject: subject
             }));
@@ -106162,16 +107232,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super84 = _createSuper(CombineLatestSubscriber);
 
       function CombineLatestSubscriber(destination, resultSelector) {
-        var _this177;
+        var _this179;
 
         _classCallCheck(this, CombineLatestSubscriber);
 
-        _this177 = _super84.call(this, destination);
-        _this177.resultSelector = resultSelector;
-        _this177.active = 0;
-        _this177.values = [];
-        _this177.observables = [];
-        return _this177;
+        _this179 = _super84.call(this, destination);
+        _this179.resultSelector = resultSelector;
+        _this179.active = 0;
+        _this179.values = [];
+        _this179.observables = [];
+        return _this179;
       }
 
       _createClass2(CombineLatestSubscriber, [{
@@ -107641,15 +108711,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super85 = _createSuper(RaceSubscriber);
 
       function RaceSubscriber(destination) {
-        var _this178;
+        var _this180;
 
         _classCallCheck(this, RaceSubscriber);
 
-        _this178 = _super85.call(this, destination);
-        _this178.hasFirst = false;
-        _this178.observables = [];
-        _this178.subscriptions = [];
-        return _this178;
+        _this180 = _super85.call(this, destination);
+        _this180.hasFirst = false;
+        _this180.observables = [];
+        _this180.subscriptions = [];
+        return _this180;
       }
 
       _createClass2(RaceSubscriber, [{
@@ -107846,9 +108916,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     }
 
-    function dispatch(_ref14) {
-      var error = _ref14.error,
-          subscriber = _ref14.subscriber;
+    function dispatch(_ref38) {
+      var error = _ref38.error,
+          subscriber = _ref38.subscriber;
       subscriber.error(error);
     } //# sourceMappingURL=throwError.js.map
 
@@ -108125,18 +109195,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super86 = _createSuper(ZipSubscriber);
 
       function ZipSubscriber(destination, resultSelector) {
-        var _this179;
+        var _this181;
 
         var values = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Object.create(null);
 
         _classCallCheck(this, ZipSubscriber);
 
-        _this179 = _super86.call(this, destination);
-        _this179.iterators = [];
-        _this179.active = 0;
-        _this179.resultSelector = typeof resultSelector === 'function' ? resultSelector : null;
-        _this179.values = values;
-        return _this179;
+        _this181 = _super86.call(this, destination);
+        _this181.iterators = [];
+        _this181.active = 0;
+        _this181.resultSelector = typeof resultSelector === 'function' ? resultSelector : null;
+        _this181.values = values;
+        return _this181;
       }
 
       _createClass2(ZipSubscriber, [{
@@ -108330,17 +109400,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super87 = _createSuper(ZipBufferIterator);
 
       function ZipBufferIterator(destination, parent, observable) {
-        var _this180;
+        var _this182;
 
         _classCallCheck(this, ZipBufferIterator);
 
-        _this180 = _super87.call(this, destination);
-        _this180.parent = parent;
-        _this180.observable = observable;
-        _this180.stillUnsubscribed = true;
-        _this180.buffer = [];
-        _this180.isComplete = false;
-        return _this180;
+        _this182 = _super87.call(this, destination);
+        _this182.parent = parent;
+        _this182.observable = observable;
+        _this182.stillUnsubscribed = true;
+        _this182.buffer = [];
+        _this182.isComplete = false;
+        return _this182;
       }
 
       _createClass2(ZipBufferIterator, [{
@@ -108466,14 +109536,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super88 = _createSuper(AuditSubscriber);
 
       function AuditSubscriber(destination, durationSelector) {
-        var _this181;
+        var _this183;
 
         _classCallCheck(this, AuditSubscriber);
 
-        _this181 = _super88.call(this, destination);
-        _this181.durationSelector = durationSelector;
-        _this181.hasValue = false;
-        return _this181;
+        _this183 = _super88.call(this, destination);
+        _this183.durationSelector = durationSelector;
+        _this183.hasValue = false;
+        return _this183;
       }
 
       _createClass2(AuditSubscriber, [{
@@ -108649,16 +109719,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super89 = _createSuper(BufferSubscriber);
 
       function BufferSubscriber(destination, closingNotifier) {
-        var _this182;
+        var _this184;
 
         _classCallCheck(this, BufferSubscriber);
 
-        _this182 = _super89.call(this, destination);
-        _this182.buffer = [];
+        _this184 = _super89.call(this, destination);
+        _this184.buffer = [];
 
-        _this182.add(Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_1__["subscribeToResult"])(_assertThisInitialized(_this182), closingNotifier));
+        _this184.add(Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_1__["subscribeToResult"])(_assertThisInitialized(_this184), closingNotifier));
 
-        return _this182;
+        return _this184;
       }
 
       _createClass2(BufferSubscriber, [{
@@ -108745,14 +109815,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super90 = _createSuper(BufferCountSubscriber);
 
       function BufferCountSubscriber(destination, bufferSize) {
-        var _this183;
+        var _this185;
 
         _classCallCheck(this, BufferCountSubscriber);
 
-        _this183 = _super90.call(this, destination);
-        _this183.bufferSize = bufferSize;
-        _this183.buffer = [];
-        return _this183;
+        _this185 = _super90.call(this, destination);
+        _this185.bufferSize = bufferSize;
+        _this185.buffer = [];
+        return _this185;
       }
 
       _createClass2(BufferCountSubscriber, [{
@@ -108788,16 +109858,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super91 = _createSuper(BufferSkipCountSubscriber);
 
       function BufferSkipCountSubscriber(destination, bufferSize, startBufferEvery) {
-        var _this184;
+        var _this186;
 
         _classCallCheck(this, BufferSkipCountSubscriber);
 
-        _this184 = _super91.call(this, destination);
-        _this184.bufferSize = bufferSize;
-        _this184.startBufferEvery = startBufferEvery;
-        _this184.buffers = [];
-        _this184.count = 0;
-        return _this184;
+        _this186 = _super91.call(this, destination);
+        _this186.bufferSize = bufferSize;
+        _this186.startBufferEvery = startBufferEvery;
+        _this186.buffers = [];
+        _this186.count = 0;
+        return _this186;
       }
 
       _createClass2(BufferSkipCountSubscriber, [{
@@ -108944,47 +110014,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super92 = _createSuper(BufferTimeSubscriber);
 
       function BufferTimeSubscriber(destination, bufferTimeSpan, bufferCreationInterval, maxBufferSize, scheduler) {
-        var _this185;
+        var _this187;
 
         _classCallCheck(this, BufferTimeSubscriber);
 
-        _this185 = _super92.call(this, destination);
-        _this185.bufferTimeSpan = bufferTimeSpan;
-        _this185.bufferCreationInterval = bufferCreationInterval;
-        _this185.maxBufferSize = maxBufferSize;
-        _this185.scheduler = scheduler;
-        _this185.contexts = [];
+        _this187 = _super92.call(this, destination);
+        _this187.bufferTimeSpan = bufferTimeSpan;
+        _this187.bufferCreationInterval = bufferCreationInterval;
+        _this187.maxBufferSize = maxBufferSize;
+        _this187.scheduler = scheduler;
+        _this187.contexts = [];
 
-        var context = _this185.openContext();
+        var context = _this187.openContext();
 
-        _this185.timespanOnly = bufferCreationInterval == null || bufferCreationInterval < 0;
+        _this187.timespanOnly = bufferCreationInterval == null || bufferCreationInterval < 0;
 
-        if (_this185.timespanOnly) {
+        if (_this187.timespanOnly) {
           var timeSpanOnlyState = {
-            subscriber: _assertThisInitialized(_this185),
+            subscriber: _assertThisInitialized(_this187),
             context: context,
             bufferTimeSpan: bufferTimeSpan
           };
 
-          _this185.add(context.closeAction = scheduler.schedule(dispatchBufferTimeSpanOnly, bufferTimeSpan, timeSpanOnlyState));
+          _this187.add(context.closeAction = scheduler.schedule(dispatchBufferTimeSpanOnly, bufferTimeSpan, timeSpanOnlyState));
         } else {
           var closeState = {
-            subscriber: _assertThisInitialized(_this185),
+            subscriber: _assertThisInitialized(_this187),
             context: context
           };
           var creationState = {
             bufferTimeSpan: bufferTimeSpan,
             bufferCreationInterval: bufferCreationInterval,
-            subscriber: _assertThisInitialized(_this185),
+            subscriber: _assertThisInitialized(_this187),
             scheduler: scheduler
           };
 
-          _this185.add(context.closeAction = scheduler.schedule(dispatchBufferClose, bufferTimeSpan, closeState));
+          _this187.add(context.closeAction = scheduler.schedule(dispatchBufferClose, bufferTimeSpan, closeState));
 
-          _this185.add(scheduler.schedule(dispatchBufferCreation, bufferCreationInterval, creationState));
+          _this187.add(scheduler.schedule(dispatchBufferCreation, bufferCreationInterval, creationState));
         }
 
-        return _this185;
+        return _this187;
       }
 
       _createClass2(BufferTimeSubscriber, [{
@@ -109184,18 +110254,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super93 = _createSuper(BufferToggleSubscriber);
 
       function BufferToggleSubscriber(destination, openings, closingSelector) {
-        var _this186;
+        var _this188;
 
         _classCallCheck(this, BufferToggleSubscriber);
 
-        _this186 = _super93.call(this, destination);
-        _this186.openings = openings;
-        _this186.closingSelector = closingSelector;
-        _this186.contexts = [];
+        _this188 = _super93.call(this, destination);
+        _this188.openings = openings;
+        _this188.closingSelector = closingSelector;
+        _this188.contexts = [];
 
-        _this186.add(Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_1__["subscribeToResult"])(_assertThisInitialized(_this186), openings));
+        _this188.add(Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_1__["subscribeToResult"])(_assertThisInitialized(_this188), openings));
 
-        return _this186;
+        return _this188;
       }
 
       _createClass2(BufferToggleSubscriber, [{
@@ -109376,17 +110446,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super94 = _createSuper(BufferWhenSubscriber);
 
       function BufferWhenSubscriber(destination, closingSelector) {
-        var _this187;
+        var _this189;
 
         _classCallCheck(this, BufferWhenSubscriber);
 
-        _this187 = _super94.call(this, destination);
-        _this187.closingSelector = closingSelector;
-        _this187.subscribing = false;
+        _this189 = _super94.call(this, destination);
+        _this189.closingSelector = closingSelector;
+        _this189.subscribing = false;
 
-        _this187.openBuffer();
+        _this189.openBuffer();
 
-        return _this187;
+        return _this189;
       }
 
       _createClass2(BufferWhenSubscriber, [{
@@ -109536,14 +110606,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super95 = _createSuper(CatchSubscriber);
 
       function CatchSubscriber(destination, selector, caught) {
-        var _this188;
+        var _this190;
 
         _classCallCheck(this, CatchSubscriber);
 
-        _this188 = _super95.call(this, destination);
-        _this188.selector = selector;
-        _this188.caught = caught;
-        return _this188;
+        _this190 = _super95.call(this, destination);
+        _this190.selector = selector;
+        _this190.caught = caught;
+        return _this190;
       }
 
       _createClass2(CatchSubscriber, [{
@@ -109880,16 +110950,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super96 = _createSuper(CountSubscriber);
 
       function CountSubscriber(destination, predicate, source) {
-        var _this189;
+        var _this191;
 
         _classCallCheck(this, CountSubscriber);
 
-        _this189 = _super96.call(this, destination);
-        _this189.predicate = predicate;
-        _this189.source = source;
-        _this189.count = 0;
-        _this189.index = 0;
-        return _this189;
+        _this191 = _super96.call(this, destination);
+        _this191.predicate = predicate;
+        _this191.source = source;
+        _this191.count = 0;
+        _this191.index = 0;
+        return _this191;
       }
 
       _createClass2(CountSubscriber, [{
@@ -109993,15 +111063,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super97 = _createSuper(DebounceSubscriber);
 
       function DebounceSubscriber(destination, durationSelector) {
-        var _this190;
+        var _this192;
 
         _classCallCheck(this, DebounceSubscriber);
 
-        _this190 = _super97.call(this, destination);
-        _this190.durationSelector = durationSelector;
-        _this190.hasValue = false;
-        _this190.durationSubscription = null;
-        return _this190;
+        _this192 = _super97.call(this, destination);
+        _this192.durationSelector = durationSelector;
+        _this192.hasValue = false;
+        _this192.durationSubscription = null;
+        return _this192;
       }
 
       _createClass2(DebounceSubscriber, [{
@@ -110142,17 +111212,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super98 = _createSuper(DebounceTimeSubscriber);
 
       function DebounceTimeSubscriber(destination, dueTime, scheduler) {
-        var _this191;
+        var _this193;
 
         _classCallCheck(this, DebounceTimeSubscriber);
 
-        _this191 = _super98.call(this, destination);
-        _this191.dueTime = dueTime;
-        _this191.scheduler = scheduler;
-        _this191.debouncedSubscription = null;
-        _this191.lastValue = null;
-        _this191.hasValue = false;
-        return _this191;
+        _this193 = _super98.call(this, destination);
+        _this193.dueTime = dueTime;
+        _this193.scheduler = scheduler;
+        _this193.debouncedSubscription = null;
+        _this193.lastValue = null;
+        _this193.hasValue = false;
+        return _this193;
       }
 
       _createClass2(DebounceTimeSubscriber, [{
@@ -110261,14 +111331,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super99 = _createSuper(DefaultIfEmptySubscriber);
 
       function DefaultIfEmptySubscriber(destination, defaultValue) {
-        var _this192;
+        var _this194;
 
         _classCallCheck(this, DefaultIfEmptySubscriber);
 
-        _this192 = _super99.call(this, destination);
-        _this192.defaultValue = defaultValue;
-        _this192.isEmpty = true;
-        return _this192;
+        _this194 = _super99.call(this, destination);
+        _this194.defaultValue = defaultValue;
+        _this194.isEmpty = true;
+        return _this194;
       }
 
       _createClass2(DefaultIfEmptySubscriber, [{
@@ -110372,17 +111442,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super100 = _createSuper(DelaySubscriber);
 
       function DelaySubscriber(destination, delay, scheduler) {
-        var _this193;
+        var _this195;
 
         _classCallCheck(this, DelaySubscriber);
 
-        _this193 = _super100.call(this, destination);
-        _this193.delay = delay;
-        _this193.scheduler = scheduler;
-        _this193.queue = [];
-        _this193.active = false;
-        _this193.errored = false;
-        return _this193;
+        _this195 = _super100.call(this, destination);
+        _this195.delay = delay;
+        _this195.scheduler = scheduler;
+        _this195.queue = [];
+        _this195.active = false;
+        _this195.errored = false;
+        return _this195;
       }
 
       _createClass2(DelaySubscriber, [{
@@ -110546,16 +111616,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super101 = _createSuper(DelayWhenSubscriber);
 
       function DelayWhenSubscriber(destination, delayDurationSelector) {
-        var _this194;
+        var _this196;
 
         _classCallCheck(this, DelayWhenSubscriber);
 
-        _this194 = _super101.call(this, destination);
-        _this194.delayDurationSelector = delayDurationSelector;
-        _this194.completed = false;
-        _this194.delayNotifierSubscriptions = [];
-        _this194.index = 0;
-        return _this194;
+        _this196 = _super101.call(this, destination);
+        _this196.delayDurationSelector = delayDurationSelector;
+        _this196.completed = false;
+        _this196.delayNotifierSubscriptions = [];
+        _this196.index = 0;
+        return _this196;
       }
 
       _createClass2(DelayWhenSubscriber, [{
@@ -110644,14 +111714,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super102 = _createSuper(SubscriptionDelayObservable);
 
       function SubscriptionDelayObservable(source, subscriptionDelay) {
-        var _this195;
+        var _this197;
 
         _classCallCheck(this, SubscriptionDelayObservable);
 
-        _this195 = _super102.call(this);
-        _this195.source = source;
-        _this195.subscriptionDelay = subscriptionDelay;
-        return _this195;
+        _this197 = _super102.call(this);
+        _this197.source = source;
+        _this197.subscriptionDelay = subscriptionDelay;
+        return _this197;
       }
 
       _createClass2(SubscriptionDelayObservable, [{
@@ -110670,15 +111740,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super103 = _createSuper(SubscriptionDelaySubscriber);
 
       function SubscriptionDelaySubscriber(parent, source) {
-        var _this196;
+        var _this198;
 
         _classCallCheck(this, SubscriptionDelaySubscriber);
 
-        _this196 = _super103.call(this);
-        _this196.parent = parent;
-        _this196.source = source;
-        _this196.sourceSubscribed = false;
-        return _this196;
+        _this198 = _super103.call(this);
+        _this198.parent = parent;
+        _this198.source = source;
+        _this198.sourceSubscribed = false;
+        return _this198;
       }
 
       _createClass2(SubscriptionDelaySubscriber, [{
@@ -110856,19 +111926,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super105 = _createSuper(DistinctSubscriber);
 
       function DistinctSubscriber(destination, keySelector, flushes) {
-        var _this197;
+        var _this199;
 
         _classCallCheck(this, DistinctSubscriber);
 
-        _this197 = _super105.call(this, destination);
-        _this197.keySelector = keySelector;
-        _this197.values = new Set();
+        _this199 = _super105.call(this, destination);
+        _this199.keySelector = keySelector;
+        _this199.values = new Set();
 
         if (flushes) {
-          _this197.add(Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_1__["subscribeToResult"])(_assertThisInitialized(_this197), flushes));
+          _this199.add(Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_1__["subscribeToResult"])(_assertThisInitialized(_this199), flushes));
         }
 
-        return _this197;
+        return _this199;
       }
 
       _createClass2(DistinctSubscriber, [{
@@ -110980,19 +112050,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super106 = _createSuper(DistinctUntilChangedSubscriber);
 
       function DistinctUntilChangedSubscriber(destination, compare, keySelector) {
-        var _this198;
+        var _this200;
 
         _classCallCheck(this, DistinctUntilChangedSubscriber);
 
-        _this198 = _super106.call(this, destination);
-        _this198.keySelector = keySelector;
-        _this198.hasKey = false;
+        _this200 = _super106.call(this, destination);
+        _this200.keySelector = keySelector;
+        _this200.hasKey = false;
 
         if (typeof compare === 'function') {
-          _this198.compare = compare;
+          _this200.compare = compare;
         }
 
-        return _this198;
+        return _this200;
       }
 
       _createClass2(DistinctUntilChangedSubscriber, [{
@@ -111247,17 +112317,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super107 = _createSuper(EverySubscriber);
 
       function EverySubscriber(destination, predicate, thisArg, source) {
-        var _this199;
+        var _this201;
 
         _classCallCheck(this, EverySubscriber);
 
-        _this199 = _super107.call(this, destination);
-        _this199.predicate = predicate;
-        _this199.thisArg = thisArg;
-        _this199.source = source;
-        _this199.index = 0;
-        _this199.thisArg = thisArg || _assertThisInitialized(_this199);
-        return _this199;
+        _this201 = _super107.call(this, destination);
+        _this201.predicate = predicate;
+        _this201.thisArg = thisArg;
+        _this201.source = source;
+        _this201.index = 0;
+        _this201.thisArg = thisArg || _assertThisInitialized(_this201);
+        return _this201;
       }
 
       _createClass2(EverySubscriber, [{
@@ -111355,14 +112425,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super108 = _createSuper(SwitchFirstSubscriber);
 
       function SwitchFirstSubscriber(destination) {
-        var _this200;
+        var _this202;
 
         _classCallCheck(this, SwitchFirstSubscriber);
 
-        _this200 = _super108.call(this, destination);
-        _this200.hasCompleted = false;
-        _this200.hasSubscription = false;
-        return _this200;
+        _this202 = _super108.call(this, destination);
+        _this202.hasCompleted = false;
+        _this202.hasSubscription = false;
+        return _this202;
       }
 
       _createClass2(SwitchFirstSubscriber, [{
@@ -111490,16 +112560,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super109 = _createSuper(ExhaustMapSubscriber);
 
       function ExhaustMapSubscriber(destination, project) {
-        var _this201;
+        var _this203;
 
         _classCallCheck(this, ExhaustMapSubscriber);
 
-        _this201 = _super109.call(this, destination);
-        _this201.project = project;
-        _this201.hasSubscription = false;
-        _this201.hasCompleted = false;
-        _this201.index = 0;
-        return _this201;
+        _this203 = _super109.call(this, destination);
+        _this203.project = project;
+        _this203.hasSubscription = false;
+        _this203.hasCompleted = false;
+        _this203.index = 0;
+        return _this203;
       }
 
       _createClass2(ExhaustMapSubscriber, [{
@@ -111657,23 +112727,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super110 = _createSuper(ExpandSubscriber);
 
       function ExpandSubscriber(destination, project, concurrent, scheduler) {
-        var _this202;
+        var _this204;
 
         _classCallCheck(this, ExpandSubscriber);
 
-        _this202 = _super110.call(this, destination);
-        _this202.project = project;
-        _this202.concurrent = concurrent;
-        _this202.scheduler = scheduler;
-        _this202.index = 0;
-        _this202.active = 0;
-        _this202.hasCompleted = false;
+        _this204 = _super110.call(this, destination);
+        _this204.project = project;
+        _this204.concurrent = concurrent;
+        _this204.scheduler = scheduler;
+        _this204.index = 0;
+        _this204.active = 0;
+        _this204.hasCompleted = false;
 
         if (concurrent < Number.POSITIVE_INFINITY) {
-          _this202.buffer = [];
+          _this204.buffer = [];
         }
 
-        return _this202;
+        return _this204;
       }
 
       _createClass2(ExpandSubscriber, [{
@@ -111829,15 +112899,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super111 = _createSuper(FilterSubscriber);
 
       function FilterSubscriber(destination, predicate, thisArg) {
-        var _this203;
+        var _this205;
 
         _classCallCheck(this, FilterSubscriber);
 
-        _this203 = _super111.call(this, destination);
-        _this203.predicate = predicate;
-        _this203.thisArg = thisArg;
-        _this203.count = 0;
-        return _this203;
+        _this205 = _super111.call(this, destination);
+        _this205.predicate = predicate;
+        _this205.thisArg = thisArg;
+        _this205.count = 0;
+        return _this205;
       }
 
       _createClass2(FilterSubscriber, [{
@@ -111926,15 +112996,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super112 = _createSuper(FinallySubscriber);
 
       function FinallySubscriber(destination, callback) {
-        var _this204;
+        var _this206;
 
         _classCallCheck(this, FinallySubscriber);
 
-        _this204 = _super112.call(this, destination);
+        _this206 = _super112.call(this, destination);
 
-        _this204.add(new _Subscription__WEBPACK_IMPORTED_MODULE_1__["Subscription"](callback));
+        _this206.add(new _Subscription__WEBPACK_IMPORTED_MODULE_1__["Subscription"](callback));
 
-        return _this204;
+        return _this206;
       }
 
       return FinallySubscriber;
@@ -112018,17 +113088,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super113 = _createSuper(FindValueSubscriber);
 
       function FindValueSubscriber(destination, predicate, source, yieldIndex, thisArg) {
-        var _this205;
+        var _this207;
 
         _classCallCheck(this, FindValueSubscriber);
 
-        _this205 = _super113.call(this, destination);
-        _this205.predicate = predicate;
-        _this205.source = source;
-        _this205.yieldIndex = yieldIndex;
-        _this205.thisArg = thisArg;
-        _this205.index = 0;
-        return _this205;
+        _this207 = _super113.call(this, destination);
+        _this207.predicate = predicate;
+        _this207.source = source;
+        _this207.yieldIndex = yieldIndex;
+        _this207.thisArg = thisArg;
+        _this207.index = 0;
+        return _this207;
       }
 
       _createClass2(FindValueSubscriber, [{
@@ -112259,19 +113329,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super114 = _createSuper(GroupBySubscriber);
 
       function GroupBySubscriber(destination, keySelector, elementSelector, durationSelector, subjectSelector) {
-        var _this206;
+        var _this208;
 
         _classCallCheck(this, GroupBySubscriber);
 
-        _this206 = _super114.call(this, destination);
-        _this206.keySelector = keySelector;
-        _this206.elementSelector = elementSelector;
-        _this206.durationSelector = durationSelector;
-        _this206.subjectSelector = subjectSelector;
-        _this206.groups = null;
-        _this206.attemptedToUnsubscribe = false;
-        _this206.count = 0;
-        return _this206;
+        _this208 = _super114.call(this, destination);
+        _this208.keySelector = keySelector;
+        _this208.elementSelector = elementSelector;
+        _this208.durationSelector = durationSelector;
+        _this208.subjectSelector = subjectSelector;
+        _this208.groups = null;
+        _this208.attemptedToUnsubscribe = false;
+        _this208.count = 0;
+        return _this208;
       }
 
       _createClass2(GroupBySubscriber, [{
@@ -112389,15 +113459,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super115 = _createSuper(GroupDurationSubscriber);
 
       function GroupDurationSubscriber(key, group, parent) {
-        var _this207;
+        var _this209;
 
         _classCallCheck(this, GroupDurationSubscriber);
 
-        _this207 = _super115.call(this, group);
-        _this207.key = key;
-        _this207.group = group;
-        _this207.parent = parent;
-        return _this207;
+        _this209 = _super115.call(this, group);
+        _this209.key = key;
+        _this209.group = group;
+        _this209.parent = parent;
+        return _this209;
       }
 
       _createClass2(GroupDurationSubscriber, [{
@@ -112427,15 +113497,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super116 = _createSuper(GroupedObservable);
 
       function GroupedObservable(key, groupSubject, refCountSubscription) {
-        var _this208;
+        var _this210;
 
         _classCallCheck(this, GroupedObservable);
 
-        _this208 = _super116.call(this);
-        _this208.key = key;
-        _this208.groupSubject = groupSubject;
-        _this208.refCountSubscription = refCountSubscription;
-        return _this208;
+        _this210 = _super116.call(this);
+        _this210.key = key;
+        _this210.groupSubject = groupSubject;
+        _this210.refCountSubscription = refCountSubscription;
+        return _this210;
       }
 
       _createClass2(GroupedObservable, [{
@@ -112463,14 +113533,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super117 = _createSuper(InnerRefCountSubscription);
 
       function InnerRefCountSubscription(parent) {
-        var _this209;
+        var _this211;
 
         _classCallCheck(this, InnerRefCountSubscription);
 
-        _this209 = _super117.call(this);
-        _this209.parent = parent;
+        _this211 = _super117.call(this);
+        _this211.parent = parent;
         parent.count++;
-        return _this209;
+        return _this211;
       }
 
       _createClass2(InnerRefCountSubscription, [{
@@ -112788,15 +113858,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super120 = _createSuper(MapSubscriber);
 
       function MapSubscriber(destination, project, thisArg) {
-        var _this210;
+        var _this212;
 
         _classCallCheck(this, MapSubscriber);
 
-        _this210 = _super120.call(this, destination);
-        _this210.project = project;
-        _this210.count = 0;
-        _this210.thisArg = thisArg || _assertThisInitialized(_this210);
-        return _this210;
+        _this212 = _super120.call(this, destination);
+        _this212.project = project;
+        _this212.count = 0;
+        _this212.thisArg = thisArg || _assertThisInitialized(_this212);
+        return _this212;
       }
 
       _createClass2(MapSubscriber, [{
@@ -112877,13 +113947,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super121 = _createSuper(MapToSubscriber);
 
       function MapToSubscriber(destination, value) {
-        var _this211;
+        var _this213;
 
         _classCallCheck(this, MapToSubscriber);
 
-        _this211 = _super121.call(this, destination);
-        _this211.value = value;
-        return _this211;
+        _this213 = _super121.call(this, destination);
+        _this213.value = value;
+        return _this213;
       }
 
       _createClass2(MapToSubscriber, [{
@@ -113220,20 +114290,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super123 = _createSuper(MergeMapSubscriber);
 
       function MergeMapSubscriber(destination, project) {
-        var _this212;
+        var _this214;
 
         var concurrent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Number.POSITIVE_INFINITY;
 
         _classCallCheck(this, MergeMapSubscriber);
 
-        _this212 = _super123.call(this, destination);
-        _this212.project = project;
-        _this212.concurrent = concurrent;
-        _this212.hasCompleted = false;
-        _this212.buffer = [];
-        _this212.active = 0;
-        _this212.index = 0;
-        return _this212;
+        _this214 = _super123.call(this, destination);
+        _this214.project = project;
+        _this214.concurrent = concurrent;
+        _this214.hasCompleted = false;
+        _this214.buffer = [];
+        _this214.active = 0;
+        _this214.index = 0;
+        return _this214;
       }
 
       _createClass2(MergeMapSubscriber, [{
@@ -113442,20 +114512,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super124 = _createSuper(MergeScanSubscriber);
 
       function MergeScanSubscriber(destination, accumulator, acc, concurrent) {
-        var _this213;
+        var _this215;
 
         _classCallCheck(this, MergeScanSubscriber);
 
-        _this213 = _super124.call(this, destination);
-        _this213.accumulator = accumulator;
-        _this213.acc = acc;
-        _this213.concurrent = concurrent;
-        _this213.hasValue = false;
-        _this213.hasCompleted = false;
-        _this213.buffer = [];
-        _this213.active = 0;
-        _this213.index = 0;
-        return _this213;
+        _this215 = _super124.call(this, destination);
+        _this215.accumulator = accumulator;
+        _this215.acc = acc;
+        _this215.concurrent = concurrent;
+        _this215.hasValue = false;
+        _this215.hasCompleted = false;
+        _this215.buffer = [];
+        _this215.active = 0;
+        _this215.index = 0;
+        return _this215;
       }
 
       _createClass2(MergeScanSubscriber, [{
@@ -113745,16 +114815,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super125 = _createSuper(ObserveOnSubscriber);
 
       function ObserveOnSubscriber(destination, scheduler) {
-        var _this214;
+        var _this216;
 
         var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
         _classCallCheck(this, ObserveOnSubscriber);
 
-        _this214 = _super125.call(this, destination);
-        _this214.scheduler = scheduler;
-        _this214.delay = delay;
-        return _this214;
+        _this216 = _super125.call(this, destination);
+        _this216.scheduler = scheduler;
+        _this216.delay = delay;
+        return _this216;
       }
 
       _createClass2(ObserveOnSubscriber, [{
@@ -113912,14 +114982,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super126 = _createSuper(OnErrorResumeNextSubscriber);
 
       function OnErrorResumeNextSubscriber(destination, nextSources) {
-        var _this215;
+        var _this217;
 
         _classCallCheck(this, OnErrorResumeNextSubscriber);
 
-        _this215 = _super126.call(this, destination);
-        _this215.destination = destination;
-        _this215.nextSources = nextSources;
-        return _this215;
+        _this217 = _super126.call(this, destination);
+        _this217.destination = destination;
+        _this217.nextSources = nextSources;
+        return _this217;
       }
 
       _createClass2(OnErrorResumeNextSubscriber, [{
@@ -114024,13 +115094,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super127 = _createSuper(PairwiseSubscriber);
 
       function PairwiseSubscriber(destination) {
-        var _this216;
+        var _this218;
 
         _classCallCheck(this, PairwiseSubscriber);
 
-        _this216 = _super127.call(this, destination);
-        _this216.hasPrev = false;
-        return _this216;
+        _this218 = _super127.call(this, destination);
+        _this218.hasPrev = false;
+        return _this218;
       }
 
       _createClass2(PairwiseSubscriber, [{
@@ -114519,13 +115589,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super128 = _createSuper(RefCountSubscriber);
 
       function RefCountSubscriber(destination, connectable) {
-        var _this217;
+        var _this219;
 
         _classCallCheck(this, RefCountSubscriber);
 
-        _this217 = _super128.call(this, destination);
-        _this217.connectable = connectable;
-        return _this217;
+        _this219 = _super128.call(this, destination);
+        _this219.connectable = connectable;
+        return _this219;
       }
 
       _createClass2(RefCountSubscriber, [{
@@ -114639,14 +115709,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super129 = _createSuper(RepeatSubscriber);
 
       function RepeatSubscriber(destination, count, source) {
-        var _this218;
+        var _this220;
 
         _classCallCheck(this, RepeatSubscriber);
 
-        _this218 = _super129.call(this, destination);
-        _this218.count = count;
-        _this218.source = source;
-        return _this218;
+        _this220 = _super129.call(this, destination);
+        _this220.count = count;
+        _this220.source = source;
+        return _this220;
       }
 
       _createClass2(RepeatSubscriber, [{
@@ -114741,15 +115811,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super130 = _createSuper(RepeatWhenSubscriber);
 
       function RepeatWhenSubscriber(destination, notifier, source) {
-        var _this219;
+        var _this221;
 
         _classCallCheck(this, RepeatWhenSubscriber);
 
-        _this219 = _super130.call(this, destination);
-        _this219.notifier = notifier;
-        _this219.source = source;
-        _this219.sourceIsBeingSubscribedTo = true;
-        return _this219;
+        _this221 = _super130.call(this, destination);
+        _this221.notifier = notifier;
+        _this221.source = source;
+        _this221.sourceIsBeingSubscribedTo = true;
+        return _this221;
       }
 
       _createClass2(RepeatWhenSubscriber, [{
@@ -114895,14 +115965,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super131 = _createSuper(RetrySubscriber);
 
       function RetrySubscriber(destination, count, source) {
-        var _this220;
+        var _this222;
 
         _classCallCheck(this, RetrySubscriber);
 
-        _this220 = _super131.call(this, destination);
-        _this220.count = count;
-        _this220.source = source;
-        return _this220;
+        _this222 = _super131.call(this, destination);
+        _this222.count = count;
+        _this222.source = source;
+        return _this222;
       }
 
       _createClass2(RetrySubscriber, [{
@@ -114998,14 +116068,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super132 = _createSuper(RetryWhenSubscriber);
 
       function RetryWhenSubscriber(destination, notifier, source) {
-        var _this221;
+        var _this223;
 
         _classCallCheck(this, RetryWhenSubscriber);
 
-        _this221 = _super132.call(this, destination);
-        _this221.notifier = notifier;
-        _this221.source = source;
-        return _this221;
+        _this223 = _super132.call(this, destination);
+        _this223.notifier = notifier;
+        _this223.source = source;
+        return _this223;
       }
 
       _createClass2(RetryWhenSubscriber, [{
@@ -115142,13 +116212,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super133 = _createSuper(SampleSubscriber);
 
       function SampleSubscriber() {
-        var _this222;
+        var _this224;
 
         _classCallCheck(this, SampleSubscriber);
 
-        _this222 = _super133.apply(this, arguments);
-        _this222.hasValue = false;
-        return _this222;
+        _this224 = _super133.apply(this, arguments);
+        _this224.hasValue = false;
+        return _this224;
       }
 
       _createClass2(SampleSubscriber, [{
@@ -115247,21 +116317,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super134 = _createSuper(SampleTimeSubscriber);
 
       function SampleTimeSubscriber(destination, period, scheduler) {
-        var _this223;
+        var _this225;
 
         _classCallCheck(this, SampleTimeSubscriber);
 
-        _this223 = _super134.call(this, destination);
-        _this223.period = period;
-        _this223.scheduler = scheduler;
-        _this223.hasValue = false;
+        _this225 = _super134.call(this, destination);
+        _this225.period = period;
+        _this225.scheduler = scheduler;
+        _this225.hasValue = false;
 
-        _this223.add(scheduler.schedule(dispatchNotification, period, {
-          subscriber: _assertThisInitialized(_this223),
+        _this225.add(scheduler.schedule(dispatchNotification, period, {
+          subscriber: _assertThisInitialized(_this225),
           period: period
         }));
 
-        return _this223;
+        return _this225;
       }
 
       _createClass2(SampleTimeSubscriber, [{
@@ -115359,16 +116429,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super135 = _createSuper(ScanSubscriber);
 
       function ScanSubscriber(destination, accumulator, _seed, hasSeed) {
-        var _this224;
+        var _this226;
 
         _classCallCheck(this, ScanSubscriber);
 
-        _this224 = _super135.call(this, destination);
-        _this224.accumulator = accumulator;
-        _this224._seed = _seed;
-        _this224.hasSeed = hasSeed;
-        _this224.index = 0;
-        return _this224;
+        _this226 = _super135.call(this, destination);
+        _this226.accumulator = accumulator;
+        _this226._seed = _seed;
+        _this226.hasSeed = hasSeed;
+        _this226.index = 0;
+        return _this226;
       }
 
       _createClass2(ScanSubscriber, [{
@@ -115482,20 +116552,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super136 = _createSuper(SequenceEqualSubscriber);
 
       function SequenceEqualSubscriber(destination, compareTo, comparator) {
-        var _this225;
+        var _this227;
 
         _classCallCheck(this, SequenceEqualSubscriber);
 
-        _this225 = _super136.call(this, destination);
-        _this225.compareTo = compareTo;
-        _this225.comparator = comparator;
-        _this225._a = [];
-        _this225._b = [];
-        _this225._oneComplete = false;
+        _this227 = _super136.call(this, destination);
+        _this227.compareTo = compareTo;
+        _this227.comparator = comparator;
+        _this227._a = [];
+        _this227._b = [];
+        _this227._oneComplete = false;
 
-        _this225.destination.add(compareTo.subscribe(new SequenceEqualCompareToSubscriber(destination, _assertThisInitialized(_this225))));
+        _this227.destination.add(compareTo.subscribe(new SequenceEqualCompareToSubscriber(destination, _assertThisInitialized(_this227))));
 
-        return _this225;
+        return _this227;
       }
 
       _createClass2(SequenceEqualSubscriber, [{
@@ -115583,13 +116653,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super137 = _createSuper(SequenceEqualCompareToSubscriber);
 
       function SequenceEqualCompareToSubscriber(destination, parent) {
-        var _this226;
+        var _this228;
 
         _classCallCheck(this, SequenceEqualCompareToSubscriber);
 
-        _this226 = _super137.call(this, destination);
-        _this226.parent = parent;
-        return _this226;
+        _this228 = _super137.call(this, destination);
+        _this228.parent = parent;
+        return _this228;
       }
 
       _createClass2(SequenceEqualCompareToSubscriber, [{
@@ -115715,13 +116785,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     }
 
-    function shareReplayOperator(_ref15) {
-      var _ref15$bufferSize = _ref15.bufferSize,
-          bufferSize = _ref15$bufferSize === void 0 ? Number.POSITIVE_INFINITY : _ref15$bufferSize,
-          _ref15$windowTime = _ref15.windowTime,
-          windowTime = _ref15$windowTime === void 0 ? Number.POSITIVE_INFINITY : _ref15$windowTime,
-          useRefCount = _ref15.refCount,
-          scheduler = _ref15.scheduler;
+    function shareReplayOperator(_ref39) {
+      var _ref39$bufferSize = _ref39.bufferSize,
+          bufferSize = _ref39$bufferSize === void 0 ? Number.POSITIVE_INFINITY : _ref39$bufferSize,
+          _ref39$windowTime = _ref39.windowTime,
+          windowTime = _ref39$windowTime === void 0 ? Number.POSITIVE_INFINITY : _ref39$windowTime,
+          useRefCount = _ref39.refCount,
+          scheduler = _ref39.scheduler;
       var subject;
       var refCount = 0;
       var subscription;
@@ -115829,16 +116899,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super138 = _createSuper(SingleSubscriber);
 
       function SingleSubscriber(destination, predicate, source) {
-        var _this227;
+        var _this229;
 
         _classCallCheck(this, SingleSubscriber);
 
-        _this227 = _super138.call(this, destination);
-        _this227.predicate = predicate;
-        _this227.source = source;
-        _this227.seenValue = false;
-        _this227.index = 0;
-        return _this227;
+        _this229 = _super138.call(this, destination);
+        _this229.predicate = predicate;
+        _this229.source = source;
+        _this229.seenValue = false;
+        _this229.index = 0;
+        return _this229;
       }
 
       _createClass2(SingleSubscriber, [{
@@ -115949,14 +117019,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super139 = _createSuper(SkipSubscriber);
 
       function SkipSubscriber(destination, total) {
-        var _this228;
+        var _this230;
 
         _classCallCheck(this, SkipSubscriber);
 
-        _this228 = _super139.call(this, destination);
-        _this228.total = total;
-        _this228.count = 0;
-        return _this228;
+        _this230 = _super139.call(this, destination);
+        _this230.total = total;
+        _this230.count = 0;
+        return _this230;
       }
 
       _createClass2(SkipSubscriber, [{
@@ -116044,15 +117114,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super140 = _createSuper(SkipLastSubscriber);
 
       function SkipLastSubscriber(destination, _skipCount) {
-        var _this229;
+        var _this231;
 
         _classCallCheck(this, SkipLastSubscriber);
 
-        _this229 = _super140.call(this, destination);
-        _this229._skipCount = _skipCount;
-        _this229._count = 0;
-        _this229._ring = new Array(_skipCount);
-        return _this229;
+        _this231 = _super140.call(this, destination);
+        _this231._skipCount = _skipCount;
+        _this231._count = 0;
+        _this231._ring = new Array(_skipCount);
+        return _this231;
       }
 
       _createClass2(SkipLastSubscriber, [{
@@ -116147,26 +117217,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super141 = _createSuper(SkipUntilSubscriber);
 
       function SkipUntilSubscriber(destination, notifier) {
-        var _this230;
+        var _this232;
 
         _classCallCheck(this, SkipUntilSubscriber);
 
-        _this230 = _super141.call(this, destination);
-        _this230.hasValue = false;
-        var innerSubscriber = new _InnerSubscriber__WEBPACK_IMPORTED_MODULE_1__["InnerSubscriber"](_assertThisInitialized(_this230), undefined, undefined);
+        _this232 = _super141.call(this, destination);
+        _this232.hasValue = false;
+        var innerSubscriber = new _InnerSubscriber__WEBPACK_IMPORTED_MODULE_1__["InnerSubscriber"](_assertThisInitialized(_this232), undefined, undefined);
 
-        _this230.add(innerSubscriber);
+        _this232.add(innerSubscriber);
 
-        _this230.innerSubscription = innerSubscriber;
-        var innerSubscription = Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_2__["subscribeToResult"])(_assertThisInitialized(_this230), notifier, undefined, undefined, innerSubscriber);
+        _this232.innerSubscription = innerSubscriber;
+        var innerSubscription = Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_2__["subscribeToResult"])(_assertThisInitialized(_this232), notifier, undefined, undefined, innerSubscriber);
 
         if (innerSubscription !== innerSubscriber) {
-          _this230.add(innerSubscription);
+          _this232.add(innerSubscription);
 
-          _this230.innerSubscription = innerSubscription;
+          _this232.innerSubscription = innerSubscription;
         }
 
-        return _this230;
+        return _this232;
       }
 
       _createClass2(SkipUntilSubscriber, [{
@@ -116252,15 +117322,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super142 = _createSuper(SkipWhileSubscriber);
 
       function SkipWhileSubscriber(destination, predicate) {
-        var _this231;
+        var _this233;
 
         _classCallCheck(this, SkipWhileSubscriber);
 
-        _this231 = _super142.call(this, destination);
-        _this231.predicate = predicate;
-        _this231.skipping = true;
-        _this231.index = 0;
-        return _this231;
+        _this233 = _super142.call(this, destination);
+        _this233.predicate = predicate;
+        _this233.skipping = true;
+        _this233.index = 0;
+        return _this233;
       }
 
       _createClass2(SkipWhileSubscriber, [{
@@ -116534,14 +117604,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super143 = _createSuper(SwitchMapSubscriber);
 
       function SwitchMapSubscriber(destination, project) {
-        var _this232;
+        var _this234;
 
         _classCallCheck(this, SwitchMapSubscriber);
 
-        _this232 = _super143.call(this, destination);
-        _this232.project = project;
-        _this232.index = 0;
-        return _this232;
+        _this234 = _super143.call(this, destination);
+        _this234.project = project;
+        _this234.index = 0;
+        return _this234;
       }
 
       _createClass2(SwitchMapSubscriber, [{
@@ -116731,14 +117801,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super144 = _createSuper(TakeSubscriber);
 
       function TakeSubscriber(destination, total) {
-        var _this233;
+        var _this235;
 
         _classCallCheck(this, TakeSubscriber);
 
-        _this233 = _super144.call(this, destination);
-        _this233.total = total;
-        _this233.count = 0;
-        return _this233;
+        _this235 = _super144.call(this, destination);
+        _this235.total = total;
+        _this235.count = 0;
+        return _this235;
       }
 
       _createClass2(TakeSubscriber, [{
@@ -116840,15 +117910,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super145 = _createSuper(TakeLastSubscriber);
 
       function TakeLastSubscriber(destination, total) {
-        var _this234;
+        var _this236;
 
         _classCallCheck(this, TakeLastSubscriber);
 
-        _this234 = _super145.call(this, destination);
-        _this234.total = total;
-        _this234.ring = new Array();
-        _this234.count = 0;
-        return _this234;
+        _this236 = _super145.call(this, destination);
+        _this236.total = total;
+        _this236.ring = new Array();
+        _this236.count = 0;
+        return _this236;
       }
 
       _createClass2(TakeLastSubscriber, [{
@@ -116961,13 +118031,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super146 = _createSuper(TakeUntilSubscriber);
 
       function TakeUntilSubscriber(destination) {
-        var _this235;
+        var _this237;
 
         _classCallCheck(this, TakeUntilSubscriber);
 
-        _this235 = _super146.call(this, destination);
-        _this235.seenValue = false;
-        return _this235;
+        _this237 = _super146.call(this, destination);
+        _this237.seenValue = false;
+        return _this237;
       }
 
       _createClass2(TakeUntilSubscriber, [{
@@ -117045,15 +118115,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super147 = _createSuper(TakeWhileSubscriber);
 
       function TakeWhileSubscriber(destination, predicate, inclusive) {
-        var _this236;
+        var _this238;
 
         _classCallCheck(this, TakeWhileSubscriber);
 
-        _this236 = _super147.call(this, destination);
-        _this236.predicate = predicate;
-        _this236.inclusive = inclusive;
-        _this236.index = 0;
-        return _this236;
+        _this238 = _super147.call(this, destination);
+        _this238.predicate = predicate;
+        _this238.inclusive = inclusive;
+        _this238.index = 0;
+        return _this238;
       }
 
       _createClass2(TakeWhileSubscriber, [{
@@ -117164,28 +118234,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super148 = _createSuper(TapSubscriber);
 
       function TapSubscriber(destination, observerOrNext, error, complete) {
-        var _this237;
+        var _this239;
 
         _classCallCheck(this, TapSubscriber);
 
-        _this237 = _super148.call(this, destination);
-        _this237._tapNext = _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
-        _this237._tapError = _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
-        _this237._tapComplete = _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
-        _this237._tapError = error || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
-        _this237._tapComplete = complete || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
+        _this239 = _super148.call(this, destination);
+        _this239._tapNext = _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
+        _this239._tapError = _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
+        _this239._tapComplete = _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
+        _this239._tapError = error || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
+        _this239._tapComplete = complete || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
 
         if (Object(_util_isFunction__WEBPACK_IMPORTED_MODULE_2__["isFunction"])(observerOrNext)) {
-          _this237._context = _assertThisInitialized(_this237);
-          _this237._tapNext = observerOrNext;
+          _this239._context = _assertThisInitialized(_this239);
+          _this239._tapNext = observerOrNext;
         } else if (observerOrNext) {
-          _this237._context = observerOrNext;
-          _this237._tapNext = observerOrNext.next || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
-          _this237._tapError = observerOrNext.error || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
-          _this237._tapComplete = observerOrNext.complete || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
+          _this239._context = observerOrNext;
+          _this239._tapNext = observerOrNext.next || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
+          _this239._tapError = observerOrNext.error || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
+          _this239._tapComplete = observerOrNext.complete || _util_noop__WEBPACK_IMPORTED_MODULE_1__["noop"];
         }
 
-        return _this237;
+        return _this239;
       }
 
       _createClass2(TapSubscriber, [{
@@ -117308,17 +118378,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super149 = _createSuper(ThrottleSubscriber);
 
       function ThrottleSubscriber(destination, durationSelector, _leading, _trailing) {
-        var _this238;
+        var _this240;
 
         _classCallCheck(this, ThrottleSubscriber);
 
-        _this238 = _super149.call(this, destination);
-        _this238.destination = destination;
-        _this238.durationSelector = durationSelector;
-        _this238._leading = _leading;
-        _this238._trailing = _trailing;
-        _this238._hasValue = false;
-        return _this238;
+        _this240 = _super149.call(this, destination);
+        _this240.destination = destination;
+        _this240.durationSelector = durationSelector;
+        _this240._leading = _leading;
+        _this240._trailing = _trailing;
+        _this240._hasValue = false;
+        return _this240;
       }
 
       _createClass2(ThrottleSubscriber, [{
@@ -117475,18 +118545,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super150 = _createSuper(ThrottleTimeSubscriber);
 
       function ThrottleTimeSubscriber(destination, duration, scheduler, leading, trailing) {
-        var _this239;
+        var _this241;
 
         _classCallCheck(this, ThrottleTimeSubscriber);
 
-        _this239 = _super150.call(this, destination);
-        _this239.duration = duration;
-        _this239.scheduler = scheduler;
-        _this239.leading = leading;
-        _this239.trailing = trailing;
-        _this239._hasTrailingValue = false;
-        _this239._trailingValue = null;
-        return _this239;
+        _this241 = _super150.call(this, destination);
+        _this241.duration = duration;
+        _this241.scheduler = scheduler;
+        _this241.leading = leading;
+        _this241.trailing = trailing;
+        _this241._hasTrailingValue = false;
+        _this241._trailingValue = null;
+        return _this241;
       }
 
       _createClass2(ThrottleTimeSubscriber, [{
@@ -117613,14 +118683,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super151 = _createSuper(ThrowIfEmptySubscriber);
 
       function ThrowIfEmptySubscriber(destination, errorFactory) {
-        var _this240;
+        var _this242;
 
         _classCallCheck(this, ThrowIfEmptySubscriber);
 
-        _this240 = _super151.call(this, destination);
-        _this240.errorFactory = errorFactory;
-        _this240.hasValue = false;
-        return _this240;
+        _this242 = _super151.call(this, destination);
+        _this242.errorFactory = errorFactory;
+        _this242.hasValue = false;
+        return _this242;
       }
 
       _createClass2(ThrowIfEmptySubscriber, [{
@@ -117713,8 +118783,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var scheduler = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _scheduler_async__WEBPACK_IMPORTED_MODULE_0__["async"];
       return function (source) {
         return Object(_observable_defer__WEBPACK_IMPORTED_MODULE_2__["defer"])(function () {
-          return source.pipe(Object(_scan__WEBPACK_IMPORTED_MODULE_1__["scan"])(function (_ref16, value) {
-            var current = _ref16.current;
+          return source.pipe(Object(_scan__WEBPACK_IMPORTED_MODULE_1__["scan"])(function (_ref40, value) {
+            var current = _ref40.current;
             return {
               value: value,
               current: scheduler.now(),
@@ -117724,10 +118794,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             current: scheduler.now(),
             value: undefined,
             last: undefined
-          }), Object(_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref17) {
-            var current = _ref17.current,
-                last = _ref17.last,
-                value = _ref17.value;
+          }), Object(_map__WEBPACK_IMPORTED_MODULE_3__["map"])(function (_ref41) {
+            var current = _ref41.current,
+                last = _ref41.last,
+                value = _ref41.value;
             return new TimeInterval(value, current - last);
           }));
         });
@@ -117877,20 +118947,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super152 = _createSuper(TimeoutWithSubscriber);
 
       function TimeoutWithSubscriber(destination, absoluteTimeout, waitFor, withObservable, scheduler) {
-        var _this241;
+        var _this243;
 
         _classCallCheck(this, TimeoutWithSubscriber);
 
-        _this241 = _super152.call(this, destination);
-        _this241.absoluteTimeout = absoluteTimeout;
-        _this241.waitFor = waitFor;
-        _this241.withObservable = withObservable;
-        _this241.scheduler = scheduler;
-        _this241.action = null;
+        _this243 = _super152.call(this, destination);
+        _this243.absoluteTimeout = absoluteTimeout;
+        _this243.waitFor = waitFor;
+        _this243.withObservable = withObservable;
+        _this243.scheduler = scheduler;
+        _this243.action = null;
 
-        _this241.scheduleTimeout();
+        _this243.scheduleTimeout();
 
-        return _this241;
+        return _this243;
       }
 
       _createClass2(TimeoutWithSubscriber, [{
@@ -118111,14 +119181,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super153 = _createSuper(WindowSubscriber);
 
       function WindowSubscriber(destination) {
-        var _this242;
+        var _this244;
 
         _classCallCheck(this, WindowSubscriber);
 
-        _this242 = _super153.call(this, destination);
-        _this242.window = new _Subject__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
-        destination.next(_this242.window);
-        return _this242;
+        _this244 = _super153.call(this, destination);
+        _this244.window = new _Subject__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
+        destination.next(_this244.window);
+        return _this244;
       }
 
       _createClass2(WindowSubscriber, [{
@@ -118243,18 +119313,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super154 = _createSuper(WindowCountSubscriber);
 
       function WindowCountSubscriber(destination, windowSize, startWindowEvery) {
-        var _this243;
+        var _this245;
 
         _classCallCheck(this, WindowCountSubscriber);
 
-        _this243 = _super154.call(this, destination);
-        _this243.destination = destination;
-        _this243.windowSize = windowSize;
-        _this243.startWindowEvery = startWindowEvery;
-        _this243.windows = [new _Subject__WEBPACK_IMPORTED_MODULE_1__["Subject"]()];
-        _this243.count = 0;
-        destination.next(_this243.windows[0]);
-        return _this243;
+        _this245 = _super154.call(this, destination);
+        _this245.destination = destination;
+        _this245.windowSize = windowSize;
+        _this245.startWindowEvery = startWindowEvery;
+        _this245.windows = [new _Subject__WEBPACK_IMPORTED_MODULE_1__["Subject"]()];
+        _this245.count = 0;
+        destination.next(_this245.windows[0]);
+        return _this245;
       }
 
       _createClass2(WindowCountSubscriber, [{
@@ -118426,13 +119496,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super155 = _createSuper(CountedSubject);
 
       function CountedSubject() {
-        var _this244;
+        var _this246;
 
         _classCallCheck(this, CountedSubject);
 
-        _this244 = _super155.apply(this, arguments);
-        _this244._numberOfNextedValues = 0;
-        return _this244;
+        _this246 = _super155.apply(this, arguments);
+        _this246._numberOfNextedValues = 0;
+        return _this246;
       }
 
       _createClass2(CountedSubject, [{
@@ -118458,47 +119528,47 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super156 = _createSuper(WindowTimeSubscriber);
 
       function WindowTimeSubscriber(destination, windowTimeSpan, windowCreationInterval, maxWindowSize, scheduler) {
-        var _this245;
+        var _this247;
 
         _classCallCheck(this, WindowTimeSubscriber);
 
-        _this245 = _super156.call(this, destination);
-        _this245.destination = destination;
-        _this245.windowTimeSpan = windowTimeSpan;
-        _this245.windowCreationInterval = windowCreationInterval;
-        _this245.maxWindowSize = maxWindowSize;
-        _this245.scheduler = scheduler;
-        _this245.windows = [];
+        _this247 = _super156.call(this, destination);
+        _this247.destination = destination;
+        _this247.windowTimeSpan = windowTimeSpan;
+        _this247.windowCreationInterval = windowCreationInterval;
+        _this247.maxWindowSize = maxWindowSize;
+        _this247.scheduler = scheduler;
+        _this247.windows = [];
 
-        var window = _this245.openWindow();
+        var window = _this247.openWindow();
 
         if (windowCreationInterval !== null && windowCreationInterval >= 0) {
           var closeState = {
-            subscriber: _assertThisInitialized(_this245),
+            subscriber: _assertThisInitialized(_this247),
             window: window,
             context: null
           };
           var creationState = {
             windowTimeSpan: windowTimeSpan,
             windowCreationInterval: windowCreationInterval,
-            subscriber: _assertThisInitialized(_this245),
+            subscriber: _assertThisInitialized(_this247),
             scheduler: scheduler
           };
 
-          _this245.add(scheduler.schedule(dispatchWindowClose, windowTimeSpan, closeState));
+          _this247.add(scheduler.schedule(dispatchWindowClose, windowTimeSpan, closeState));
 
-          _this245.add(scheduler.schedule(dispatchWindowCreation, windowCreationInterval, creationState));
+          _this247.add(scheduler.schedule(dispatchWindowCreation, windowCreationInterval, creationState));
         } else {
           var timeSpanOnlyState = {
-            subscriber: _assertThisInitialized(_this245),
+            subscriber: _assertThisInitialized(_this247),
             window: window,
             windowTimeSpan: windowTimeSpan
           };
 
-          _this245.add(scheduler.schedule(dispatchWindowTimeSpanOnly, windowTimeSpan, timeSpanOnlyState));
+          _this247.add(scheduler.schedule(dispatchWindowTimeSpanOnly, windowTimeSpan, timeSpanOnlyState));
         }
 
-        return _this245;
+        return _this247;
       }
 
       _createClass2(WindowTimeSubscriber, [{
@@ -118690,18 +119760,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super157 = _createSuper(WindowToggleSubscriber);
 
       function WindowToggleSubscriber(destination, openings, closingSelector) {
-        var _this246;
+        var _this248;
 
         _classCallCheck(this, WindowToggleSubscriber);
 
-        _this246 = _super157.call(this, destination);
-        _this246.openings = openings;
-        _this246.closingSelector = closingSelector;
-        _this246.contexts = [];
+        _this248 = _super157.call(this, destination);
+        _this248.openings = openings;
+        _this248.closingSelector = closingSelector;
+        _this248.contexts = [];
 
-        _this246.add(_this246.openSubscription = Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_3__["subscribeToResult"])(_assertThisInitialized(_this246), openings, openings));
+        _this248.add(_this248.openSubscription = Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_3__["subscribeToResult"])(_assertThisInitialized(_this248), openings, openings));
 
-        return _this246;
+        return _this248;
       }
 
       _createClass2(WindowToggleSubscriber, [{
@@ -118910,17 +119980,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super158 = _createSuper(WindowSubscriber);
 
       function WindowSubscriber(destination, closingSelector) {
-        var _this247;
+        var _this249;
 
         _classCallCheck(this, WindowSubscriber);
 
-        _this247 = _super158.call(this, destination);
-        _this247.destination = destination;
-        _this247.closingSelector = closingSelector;
+        _this249 = _super158.call(this, destination);
+        _this249.destination = destination;
+        _this249.closingSelector = closingSelector;
 
-        _this247.openWindow();
+        _this249.openWindow();
 
-        return _this247;
+        return _this249;
       }
 
       _createClass2(WindowSubscriber, [{
@@ -119077,28 +120147,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super159 = _createSuper(WithLatestFromSubscriber);
 
       function WithLatestFromSubscriber(destination, observables, project) {
-        var _this248;
+        var _this250;
 
         _classCallCheck(this, WithLatestFromSubscriber);
 
-        _this248 = _super159.call(this, destination);
-        _this248.observables = observables;
-        _this248.project = project;
-        _this248.toRespond = [];
+        _this250 = _super159.call(this, destination);
+        _this250.observables = observables;
+        _this250.project = project;
+        _this250.toRespond = [];
         var len = observables.length;
-        _this248.values = new Array(len);
+        _this250.values = new Array(len);
 
         for (var i = 0; i < len; i++) {
-          _this248.toRespond.push(i);
+          _this250.toRespond.push(i);
         }
 
         for (var _i26 = 0; _i26 < len; _i26++) {
           var observable = observables[_i26];
 
-          _this248.add(Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_1__["subscribeToResult"])(_assertThisInitialized(_this248), observable, observable, _i26));
+          _this250.add(Object(_util_subscribeToResult__WEBPACK_IMPORTED_MODULE_1__["subscribeToResult"])(_assertThisInitialized(_this250), observable, observable, _i26));
         }
 
-        return _this248;
+        return _this250;
       }
 
       _createClass2(WithLatestFromSubscriber, [{
@@ -119671,14 +120741,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super161 = _createSuper(AnimationFrameAction);
 
       function AnimationFrameAction(scheduler, work) {
-        var _this249;
+        var _this251;
 
         _classCallCheck(this, AnimationFrameAction);
 
-        _this249 = _super161.call(this, scheduler, work);
-        _this249.scheduler = scheduler;
-        _this249.work = work;
-        return _this249;
+        _this251 = _super161.call(this, scheduler, work);
+        _this251.scheduler = scheduler;
+        _this251.work = work;
+        return _this251;
       }
 
       _createClass2(AnimationFrameAction, [{
@@ -119831,14 +120901,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super163 = _createSuper(AsapAction);
 
       function AsapAction(scheduler, work) {
-        var _this250;
+        var _this252;
 
         _classCallCheck(this, AsapAction);
 
-        _this250 = _super163.call(this, scheduler, work);
-        _this250.scheduler = scheduler;
-        _this250.work = work;
-        return _this250;
+        _this252 = _super163.call(this, scheduler, work);
+        _this252.scheduler = scheduler;
+        _this252.work = work;
+        return _this252;
       }
 
       _createClass2(AsapAction, [{
@@ -119984,15 +121054,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super165 = _createSuper(AsyncAction);
 
       function AsyncAction(scheduler, work) {
-        var _this251;
+        var _this253;
 
         _classCallCheck(this, AsyncAction);
 
-        _this251 = _super165.call(this, scheduler, work);
-        _this251.scheduler = scheduler;
-        _this251.work = work;
-        _this251.pending = false;
-        return _this251;
+        _this253 = _super165.call(this, scheduler, work);
+        _this253.scheduler = scheduler;
+        _this253.work = work;
+        _this253.pending = false;
+        return _this253;
       }
 
       _createClass2(AsyncAction, [{
@@ -120133,23 +121203,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super166 = _createSuper(AsyncScheduler);
 
       function AsyncScheduler(SchedulerAction) {
-        var _this252;
+        var _this254;
 
         var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _Scheduler__WEBPACK_IMPORTED_MODULE_0__["Scheduler"].now;
 
         _classCallCheck(this, AsyncScheduler);
 
-        _this252 = _super166.call(this, SchedulerAction, function () {
-          if (AsyncScheduler.delegate && AsyncScheduler.delegate !== _assertThisInitialized(_this252)) {
+        _this254 = _super166.call(this, SchedulerAction, function () {
+          if (AsyncScheduler.delegate && AsyncScheduler.delegate !== _assertThisInitialized(_this254)) {
             return AsyncScheduler.delegate.now();
           } else {
             return now();
           }
         });
-        _this252.actions = [];
-        _this252.active = false;
-        _this252.scheduled = undefined;
-        return _this252;
+        _this254.actions = [];
+        _this254.active = false;
+        _this254.scheduled = undefined;
+        return _this254;
       }
 
       _createClass2(AsyncScheduler, [{
@@ -120234,14 +121304,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super167 = _createSuper(QueueAction);
 
       function QueueAction(scheduler, work) {
-        var _this253;
+        var _this255;
 
         _classCallCheck(this, QueueAction);
 
-        _this253 = _super167.call(this, scheduler, work);
-        _this253.scheduler = scheduler;
-        _this253.work = work;
-        return _this253;
+        _this255 = _super167.call(this, scheduler, work);
+        _this255.scheduler = scheduler;
+        _this255.work = work;
+        return _this255;
       }
 
       _createClass2(QueueAction, [{
@@ -120371,20 +121441,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super169 = _createSuper(VirtualTimeScheduler);
 
       function VirtualTimeScheduler() {
-        var _this254;
+        var _this256;
 
         var SchedulerAction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : VirtualAction;
         var maxFrames = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Number.POSITIVE_INFINITY;
 
         _classCallCheck(this, VirtualTimeScheduler);
 
-        _this254 = _super169.call(this, SchedulerAction, function () {
-          return _this254.frame;
+        _this256 = _super169.call(this, SchedulerAction, function () {
+          return _this256.frame;
         });
-        _this254.maxFrames = maxFrames;
-        _this254.frame = 0;
-        _this254.index = -1;
-        return _this254;
+        _this256.maxFrames = maxFrames;
+        _this256.frame = 0;
+        _this256.index = -1;
+        return _this256;
       }
 
       _createClass2(VirtualTimeScheduler, [{
@@ -120424,19 +121494,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var _super170 = _createSuper(VirtualAction);
 
       function VirtualAction(scheduler, work) {
-        var _this255;
+        var _this257;
 
         var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : scheduler.index += 1;
 
         _classCallCheck(this, VirtualAction);
 
-        _this255 = _super170.call(this, scheduler, work);
-        _this255.scheduler = scheduler;
-        _this255.work = work;
-        _this255.index = index;
-        _this255.active = true;
-        _this255.index = scheduler.index = index;
-        return _this255;
+        _this257 = _super170.call(this, scheduler, work);
+        _this257.scheduler = scheduler;
+        _this257.work = work;
+        _this257.index = index;
+        _this257.active = true;
+        _this257.index = scheduler.index = index;
+        return _this257;
       }
 
       _createClass2(VirtualAction, [{

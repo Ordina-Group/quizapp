@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../services/quiz.service';
 import { SubmitAnswer } from '../model/submitAnswer';
 import { AnswerIsCorrect } from '../model/answeriscorrect';
-import { NavigationExtras, Router} from "@angular/router";
+import { NavigationExtras, Router} from '@angular/router';
 import { AnswerOption } from '../model/answerOption';
 import { Question } from '../model/question';
 import { SubmitAnswerService } from '../services/submitAnswer.service';
@@ -29,6 +29,7 @@ export class QuestionComponent implements OnInit {
   errorMessage = '';
   private date: Date;
   private dateString: string;
+  videoId: string;
 
   constructor(private quizService: QuizService,
               private submittedAnswerService: SubmitAnswerService,
@@ -39,7 +40,7 @@ export class QuestionComponent implements OnInit {
   ngOnInit(): void {
     this.quizService.quizSubject.subscribe(quiz => {
       this.currentQuiz = quiz;
-    })
+    });
   }
   public get currentQuiz(): Quiz {
     return this._currentQuiz;
@@ -47,7 +48,7 @@ export class QuestionComponent implements OnInit {
 
   public set currentQuiz(value: Quiz) {
     this._currentQuiz = value;
-    if(this._currentQuiz !== undefined && this._currentQuiz !== null){
+    if (this._currentQuiz !== undefined && this._currentQuiz !== null){
       this.setAnswersToRadiobuttons();
     }
   }
@@ -60,8 +61,10 @@ export class QuestionComponent implements OnInit {
       return question.id === this.currentQuestionNumber + 1;
     })[0];
 
+    console.log('current video id is: ' + this.currentQuestion.videoId);
+
     if (this.currentQuestion === undefined) {
-      console.log('currentquestion is: ' + this.currentQuestion)
+      console.log('currentquestion is: ' + this.currentQuestion);
       this.date = new Date();
       this.dateString = formatDate(this.date, 'dd/MM/yyyy HH:mm:ss', 'en');
       this.quizScoreService.setFinishTimestamp(this.date);
@@ -70,16 +73,14 @@ export class QuestionComponent implements OnInit {
       return;
     }
     this.answerOptionsArray = this.currentQuestion.answerOptions;
-
   }
-
 
   onFormSubmit() {
     this.submittedAnswer = {quizid: this.currentQuiz.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
     this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
       this.answerIsCorrect = answerIsCorrect;
       this.saveAnswers();
-    })
+    });
   }
 
   // als je op knop "volgende" drukt wil je de volgende vraag laten zien

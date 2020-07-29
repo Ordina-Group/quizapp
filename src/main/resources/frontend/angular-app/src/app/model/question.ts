@@ -7,4 +7,5 @@ export interface Question {
     number: number;
     questionDescription: string;
     iscorrect: boolean;
+    videoId: string;
   }
