@@ -26,14 +26,14 @@
           <label class="antwoordLabel">{{answerOption.value}}</label>
         </div>
 
-        <button class="btn btn-light btn-sm" type="submit" *ngIf="chosenAnswer?.value != null && answerIsCorrect == null">
+        <button class="btn btn-light btn-sm" type="submit" *ngIf="chosenAnswer?.value != null">
           Submit
         </button>
 
       </form>
       </div>
-      <div *ngIf="answerIsCorrect" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': answerIsCorrect?.isCorrect === true ? 'green' : 'red' }">
-        {{answerIsCorrect.answerExplanation}}
+      <div *ngIf="submitPressed" class="col-sm-6" style="background-color: white" [ngStyle]="{ 'color': chosenAnswer?.isCorrect === true ? 'green' : 'red' }">
+        {{chosenAnswer.answerExplanation}}
         <youtube-player [videoId]='currentQuestion.videoId' suggestedQuality="highres" [height]="250" [width]="500">
         </youtube-player>
       </div>
@@ -47,7 +47,7 @@
   </div>
 
   <div class="row">
-    <div class="col-1" Style="background-color:black;" *ngIf="answerIsCorrect">
+    <div class="col-1" Style="background-color:black;" *ngIf="chosenAnswer">
       <p style="margin: 1rem;"><button class="btn btn-dark btn-lg" (click)="nextQuestion()">Volgende</button></p>
     </div>
   </div>

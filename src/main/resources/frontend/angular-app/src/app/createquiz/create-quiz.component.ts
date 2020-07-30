@@ -3,7 +3,6 @@ import {AbstractControl, FormBuilder, FormGroup} from "@angular/forms";
 import {Quiz} from "../model/quiz";
 import {Question} from "../model/question";
 import {FormArray} from '@angular/forms';
-import {AnswerIsCorrect} from "../model/answerIsCorrect";
 import {AnswerOption} from "../model/answerOption";
 import { QuizService } from '../services/quiz.service';
 
@@ -90,7 +89,7 @@ export class CreateQuizComponent implements OnInit {
   private toAnswerOption(ac: AbstractControl): AnswerOption {
     let answerOption = {} as AnswerOption;
     answerOption.value = ac.get('answer').value;
-    answerOption.correctAnswer = ac.get('iscorrect').value;
+    answerOption.isCorrect = ac.get('iscorrect').value;
     return answerOption;
   }
 

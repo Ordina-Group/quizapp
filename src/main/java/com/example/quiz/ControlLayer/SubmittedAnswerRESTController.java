@@ -3,7 +3,7 @@ package com.example.quiz.ControlLayer;
 
 import com.example.quiz.Repository.SubmittedAnswerRepository;
 import com.example.quiz.ServiceLayer.SubmittedAnswerService;
-import com.example.quiz.model.AnswerIsCorrect;
+import com.example.quiz.model.AnswerOption;
 import com.example.quiz.model.SubmittedAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -29,9 +29,9 @@ public class SubmittedAnswerRESTController {
 
     //Requestbody laat het antwoord vd gebruiker hier binnenkomen
     @PostMapping()
-    public ResponseEntity<AnswerIsCorrect> createSubmittedAnswer(@RequestBody SubmittedAnswer submittedAnswer) {
-        AnswerIsCorrect answer = submittedAnswerService.ResponseToSubmission(submittedAnswer);
-        return new ResponseEntity<>(answer, new HttpHeaders(), HttpStatus.OK);
+    public ResponseEntity<AnswerOption> createSubmittedAnswer(@RequestBody SubmittedAnswer submittedAnswer) {
+        AnswerOption answerOption = submittedAnswerService.ResponseToSubmission(submittedAnswer);
+        return new ResponseEntity<>(answerOption, new HttpHeaders(), HttpStatus.OK);
     }
 }
 

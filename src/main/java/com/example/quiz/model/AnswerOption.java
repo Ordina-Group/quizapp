@@ -16,33 +16,22 @@ public class AnswerOption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String value;
+    private Boolean isCorrect;
+    private String answerExplanation;
 
-    @JsonIgnore
-    private boolean isCorrect;
-
-    protected AnswerOption() {
-    }
-
-    public AnswerOption(String value, boolean isCorrect) {
+    protected AnswerOption() {}
+    public AnswerOption(String value, Boolean isCorrect, String answerExplanation) {
         this.value = value;
         this.isCorrect = isCorrect;
+        this.answerExplanation = answerExplanation;
     }
-
-    public AnswerOption(AnswerOption answerOption){
-        this(answerOption.getValue(), answerOption.isCorrect());
+    public AnswerOption(AnswerOption answerOption) {
+        this(answerOption.getValue(), answerOption.getIsCorrect(), answerOption.answerExplanation);
     }
-
     public AnswerOption(Long id, String s, boolean b) {
         this.id = id;
         this.value = s;
         this.isCorrect = b;
-    }
-
-    public String getValue() {
-        return value;
-    }
-    public void setValue(String value) {
-        this.value = value;
     }
 
     public Long getId() {
@@ -52,12 +41,22 @@ public class AnswerOption {
         this.id = id;
     }
 
-    public boolean isCorrect() {
+    public String getValue() {
+        return value;
+    }
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Boolean getIsCorrect() {
         return isCorrect;
     }
     public void setCorrect(boolean correct) {
         isCorrect = correct;
     }
+
+    public String getAnswerExplanation() { return answerExplanation; }
+    public void setAnswerExplanation(String answerExplanation) { this.answerExplanation = answerExplanation; }
 
     @Override
     public boolean equals(Object o) {

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../services/quiz.service';
 import { SubmitAnswer } from '../model/submitAnswer';
-import { AnswerIsCorrect } from '../model/answeriscorrect';
 import { NavigationExtras, Router} from '@angular/router';
 import { AnswerOption } from '../model/answerOption';
 import { Question } from '../model/question';
@@ -21,9 +20,9 @@ export class QuestionComponent implements OnInit {
   currentQuestion: Question;
   answerOptionsArray: AnswerOption[];
   chosenAnswer: AnswerOption;
+  submitPressed = false;
 
   submittedAnswer: SubmitAnswer;
-  answerIsCorrect: AnswerIsCorrect;
 
   currentQuestionNumber = 0;
   errorMessage = '';
@@ -75,23 +74,23 @@ export class QuestionComponent implements OnInit {
 
   onFormSubmit() {
     this.submittedAnswer = {quizid: this.currentQuiz.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
-    this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer).subscribe(answerIsCorrect => {
-      this.answerIsCorrect = answerIsCorrect;
-      this.saveAnswers();
-    });
+    this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer);
+    this.saveAnswers();
+    console.log(this.chosenAnswer);
+    console.log(this.chosenAnswer.isCorrect);
+    this.submitPressed = true;
   }
 
   // als je op knop "volgende" drukt wil je de volgende vraag laten zien
   nextQuestion() {
     this.currentQuestionNumber++;
     this.setAnswersToRadiobuttons();
-    this.answerIsCorrect = null;
     this.chosenAnswer = null;
+    this.submitPressed = false;
   }
 
   //hier worden alle goede en foute antwoorden bijgehouden
   saveAnswers(){
-    this.quizScoreService.processAnswer(this.answerIsCorrect);
+    this.quizScoreService.processAnswer(this.chosenAnswer);
   }
-
 }

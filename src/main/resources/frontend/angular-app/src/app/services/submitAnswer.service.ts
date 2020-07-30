@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SubmitAnswer } from '../model/submitAnswer';
-import { AnswerIsCorrect } from '../model/answeriscorrect';
 import { UrlService } from './url.service';
+import { AnswerOption } from "../model/answerOption";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class SubmitAnswerService {
   }
 
   postSubmittedAnswer(submitAnswer: SubmitAnswer) {
-    return this.http.post<AnswerIsCorrect>(this.submitAnswerUrl, submitAnswer);
+    this.http.post(this.submitAnswerUrl, submitAnswer);
   }
 
 

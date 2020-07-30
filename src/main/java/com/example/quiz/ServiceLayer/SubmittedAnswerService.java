@@ -1,8 +1,8 @@
 package com.example.quiz.ServiceLayer;
 
-import com.example.quiz.Repository.AnswerIsCorrectRepository;
+import com.example.quiz.Repository.AnswerOptionRepository;
 import com.example.quiz.Repository.SubmittedAnswerRepository;
-import com.example.quiz.model.AnswerIsCorrect;
+import com.example.quiz.model.AnswerOption;
 import com.example.quiz.model.Quiz;
 import com.example.quiz.model.SubmittedAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,23 +14,22 @@ import java.util.Optional;
 public class SubmittedAnswerService {
 
     @Autowired
-    private AnswerIsCorrectRepository answerIsCorrectRepository;
+    private AnswerOptionRepository answerOptionRepository;
     @Autowired
     private SubmittedAnswerRepository submittedAnswerRepository;
 
-    public AnswerIsCorrect ResponseToSubmission(SubmittedAnswer submittedAnswer) {
+    public AnswerOption ResponseToSubmission(SubmittedAnswer submittedAnswer) {
 
-        Optional<AnswerIsCorrect> optAnswerIsCorrect = answerIsCorrectRepository.findById(submittedAnswer.getChosenAnswerId());
+        Optional<AnswerOption> optAnswerOption = answerOptionRepository.findById(submittedAnswer.getChosenAnswerId());
 
-        if (optAnswerIsCorrect.isPresent()) {
-            AnswerIsCorrect answerIsCorrect = optAnswerIsCorrect.get();
-            submittedAnswer.setAnsweredCorrect(answerIsCorrect.getIsCorrect());
+        if (optAnswerOption.isPresent()) {
+            AnswerOption answerOption = optAnswerOption.get();
+            submittedAnswer.setAnsweredCorrect(answerOption.getIsCorrect());
             submittedAnswerRepository.save(submittedAnswer);
-            return answerIsCorrect;
+            return answerOption;
         } else {
             System.out.println("En hier komen we dus zowiezo?");
-            return new AnswerIsCorrect(1L, false, "hallo");
-
+            return new AnswerOption(1L, "hallo", false);
         }
 
         // check of antwoord goed is
@@ -43,7 +42,6 @@ public class SubmittedAnswerService {
 
         //return response naar controller
     }
-
 
 //    public List<SubmittedAnswer> findAllSubmittedAnswers() {
 //        return SubmittedAnswerRepository.findAll();
