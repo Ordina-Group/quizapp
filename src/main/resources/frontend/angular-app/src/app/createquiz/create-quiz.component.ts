@@ -23,7 +23,7 @@ export class CreateQuizComponent implements OnInit {
   newQuiz: Quiz;
   currentQuestion: number;
   lockQuizName: boolean;
-  show: boolean;
+  show: string;
   currentQuestionsArray: Array<number>;
   stored: Array<any>;
   filteredItem: Question;
@@ -33,7 +33,7 @@ export class CreateQuizComponent implements OnInit {
     this.count = 0;
     this.currentQuestionsArray = [];
     this.lockQuizName = false;
-    this.show = true;
+    this.show = '';
     this.newQuiz = {questions: []} as Quiz;
     this.stored = [];
 
@@ -126,8 +126,12 @@ this.checkQuestion();
   onClick(questionNumber){
     console.log(questionNumber);
    let myFilter = JSON.parse(localStorage.getItem('questions')).filter(questions =>questions.id === questionNumber);
-   console.log(myFilter);
 
+   // let obj = eval('(' + myFilter+ ')');
+   this.show = JSON.stringify(myFilter, ['qdescription']);
+
+
+    console.log(this.show);
   }
 
 
