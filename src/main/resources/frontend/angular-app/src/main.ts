@@ -6,6 +6,12 @@ import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
+  // Don't log to console in production environment.
+  if (window){
+    window.console.log = window.console.warn = window.console.info = () => {
+      // Don't log anything.
+    };
+  }
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule)
