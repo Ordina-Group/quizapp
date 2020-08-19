@@ -75,7 +75,9 @@ export class QuestionComponent implements OnInit {
   onFormSubmit() {
     this.submittedAnswer = {quizid: this.currentQuiz.id , chosenAnswerId: this.chosenAnswer.id , questionid: this.currentQuestion.number, answeredCorrect: false};
     this.submittedAnswerService.postSubmittedAnswer(this.submittedAnswer);
-    this.saveAnswers();
+    if (this.submitPressed === false) {
+      this.saveAnswers();
+    }
     console.log(this.chosenAnswer);
     console.log(this.chosenAnswer.isCorrect);
     this.submitPressed = true;
