@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Quiz} from "../model/quiz";
 import {Question} from "../model/question";
 import {FormArray} from '@angular/forms';
 
 import {AnswerOption} from "../model/answerOption";
 import { QuizService } from '../services/quiz.service';
-import {filter} from "rxjs/operators";
+
 
 
 
@@ -23,9 +23,11 @@ export class CreateQuizComponent implements OnInit {
   newQuiz: Quiz;
   currentQuestion: number;
   lockQuizName: boolean;
-  show: string;
+  values: object;
+  valuesTwo: object;
   currentQuestionsArray: Array<number>;
   stored: Array<any>;
+  storedTwo: Array<any>;
   filteredItem: Question;
 
 
@@ -33,9 +35,10 @@ export class CreateQuizComponent implements OnInit {
     this.count = 0;
     this.currentQuestionsArray = [];
     this.lockQuizName = false;
-    this.show = '';
     this.newQuiz = {questions: []} as Quiz;
     this.stored = [];
+    this.storedTwo = [];
+
 
 
 
@@ -100,16 +103,25 @@ export class CreateQuizComponent implements OnInit {
     console.log('nu is count' + this.count);
     question.id = this.count;
 
+
     let q ={id: this.count, qdescription: questionDescription}
-
-
     this.stored.push(q);
+
+//met deze twee onderstaande regels probeer ik om answeroptions uit de HTML te 'getten' en te loggen
+  //  const answeroptArray = this.quizForm.get('answer');
+  //  console.log(answeroptArray);
+   // let p ={ id: this.count, answeropt: answeroptArray}
+    //this.storedTwo.push(p);
 
     //this.stored.push(this.count, questionDescription);
     localStorage.setItem('questions', JSON.stringify(this.stored));
     let myItem = JSON.parse(localStorage.getItem('questions'));
 
     console.log(myItem);
+
+    // hiermee probeerde ik de antwoorden op te slaan in de localstorage
+    //localStorage.setItem('answers', JSON.stringify(this.storedTwo));
+    //let myItemTwo = JSON.parse(localStorage.getItem('answers'));
 
 this.checkQuestion();
   }
@@ -125,13 +137,18 @@ this.checkQuestion();
   // Volgende stap is om dit nu te laten zien in het inputfield zodat je dit aan kan passen.
   onClick(questionNumber){
     console.log(questionNumber);
-   let myFilter = JSON.parse(localStorage.getItem('questions')).filter(questions =>questions.id === questionNumber);
 
-   // let obj = eval('(' + myFilter+ ')');
-   this.show = JSON.stringify(myFilter, ['qdescription']);
+    //hiermee laat je de vraag zien in het vak voer een nieuwe vraag in
+   const myFilter = JSON.parse(localStorage.getItem('questions')).filter(questions =>questions.id === questionNumber);
+    this.values = myFilter[0].qdescription;
+    console.log(this.values);
+
+    //Met deze onderstaande regels probeer ik de antwoorden uit de local storage te halen en te loggen of te loggen in het witte veld bij de HTML
+   // const myFilterTwo = JSON.parse(localStorage.getItem('answers')).filter(questions =>questions.id === questionNumber);
+  //  this.valuesTwo = myFilterTwo[0].answeropt;
+  //  console.log(myFilterTwo);
 
 
-    console.log(this.show);
   }
 
 
