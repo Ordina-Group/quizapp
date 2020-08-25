@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {AbstractControl, FormArrayName, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {Quiz} from "../model/quiz";
 import {Question} from "../model/question";
 import {FormArray} from '@angular/forms';
@@ -28,7 +28,9 @@ export class CreateQuizComponent implements OnInit {
   currentQuestionsArray: Array<number>;
   stored: Array<any>;
   storedTwo: Array<any>;
-  filteredItem: Question;
+  filteredItem: Question
+  answers: Array<any>;
+  answerOptionsArray: Array<any>;
 
 
   constructor(private formBuilder: FormBuilder, private quizService: QuizService) {
@@ -40,14 +42,12 @@ export class CreateQuizComponent implements OnInit {
     this.storedTwo = [];
 
 
-
-
     this.quizForm = this.formBuilder.group({
       quizName: [''],
       question: [''],
-      answerOptions: this.formBuilder.array([]),
-      currentQuestionsArray:  this.formBuilder.array([])
-    });
+      currentQuestionsArray: this.formBuilder.array([]),
+      answerOptions: this.formBuilder.array([])
+    })
   }
 
   ngOnInit() {
@@ -63,7 +63,8 @@ export class CreateQuizComponent implements OnInit {
   }
 
   deleteAnswerOption() {
-    (this.quizForm.get('answerOptions') as FormArray).removeAt(this.answerOptions.length - 1);
+   (this.quizForm.get('answerOptions') as FormArray).removeAt(this.answerOptions.length - 1);
+   // this.quizForm.get('').removeAt(this.answerOptionsArray.length - 1);
   }
 
   get quizName(): string {
@@ -96,6 +97,13 @@ export class CreateQuizComponent implements OnInit {
     })
     question.questionDescription = questionDescription;
 
+
+
+  let answeropt = this.quizForm.get('answerOptions').value;
+   console.log(answeropt);
+    this.storedTwo.push(answeropt[0].answer);
+    console.log(this.storedTwo);
+
     this.newQuiz.quizDescription = quizname;
     this.newQuiz.questions.push(question);
 
@@ -104,12 +112,12 @@ export class CreateQuizComponent implements OnInit {
     question.id = this.count;
 
 
-    let q ={id: this.count, qdescription: questionDescription}
+    let q ={id: this.count, qdescription: questionDescription, answeropt: this.storedTwo}
     this.stored.push(q);
 
 //met deze twee onderstaande regels probeer ik om answeroptions uit de HTML te 'getten' en te loggen
   //  const answeroptArray = this.quizForm.get('answer');
-  //  console.log(answeroptArray);
+  // console.log(question);
    // let p ={ id: this.count, answeropt: answeroptArray}
     //this.storedTwo.push(p);
 
@@ -137,18 +145,27 @@ this.checkQuestion();
   // Volgende stap is om dit nu te laten zien in het inputfield zodat je dit aan kan passen.
   onClick(questionNumber){
     console.log(questionNumber);
+    this.deleteAnswerOption();
 
-    //hiermee laat je de vraag zien in het vak voer een nieuwe vraag in
+
    const myFilter = JSON.parse(localStorage.getItem('questions')).filter(questions =>questions.id === questionNumber);
     this.values = myFilter[0].qdescription;
     console.log(this.values);
+    console.log(myFilter[0].answeropt[0]);
+    this.answers =myFilter[0].answeropt[0];
+    let answerA = this.answers.toString();
+    console.log(answerA);
+   this.answerOptions.push(this.formBuilder.group({
+     answer: answerA,
+     iscorrect: 'true'
+   }));
+  }
 
-    //Met deze onderstaande regels probeer ik de antwoorden uit de local storage te halen en te loggen of te loggen in het witte veld bij de HTML
-   // const myFilterTwo = JSON.parse(localStorage.getItem('answers')).filter(questions =>questions.id === questionNumber);
-  //  this.valuesTwo = myFilterTwo[0].answeropt;
-  //  console.log(myFilterTwo);
-
-
+  private updatedAnswerOption(): FormGroup {
+    return this.formBuilder.group({
+      answer: this.valuesTwo,
+      iscorrect: 'true'
+    })
   }
 
 
