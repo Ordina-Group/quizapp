@@ -101,7 +101,14 @@ export class CreateQuizComponent implements OnInit {
 
   let answeropt = this.quizForm.get('answerOptions').value;
    console.log(answeropt);
-    this.storedTwo.push(answeropt[0].answer);
+   console.log(this.storedTwo);
+
+   //verzamel alle answers elementen van het answeropt object en stop ze in een array
+    for (let i=0; i<answeropt.length; i++){
+      this.storedTwo.push(answeropt[i].answer);
+    }
+
+
     console.log(this.storedTwo);
 
     this.newQuiz.quizDescription = quizname;
@@ -115,21 +122,12 @@ export class CreateQuizComponent implements OnInit {
     let q ={id: this.count, qdescription: questionDescription, answeropt: this.storedTwo}
     this.stored.push(q);
 
-//met deze twee onderstaande regels probeer ik om answeroptions uit de HTML te 'getten' en te loggen
-  //  const answeroptArray = this.quizForm.get('answer');
-  // console.log(question);
-   // let p ={ id: this.count, answeropt: answeroptArray}
-    //this.storedTwo.push(p);
 
-    //this.stored.push(this.count, questionDescription);
     localStorage.setItem('questions', JSON.stringify(this.stored));
     let myItem = JSON.parse(localStorage.getItem('questions'));
 
     console.log(myItem);
 
-    // hiermee probeerde ik de antwoorden op te slaan in de localstorage
-    //localStorage.setItem('answers', JSON.stringify(this.storedTwo));
-    //let myItemTwo = JSON.parse(localStorage.getItem('answers'));
 
 this.checkQuestion();
   }
@@ -151,14 +149,25 @@ this.checkQuestion();
    const myFilter = JSON.parse(localStorage.getItem('questions')).filter(questions =>questions.id === questionNumber);
     this.values = myFilter[0].qdescription;
     console.log(this.values);
+    console.log(myFilter[0].answeropt);
+
+    //hier logt ie het eerste antwoord.
     console.log(myFilter[0].answeropt[0]);
-    this.answers =myFilter[0].answeropt[0];
-    let answerA = this.answers.toString();
-    console.log(answerA);
-   this.answerOptions.push(this.formBuilder.group({
-     answer: answerA,
-     iscorrect: 'true'
-   }));
+
+
+    //set answeroptie naar array
+   // this.answers =myFilter[0].answeropt[0];
+   // vervolgens omzetten van array naar string en deze pushen naar the array
+  // let answerA = this.answers.toString();
+  //  console.log(answerA);
+
+    for (let i=0; i<myFilter[0].answeropt.length; i++) {
+      this.answerOptions.push(this.formBuilder.group({
+        answer: myFilter[0].answeropt[i],
+        iscorrect: 'true'
+      }));
+    }
+
   }
 
   private updatedAnswerOption(): FormGroup {
