@@ -177,25 +177,26 @@ export class CreateQuizComponent implements OnInit {
     }
 
   //hier weer opties saven naar localstorage, want er zijn mogelijk wijzigingen aangebracht
-    let questionDescription = this.quizForm.get('question').value;
+ //   let questionDescription = this.quizForm.get('question').value;
 
-    let answeropt = this.quizForm.get('answerOptions').value;
-    console.log(answeropt);
-    console.log(this.storedTwo);
+   // let answeropt = this.quizForm.get('answerOptions').value;
+  //  console.log(answeropt);
+  //  console.log(this.storedTwo);
 
     //verzamel alle answers elementen van het answeropt object en stop ze in een array
-    for (let i=0; i<answeropt.length; i++){
-      this.storedTwo.push(answeropt[i].answer);
-    }
+   // for (let i=0; i<answeropt.length; i++){
+    //  this.storedTwo.push(answeropt[i].answer);
+   /// }
 
     // maak weer object aan en stop het weer in en array, dit keer met questionNumber als id
-    let q ={id: questionNumber, qdescription: questionDescription, answeropt: this.storedTwo}
-    this.storedNew.push(q);
-    console.log(this.storedNew);
+   // let q ={id: questionNumber, qdescription: questionDescription, answeropt: this.storedTwo}
+   // this.stored.push(q);
+   // console.log(this.stored);
 
-    localStorage.setItem('questions', JSON.stringify(this.storedNew));
-    console.log(this.storedNew);
-    this.storedTwo = [];
+   // localStorage.setItem('questions', JSON.stringify(this.stored));
+  //  console.log(this.stored);
+  //  this.storedTwo = [];
+ //   this.stored = []
 
 
   }
