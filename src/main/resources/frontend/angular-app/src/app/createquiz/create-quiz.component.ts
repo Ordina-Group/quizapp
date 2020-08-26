@@ -24,12 +24,11 @@ export class CreateQuizComponent implements OnInit {
   currentQuestion: number;
   lockQuizName: boolean;
   values: object;
-  valuesTwo: object;
   currentQuestionsArray: Array<number>;
   stored: Array<any>;
   storedTwo: Array<any>;
   filteredItem: Question
-  answers: Array<any>;
+  storedNew: Array<any>;
   answerOptionsArray: Array<any>;
 
 
@@ -40,6 +39,7 @@ export class CreateQuizComponent implements OnInit {
     this.newQuiz = {questions: []} as Quiz;
     this.stored = [];
     this.storedTwo = [];
+    this.storedNew = [];
 
 
     this.quizForm = this.formBuilder.group({
@@ -64,7 +64,7 @@ export class CreateQuizComponent implements OnInit {
 
   deleteAnswerOption() {
    (this.quizForm.get('answerOptions') as FormArray).removeAt(this.answerOptions.length - 1);
-   // this.quizForm.get('').removeAt(this.answerOptionsArray.length - 1);
+
   }
 
   get quizName(): string {
@@ -87,9 +87,14 @@ export class CreateQuizComponent implements OnInit {
   }
 
   saveQuestion() {
+
+    //stopt het in this.quizName voor submitfunctie
     let quizname = this.quizName;
 
+    //haal vraag omschrijving op uit het formulier
     let questionDescription = this.quizForm.get('question').value;
+
+    //dit onderstaande is voor submitfunctie
     let question = {answerOptions: []} as Question;
     this.answerOptions.controls.forEach(control => {
       let answerOption = this.toAnswerOption(control)
@@ -98,12 +103,12 @@ export class CreateQuizComponent implements OnInit {
     question.questionDescription = questionDescription;
 
 
-
+//haalt antwoordopties uit formulier
   let answeropt = this.quizForm.get('answerOptions').value;
    console.log(answeropt);
    console.log(this.storedTwo);
 
-   //verzamel alle answers elementen van het answeropt object en stop ze in een array
+   //verzamel alle answers elementen van het answeropt object en stop ze in een array (storedTwo)
     for (let i=0; i<answeropt.length; i++){
       this.storedTwo.push(answeropt[i].answer);
     }
@@ -111,25 +116,30 @@ export class CreateQuizComponent implements OnInit {
 
     console.log(this.storedTwo);
 
+    //dit is voor submitfunctie
     this.newQuiz.quizDescription = quizname;
     this.newQuiz.questions.push(question);
 
+    //zet het vraagnummer
     this.count++;
     console.log('nu is count' + this.count);
     question.id = this.count;
 
-
+//maakt een object voor localstorage en stopt het object (q) in een array
     let q ={id: this.count, qdescription: questionDescription, answeropt: this.storedTwo}
     this.stored.push(q);
 
-
+    //stopt array 'stored' in localstorage en geeft hem als naam/key: 'questions'
     localStorage.setItem('questions', JSON.stringify(this.stored));
     let myItem = JSON.parse(localStorage.getItem('questions'));
 
     console.log(myItem);
 
+    //empty the array answers hier, want anders gaat deze de antwoorden van de volgende vraag ook erbij stoppen
+    this.storedTwo = [];
 
-this.checkQuestion();
+
+    this.checkQuestion();
   }
 
 
@@ -138,14 +148,17 @@ this.checkQuestion();
     this.currentQuestionsArray.push(this.count)
   }
 
-
-  //Onclick functie logt dus de juiste vraagomschrijving in de F12 console als je op de button klikt boven die boven de vraag verschijnt.
-  // Volgende stap is om dit nu te laten zien in het inputfield zodat je dit aan kan passen.
+  //Onclick functie logt dus de juiste vraagomschrijving in het inputveld als je op de button met nummer klikt
   onClick(questionNumber){
     console.log(questionNumber);
-    this.deleteAnswerOption();
+   // this.deleteAnswerOption();
+     while (this.answerOptions.length !== 0) {
+        this.answerOptions.removeAt(this.answerOptions.length - 1)
+      }
 
 
+
+//haalt de info uit de localstorage
    const myFilter = JSON.parse(localStorage.getItem('questions')).filter(questions =>questions.id === questionNumber);
     this.values = myFilter[0].qdescription;
     console.log(this.values);
@@ -155,12 +168,7 @@ this.checkQuestion();
     console.log(myFilter[0].answeropt[0]);
 
 
-    //set answeroptie naar array
-   // this.answers =myFilter[0].answeropt[0];
-   // vervolgens omzetten van array naar string en deze pushen naar the array
-  // let answerA = this.answers.toString();
-  //  console.log(answerA);
-
+//pushed het naar de antwoordoptie velden
     for (let i=0; i<myFilter[0].answeropt.length; i++) {
       this.answerOptions.push(this.formBuilder.group({
         answer: myFilter[0].answeropt[i],
@@ -168,15 +176,29 @@ this.checkQuestion();
       }));
     }
 
-  }
+  //hier weer opties saven naar localstorage, want er zijn mogelijk wijzigingen aangebracht
+    let questionDescription = this.quizForm.get('question').value;
 
-  private updatedAnswerOption(): FormGroup {
-    return this.formBuilder.group({
-      answer: this.valuesTwo,
-      iscorrect: 'true'
-    })
-  }
+    let answeropt = this.quizForm.get('answerOptions').value;
+    console.log(answeropt);
+    console.log(this.storedTwo);
 
+    //verzamel alle answers elementen van het answeropt object en stop ze in een array
+    for (let i=0; i<answeropt.length; i++){
+      this.storedTwo.push(answeropt[i].answer);
+    }
+
+    // maak weer object aan en stop het weer in en array, dit keer met questionNumber als id
+    let q ={id: questionNumber, qdescription: questionDescription, answeropt: this.storedTwo}
+    this.storedNew.push(q);
+    console.log(this.storedNew);
+
+    localStorage.setItem('questions', JSON.stringify(this.storedNew));
+    console.log(this.storedNew);
+    this.storedTwo = [];
+
+
+  }
 
 
   toAnswerOption(ac: AbstractControl): AnswerOption {
