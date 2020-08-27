@@ -78,15 +78,19 @@ export class CreateQuizComponent implements OnInit {
     })
   }
 
-
-  nextQuestion() {
-    this.saveQuestion();
-    this.lockQuizName = true;
+  nextQuestion(){
     this.quizForm.get('question').reset();
     this.quizForm.get('answerOptions').reset();
   }
 
   saveQuestion() {
+    this.checkQuestionCount();
+    this.updateStorage();
+    this.lockQuizName = true;
+  }
+
+
+  updateStorage() {
 
     //stopt het in this.quizName voor submitfunctie
     let quizname = this.quizName;
@@ -121,8 +125,6 @@ export class CreateQuizComponent implements OnInit {
     this.newQuiz.questions.push(question);
 
     //zet het vraagnummer
-    this.count++;
-    console.log('nu is count' + this.count);
     question.id = this.count;
 
 //maakt een object voor localstorage en stopt het object (q) in een array
@@ -138,68 +140,47 @@ export class CreateQuizComponent implements OnInit {
     //empty the array answers hier, want anders gaat deze de antwoorden van de volgende vraag ook erbij stoppen
     this.storedTwo = [];
 
-
-    this.checkQuestion();
   }
 
 
   //deze functie zorgt ervoor dat de button met vraagnummer boven de vraag verschijnt
-  checkQuestion(){
-    this.currentQuestionsArray.push(this.count)
+  checkQuestionCount(){
+    this.count++;
+    console.log('nu is count' + this.count);
+    this.currentQuestionsArray.push(this.count);
   }
 
   //Onclick functie logt dus de juiste vraagomschrijving in het inputveld als je op de button met nummer klikt
   onClick(questionNumber){
+
+
     console.log(questionNumber);
    // this.deleteAnswerOption();
-     while (this.answerOptions.length !== 0) {
-        this.answerOptions.removeAt(this.answerOptions.length - 1)
-      }
+   while (this.answerOptions.length !== 0) {
+     this.answerOptions.removeAt(this.answerOptions.length - 1)
+   }
+    this.values = null;
+    this.storedTwo = [];
+    this.stored = [];
+
+    const found = JSON.parse(localStorage.getItem('questions')).filter(questions =>questions.id === questionNumber);
+    console.log(found);
 
 
-
-//haalt de info uit de localstorage
-   const myFilter = JSON.parse(localStorage.getItem('questions')).filter(questions =>questions.id === questionNumber);
-    this.values = myFilter[0].qdescription;
+    console.log(found);
+    this.values = found[0].qdescription;
     console.log(this.values);
-    console.log(myFilter[0].answeropt);
-
-    //hier logt ie het eerste antwoord.
-    console.log(myFilter[0].answeropt[0]);
-
-
-//pushed het naar de antwoordoptie velden
-    for (let i=0; i<myFilter[0].answeropt.length; i++) {
+    for (let i=0; i<found[0].answeropt.length; i++) {
       this.answerOptions.push(this.formBuilder.group({
-        answer: myFilter[0].answeropt[i],
+        answer: found[0].answeropt[i],
         iscorrect: 'true'
       }));
     }
 
-  //hier weer opties saven naar localstorage, want er zijn mogelijk wijzigingen aangebracht
- //   let questionDescription = this.quizForm.get('question').value;
-
-   // let answeropt = this.quizForm.get('answerOptions').value;
-  //  console.log(answeropt);
-  //  console.log(this.storedTwo);
-
-    //verzamel alle answers elementen van het answeropt object en stop ze in een array
-   // for (let i=0; i<answeropt.length; i++){
-    //  this.storedTwo.push(answeropt[i].answer);
-   /// }
-
-    // maak weer object aan en stop het weer in en array, dit keer met questionNumber als id
-   // let q ={id: questionNumber, qdescription: questionDescription, answeropt: this.storedTwo}
-   // this.stored.push(q);
-   // console.log(this.stored);
-
-   // localStorage.setItem('questions', JSON.stringify(this.stored));
-  //  console.log(this.stored);
-  //  this.storedTwo = [];
- //   this.stored = []
-
 
   }
+
+
 
 
   toAnswerOption(ac: AbstractControl): AnswerOption {
