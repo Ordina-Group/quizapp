@@ -161,7 +161,6 @@ export class CreateQuizComponent implements OnInit {
     const found = JSON.parse(localStorage.getItem('questions')).filter(questions => questions.id === questionNumber);
     console.log(found);
 
-
     console.log(found);
     this.values = found[0].qdescription;
     console.log(this.values);
